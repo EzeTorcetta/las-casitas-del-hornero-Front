@@ -1,10 +1,8 @@
-const Card = () => {
-  return (
-    <div>
-      Card
-      <h2>Hola Juan Ignacio</h2>
-    </div>
-  );
-};
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
-export default Card;
+function Cards() {
+  return <div>Cards</div>;
+}
+
+export default Cards;

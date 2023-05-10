@@ -1,0 +1,24 @@
+.input {
+  width: 40px;
+  text-align: center;
+}
+
+.boton {
+  width: 25px;
+  background-color: blue;
+  color: white;
+}
+
+.divInput {
+  margin: 10px;
+}
+
+.div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.label {
+  margin-left: 10px;
+}
