@@ -4,6 +4,7 @@ import style from "./Home.module.css";
 import NavBar from "../Nav/Nav";
 import Search from "../Search/Search";
 import Footer from "../Footer/Footer";
+import Clima from "../Clima/Clima";
 
 const Home = () => {
   return (
@@ -58,6 +59,7 @@ const Home = () => {
           </Carousel.Item>
         </Carousel>
         <Search />
+        <Clima />
 
         <section className={`${style.section} ${style.one}`}>
           <Card />

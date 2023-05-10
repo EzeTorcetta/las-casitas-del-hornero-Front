@@ -1,0 +1,105 @@
+/* Estilos para el componente Clima */
+body {
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.h1 {
+  padding-top: 100px;
+  color: #f7931e;
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.input {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+  margin-bottom: 1rem;
+  width: 20rem;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 2px 2px 5px rgba(247, 146, 30, 0.678);
+}
+
+.button {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f7931e;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #fcb044;
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.result h4 {
+  font-size: 2rem;
+  color: #f7931e;
+  margin-bottom: 1rem;
+}
+
+.result img {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+
+.result h3 {
+  font-size: 3rem;
+  color: #f7931e;
+  margin-bottom: 0.5rem;
+}
+
+.result h4 {
+  font-size: 1.5rem;
+  color: #f7931e;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+.powered {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 2rem;
+  color: #999;
+}
+
+.powered a {
+  color: #f7931e;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.powered-by a:hover {
+  color: #fcb044;
+}
