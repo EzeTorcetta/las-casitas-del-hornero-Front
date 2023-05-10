@@ -2,8 +2,10 @@
 import Home from "./Home/Home";
 import Favoritos from "./Favorites/Favorites";
 import Detail from "./Detail/Detail";
-import Nav from "./Nav/Nav";
-import Loading from "./Loading/Loading";
-import Formulario from "./Formulario/Formulario";
+import Search from "./Search/Search";
+// import Nav1 from "./Nav/Nav";
+// import Loading from "./Loading/Loading";
+// import Formulario from "./Formulario/Formulario";
+// import Carrusel from "./Carrusel/Carrusel";
 
-export { Home, Favoritos, Detail, Nav, Loading, Formulario };
+export { Home, Favoritos, Detail, Search };
