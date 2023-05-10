@@ -1,16 +1,20 @@
 import { Carousel } from "react-bootstrap";
 import Card from "../Card/Card";
 import style from "./Home.module.css";
-import { Search } from "../Index";
+import NavBar from "../Nav/Nav";
+import Search from "../Search/Search";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
     <>
+      <NavBar />
       <div className={style.container}>
         <Carousel className={style.carousel}>
           <Carousel.Item className={style.item}>
             <img
               // className="d-block w-100"
+              className={style.img}
               src="https://www.murhotels.com/cache/40/b3/40b3566310d686be665d9775f59ca9cd.jpg"
               alt="First slide"
             />
@@ -25,7 +29,8 @@ const Home = () => {
           <Carousel.Item className={style.item}>
             <img
               // className="d-block w-100"
-              src="https://images.pxsol.com/3090/company/library/user/489674424008fd8e212c5fa211b9e7f7320b4d77ab.jpg?auto=format&browser=&h=1000&ixlib=php-3.3.1&w=1900&s=8fb0a17b99f93b326086047a3535a6d8"
+              className={style.img}
+              src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/ce/0c/66/frente-nocturno.jpg?w=700&h=-1&s=1"
               alt="Second slide"
             />
             <Carousel.Caption>
@@ -39,6 +44,7 @@ const Home = () => {
           <Carousel.Item className={style.item}>
             <img
               // className="d-block w-100"
+              className={style.img}
               src="https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2017/08/03/1943/Park-Hyatt-Mendoza-P041-Facade-Lateral-View.jpg/Park-Hyatt-Mendoza-P041-Facade-Lateral-View.16x9.jpg"
               alt="Third slide"
             />
@@ -60,6 +66,7 @@ const Home = () => {
           <h1 className={style.h1}>Optional</h1>
         </section>
       </div>
+      <Footer />
     </>
   );
 };
