@@ -1,0 +1,22 @@
+.nav {
+  position: fixed;
+  width: 100vw;
+  height: 10vh;
+  padding: 0 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: orange;
+  z-index: 3; /* encima de todo */
+  color: white;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  margin: 0 10%;
+}
+
+.logo {
+  color: white;
+}
