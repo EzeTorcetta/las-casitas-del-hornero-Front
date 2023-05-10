@@ -6,5 +6,5 @@ import Loading from "./Loading/Loading";
 import Formulario from "./Formulario/Formulario";
 import Footer from "./Footer/Footer";
 import Search from "./Search/Search";
-import Login from "./Login";
-export { Home, Favoritos, Detail, Footer, Loading, Formulario, Search, Login };
+
+export { Home, Favoritos, Detail, Footer, Loading, Formulario, Search };
