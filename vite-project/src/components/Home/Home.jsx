@@ -1,6 +1,7 @@
-import { Carousel } from 'react-bootstrap';
-import Card from '../Card/Card';
-import style from './Home.module.css';
+import { Carousel } from "react-bootstrap";
+import Card from "../Card/Card";
+import style from "./Home.module.css";
+import { Search } from "../Index";
 
 const Home = () => {
   return (
@@ -15,7 +16,10 @@ const Home = () => {
             />
             <Carousel.Caption>
               <h3>MUR Aparthotel Buenos Aires</h3>
-              <p>Apartamentos en Playa del Inglés en San Bartolomé en Gran Canaria.</p>
+              <p>
+                Apartamentos en Playa del Inglés en San Bartolomé en Gran
+                Canaria.
+              </p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item className={style.item}>
@@ -26,7 +30,10 @@ const Home = () => {
             />
             <Carousel.Caption>
               <h3>Hotel Patagonia</h3>
-              <p>Toda la comodidad y unas vistas paradisíacas de la Patagonia Argentina.</p>
+              <p>
+                Toda la comodidad y unas vistas paradisíacas de la Patagonia
+                Argentina.
+              </p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item className={style.item}>
@@ -37,10 +44,14 @@ const Home = () => {
             />
             <Carousel.Caption>
               <h3>Park Hyatt Mendoza</h3>
-              <p>Magnífica fachada Neoclásica de la academia francesa del siglo XX.</p>
+              <p>
+                Magnífica fachada Neoclásica de la academia francesa del siglo
+                XX.
+              </p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
+        <Search />
 
         <section className={`${style.section} ${style.one}`}>
           <Card />
