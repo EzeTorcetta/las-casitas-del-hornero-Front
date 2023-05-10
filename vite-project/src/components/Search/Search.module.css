@@ -39,6 +39,11 @@ input {
   border: 0.5px solid black;
   box-shadow: -5px -5px 0px black;
 }
+.fancy {
+  background-color: rgba(231, 131, 37, 0.52);
+  border-radius: 10px;
+  width: 105px;
+}
 
 .container:hover > .icon {
   animation: anim 1s linear infinite;
