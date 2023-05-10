@@ -28,6 +28,8 @@ const Detail = () => {
     Capacidad,
   } = DetailHotel;
 
+  //adsdf
+
   // {name , telefono , email , imagen , Provincia , Direccion , precio , capacidad }
   return (
     <div>
