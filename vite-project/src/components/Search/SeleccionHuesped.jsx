@@ -40,7 +40,7 @@ function SeleccionHuespedes({ setSearchAll, SearchAll }) {
         <div className={style.div}>
           <div className={style.divInput}>
             <label className={style.label}>
-              Cantidad de Personas :
+              Personas :
               <button onClick={FuncionDecrementPerson} className={style.boton}>
                 -
               </button>

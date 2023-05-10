@@ -1,0 +1,113 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.form-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://a0.muscache.com/im/pictures/miso/Hosting-642474359942471549/original/0a66edfa-5166-47d3-b0f7-16d4eb271871.jpeg?im_w=1200");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.form-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.form-control {
+  height: 50px;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #f3f3f3;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  outline: none;
+  background-color: #e8e8e8;
+}
+
+.form-group .form-check-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.custom-button {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #8e44ad;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #9b59b6;
+}
+
+@media screen and (max-width: 767px) {
+  .form-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .form-container:before {
+    opacity: 0.05;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    height: 40px;
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .custom-button {
+    height: 40px;
+    font-size: 0.9rem;
+  }
+}
