@@ -5,6 +5,7 @@ import Search from "../Search/Search";
 import Footer from "../Footer/Footer";
 import Clima from "../Clima/Clima";
 import Carrusel from "../Carrusel/Carrusel";
+import Maps from "../Map/Map";
 
 const Home = () => {
   return (

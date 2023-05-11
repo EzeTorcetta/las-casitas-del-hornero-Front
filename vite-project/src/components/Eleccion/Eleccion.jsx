@@ -6,7 +6,7 @@ const Eleccion = () => {
     <div className={styles.DivPadre}>
       <div className={styles.Div}>
         <div className={styles.DivEleccion}>
-          <h1>INGRESAR COMO :</h1>
+          <h1>REGISTRARSE COMO :</h1>
           <Link to="/FormularioUser">
             <button className={styles.button}>Usuario</button>
           </Link>
