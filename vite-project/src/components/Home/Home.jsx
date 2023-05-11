@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import Clima from "../Clima/Clima";
 import Carrusel from "../Carrusel/Carrusel";
 
-const Home = () => {
+const Home = ({ hotels }) => {
   return (
     <>
       <NavBar />
@@ -18,7 +18,7 @@ const Home = () => {
       <Clima />
 
       <section className={`${style.section} ${style.one}`}>
-        <Card />
+        <Card hotels={hotels} />
       </section>
       <section className={`${style.section} ${style.two}`}></section>
 
