@@ -17,7 +17,9 @@ const Home = () => {
 
       <Clima />
 
-      <section className={`${style.section} ${style.one}`}>{/* <Card /> */}</section>
+      <section className={`${style.section} ${style.one}`}>
+        <Card />
+      </section>
       <section className={`${style.section} ${style.two}`}></section>
 
       <Footer />
