@@ -2,10 +2,9 @@ import {
   Home,
   Favoritos,
   Detail,
-  Search,
-  Footer,
-  Loading,
   Formulario,
+  Eleccion,
+  FormularioAdministrador,
 } from "./components/Index";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
@@ -17,7 +16,9 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Favoritos" element={<Favoritos />} />
         <Route path="/Detail/:id" element={<Detail />} />
-        <Route path="/" element={<Formulario />} />
+        <Route path="/" element={<Eleccion />} />
+        <Route path="/FormularioUser" element={<Formulario />} />
+        <Route path="/FormularioAdmin" element={<FormularioAdministrador />} />
       </Routes>
     </div>
   );

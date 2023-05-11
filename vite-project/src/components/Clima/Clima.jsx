@@ -85,7 +85,6 @@ export default function Clima() {
       )}
 
       <p className={style.powered}>
-        {" "}
         Powered by: <a href="https://www.weatherapi.com">WeatherAPI</a>{" "}
       </p>
     </div>
