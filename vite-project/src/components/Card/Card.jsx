@@ -8,7 +8,7 @@ import style from "./Card.module.css";
 function Cards({ hotels }) {
   return (
     <div className={style.container}>
-      <Row xs={1} md={3} className="g-2">
+      <Row xs={1} sm={2} lg={3} className="g-2">
         {hotels?.map((hotel) => (
           <Col key={hotel.id}>
             <Link to={`/detail/${hotel.id}`}>
