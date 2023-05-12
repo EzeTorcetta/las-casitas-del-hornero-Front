@@ -1,6 +1,5 @@
 .container {
   padding-top: 10vh;
-  scroll-snap-type: y mandatory;
 }
 
 .section {
@@ -10,14 +9,6 @@
   align-items: center;
   scroll-snap-align: center;
 }
-
-/* .one {
-  height: 90vh;
-}
-
-.two {
-  height: 70vh;
-} */
 
 .item {
   height: 90vh;
