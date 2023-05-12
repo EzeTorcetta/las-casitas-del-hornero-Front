@@ -1,18 +1,22 @@
-.Div {
+.DivPadre {
   display: flex;
   justify-content: center;
-  margin: 300px;
+  margin-top: 50px;
 }
-.DivEleccion {
+
+.divEleccion {
   text-align: center;
   height: 200px;
   width: fit-content;
-  border: 3px black solid;
+  border: 3px solid #000000;
   margin: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.DivEleccion h1 {
+.divEleccion h1 {
   font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .button {
