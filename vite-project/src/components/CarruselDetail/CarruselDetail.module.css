@@ -1,8 +1,9 @@
 .container {
-  padding-top: 10vh;
+  /* padding-top: 10vh; */
   scroll-snap-type: y mandatory;
   width: fit-content;
   height: fit-content;
+  margin: 0 20px;
 }
 
 .item {
