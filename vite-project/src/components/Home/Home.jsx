@@ -7,19 +7,22 @@ import Clima from "../Clima/Clima";
 import Carrusel from "../Carrusel/Carrusel";
 import Maps from "../Map/Map";
 
-const Home = () => {
+const Home = ({ hotels }) => {
   return (
     <>
       <NavBar />
+
       <Carrusel />
+
       <Search />
+
       <Clima />
+
       <section className={`${style.section} ${style.one}`}>
-        <Card />
+        <Card hotels={hotels} />
       </section>
-      <section className={`${style.section} ${style.two}`}>
-        <h1 className={style.h1}>Optional</h1>
-      </section>
+      <section className={`${style.section} ${style.two}`}></section>
+      {/*sadsd*/}
       <Footer />
     </>
   );

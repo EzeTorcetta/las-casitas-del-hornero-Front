@@ -5,6 +5,7 @@ import "react-datePicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import styles from "./Search.module.css";
 import { useDispatch } from "react-redux";
+import MyCalendar from "./Calendario";
 import { FuncionSearch } from "../../redux/Actions/Actions";
 registerLocale("es", es);
 
@@ -43,6 +44,7 @@ const Search = () => {
         placeholder="Buscar una Provincia"
         onChange={onChangeText}
       />
+
       <DatePicker
         selected={state}
         onChange={onChange}
