@@ -53,11 +53,6 @@ const Home = ({ hotels }) => {
           <Card hotels={hotels} />
         </section>
         <section className={`${style.section} ${style.two}`}></section>
-
-        <section className={`${style.section} ${style.one}`}>
-          <Card hotels={hotels} />
-        </section>
-        <section className={`${style.section} ${style.two}`}></section>
         {/*sadsd*/}
         <Footer />
       </div>
