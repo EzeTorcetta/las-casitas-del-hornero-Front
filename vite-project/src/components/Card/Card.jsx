@@ -13,7 +13,7 @@ function Cards({ hotels }) {
           <Col key={hotel.id}>
             <Link to={`/detail/${hotel.id}`}>
               <Card className="bg-white text-white">
-                <Card.Img src={hotel.image} alt="Card image" />
+                <Card.Img src={hotel.image} alt="Card image" className={style.img} />
                 <Card.ImgOverlay>
                   <Card.Title>{hotel.nombre}</Card.Title>
                   <Card.Text>{hotel.direccion}</Card.Text>

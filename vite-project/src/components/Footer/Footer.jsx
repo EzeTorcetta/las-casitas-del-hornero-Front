@@ -1,9 +1,9 @@
-import style from './Footer.module.css';
+import style from "./Footer.module.css";
 
 const Footer = () => {
   return (
     <footer className={style.footer}>
-      <p>&copy; 2023 LAS CASITAS DEL HORNERO</p>
+      <p>&copy; 2023 LasCasitasDelHornero </p>
     </footer>
   );
 };
