@@ -5,7 +5,7 @@ const Eleccion = () => {
   return (
     <div className={styles.DivPadre}>
       <div className={styles.Div}>
-        <div className={styles.DivEleccion}>
+        <div className={styles.divEleccion}>
           <h1>REGISTRARSE COMO :</h1>
           <Link to="/FormularioUser">
             <button className={styles.button}>Usuario</button>
