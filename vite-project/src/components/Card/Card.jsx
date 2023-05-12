@@ -14,9 +14,9 @@ function Cards({ hotels }) {
             <Link to={`/detail/${hotel.id}`}>
               <Card className="bg-white text-white">
                 <Card.Img
-                  className={style.img}
                   src={hotel.image}
                   alt="Card image"
+                  className={style.img}
                 />
                 <Card.ImgOverlay>
                   <Card.Title>{hotel.nombre}</Card.Title>
