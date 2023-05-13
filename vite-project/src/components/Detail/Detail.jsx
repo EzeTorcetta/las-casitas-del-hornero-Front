@@ -8,10 +8,7 @@ import NavDetail from "../Nav/NavDetail";
 import style from "./Detail.module.css";
 import imagen from "../../image/favorito.png";
 import Maps from "../Map/Map";
-import {
-  FuncionDetailHotel,
-  FuncionClearDetail,
-} from "../../redux/Actions/Actions";
+import { FuncionDetailHotel, FuncionClearDetail } from "../../redux/Actions/Actions";
 import CarruselDetail from "../CarruselDetail/CarruselDetail";
 
 const Detail = () => {
@@ -46,8 +43,8 @@ const Detail = () => {
               <p>Email: {DetailHotel.email}</p>
               <p>Province: {DetailHotel.province}</p>
               <p>{DetailHotel.direccion}</p>
-              {array.map((ranting) => (
-                <img className={style.img} src={imagen} />
+              {array.map((ranting, index) => (
+                <img className={style.img} src={imagen} key={index} />
               ))}
             </div>
           </div>
@@ -65,9 +62,7 @@ const Detail = () => {
           <h1>Descripción:</h1>
           <p>{DetailHotel.description}</p>
         </section>
-        {DetailHotel.location && DetailHotel.name && (
-          <Maps location={DetailHotel.location} name={DetailHotel.name} />
-        )}
+        {DetailHotel.location && DetailHotel.name && <Maps location={DetailHotel.location} name={DetailHotel.name} />}
         <section className={`${style.section} ${style.two}`}>
           <TipoHabitacion id={id} />
         </section>

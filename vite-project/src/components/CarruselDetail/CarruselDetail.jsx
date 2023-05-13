@@ -6,8 +6,8 @@ const CarruselDetail = ({ image }) => {
     <>
       <div className={style.container}>
         <Carousel className={style.carousel}>
-          {image?.map((imagen) => (
-            <Carousel.Item className={style.item}>
+          {image?.map((imagen, index) => (
+            <Carousel.Item className={style.item} key={index}>
               <img
                 // className="d-block w-100"
                 className={style.img}
