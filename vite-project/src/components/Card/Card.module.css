@@ -1,9 +1,9 @@
 .container {
-  margin: 10px;
+  /* margin: 0 1rem; */
 }
 
 .img {
-  width: 300px; /* Establece un ancho fijo */
+  width: 300px; /* Establece un ancho fijo  */
   height: 300px; /* Establece una altura fija */
   object-fit: cover;
 }
