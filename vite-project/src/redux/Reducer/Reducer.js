@@ -16,7 +16,7 @@ export const rootReducer = (state = InicialState, actions) => {
     case "ALL_HOTELS":
       return {
         ...state,
-        Hotels: [...state.Hotels, actions.payload],
+        Hotels: actions.payload,
       };
 
     case "DETAIL_HOTEL":
@@ -53,6 +53,11 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         Hotels: actions.payload,
+      };
+    case "TYPE_ROOM":
+      return {
+        ...state,
+        TypeRoom: actions.payload,
       };
 
     default:

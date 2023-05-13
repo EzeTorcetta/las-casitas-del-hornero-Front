@@ -1,0 +1,21 @@
+.container {
+  /* padding-top: 10vh; */
+  scroll-snap-type: y mandatory;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 20px;
+}
+
+.item {
+  height: fit-content;
+}
+
+.carousel {
+  width: 500px;
+  height: 350px;
+}
+
+.img {
+  width: 500px;
+  height: 350px;
+}

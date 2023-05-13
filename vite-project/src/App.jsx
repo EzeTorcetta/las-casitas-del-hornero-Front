@@ -6,7 +6,7 @@ import {
   Footer,
   Loading,
   Landing,
-  FormularioRegistrar
+  FormularioRegistrar,
 } from "./components/Index";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
