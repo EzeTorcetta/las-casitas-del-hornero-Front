@@ -31,6 +31,8 @@ const Detail = () => {
 
   let array = Array(DetailHotel.rating).fill(DetailHotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
 
+  console.log(DetailHotel.location);
+
   return (
     <div>
       <>

@@ -2,9 +2,6 @@ import {
   Home,
   Favoritos,
   Detail,
-  Search,
-  Footer,
-  Loading,
   Landing,
   FormularioRegistrar,
 } from "./components/Index";

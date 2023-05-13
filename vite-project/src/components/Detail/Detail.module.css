@@ -65,3 +65,9 @@
 .divServicios {
   display: flex;
 }
+
+.divPadre {
+  display: flex;
+  justify-content: end;
+  width: 50px;
+}

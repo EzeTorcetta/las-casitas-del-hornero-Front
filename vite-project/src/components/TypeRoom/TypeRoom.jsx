@@ -4,14 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { FuncionTypeRoomTypes } from "../../redux/Actions/Actions";
 
 const TipoHabitacion = ({ id }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const TypeRoom = useSelector((state) => state.TypeRoom);
 
   useEffect(() => {
     dispatch(FuncionTypeRoomTypes(id));
   }, []);
 
-  return TypeRoom.map((room) => (
+  console.log(TypeRoom);
+
+  return TypeRoom?.map((room) => (
     <div>
       <Card style={{ width: "18rem" }}>
         <Card.Body>

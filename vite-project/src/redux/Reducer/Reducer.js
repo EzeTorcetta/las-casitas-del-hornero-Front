@@ -3,12 +3,10 @@ const InicialState = {
   DetailHotel: {},
   FavHotels: [],
   idUser: {},
-  usuarios: [{username: "jose123",
-  correo: "jose@henry.com",
-  contraseña: "abc123"
-}, {username: "martin123",
-correo: "martin@henry.com",
-contraseña: "fgh456"}],
+  usuarios: [
+    { username: "jose123", correo: "jose@henry.com", contraseña: "abc123" },
+    { username: "martin123", correo: "martin@henry.com", contraseña: "fgh456" },
+  ],
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -37,17 +35,17 @@ export const rootReducer = (state = InicialState, actions) => {
         FavHotels: actions.payload,
       };
 
-    case "LOGIN_USER":
-      return {
-        ...state,
-        idUser: actions.payload,
-      };
+    // case "LOGIN_USER":
+    //   return {
+    //     ...state,
+    //     idUser: actions.payload,
+    //   };
 
-    case "USER_LOGIN":
-      return {
-        ...state,
-        idUser: actions.payload,
-      };
+    // case "USER_LOGIN":
+    //   return {
+    //     ...state,
+    //     idUser: actions.payload,
+    //   };
 
     case "SEARCH_HOTELS":
       return {
@@ -58,6 +56,24 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         TypeRoom: actions.payload,
+      };
+
+    case "SELECT_PROVINCE":
+      return {
+        ...state,
+        Hotels: actions.payload,
+      };
+
+    case "SELECT_RATING":
+      return {
+        ...state,
+        Hotels: actions.payload,
+      };
+
+    case "ALL_SERVICE":
+      return {
+        ...state,
+        Hotels: actions.payload,
       };
 
     default:

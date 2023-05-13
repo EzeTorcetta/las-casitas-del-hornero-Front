@@ -9,4 +9,14 @@ import FormularioRegistrar from "./Formularios/FormularioRegistrar/FormularioReg
 import FormularioIngresa from "./Formularios/FormularioIngresa/FormularioIngresa";
 import Landing from "./Landing/Landing";
 
-export { Home, Favoritos, Detail, Footer, Loading, Search, FormularioRegistrar, FormularioIngresa, Landing };
+export {
+  Home,
+  Detail,
+  Footer,
+  Loading,
+  Search,
+  Favoritos,
+  FormularioRegistrar,
+  FormularioIngresa,
+  Landing,
+};

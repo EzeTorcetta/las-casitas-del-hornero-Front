@@ -7,7 +7,16 @@ function Cards({ hotels }) {
     <div className={style.container}>
       <Row xs={1} sm={2} lg={3} className="g-2">
         {hotels?.map(({ id, image, nombre, direccion, provincia }) => {
-          return <CardItem id={id} image={image} nombre={nombre} direccion={direccion} provincia={provincia} key={id} />;
+          return (
+            <CardItem
+              id={id}
+              image={image}
+              nombre={nombre}
+              direccion={direccion}
+              provincia={provincia}
+              key={id}
+            />
+          );
         })}
       </Row>
     </div>

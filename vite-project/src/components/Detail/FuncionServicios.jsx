@@ -20,12 +20,12 @@ const FuncionServices = ({ Services }) => {
   const imagen = {
     "Desayuno gratis": imagenDesayuno,
     Pileta: imagenPileta,
-    " Gimnasio": imagenGimnasio,
+    Gimnasio: imagenGimnasio,
     "Hotel frente a la playa": imagenPlaya,
     "Wi-Fi": imagenWifi,
     Estacionamiento: imagenEstacionamiento,
     "Aire acondicionado": imagenAireAcondicionado,
-    " Restaurante": imagenRestaurante,
+    Restaurante: imagenRestaurante,
     "Mascotas permitidas": imagenMascotasPermitidas,
     Familias: imageFamilia,
     "Bañera de hidromasaje": imagenBañeraDeHidromasaje,
@@ -39,7 +39,9 @@ const FuncionServices = ({ Services }) => {
       {Services?.map((Ser) => (
         <div className={style.divServicios} key={Ser.name}>
           <h2 className={style.h2}>{Ser.name}</h2>
-          <img className={style.img} src={imagen[Ser.name]} />
+          <div className={style.divPadre}>
+            <img className={style.img} src={imagen[Ser.name]} />
+          </div>
         </div>
       ))}
     </>

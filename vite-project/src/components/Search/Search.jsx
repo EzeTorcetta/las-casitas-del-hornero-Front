@@ -6,7 +6,7 @@ import es from "date-fns/locale/es";
 import styles from "./Search.module.css";
 import { useDispatch } from "react-redux";
 // import MyCalendar from "./Calendario";
-import { FuncionSearch } from "../../redux/Actions/Actions";
+// import { FuncionSearch } from "../../redux/Actions/Actions";
 registerLocale("es", es);
 
 const Search = () => {
@@ -34,7 +34,7 @@ const Search = () => {
   };
 
   const FuncionSearchAll = (name) => {
-    dispatch(FuncionSearch(name));
+    // dispatch(FuncionSearch(name));
   };
 
   // const FuncionSearchAll = () => {

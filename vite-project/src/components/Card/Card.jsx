@@ -8,7 +8,8 @@ import style from "./Card.module.css";
 function Cards({ id, name, image, province }) {
   // const ElementoDelArrayImage =
   //   image && (image.length === 0 || image.length > 0) ? image.shift() : null;
-  const [position1] = image;
+
+  // const imagen = image[0];
 
   return (
     <div className={style.container}>
@@ -16,11 +17,16 @@ function Cards({ id, name, image, province }) {
         <Col key={id}>
           <Link to={`/detail/${id}`}>
             <Card className="bg-white text-white">
-              <Card.Img
-                src={position1}
-                alt="Card image"
-                className={style.img}
-              />
+              {Array.isArray(image) ? (
+                <Card.Img
+                  src={image[0]}
+                  alt="Card image"
+                  className={style.img}
+                />
+              ) : (
+                <Card.Img src={image} alt="Card image" className={style.img} />
+              )}
+
               <Card.ImgOverlay>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>{province}</Card.Text>
