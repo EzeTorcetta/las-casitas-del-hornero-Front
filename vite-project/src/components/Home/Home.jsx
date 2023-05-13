@@ -1,4 +1,4 @@
-import Card from "../Card/Card";
+import Cards from "../Cards/Cards";
 import style from "./Home.module.css";
 import NavBar from "../Nav/Nav";
 import Search from "../Search/Search";
@@ -14,28 +14,21 @@ const Home = ({ hotels }) => {
   });
   const arrayImages = [
     {
-      image:
-        "https://www.murhotels.com/cache/40/b3/40b3566310d686be665d9775f59ca9cd.jpg",
+      image: "https://www.murhotels.com/cache/40/b3/40b3566310d686be665d9775f59ca9cd.jpg",
     },
     {
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/ce/0c/66/frente-nocturno.jpg?w=700&h=-1&s=1",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/ce/0c/66/frente-nocturno.jpg?w=700&h=-1&s=1",
     },
     {
-      image:
-        "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2017/08/03/1943/Park-Hyatt-Mendoza-P041-Facade-Lateral-View.jpg/Park-Hyatt-Mendoza-P041-Facade-Lateral-View.16x9.jpg",
+      image: "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2017/08/03/1943/Park-Hyatt-Mendoza-P041-Facade-Lateral-View.jpg/Park-Hyatt-Mendoza-P041-Facade-Lateral-View.16x9.jpg",
     },
   ];
 
   useEffect(() => {
     const handler = (event) => setMediaQuery({ matches: event.matches });
-    window
-      .matchMedia("(min-width: 1200px)")
-      .addEventListener("change", handler, true);
+    window.matchMedia("(min-width: 1200px)").addEventListener("change", handler, true);
     return () => {
-      window
-        .matchMedia("(min-width: 1200px)")
-        .removeEventListener("change", handler, false);
+      window.matchMedia("(min-width: 1200px)").removeEventListener("change", handler, false);
     };
   }, []);
 
@@ -43,14 +36,14 @@ const Home = ({ hotels }) => {
     <>
       <NavBar />
       <div className={style.container}>
-        {mediaQuery.matches ? <Carrusel /> : <Card hotels={arrayImages} />}
+        {mediaQuery.matches ? <Carrusel /> : <Cards hotels={arrayImages} />}
 
         <Search />
 
         <Clima />
 
         <section className={`${style.section} ${style.one}`}>
-          <Card hotels={hotels} />
+          <Cards hotels={hotels} />
         </section>
         <section className={`${style.section} ${style.two}`}></section>
         {/*sadsd*/}
