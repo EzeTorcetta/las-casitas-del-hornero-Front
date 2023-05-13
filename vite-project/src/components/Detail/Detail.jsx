@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import FuncionServices from "./FuncionServicios";
+import FuncionServices from "./FuncionServicios";
 import { useParams } from "react-router-dom";
 import TipoHabitacion from "../TypeRoom/TypeRoom";
 import Footer from "../Footer/Footer";
 import NavDetail from "../Nav/NavDetail";
 import style from "./Detail.module.css";
-import imagen from "../image/favorito.png";
+import imagen from "../../image/favorito.png";
 import Maps from "../Map/Map";
 import {
   FuncionDetailHotel,
@@ -51,9 +51,10 @@ const Detail = () => {
           </div>
         </div>
         <section className={style.sectionDescription}>
-          {DetailHotel.Services?.map((Ser) => (
+          <FuncionServices Services={DetailHotel.Services} />
+          {/* {DetailHotel.Services?.map((Ser) => (
             <h2>{Ser.name}</h2>
-          ))}
+          ))} */}
           {/* {DetailHotel.Services && (
             <FuncionServices Services={DetailHotel.Services} />
           )} */}
