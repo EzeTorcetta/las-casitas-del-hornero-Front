@@ -5,7 +5,8 @@ import {
   Search,
   Footer,
   Loading,
-  Formulario,
+  Landing,
+  FormularioRegistrar
 } from "./components/Index";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
@@ -17,7 +18,8 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Favoritos" element={<Favoritos />} />
         <Route path="/Detail/:id" element={<Detail />} />
-        <Route path="/" element={<Formulario />} />
+        <Route path="/Registrar" element={<FormularioRegistrar />} />
+        <Route path="/" element={<Landing />} />
       </Routes>
     </div>
   );

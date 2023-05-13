@@ -5,6 +5,7 @@ import {
   DETAIL_HOTEL,
   LOGIN_USER,
   SEARCH_HOTELS,
+  USER_LOGIN,
 } from "../Actions-index/index";
 import axios from "axios";
 
@@ -71,12 +72,14 @@ export const Login = (name, username, password) => {
   };
 };
 
-export const UserLogin = (InfoUser) => {
-  return async function () {
+
+export const UserLogin =  (usuario) => {
+  return async (dispatch) => {
     try {
-      await axios.post(`/login`, InfoUser);
+      const response = await axios.post(`las-casitas-del-hornero-back.up.railway.app/user`, usuario);
+      dispatch({ type: USER_LOGIN, payload: response.data})
     } catch (error) {
       alert(error.response.data.error);
     }
-  };
+  }
 };

@@ -5,8 +5,12 @@ import NavBar from "../Nav/Nav";
 import Search from "../Search/Search";
 import Footer from "../Footer/Footer";
 import Clima from "../Clima/Clima";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
+
+  const usuario = useSelector((state)=>state)
+console.log(usuario)
   return (
     <>
       <NavBar />
