@@ -5,28 +5,28 @@ import { Link } from "react-router-dom";
 
 import style from "./Card.module.css";
 
-function Cards({ hotels }) {
+function Cards({ id, name, image, province }) {
+  const ElementoDelArrayImage =
+    image && (image.length === 0 || image.length > 0) ? image.shift() : null;
+
   return (
     <div className={style.container}>
       <Row xs={1} sm={2} lg={3} className="g-2">
-        {hotels?.map((hotel) => (
-          <Col key={hotel.id}>
-            <Link to={`/detail/${hotel.id}`}>
-              <Card className="bg-white text-white">
-                <Card.Img
-                  src={hotel.image}
-                  alt="Card image"
-                  className={style.img}
-                />
-                <Card.ImgOverlay>
-                  <Card.Title>{hotel.nombre}</Card.Title>
-                  <Card.Text>{hotel.direccion}</Card.Text>
-                  <Card.Text>{hotel.provincia}</Card.Text>
-                </Card.ImgOverlay>
-              </Card>
-            </Link>
-          </Col>
-        ))}
+        <Col key={id}>
+          <Link to={`/detail/${id}`}>
+            <Card className="bg-white text-white">
+              <Card.Img
+                src={ElementoDelArrayImage}
+                alt="Card image"
+                className={style.img}
+              />
+              <Card.ImgOverlay>
+                <Card.Title>{name}</Card.Title>
+                <Card.Text>{province}</Card.Text>
+              </Card.ImgOverlay>
+            </Card>
+          </Link>
+        </Col>
       </Row>
     </div>
   );

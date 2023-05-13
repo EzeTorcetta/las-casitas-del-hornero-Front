@@ -4,3 +4,5 @@ export const DETAIL_CLEAR_HOTEL = "DETAIL_CLEAR_HOTEL";
 export const ALL_FAVORITES_HOTELS = "ALL_FAVORITES_HOTELS";
 export const LOGIN_USER = "LOGIN_USER";
 export const SEARCH_HOTELS = "SEARCH_HOTELS";
+export const TYPE_ROOM = "TYPE_ROOM";
+export const ALL_SERVICE = "ALL_SERVICE";

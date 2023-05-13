@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import FuncionServices from "./FuncionServicios";
 import { useParams } from "react-router-dom";
+import TipoHabitacion from "../TypeRoom/TypeRoom";
 import Footer from "../Footer/Footer";
 import NavDetail from "../Nav/NavDetail";
 import style from "./Detail.module.css";
@@ -14,48 +16,20 @@ import CarruselDetail from "../CarruselDetail/CarruselDetail";
 
 const Detail = () => {
   const { id } = useParams();
+
   const dispatch = useDispatch();
   const DetailHotel = useSelector((state) => state.DetailHotel);
 
-  // useEffect(() => {
-  //   dispatch(FuncionDetailHotel(id));
-  //   return () => {
-  //     dispatch(FuncionClearDetail());
-  //   };
-  // }, []);
-  // const {
-  //   name,
-  //   telefono,
-  //   email,
-  //   imagen,
-  //   Provincia,
-  //   Direccion,
-  //   Precio,
-  //   Capacidad,
-  // } = DetailHotel;
+  console.log(id);
 
-  const hotel = {
-    id: 1,
-    name: "MustafaHotel",
-    email: "mustafahotel@gmail.com",
-    phoneNumber: "01134531",
-    province: "BUENOS AIRES",
-    location: [1200, -1200],
-    direccion: "Camaño y Bazan 4890",
-    rating: 2,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ab expedita, odit nostrum aut alias? Id a quibusdam quidem quis velit minima voluptatem illum eaque esse mollitia quo, nemo perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ab expedita, odit nostrum aut alias? Id a quibusdam quidem quis velit minima voluptatem illum eaque esse mollitia quo, nemo perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ab expedita, odit nostrum aut alias? Id a quibusdam quidem quis velit minima voluptatem illum eaque esse mollitia quo, nemo perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ab expedita, odit nostrum aut alias? Id a quibusdam quidem quis velit minima voluptatem illum eaque esse mollitia quo, nemo perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ab expedita, odit nostrum aut alias? Id a quibusdam quidem quis velit minima voluptatem illum eaque esse mollitia quo, nemo perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ab expedita, odit nostrum aut alias? Id a quibusdam quidem quis velit minima voluptatem illum eaque esse mollitia quo, nemo perspiciatis.",
-    image: [
-      "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/10/96/109659414.jpeg",
-      "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/uploadimages/34/68/34686940.jpeg",
-      "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/10/96/109659420.jpeg",
-      "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/12/04/120441352.jpeg",
-      "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/81/14/811467042.jpeg",
-      "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/uploadimages/34/68/34687000.jpeg",
-    ],
-  };
+  useEffect(() => {
+    dispatch(FuncionDetailHotel(id));
+    return () => {
+      dispatch(FuncionClearDetail());
+    };
+  }, [id]);
 
-  let array = Array(hotel.rating).fill(hotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
+  let array = Array(DetailHotel.rating).fill(DetailHotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
 
   return (
     <div>
@@ -63,13 +37,13 @@ const Detail = () => {
         <NavDetail />
         <div className={style.div}>
           <div className={style.divImg}>
-            <CarruselDetail image={hotel.image} />
+            <CarruselDetail image={DetailHotel.image} />
             <div className={style.divDescription}>
-              <h3>Name: {hotel.name}</h3>
-              <h3>PhoneNumber: {hotel.phoneNumber}</h3>
-              <p>Email: {hotel.email}</p>
-              <p>Province: {hotel.province}</p>
-              <p>{hotel.direccion}</p>
+              <h3>Name: {DetailHotel.name}</h3>
+              <h3>PhoneNumber: {DetailHotel.phoneNumber}</h3>
+              <p>Email: {DetailHotel.email}</p>
+              <p>Province: {DetailHotel.province}</p>
+              <p>{DetailHotel.direccion}</p>
               {array.map((ranting) => (
                 <img className={style.img} src={imagen} />
               ))}
@@ -77,16 +51,22 @@ const Detail = () => {
           </div>
         </div>
         <section className={style.sectionDescription}>
-          <h1>Descripción:</h1>
-          <p>{hotel.description}</p>
+          {DetailHotel.Services?.map((Ser) => (
+            <h2>{Ser.name}</h2>
+          ))}
+          {/* {DetailHotel.Services && (
+            <FuncionServices Services={DetailHotel.Services} />
+          )} */}
         </section>
-        <Maps
-          location={hotel.location}
-          name={hotel.name}
-          direccion={hotel.direccion}
-        />
+        <section className={style.sectionDescription}>
+          <h1>Descripción:</h1>
+          <p>{DetailHotel.description}</p>
+        </section>
+        {DetailHotel.location && DetailHotel.name && (
+          <Maps location={DetailHotel.location} name={DetailHotel.name} />
+        )}
         <section className={`${style.section} ${style.two}`}>
-          <h1>Habitaciones</h1>
+          <TipoHabitacion id={id} />
         </section>
         <Footer />
       </>

@@ -1,14 +1,18 @@
-import Card from "../Card/Card";
 import style from "./Home.module.css";
 import NavBar from "../Nav/Nav";
 import Search from "../Search/Search";
 import Footer from "../Footer/Footer";
 import Clima from "../Clima/Clima";
 import Carrusel from "../Carrusel/Carrusel";
-import Maps from "../Map/Map";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncionAllHotel } from "../../redux/Actions/Actions";
+import Cards from "../Card/Card";
 
-const Home = ({ hotels }) => {
+const Home = () => {
+  const dispatch = useDispatch();
+  const Hotels = useSelector((state) => state.Hotels);
+
   const [mediaQuery, setMediaQuery] = useState({
     matches: window.matchMedia("(min-width: 768px)").matches,
   });
@@ -28,6 +32,9 @@ const Home = ({ hotels }) => {
   ];
 
   useEffect(() => {
+    if (!Hotels.length) {
+      dispatch(FuncionAllHotel());
+    }
     const handler = (event) => setMediaQuery({ matches: event.matches });
     window
       .matchMedia("(min-width: 1200px)")
@@ -37,23 +44,25 @@ const Home = ({ hotels }) => {
         .matchMedia("(min-width: 1200px)")
         .removeEventListener("change", handler, false);
     };
-  }, []);
+  }, [Hotels]);
 
   return (
     <>
       <NavBar />
       <div className={style.container}>
-        {mediaQuery.matches ? <Carrusel /> : <Card hotels={arrayImages} />}
+        {mediaQuery.matches ? <Carrusel /> : <Cards hotels={arrayImages} />}
 
         <Search />
 
         <Clima />
 
         <section className={`${style.section} ${style.one}`}>
-          <Card hotels={hotels} />
+          {Hotels?.map(({ id, name, image, province }) => (
+            <Cards id={id} name={name} image={image} province={province} />
+          ))}
         </section>
         <section className={`${style.section} ${style.two}`}></section>
-        {/*sadsd*/}
+
         <Footer />
       </div>
     </>
