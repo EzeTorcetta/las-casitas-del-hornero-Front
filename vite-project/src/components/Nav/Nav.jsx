@@ -11,7 +11,7 @@ const NavBar = () => {
           src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
           alt=""
         />
-        <p>LasCasitasDelHornero </p>
+        <p>LasCasitaDelHornero </p>
       </div>
       <div>
         <NavLink to={"/Home"} className={style.link}>

@@ -1,22 +1,54 @@
 import hotels from "../../data";
-import { ALL_HOTELS, ALL_FAVORITES_HOTELS, DETAIL_CLEAR_HOTEL, DETAIL_HOTEL, LOGIN_USER, SEARCH_HOTELS } from "../Actions-index/index";
+import { ALL_HOTELS, ALL_FAVORITES_HOTELS, DETAIL_CLEAR_HOTEL, DETAIL_HOTEL, LOGIN_USER, SEARCH_HOTELS, TYPE_ROOM, ALL_SERVICE } from "../Actions-index/index";
 import axios from "axios";
 
-export const FuncionAllHotel = () => {
+// usuarios: /users
+// hoteles: /hotels
+// tipos de habitaciones: /roomTypes
+// servicios: /services
+// favoritos: /favorites
+
+export const FuncionServices = () => {
   return async (dispatch) => {
     try {
-      // const response = await axios.get("/Hotel");
-      dispatch({ type: ALL_HOTELS, payload: hotels });
+      const response = await axios.get("http://las-casitas-del-hornero-back.up.railway.app/services");
+      dispatch({ type: ALL_SERVICE, payload: response.data });
     } catch (error) {
       alert(error.response.data.error);
     }
   };
 };
 
-export const FuncionSearch = (searchAll) => {
+export const FuncionAllHotel = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/onsearch`, searchAll);
+      const response = await axios.get("http://las-casitas-del-hornero-back.up.railway.app/hotels");
+      dispatch({ type: ALL_HOTELS, payload: response.data });
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  };
+};
+
+export const FuncionTypeRoomTypes = (idHotel) => {
+  console.log(idHotel);
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://las-casitas-del-hornero-back.up.railway.app/roomTypes/${idHotel}`);
+      dispatch({ type: TYPE_ROOM, payload: response.data });
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  };
+};
+
+export const FuncionSearch = (nameHotel) => {
+  console.log(nameHotel);
+
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://las-casitas-del-hornero-back.up.railway.app/hotels?name=${nameHotel}`);
+      console.log(response.data);
       dispatch({ type: SEARCH_HOTELS, payload: response.data });
     } catch (error) {
       alert(error.response.data.error);
@@ -24,11 +56,11 @@ export const FuncionSearch = (searchAll) => {
   };
 };
 
-export const FuncionAllFavoritesHotel = (idUser) => {
+export const FuncionAllFavoritesHotel = (idHotel, idUser) => {
   return async (dispatch) => {
     try {
-      // const response = await axios.get(`/Favorito?idUser=${idUser}`);
-      dispatch({ type: ALL_FAVORITES_HOTELS, payload: hotels });
+      const response = await axios.get(`http://las-casitas-del-hornero-back.up.railway.app/favorites?id=${idHotel}&idUser=${idUser}`);
+      dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
       alert(error.response.data.error);
     }
@@ -38,7 +70,7 @@ export const FuncionAllFavoritesHotel = (idUser) => {
 export const FuncionDetailHotel = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/Detail/${id}`);
+      const response = await axios.get(`http://las-casitas-del-hornero-back.up.railway.app/hotels/${id}`);
       dispatch({ type: DETAIL_HOTEL, payload: response.data });
     } catch (error) {
       alert(error.response.data.error);
@@ -53,7 +85,7 @@ export const FuncionClearDetail = () => {
 export const Login = (name, username, password) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/login?name=${name}&username=${username}&password=${password}`);
+      const response = await axios.get(`http://las-casitas-del-hornero-back.up.railway.app/users?name=${name}&username=${username}&password=${password}`);
       if (response.data.access === true) {
         dispatch({ type: LOGIN_USER, payload: response.data.dataValues.id });
       }
@@ -66,7 +98,7 @@ export const Login = (name, username, password) => {
 export const UserLogin = (InfoUser) => {
   return async function () {
     try {
-      await axios.post(`/login`, InfoUser);
+      await axios.post(`http://las-casitas-del-hornero-back.up.railway.app/users`, InfoUser);
     } catch (error) {
       alert(error.response.data.error);
     }
