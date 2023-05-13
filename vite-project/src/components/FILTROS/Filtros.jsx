@@ -74,23 +74,23 @@ const Filtro = () => {
   return (
     <div>
       <select onChange={onChange}>
-        {Provincias.map((pro) => (
-          <option value={pro}>{pro}</option>
+        {Provincias.map((pro, index) => (
+          <option value={pro} key={index}>
+            {pro}
+          </option>
         ))}
       </select>
       <select onChange={onChange1}>
-        {raiting.map((rant) => (
-          <option value={rant}>{rant}</option>
+        {raiting.map((rant, index) => (
+          <option value={rant} key={index}>
+            {rant}
+          </option>
         ))}
       </select>
-      {Servicos.map((Ser) => (
-        <div>
+      {Servicos.map((Ser, index) => (
+        <div key={index}>
           {Ser}
-          <input
-            onChange={() => onChange3(Ser)}
-            type="checkbox"
-            value={Ser}
-          ></input>
+          <input onChange={() => onChange3(Ser)} type="checkbox" value={Ser}></input>
         </div>
       ))}
       <button onClick={FuncionOnclick}>AllHotels</button>

@@ -11,7 +11,7 @@ const TipoHabitacion = ({ id }) => {
     dispatch(FuncionTypeRoomTypes(id));
   }, []);
 
-  return TypeRoom.map((room, index) => (
+  return TypeRoom?.map((room, index) => (
     <div key={index}>
       <Card style={{ width: "18rem" }}>
         <Card.Body>
