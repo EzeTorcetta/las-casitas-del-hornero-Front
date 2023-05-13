@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-import Cards from "../Cards/Cards";
-=======
->>>>>>> 6a41f6c9deba8d25ac2bdaf741b77c4fa84db3f3
+// import Cards from "../Cards/Cards";
 import style from "./Home.module.css";
 import NavBar from "../Nav/Nav";
 import Search from "../Search/Search";
@@ -54,13 +51,9 @@ const Home = () => {
         <Clima />
 
         <section className={`${style.section} ${style.one}`}>
-<<<<<<< HEAD
-          <Cards hotels={hotels} />
-=======
           {Hotels?.map(({ id, name, image, province }) => (
             <Cards id={id} name={name} image={image} province={province} />
           ))}
->>>>>>> 6a41f6c9deba8d25ac2bdaf741b77c4fa84db3f3
         </section>
         <section className={`${style.section} ${style.two}`}></section>
 
