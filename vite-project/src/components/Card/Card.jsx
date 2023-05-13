@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
 function Cards({ id, name, image, province }) {
-  const ElementoDelArrayImage =
-    image && (image.length === 0 || image.length > 0) ? image.shift() : null;
+  // const ElementoDelArrayImage =
+  //   image && (image.length === 0 || image.length > 0) ? image.shift() : null;
+  const [position1] = image;
 
   return (
     <div className={style.container}>
@@ -16,7 +17,7 @@ function Cards({ id, name, image, province }) {
           <Link to={`/detail/${id}`}>
             <Card className="bg-white text-white">
               <Card.Img
-                src={ElementoDelArrayImage}
+                src={position1}
                 alt="Card image"
                 className={style.img}
               />
