@@ -94,6 +94,7 @@ const Filtro = ({ paginas }) => {
 
   const onChange3 = (ser) => {
     if (stateFiltro.servicios.includes(ser)) {
+      // basicamente
       // Remove the service from the filter
       setFiltro({
         ...stateFiltro,
