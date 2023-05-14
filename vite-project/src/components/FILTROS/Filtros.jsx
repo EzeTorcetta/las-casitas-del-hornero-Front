@@ -1,11 +1,17 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncionSelectProvince, FuncionSelectranting, FuncionSelectService, FuncionAllHotel } from "../../redux/Actions/Actions";
+import {
+  FuncionSelectProvince,
+  FuncionSelectranting,
+  FuncionSelectService,
+  FuncionAllHotel,
+} from "../../redux/Actions/Actions";
 import style from "./Filtros.module.css";
+import { useState } from "react";
 
 const Filtro = () => {
   const dispatch = useDispatch();
-  const Hotels = useSelector((state) => state.Hotels);
+  const [state, setState] = useState(false);
 
   const Provincias = [
     "CATAMARCA",
@@ -60,7 +66,13 @@ const Filtro = () => {
   };
 
   const onChange3 = (ser) => {
-    dispatch(FuncionSelectService(ser));
+    if (state === true) {
+      dispatch(FuncionSelectService(ser));
+      setState(false);
+    } else {
+      setState(true);
+      dispatch(FuncionAllHotel());
+    }
   };
 
   const FuncionOnclick = () => {
@@ -70,6 +82,7 @@ const Filtro = () => {
   return (
     <div>
       <select onChange={onChange} className={style.select}>
+        <option selected>Filtro Por Provincia</option>
         {Provincias.map((pro, index) => (
           <option value={pro} key={index}>
             {pro}
@@ -77,6 +90,7 @@ const Filtro = () => {
         ))}
       </select>
       <select onChange={onChange1} className={style.select}>
+        <option selected>Filtro Por raiting</option>
         {raiting.map((rant, index) => (
           <option value={rant} key={index}>
             {rant}
@@ -91,7 +105,12 @@ const Filtro = () => {
               <td className={style.td}>
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
-                  <input onChange={() => onChange3(Ser)} type="checkbox" value={Ser} id="checkbox"></input>
+                  <input
+                    onChange={() => onChange3(Ser)}
+                    type="checkbox"
+                    value={Ser}
+                    id="checkbox"
+                  ></input>
                   <span className={style.checkmark}></span>
                 </label>
               </td>

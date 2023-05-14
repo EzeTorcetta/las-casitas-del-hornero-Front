@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FuncionAllHotel } from "../../redux/Actions/Actions";
 import Cards from "../Card/Card";
 import Row from "react-bootstrap/Row";
+import Loading from "../Loading/Loading";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -39,39 +40,31 @@ const Home = () => {
     <>
       <NavBar />
       <div className={style.container}>
-        {mediaQuery.matches ? (
-          <Carrusel Hotels={Hotels} />
-        ) : (
-          <Row xs={1} sm={2} lg={3} className="g-2">
-            {Hotels?.map(({ id, name, image, province }) => (
-              <Cards
-                key={id}
-                id={id}
-                name={name}
-                image={image}
-                province={province}
-              />
-            ))}
-          </Row>
-        )}
-
-        <Search />
-        <Filtro />
+        <Carrusel Hotels={Hotels} />
+        {/* <Search /> */}
         <Clima />
-
-        <section className={`${style.section} ${style.one}`}>
-          <Row xs={1} sm={2} lg={3} className="g-2">
-            {Hotels?.map(({ id, name, image, province }) => (
-              <Cards
-                key={id}
-                id={id}
-                name={name}
-                image={image}
-                province={province}
-              />
-            ))}
-          </Row>
-        </section>
+        {Hotels.length ? (
+          <section className={`${style.section} ${style.one}`}>
+            <Filtro />
+            <section className={`${style.section} ${style.one}`}>
+              <Row xs={1} sm={2} lg={3} className="g-2">
+                {Hotels?.map(({ id, name, image, province }) => (
+                  <Cards
+                    key={id}
+                    id={id}
+                    name={name}
+                    image={image}
+                    province={province}
+                  />
+                ))}
+              </Row>
+            </section>
+          </section>
+        ) : (
+          <section className={`${style.section} ${style.one}`}>
+            <Loading />
+          </section>
+        )}
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
@@ -81,3 +74,17 @@ const Home = () => {
 };
 
 export default Home;
+/* {mediaQuery.matches ? ( 
+        // ) : (
+        //   <Row xs={1} sm={2} lg={3} className="g-2">
+        //     {Hotels?.map(({ id, name, image, province }) => (
+        //       <Cards
+        //         key={id}
+        //         id={id}
+        //         name={name}
+        //         image={image}
+        //         province={province}
+        //       />
+        //     ))}
+        //   </Row>
+        // )}*/

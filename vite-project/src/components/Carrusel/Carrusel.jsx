@@ -21,7 +21,6 @@ const Carrusel = ({ Hotels }) => {
             );
           })}
         </Carousel>
-        ;
       </div>
     </>
   );

@@ -17,8 +17,13 @@ function Cards({ id, name, image, province }) {
   }, []);
 
   const handleFavorite = () => {
+    // isFav ? deleteFavorite(props.id) : addFavorite();
     setIsFav(!isFav);
   };
+
+  // const ElementoDelArrayImage =
+  //   image && (image.length === 0 || image.length > 0) ? image.shift() : null;
+  // const [position1] = image;
 
   return (
     <div className={style.container}>

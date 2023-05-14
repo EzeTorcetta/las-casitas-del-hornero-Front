@@ -134,7 +134,7 @@ export const FuncionDetailHotel = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `http://las-casitas-del-hornero-back.up.railway.app/hotels/${id}`
+        `https://las-casitas-del-hornero-back.up.railway.app/hotels/${id}`
       );
       dispatch({ type: DETAIL_HOTEL, payload: response.data });
     } catch (error) {

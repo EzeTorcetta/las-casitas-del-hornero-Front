@@ -1,5 +1,6 @@
 const InicialState = {
   Hotels: [],
+  HotelsCopi: [],
   DetailHotel: {},
   FavHotels: [],
   idUser: {},
@@ -16,6 +17,7 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         Hotels: actions.payload,
+        HotelsCopi: actions.payload,
       };
 
     case "DETAIL_HOTEL":
@@ -68,7 +70,7 @@ export const rootReducer = (state = InicialState, actions) => {
     case "SELECT_RATING":
       return {
         ...state,
-        Hotels: actions.payload,
+        Hotels: [...state.HotelsCopi, ...actions.payload],
       };
 
     case "ALL_SERVICE":
