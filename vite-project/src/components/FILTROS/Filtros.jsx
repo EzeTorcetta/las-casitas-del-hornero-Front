@@ -1,17 +1,21 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+// import axios from "axios";
+import { useDispatch } from "react-redux";
 import {
-  FuncionSelectProvince,
   FuncionSelectranting,
-  FuncionSelectService,
   FuncionAllHotel,
 } from "../../redux/Actions/Actions";
 import style from "./Filtros.module.css";
 import { useState } from "react";
 
-const Filtro = () => {
+const Filtro = ({ paginas }) => {
   const dispatch = useDispatch();
   const [state, setState] = useState(false);
+  const [stateFiltro, setFiltro] = useState({
+    Provincias: "",
+    servicios: [],
+    rating: "",
+    order: "",
+  });
 
   const Provincias = [
     "CATAMARCA",
@@ -40,7 +44,7 @@ const Filtro = () => {
 
   const raiting = [1, 2, 3, 4, 5];
 
-  const Servicos = [
+  const Servicios = [
     "Desayuno gratis",
     "Pileta",
     "Gimnasio",
@@ -58,21 +62,56 @@ const Filtro = () => {
   ];
 
   const onChange = async (event) => {
-    dispatch(FuncionSelectProvince(event.target.value));
+    setFiltro({
+      ...stateFiltro,
+      Provincias: event.target.value,
+    });
+    // dispatch(FuncionSelectranting(null, null, event.target.value));
   };
 
   const onChange1 = async (event) => {
-    dispatch(FuncionSelectranting(event.target.value));
+    setFiltro({ ...stateFiltro, rating: event.target.value });
+    // dispatch(FuncionSelectranting(null, event.target.value, null));
   };
 
+  // const onChange3 = (ser) => {
+  //   setState((prevState) => {
+  //     if (prevState) {
+  //       // Si el estado actual es true, se agrega el servicio al filtro
+  //       setFiltro({
+  //         ...stateFiltro,
+  //         servicios: [...stateFiltro.servicios, ser],
+  //       });
+  //     } else {
+  //       // Si el estado actual es false, se elimina el servicio del filtro
+  //       setFiltro({
+  //         ...stateFiltro,
+  //         servicios: stateFiltro.servicios.filter((s) => s !== ser),
+  //       });
+  //     }
+  //   });
+  // };
+
   const onChange3 = (ser) => {
-    if (state === true) {
-      dispatch(FuncionSelectService(ser));
-      setState(false);
-    } else {
+    if (state === false) {
+      setFiltro({
+        ...stateFiltro,
+        servicios: stateFiltro.servicios.filter((servi) => servi !== ser),
+      });
       setState(true);
-      dispatch(FuncionAllHotel());
+    } else {
+      setFiltro({ ...stateFiltro, servicios: [...stateFiltro.servicios, ser] });
+      setState(false);
+      //   // dispatch(FuncionAllHotel());
     }
+  };
+
+  const onChangeOrder = (event) => {
+    setFiltro({ ...stateFiltro, order: event.target.value });
+  };
+
+  const FuncionFiltrar = () => {
+    dispatch(FuncionSelectranting(stateFiltro, paginas));
   };
 
   const FuncionOnclick = () => {
@@ -82,7 +121,7 @@ const Filtro = () => {
   return (
     <div>
       <select onChange={onChange} className={style.select}>
-        <option selected>Filtro Por Provincia</option>
+        <option hidden>Filtro Por Provincia</option>
         {Provincias.map((pro, index) => (
           <option value={pro} key={index}>
             {pro}
@@ -90,15 +129,22 @@ const Filtro = () => {
         ))}
       </select>
       <select onChange={onChange1} className={style.select}>
-        <option selected>Filtro Por raiting</option>
+        <option hidden>Filtro Por raiting</option>
         {raiting.map((rant, index) => (
           <option value={rant} key={index}>
             {rant}
           </option>
         ))}
       </select>
+      <select onChange={onChangeOrder} className={style.select}>
+        <option hidden>Ordenar por</option>
+        <option value="NAMEASC">Nombre A-Z</option>
+        <option value="NAMEDESC">Nombre Z-A</option>
+        <option value="RATINGASC">Estrellas mayor</option>
+        <option value="RATINGDESC">Estrellas menor</option>
+      </select>
       <table className={style.table}>
-        {Servicos.map((Ser, index) => (
+        {Servicios.map((Ser, index) => (
           <tbody key={index}>
             <tr className={style.tr}>
               <td className={style.td}>{Ser}</td>
@@ -118,6 +164,9 @@ const Filtro = () => {
           </tbody>
         ))}
       </table>
+      <button onClick={FuncionFiltrar} className={style.button}>
+        Filtrar
+      </button>
       <button onClick={FuncionOnclick} className={style.button}>
         AllHotels
       </button>
