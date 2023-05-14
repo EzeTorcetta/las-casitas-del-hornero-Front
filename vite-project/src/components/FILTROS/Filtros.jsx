@@ -93,16 +93,18 @@ const Filtro = ({ paginas }) => {
   // };
 
   const onChange3 = (ser) => {
-    if (state === false) {
+    if (stateFiltro.servicios.includes(ser)) {
+      // Remove the service from the filter
       setFiltro({
         ...stateFiltro,
-        servicios: stateFiltro.servicios.filter((servi) => servi !== ser),
+        servicios: stateFiltro.servicios.filter((s) => s !== ser),
       });
-      setState(true);
     } else {
-      setFiltro({ ...stateFiltro, servicios: [...stateFiltro.servicios, ser] });
-      setState(false);
-      //   // dispatch(FuncionAllHotel());
+      // Add the service to the filter
+      setFiltro({
+        ...stateFiltro,
+        servicios: [...stateFiltro.servicios, ser],
+      });
     }
   };
 
@@ -153,8 +155,8 @@ const Filtro = ({ paginas }) => {
                   <label htmlFor="checkbox"></label>
                   <input
                     onChange={() => onChange3(Ser)}
-                    type="checkbox"
                     value={Ser}
+                    type="checkbox"
                     id="checkbox"
                   ></input>
                   <span className={style.checkmark}></span>
