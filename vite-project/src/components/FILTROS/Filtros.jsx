@@ -1,11 +1,7 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  FuncionSelectProvince,
-  FuncionSelectranting,
-  FuncionSelectService,
-  FuncionAllHotel,
-} from "../../redux/Actions/Actions";
+import { FuncionSelectProvince, FuncionSelectranting, FuncionSelectService, FuncionAllHotel } from "../../redux/Actions/Actions";
+import style from "./Filtros.module.css";
 
 const Filtro = () => {
   const dispatch = useDispatch();
@@ -74,25 +70,35 @@ const Filtro = () => {
   return (
     <div>
       <select onChange={onChange}>
-        {Provincias.map((pro) => (
-          <option value={pro}>{pro}</option>
+        {Provincias.map((pro, index) => (
+          <option value={pro} key={index}>
+            {pro}
+          </option>
         ))}
       </select>
       <select onChange={onChange1}>
-        {raiting.map((rant) => (
-          <option value={rant}>{rant}</option>
+        {raiting.map((rant, index) => (
+          <option value={rant} key={index}>
+            {rant}
+          </option>
         ))}
       </select>
-      {Servicos.map((Ser) => (
-        <div>
-          {Ser}
-          <input
-            onChange={() => onChange3(Ser)}
-            type="checkbox"
-            value={Ser}
-          ></input>
-        </div>
-      ))}
+      <table className={style.table}>
+        {Servicos.map((Ser, index) => (
+          <tbody key={index}>
+            <tr className={style.tr}>
+              <td className={style.td}>{Ser}</td>
+              <td className={style.td}>
+                <label className={style.checkbox_btn}>
+                  <label htmlFor="checkbox"></label>
+                  <input onChange={() => onChange3(Ser)} type="checkbox" value={Ser} id="checkbox"></input>
+                  <span className={style.checkmark}></span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
       <button onClick={FuncionOnclick}>AllHotels</button>
     </div>
   );

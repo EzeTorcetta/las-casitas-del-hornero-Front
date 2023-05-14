@@ -7,6 +7,7 @@ const InicialState = {
     { username: "jose123", correo: "jose@henry.com", contraseña: "abc123" },
     { username: "martin123", correo: "martin@henry.com", contraseña: "fgh456" },
   ],
+  TypeRoom: [],
 };
 
 export const rootReducer = (state = InicialState, actions) => {
