@@ -3,9 +3,9 @@ import {
   ALL_FAVORITES_HOTELS,
   DETAIL_CLEAR_HOTEL,
   DETAIL_HOTEL,
-  // LOGIN_USER,
+  LOGIN_USER,
   SEARCH_HOTELS,
-  // USER_LOGIN,
+  USER_LOGIN,
   TYPE_ROOM,
   SELECT_PROVINCE,
   SELECT_RATING,
@@ -65,8 +65,9 @@ export const FuncionAllHotel = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        "https://las-casitas-del-hornero-back.up.railway.app/hotels"
+        `https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${1}`
       );
+      console.log(response.data);
       dispatch({ type: ALL_HOTELS, payload: response.data });
     } catch (error) {
       alert(error.response.data.error);
@@ -147,34 +148,34 @@ export const FuncionClearDetail = () => {
   return { type: DETAIL_CLEAR_HOTEL }; // cuando se desmonte el detail , el objeto se vacia.
 };
 
-// export const Login = (usuarioRegistro) => {
-//   console.log(usuarioRegistro);
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.post(
-//         `https://las-casitas-del-hornero-back.up.railway.app/user`,
-//         usuarioRegistro
-//       );
-//       console.log(response.data);
-//       dispatch({ type: USER_LOGIN, payload: response.data.id });
-//     } catch (error) {
-//       alert(error.response.data.error);
-//     }
-//   };
-// };
+export const Login = (usuarioRegistro) => {
+  console.log(usuarioRegistro);
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        `https://las-casitas-del-hornero-back.up.railway.app/user`,
+        usuarioRegistro
+      );
+      console.log(response.data);
+      dispatch({ type: USER_LOGIN, payload: response.data.id });
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  };
+};
 
-// export const UserLogin = (usuario) => {
-//   console.log(usuario);
-//   return async () => {
-//     try {
-//       const response = await axios.post(
-//         `https://las-casitas-del-hornero-back.up.railway.app/user`,
-//         usuario
-//       );
-//       console.log(response.data);
-//       dispatch({ type: LOGIN_USER, payload: response.data.id });
-//     } catch (error) {
-//       alert(error.response.data.error);
-//     }
-//   };
-// };
+export const UserLogin = (usuario) => {
+  console.log(usuario);
+  return async () => {
+    try {
+      const response = await axios.post(
+        `https://las-casitas-del-hornero-back.up.railway.app/user`,
+        usuario
+      );
+      console.log(response.data);
+      dispatch({ type: LOGIN_USER, payload: response.data.id });
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  };
+};

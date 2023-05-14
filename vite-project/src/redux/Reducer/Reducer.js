@@ -1,9 +1,9 @@
 const InicialState = {
-  Hotels: [],
+  Hotels: {},
   HotelsCopi: [],
   DetailHotel: {},
   FavHotels: [],
-  idUser: {},
+  idUser: 0,
   usuarios: [
     { username: "jose123", correo: "jose@henry.com", contraseña: "abc123" },
     { username: "martin123", correo: "martin@henry.com", contraseña: "fgh456" },
@@ -14,6 +14,7 @@ const InicialState = {
 export const rootReducer = (state = InicialState, actions) => {
   switch (actions.type) {
     case "ALL_HOTELS":
+      console.log(actions.payload);
       return {
         ...state,
         Hotels: actions.payload,
@@ -38,17 +39,17 @@ export const rootReducer = (state = InicialState, actions) => {
         FavHotels: actions.payload,
       };
 
-    // case "LOGIN_USER":
-    //   return {
-    //     ...state,
-    //     idUser: actions.payload,
-    //   };
+    case "LOGIN_USER":
+      return {
+        ...state,
+        idUser: actions.payload,
+      };
 
-    // case "USER_LOGIN":
-    //   return {
-    //     ...state,
-    //     idUser: actions.payload,
-    //   };
+    case "USER_LOGIN":
+      return {
+        ...state,
+        idUser: actions.payload,
+      };
 
     case "SEARCH_HOTELS":
       return {
@@ -70,7 +71,7 @@ export const rootReducer = (state = InicialState, actions) => {
     case "SELECT_RATING":
       return {
         ...state,
-        Hotels: [...state.HotelsCopi, ...actions.payload],
+        Hotels: actions.payload,
       };
 
     case "ALL_SERVICE":

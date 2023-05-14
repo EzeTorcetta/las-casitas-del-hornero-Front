@@ -9,6 +9,7 @@ function Cards({ id, name, image, province }) {
   const dispatch = useDispatch();
   const FavHotels = useSelector((state) => state.FavHotels);
   const [isFav, setIsFav] = useState(false);
+  // const idUser = useSelector(sate => state.idUser)
 
   useEffect(() => {
     FavHotels.forEach((fav) => {
@@ -18,12 +19,9 @@ function Cards({ id, name, image, province }) {
 
   const handleFavorite = () => {
     // isFav ? deleteFavorite(props.id) : addFavorite();
+    //post (idHotel , idUser)
     setIsFav(!isFav);
   };
-
-  // const ElementoDelArrayImage =
-  //   image && (image.length === 0 || image.length > 0) ? image.shift() : null;
-  // const [position1] = image;
 
   return (
     <div className={style.container}>

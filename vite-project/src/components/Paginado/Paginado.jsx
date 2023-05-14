@@ -3,22 +3,22 @@ import style from "./Paginado.module.css";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
-const Paginado = () => {
-  const [page, setPage] = useState(0);
+const Paginado = ({ paginas }) => {
+  const [page, setPage] = useState(paginas);
   const [currentPage, setCurrentPage] = useState(page);
 
   const handlePage = (event) => {
-    setPage(event.target.value * 15);
+    setPage(event.target.value * 5);
     setCurrentPage(event.target.value * 1);
   };
 
   const handlePagePrev = () => {
-    setPage(page - 15);
+    setPage(page - 5);
     setCurrentPage(currentPage - 1);
   };
 
   const handlePageNext = () => {
-    setPage(page + 15);
+    setPage(page + 5);
     setCurrentPage(currentPage + 1);
   };
 
@@ -36,7 +36,7 @@ const Paginado = () => {
             {i + 1}
           </button>
         ))}
-        {page < cards.length - 15 && (
+        {page < cards.length - 5 && (
           <button onClick={handlePageNext}>&rArr;</button>
         )}
       </div>

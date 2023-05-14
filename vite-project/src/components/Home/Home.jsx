@@ -18,12 +18,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const Hotels = useSelector((state) => state.Hotels);
 
+  console.log(Hotels.numPages);
+
   const [mediaQuery, setMediaQuery] = useState({
     matches: window.matchMedia("(min-width: 768px)").matches,
   });
 
   useEffect(() => {
-    if (!Hotels.length) {
+    if (!Hotels.allHotels?.length) {
       dispatch(FuncionAllHotel());
     }
     const handler = (event) => setMediaQuery({ matches: event.matches });
@@ -35,21 +37,23 @@ const Home = () => {
         .matchMedia("(min-width: 1200px)")
         .removeEventListener("change", handler, false);
     };
-  }, [Hotels]);
+  }, [Hotels.allHotels]);
 
   return (
     <>
       <NavBar />
       <div className={style.container}>
-        <Carrusel Hotels={Hotels} />
+        <Carrusel Hotels={Hotels.allHotels} />
         {/* <Search /> */}
         <Clima />
-        {Hotels.length ? (
-          <section className={`${style.section} ${style.one}`}>
-            <Filtro />
+        {Hotels.allHotels?.length ? (
+          <>
+            <div className={style.filtroContainer}>
+              <Filtro />
+            </div>
             <section className={`${style.section} ${style.one}`}>
               <Row xs={1} sm={2} lg={3} className="g-2">
-                {Hotels?.map(({ id, name, image, province }) => (
+                {Hotels.allHotels?.map(({ id, name, image, province }) => (
                   <Cards
                     key={id}
                     id={id}
@@ -60,14 +64,14 @@ const Home = () => {
                 ))}
               </Row>
             </section>
-          </section>
+          </>
         ) : (
           <section className={`${style.section} ${style.one}`}>
             <Loading />
           </section>
         )}
 
-        <Paginado />
+        <Paginado paginas={Hotels.numPages} />
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
