@@ -17,16 +17,18 @@ const Paginado = ({ paginas }) => {
     dispatch(FuncionAllHotel(currentPage));
   };
 
+  //dfsdf
+
   const handlePagePrev = () => {
     setCurrentPage(currentPage - 1);
     setPage(page - 1);
-    dispatch(FuncionAllHotel(currentPage));
+    dispatch(FuncionAllHotel(page));
   };
 
   const handlePageNext = () => {
     setCurrentPage(currentPage + 1);
     setPage(page + 1);
-    dispatch(FuncionAllHotel(currentPage));
+    dispatch(FuncionAllHotel(page));
   };
 
   return (
