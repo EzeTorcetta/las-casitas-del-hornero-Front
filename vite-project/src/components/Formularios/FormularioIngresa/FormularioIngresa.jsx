@@ -1,7 +1,7 @@
 import "./sign-in.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { UserLogin } from "../../../redux/Actions/Actions";
+import { FuncionIDUser } from "../../../redux/Actions/Actions";
 import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,6 @@ import axios from "axios";
 const FormularioIngresa = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const db = useSelector((state) => state.usuarios);
-  // console.log(db);
 
   const [usuario, setUsuario] = useState({
     email: "",
@@ -39,38 +37,20 @@ const FormularioIngresa = () => {
       alert("Tienes errores en los campos");
     } else {
       try {
-        await axios.post(
+        const response = await axios.post(
           `https://las-casitas-del-hornero-back.up.railway.app/user`,
           usuario
         );
-
+        console.log(response.data.id);
+        const idUser1 = response.data.id;
+        dispatch(FuncionIDUser(idUser1));
         alert(" Inicio de sesion con exito!!");
         navigate("/Home");
       } catch (error) {
+        console.log(error);
         alert(error.response.data.error);
       }
-      // dispatch(UserLogin(usuario));
-      // navigate("/Home");
     }
-
-    // if (usuario.email === "" || usuario.password === "")
-    //   return alert("Necesitas completar las áreas");
-    // else if (
-    //   db.find(
-    //     (user) =>
-    //       user.email === usuario.email &&
-    //       user.password === usuario.password
-    //   )
-    // ) {
-    //   window.location.href = "Home";
-    // } else {
-    //   return alert("Usuario o password equivocada");
-    // }
-
-    // setUsuario({
-    //   email: "",
-    //   password: "",
-    // });
   };
 
   return (

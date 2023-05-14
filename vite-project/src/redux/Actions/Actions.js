@@ -3,9 +3,8 @@ import {
   ALL_FAVORITES_HOTELS,
   DETAIL_CLEAR_HOTEL,
   DETAIL_HOTEL,
-  LOGIN_USER,
   SEARCH_HOTELS,
-  USER_LOGIN,
+  IDUSER,
   TYPE_ROOM,
   SELECT_PROVINCE,
   SELECT_RATING,
@@ -13,47 +12,87 @@ import {
 } from "../Actions-index/index";
 import axios from "axios";
 
-// usuarios: /users
-// hoteles: /hotels
-// tipos de habitaciones: /roomTypes
-// servicios: /services
-// favoritos: /favorites
+// export const FuncionSelectService = (Service) => {
+// console.log(Service);
+// return async (dispatch) => {
+//   try {
+//     const response = await axios.get(
+//       `https://las-casitas-del-hornero-back.up.railway.app/hotels?services=${Service}`
+//     );
+//     dispatch({ type: ALL_SERVICE, payload: response.data });
+//   } catch (error) {
+//     alert(error.response.data.error);
+//   }
+// };
+// };
 
-export const FuncionSelectService = (Service) => {
-  console.log(Service);
+// export const FuncionSelectProvince = (Province) => {
+//   console.log(Province);
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.get(
+//         `https://las-casitas-del-hornero-back.up.railway.app/hotels?provinces=${Province}`
+//       );
+//       dispatch({ type: SELECT_PROVINCE, payload: response.data });
+//     } catch (error) {
+//       alert(error.response.data.error);
+//     }
+//   };
+// };
+
+// export const FuncionSelectranting = (filtros, paginas) => {
+//   const URL = "https://las-casitas-del-hornero-back.up.railway.app/hotels";
+//   const { Provincias, servicios, ranting, order } = filtros;
+//   console.log(order);
+
+//   console.log(servicios);
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.get(
+//         `${URL}?page=${paginas}&rating=${ranting}&provinces=${Provincias}&services=${servicios}&order=${order}`
+//       );
+
+//       // const response = await axios.get(
+//       //   `${URL}?rating=${ranting}&&provinces=${Provincias}&&services=${servicios}`
+//       // );
+//       console.log(response.data);
+//       dispatch({ type: SELECT_RATING, payload: response.data });
+//     } catch (error) {
+//       alert(error.response.data.error);
+//     }
+//   };
+// };
+
+export const FuncionSelectranting = (filtros, page) => {
+  let URL = "https://las-casitas-del-hornero-back.up.railway.app/hotels";
+  const { Provincias, servicios, rating, order } = filtros;
+  console.log(filtros);
+  console.log(Number(rating));
+
+  /*https://las-casitas-del-hornero-back.up.railway.app/hotels?page=1&provinces=SAN%20JUAN*/
+
+  URL = URL + `?page=${page}`;
+
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `https://las-casitas-del-hornero-back.up.railway.app/hotels?services=${Service}`
-      );
-      dispatch({ type: ALL_SERVICE, payload: response.data });
-    } catch (error) {
-      alert(error.response.data.error);
-    }
-  };
-};
+      if (Number(rating) !== 0) {
+        URL = URL + `&rating=${Number(rating)}`;
+      }
+      if (Provincias.length) {
+        URL = URL + `&provinces=${encodeURIComponent(Provincias)}`;
+      }
+      if (order.length) {
+        URL = URL + `&order=${order}`;
+      }
+      if (servicios.length) {
+        servicios.map(
+          (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
+        );
+      }
+      console.log(URL);
 
-export const FuncionSelectProvince = (Province) => {
-  console.log(Province);
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(
-        `https://las-casitas-del-hornero-back.up.railway.app/hotels?provinces=${Province}`
-      );
-      dispatch({ type: SELECT_PROVINCE, payload: response.data });
-    } catch (error) {
-      alert(error.response.data.error);
-    }
-  };
-};
+      const response = await axios.get(URL);
 
-export const FuncionSelectranting = (number) => {
-  console.log(number);
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(
-        `https://las-casitas-del-hornero-back.up.railway.app/hotels?rating=${number}`
-      );
       dispatch({ type: SELECT_RATING, payload: response.data });
     } catch (error) {
       alert(error.response.data.error);
@@ -61,11 +100,11 @@ export const FuncionSelectranting = (number) => {
   };
 };
 
-export const FuncionAllHotel = () => {
+export const FuncionAllHotel = (page = 1) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${1}`
+        `https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`
       );
       console.log(response.data);
       dispatch({ type: ALL_HOTELS, payload: response.data });
@@ -118,11 +157,11 @@ export const FuncionSearch = (nameHotel) => {
   };
 };
 
-export const FuncionAllFavoritesHotel = (idHotel, idUser) => {
+export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `http://las-casitas-del-hornero-back.up.railway.app/favorites?id=${idHotel}&idUser=${idUser}`
+        `http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}`
       );
       dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
@@ -148,34 +187,6 @@ export const FuncionClearDetail = () => {
   return { type: DETAIL_CLEAR_HOTEL }; // cuando se desmonte el detail , el objeto se vacia.
 };
 
-export const Login = (usuarioRegistro) => {
-  console.log(usuarioRegistro);
-  return async function (dispatch) {
-    try {
-      const response = await axios.post(
-        `https://las-casitas-del-hornero-back.up.railway.app/user`,
-        usuarioRegistro
-      );
-      console.log(response.data);
-      dispatch({ type: USER_LOGIN, payload: response.data.id });
-    } catch (error) {
-      alert(error.response.data.error);
-    }
-  };
-};
-
-export const UserLogin = (usuario) => {
-  console.log(usuario);
-  return async () => {
-    try {
-      const response = await axios.post(
-        `https://las-casitas-del-hornero-back.up.railway.app/user`,
-        usuario
-      );
-      console.log(response.data);
-      dispatch({ type: LOGIN_USER, payload: response.data.id });
-    } catch (error) {
-      alert(error.response.data.error);
-    }
-  };
+export const FuncionIDUser = (idUser) => {
+  return { type: IDUSER, payload: idUser }; // cuando se desmonte el detail , el objeto se vacia.
 };

@@ -5,28 +5,28 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Paginado = ({ paginas }) => {
   const [page, setPage] = useState(paginas);
-  const [currentPage, setCurrentPage] = useState(page);
+  const [currentPage, setCurrentPage] = useState(paginas);
   const paginado = useSelector((state) => state.Hotels.numPages);
   const dispatch = useDispatch();
 
   const cards = Array.from({ length: paginado }, (_, i) => i + 1);
 
   const handlePage = (event) => {
-    setPage(event.target.value * 1);
     setCurrentPage(event.target.value * 1);
-    dispatch(FuncionAllHotel(page));
+    setPage(event.target.value * 1);
+    dispatch(FuncionAllHotel(currentPage));
   };
 
   const handlePagePrev = () => {
-    setPage(page - 1);
     setCurrentPage(currentPage - 1);
-    dispatch(FuncionAllHotel(page));
+    setPage(page - 1);
+    dispatch(FuncionAllHotel(currentPage));
   };
 
   const handlePageNext = () => {
-    setPage(page + 1);
     setCurrentPage(currentPage + 1);
-    dispatch(FuncionAllHotel(page));
+    setPage(page + 1);
+    dispatch(FuncionAllHotel(currentPage));
   };
 
   return (
@@ -35,10 +35,10 @@ const Paginado = ({ paginas }) => {
         {page > 0 && <button onClick={handlePagePrev}>&lArr;</button>}
         {cards.map((value, i) => (
           <button
-            value={i}
+            value={i + 1}
             onClick={handlePage}
             className={currentPage === i ? "style.active" : ""}
-            key={i}
+            key={i + 1}
           >
             {value}
           </button>

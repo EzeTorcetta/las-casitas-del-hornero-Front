@@ -64,10 +64,6 @@ const FormularioIngresa = () => {
     ) {
       alert("Tienes errores en los campos");
     } else {
-      // if (usuario.password === usuario.repetir) {
-      //   const { username, password, email, admin } = usuario;
-      //   dispatch(Login({ username, password, email, admin }));
-      // }
       try {
         const { username, password, email, admin } = usuario;
         await axios.post(
@@ -76,7 +72,7 @@ const FormularioIngresa = () => {
         );
 
         alert("Usuarios registrado con exito!!");
-        navigate("/Home");
+        navigate("/");
       } catch (error) {
         alert(error.response.data.error);
       }

@@ -17,8 +17,7 @@ import Paginado from "../Paginado/Paginado";
 const Home = () => {
   const dispatch = useDispatch();
   const Hotels = useSelector((state) => state.Hotels);
-
-  console.log(Hotels.numPages);
+  const HotelsCopi = useSelector((state) => state.HotelsCopi);
 
   const [mediaQuery, setMediaQuery] = useState({
     matches: window.matchMedia("(min-width: 768px)").matches,
@@ -43,15 +42,15 @@ const Home = () => {
     <>
       <NavBar />
       <div className={style.container}>
-        <Carrusel Hotels={Hotels.allHotels} />
+        <Carrusel Hotels1={HotelsCopi?.allHotels} />
         {/* <Search /> */}
         <Clima />
         {Hotels.allHotels?.length ? (
           <>
-            <div className={style.filtroContainer}>
-              <Filtro />
-            </div>
             <section className={`${style.section} ${style.one}`}>
+              <div className={style.filtroContainer}>
+                <Filtro paginas={Hotels.numPages} />
+              </div>
               <Row xs={1} sm={2} lg={3} className="g-2">
                 {Hotels.allHotels?.map(({ id, name, image, province }) => (
                   <Cards
@@ -81,17 +80,3 @@ const Home = () => {
 };
 
 export default Home;
-/* {mediaQuery.matches ? ( 
-        // ) : (
-        //   <Row xs={1} sm={2} lg={3} className="g-2">
-        //     {Hotels?.map(({ id, name, image, province }) => (
-        //       <Cards
-        //         key={id}
-        //         id={id}
-        //         name={name}
-        //         image={image}
-        //         province={province}
-        //       />
-        //     ))}
-        //   </Row>
-        // )}*/
