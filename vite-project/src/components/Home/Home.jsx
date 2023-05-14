@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FuncionAllHotel } from "../../redux/Actions/Actions";
 import Cards from "../Card/Card";
 import Row from "react-bootstrap/Row";
+import Paginado from "../Paginado/Paginado";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const Home = () => {
             ))}
           </Row>
         </section>
+        <Paginado />
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
