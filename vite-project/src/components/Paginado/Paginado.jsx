@@ -14,19 +14,19 @@ const Paginado = ({ paginas }) => {
   const handlePage = (event) => {
     setPage(event.target.value * 1);
     setCurrentPage(event.target.value * 1);
-    dispatch(FuncionAllHotel(page));
+    dispatch(FuncionAllHotel(currentPage));
   };
 
   const handlePagePrev = () => {
     setPage(page - 1);
     setCurrentPage(currentPage - 1);
-    dispatch(FuncionAllHotel(page));
+    dispatch(FuncionAllHotel(currentPage));
   };
 
   const handlePageNext = () => {
     setPage(page + 1);
     setCurrentPage(currentPage + 1);
-    dispatch(FuncionAllHotel(page));
+    dispatch(FuncionAllHotel(currentPage));
   };
 
   return (
@@ -37,7 +37,7 @@ const Paginado = ({ paginas }) => {
           <button
             value={i}
             onClick={handlePage}
-            className={currentPage === i ? "style.active" : ""}
+            className={currentPage === i ? ".active" : ""}
             key={i}
           >
             {value}
