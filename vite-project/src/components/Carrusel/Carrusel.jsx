@@ -5,7 +5,7 @@ import style from "./Carrusel.module.css";
 const Carrusel = ({ Hotels }) => {
   return (
     <>
-      <div className={style.container}>
+      <div>
         <Carousel className={style.carousel}>
           {Hotels?.map(({ id, name, image, decription }) => {
             return (
@@ -21,6 +21,7 @@ const Carrusel = ({ Hotels }) => {
             );
           })}
         </Carousel>
+        ;
       </div>
     </>
   );

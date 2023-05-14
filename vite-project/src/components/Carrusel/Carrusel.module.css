@@ -1,5 +1,7 @@
 .container {
   scroll-snap-type: y mandatory;
+  display: flex;
+  overflow-x: scroll;
 }
 
 .item {
@@ -11,4 +13,3 @@
   height: 100%;
   object-fit: cover;
 }
-/*xfgfgrgsef*/
