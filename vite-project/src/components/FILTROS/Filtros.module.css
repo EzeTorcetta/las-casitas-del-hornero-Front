@@ -1,3 +1,13 @@
+.select {
+  appearance: none;
+  cursor: pointer;
+  color: white;
+  background-color: orange;
+  width: 150px;
+  padding: 5px;
+  border: 2px solid white;
+}
+
 .td {
   padding: 5px;
 }
@@ -75,4 +85,15 @@
   50% {
     transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
   }
+}
+
+.button {
+  width: 100px;
+  height: 55px;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f7931e;
+  color: #fff;
+  cursor: pointer;
 }

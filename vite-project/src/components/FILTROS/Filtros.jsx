@@ -69,14 +69,14 @@ const Filtro = () => {
 
   return (
     <div>
-      <select onChange={onChange}>
+      <select onChange={onChange} className={style.select}>
         {Provincias.map((pro, index) => (
           <option value={pro} key={index}>
             {pro}
           </option>
         ))}
       </select>
-      <select onChange={onChange1}>
+      <select onChange={onChange1} className={style.select}>
         {raiting.map((rant, index) => (
           <option value={rant} key={index}>
             {rant}
@@ -99,7 +99,9 @@ const Filtro = () => {
           </tbody>
         ))}
       </table>
-      <button onClick={FuncionOnclick}>AllHotels</button>
+      <button onClick={FuncionOnclick} className={style.button}>
+        AllHotels
+      </button>
     </div>
   );
 };
