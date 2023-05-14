@@ -20,11 +20,13 @@ const Paginado = ({ paginas }) => {
   const handlePagePrev = () => {
     setPage(page - 1);
     setCurrentPage(currentPage - 1);
+    dispatch(FuncionAllHotel(page));
   };
 
   const handlePageNext = () => {
     setPage(page + 1);
     setCurrentPage(currentPage + 1);
+    dispatch(FuncionAllHotel(page));
   };
 
   return (
