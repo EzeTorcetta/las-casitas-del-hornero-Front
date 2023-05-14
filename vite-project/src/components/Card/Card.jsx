@@ -7,12 +7,12 @@ import style from "./Card.module.css";
 
 function Cards({ id, name, image, province }) {
   const dispatch = useDispatch();
-  const Hotels = useSelector((state) => state.Hotels);
+  const FavHotels = useSelector((state) => state.FavHotels);
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
-    Hotels.forEach((h) => {
-      if (h.id === id) setIsFav(true);
+    FavHotels.forEach((fav) => {
+      if (fav.id === id) setIsFav(true);
     });
   }, []);
 
