@@ -9,12 +9,7 @@ const CarruselDetail = ({ image }) => {
           <Carousel className={style.carousel}>
             {image?.map((imagen, index) => (
               <Carousel.Item className={style.item} key={index}>
-                <img
-                  // className="d-block w-100"
-                  className={style.img}
-                  src={imagen}
-                  alt="First slide"
-                />
+                <img className={style.img} src={imagen} alt="First slide" />
               </Carousel.Item>
             ))}
           </Carousel>

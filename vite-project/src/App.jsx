@@ -1,11 +1,4 @@
-import {
-  Home,
-  Favoritos,
-  Detail,
-  Landing,
-  FormularioRegistrar,
-} from "./components/Index";
-import "./App.css";
+import { Home, Favoritos, Detail, Landing, FormularioRegistrar } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
 
 function App() {

@@ -1,6 +1,6 @@
 import "./sign-in.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FuncionIDUser } from "../../../redux/Actions/Actions";
 import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
@@ -46,10 +46,7 @@ const FormularioIngresa = () => {
       });
     } else {
       try {
-        const response = await axios.post(
-          `https://las-casitas-del-hornero-back.up.railway.app/user`,
-          usuario
-        );
+        const response = await axios.post(`https://las-casitas-del-hornero-back.up.railway.app/user`, usuario);
         console.log(response.data.id);
         const idUser1 = response.data.id;
         dispatch(FuncionIDUser(idUser1));
@@ -101,24 +98,11 @@ const FormularioIngresa = () => {
           <span className={style.span}>{Error.password}</span>
           <label>password</label>
         </div>
-        {/* 
-        <div className="checkbox">
-          <input
-            className="box"
-            type="checkbox"
-            value="remember-me"
-            indeterminate
-          />
-
-          <label>Recordar</label>
-        </div> */}
 
         <button className="w-100 btn btn-lg btn-warning" type="submit">
           Ingresar
         </button>
       </form>
-
-      {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );
 };

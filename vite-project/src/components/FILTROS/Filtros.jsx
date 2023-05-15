@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const Filtro = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState(false);
   const { Filtros } = useSelector((state) => state);
   const [stateFiltro, setFiltro] = useState(Filtros);
 
