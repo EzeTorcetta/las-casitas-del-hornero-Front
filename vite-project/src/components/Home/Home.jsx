@@ -19,7 +19,6 @@ const Home = () => {
   const HotelsCopi = useSelector((state) => state.HotelsCopi);
 
   useEffect(() => {
-    console.log(idUser);
     dispatch(FuncionAllFavoritesHotel(idUser));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filtros));

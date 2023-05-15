@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import style from "./Carrusel.module.css";
 
 const Carrusel = ({ Hotels1 }) => {
-  console.log(Hotels1);
   return (
     <>
       <div>

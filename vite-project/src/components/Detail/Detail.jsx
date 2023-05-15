@@ -10,10 +10,7 @@ import imagen from "../../image/favorito.png";
 import Maps from "../Map/Map";
 import imagenCorreo from "../../image/correo-electronico-vacio.png";
 import imagenTelefono from "../../image/llamada-telefonica.png";
-import {
-  FuncionDetailHotel,
-  FuncionClearDetail,
-} from "../../redux/Actions/Actions";
+import { FuncionDetailHotel, FuncionClearDetail } from "../../redux/Actions/Actions";
 import CarruselDetail from "../CarruselDetail/CarruselDetail";
 
 const Detail = () => {
@@ -21,8 +18,6 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   const DetailHotel = useSelector((state) => state.DetailHotel);
-
-  console.log(id);
 
   useEffect(() => {
     dispatch(FuncionDetailHotel(id));
@@ -32,8 +27,6 @@ const Detail = () => {
   }, [id]);
 
   let array = Array(DetailHotel.rating).fill(DetailHotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
-
-  console.log(DetailHotel.location);
 
   return (
     <div>
@@ -50,12 +43,10 @@ const Detail = () => {
                 ))}
               </p>
               <h3>
-                <img className={style.img} src={imagenTelefono} />{" "}
-                {DetailHotel.phoneNumber}
+                <img className={style.img} src={imagenTelefono} /> {DetailHotel.phoneNumber}
               </h3>
               <p>
-                <img className={style.img} src={imagenCorreo} />{" "}
-                {DetailHotel.email}
+                <img className={style.img} src={imagenCorreo} /> {DetailHotel.email}
               </p>
               <p>Province: {DetailHotel.province}</p>
               <p>{DetailHotel.direccion}</p>
@@ -76,9 +67,7 @@ const Detail = () => {
           <h1>Descripción</h1>
           <p>{DetailHotel.description}</p>
         </section>
-        {DetailHotel.location && DetailHotel.name && (
-          <Maps location={DetailHotel.location} name={DetailHotel.name} />
-        )}
+        {DetailHotel.location && DetailHotel.name && <Maps location={DetailHotel.location} name={DetailHotel.name} />}
         <section className={`${style.section} ${style.two}`}>
           <TipoHabitacion id={id} />
         </section>

@@ -15,8 +15,6 @@ import imagenAscensor from "../../image/ascensor.png";
 import style from "./Detail.module.css";
 
 const FuncionServices = ({ Services }) => {
-  console.log(Services);
-
   const imagen = {
     "Desayuno gratis": imagenDesayuno,
     Pileta: imagenPileta,
