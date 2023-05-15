@@ -1,3 +1,4 @@
 .section {
-  height: 80vh;
+  padding-top: 10vh;
+  min-height: 80vh;
 }

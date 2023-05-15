@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FuncionAllFavoritesHotel } from "../../redux/Actions/Actions.js";
 import style from "./Favorites.module.css";
 import NavBar from "../Nav/Nav";
 import Footer from "../Footer/Footer";
@@ -7,7 +9,12 @@ import Cards from "../Card/Card";
 
 const Favoritos = () => {
   const dispatch = useDispatch();
+  const idUser = useSelector((state) => state.idUser);
   const favorites = useSelector((state) => state.FavHotels);
+
+  useEffect(() => {
+    dispatch(FuncionAllFavoritesHotel(idUser));
+  }, []);
 
   return (
     <div>
