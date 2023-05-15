@@ -12,10 +12,6 @@
   /* margin: 150px; */
 }
 
-.item {
-  height: 90vh;
-}
-
 .filtroContainer {
   position: sticky;
   top: 50;
