@@ -5,6 +5,13 @@ const InicialState = {
   FavHotels: [],
   idUser: 0,
   TypeRoom: [],
+  Filtros: {
+    Provincias: "",
+    servicios: [],
+    rating: "",
+    order: "",
+    page: 1,
+  },
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -14,6 +21,12 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         Hotels: actions.payload,
         HotelsCopi: actions.payload,
+      };
+
+    case "POST_FILTERS":
+      return {
+        ...state,
+        Filtros: actions.payload,
       };
 
     case "DETAIL_HOTEL":
@@ -60,8 +73,9 @@ export const rootReducer = (state = InicialState, actions) => {
     case "SELECT_RATING":
       return {
         ...state,
-        Hotels: { ...state.Hotels, allHotels: actions.payload },
-        // Hotels: actions.payload,
+        Hotels: actions.payload,
+        HotelsCopi: actions.payload,
+        // Hotels: { ...state.Hotels, allHotels: actions.payload },
       };
 
     case "ALL_SERVICE":
