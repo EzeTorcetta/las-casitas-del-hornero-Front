@@ -37,12 +37,12 @@ const FuncionServices = ({ Services }) => {
   return (
     <>
       {Services?.map((Ser) => (
-        <div className={style.divServicios} key={Ser.name}>
+        <section className={style.divServicios} key={Ser.name}>
           <h2 className={style.h2}>{Ser.name}</h2>
           <div className={style.divPadre}>
             <img className={style.img} src={imagen[Ser.name]} />
           </div>
-        </div>
+        </section>
       ))}
     </>
   );

@@ -20,6 +20,8 @@ const Paginado = ({ paginas }) => {
     dispatch(FuncionSelectFilter({ ...Filtros, page: newPage }));
   };
 
+  //dfsdf
+
   const handlePagePrev = () => {
     const newPage = currentPage - 1;
     setCurrentPage(newPage);
@@ -41,11 +43,18 @@ const Paginado = ({ paginas }) => {
       <div className={style.pagination}>
         {page > 1 && <button onClick={handlePagePrev}>&lArr;</button>}
         {cards.map((value, i) => (
-          <button value={value} onClick={handlePage} className={currentPage === value ? style.active : ""} key={i}>
+          <button
+            value={value}
+            onClick={handlePage}
+            className={currentPage === value ? style.active : ""}
+            key={i}
+          >
             {value}
           </button>
         ))}
-        {page < cards.length && <button onClick={handlePageNext}>&rArr;</button>}
+        {page < cards.length && (
+          <button onClick={handlePageNext}>&rArr;</button>
+        )}
       </div>
     </div>
   );

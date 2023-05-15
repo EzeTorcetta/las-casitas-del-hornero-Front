@@ -8,22 +8,24 @@ const Maps = ({ location, name }) => {
 
   const position = location;
   return (
-    <div className={style.divMap}>
-      <MapContainer
-        className={style.leaflet}
-        center={{ lat: location[0], lng: location[1] }}
-        zoom={13}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>{name}</Popup>
-        </Marker>
-      </MapContainer>
-    </div>
+    <section className={style.divMapPadre}>
+      <section className={style.divMap}>
+        <MapContainer
+          className={style.leaflet}
+          center={{ lat: location[0], lng: location[1] }}
+          zoom={13}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={position}>
+            <Popup>{name}</Popup>
+          </Marker>
+        </MapContainer>
+      </section>
+    </section>
   );
 };
 

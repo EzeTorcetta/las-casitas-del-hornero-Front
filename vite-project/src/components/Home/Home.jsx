@@ -8,7 +8,10 @@ import Clima from "../Clima/Clima";
 import Carrusel from "../Carrusel/Carrusel";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncionSelectFilter, FuncionAllFavoritesHotel } from "../../redux/Actions/Actions";
+import {
+  FuncionSelectFilter,
+  FuncionAllFavoritesHotel,
+} from "../../redux/Actions/Actions";
 import Cards from "../Card/Card";
 import Row from "react-bootstrap/Row";
 import Loading from "../Loading/Loading";
@@ -32,9 +35,13 @@ const Home = () => {
       dispatch(FuncionSelectFilter(Filtros));
     }
     const handler = (event) => setMediaQuery({ matches: event.matches });
-    window.matchMedia("(min-width: 1200px)").addEventListener("change", handler, true);
+    window
+      .matchMedia("(min-width: 1200px)")
+      .addEventListener("change", handler, true);
     return () => {
-      window.matchMedia("(min-width: 1200px)").removeEventListener("change", handler, false);
+      window
+        .matchMedia("(min-width: 1200px)")
+        .removeEventListener("change", handler, false);
     };
   }, []);
 
@@ -51,11 +58,19 @@ const Home = () => {
               <div className={style.filtroContainer}>
                 <Filtro />
               </div>
-              <Row xs={1} sm={2} lg={3} className="g-2">
-                {Hotels.allHotels?.map(({ id, name, image, province }) => (
-                  <Cards key={id} id={id} name={name} image={image} province={province} />
-                ))}
-              </Row>
+              <div className={style.divCard}>
+                <Row xs={1} sm={2} lg={3} className="g-2">
+                  {Hotels.allHotels?.map(({ id, name, image, province }) => (
+                    <Cards
+                      key={id}
+                      id={id}
+                      name={name}
+                      image={image}
+                      province={province}
+                    />
+                  ))}
+                </Row>
+              </div>
             </section>
           </>
         ) : (

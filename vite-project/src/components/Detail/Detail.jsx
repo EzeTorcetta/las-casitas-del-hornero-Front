@@ -8,7 +8,12 @@ import NavDetail from "../Nav/NavDetail";
 import style from "./Detail.module.css";
 import imagen from "../../image/favorito.png";
 import Maps from "../Map/Map";
-import { FuncionDetailHotel, FuncionClearDetail } from "../../redux/Actions/Actions";
+import imagenCorreo from "../../image/correo-electronico-vacio.png";
+import imagenTelefono from "../../image/llamada-telefonica.png";
+import {
+  FuncionDetailHotel,
+  FuncionClearDetail,
+} from "../../redux/Actions/Actions";
 import CarruselDetail from "../CarruselDetail/CarruselDetail";
 
 const Detail = () => {
@@ -35,34 +40,45 @@ const Detail = () => {
       <>
         <NavDetail />
         <div className={style.div}>
-          <div className={style.divImg}>
-            <CarruselDetail image={DetailHotel.image} />
+          <div className={`${style.divImg} ${style.carouselContainer}`}>
             <div className={style.divDescription}>
-              <h3>Name: {DetailHotel.name}</h3>
-              <h3>PhoneNumber: {DetailHotel.phoneNumber}</h3>
-              <p>Email: {DetailHotel.email}</p>
+              <h3>{DetailHotel.name}</h3>
+              <p className={style.p}>
+                Rating :
+                {array.map((ranting, index) => (
+                  <img className={style.img} src={imagen} key={index} />
+                ))}
+              </p>
+              <h3>
+                <img className={style.img} src={imagenTelefono} />{" "}
+                {DetailHotel.phoneNumber}
+              </h3>
+              <p>
+                <img className={style.img} src={imagenCorreo} />{" "}
+                {DetailHotel.email}
+              </p>
               <p>Province: {DetailHotel.province}</p>
               <p>{DetailHotel.direccion}</p>
-              {array.map((ranting, index) => (
-                <img className={style.img} src={imagen} key={index} />
-              ))}
+            </div>
+            <div className={style.DivCarrusel}>
+              <CarruselDetail image={DetailHotel.image} />
             </div>
           </div>
         </div>
         <section className={style.sectionDescription}>
-          <FuncionServices Services={DetailHotel.Services} />
-          {/* {DetailHotel.Services?.map((Ser) => (
-            <h2>{Ser.name}</h2>
-          ))} */}
-          {/* {DetailHotel.Services && (
+          <h1>Servicios del alojamiento </h1>
+          <br />
+          <div className={style.divContenedorServicio}>
             <FuncionServices Services={DetailHotel.Services} />
-          )} */}
+          </div>
         </section>
         <section className={style.sectionDescription}>
-          <h1>Descripción:</h1>
+          <h1>Descripción</h1>
           <p>{DetailHotel.description}</p>
         </section>
-        {DetailHotel.location && DetailHotel.name && <Maps location={DetailHotel.location} name={DetailHotel.name} />}
+        {DetailHotel.location && DetailHotel.name && (
+          <Maps location={DetailHotel.location} name={DetailHotel.name} />
+        )}
         <section className={`${style.section} ${style.two}`}>
           <TipoHabitacion id={id} />
         </section>
