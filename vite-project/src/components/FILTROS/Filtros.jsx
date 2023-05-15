@@ -148,8 +148,8 @@ const Filtro = () => {
         <option hidden>Ordenar por</option>
         <option value="NAMEASC">Nombre A-Z</option>
         <option value="NAMEDESC">Nombre Z-A</option>
-        <option value="RATINGASC">Estrellas mayor</option>
-        <option value="RATINGDESC">Estrellas menor</option>
+        <option value="RATINGDESC">Mas Estrellas</option>
+        <option value="RATINGASC">Menos Estrellas</option>
       </select>
       <table className={style.table}>
         {Servicios.map((Ser, index) => (
