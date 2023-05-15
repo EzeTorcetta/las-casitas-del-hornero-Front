@@ -17,11 +17,9 @@ function Cards({ id, name, image, province }) {
     FavHotels?.forEach((fav) => {
       if (fav.id == id) setIsFav(true);
     });
-  }, []);
+  }, [FavHotels]);
 
   const handleFavorite = async (idUser, id) => {
-    console.log(idUser, id);
-    console.log("hola");
     setIsFav(!isFav);
     // isFav ? dispatch(DeleteFavoriteHotel(idUser, id)) : dispatch(PostFavoriteHotel(idUser, id));
     isFav

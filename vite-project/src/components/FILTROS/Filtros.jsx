@@ -1,23 +1,17 @@
 // import axios from "axios";
-import { useDispatch } from "react-redux";
-import {
-  FuncionSelectranting,
-  FuncionAllHotel,
-} from "../../redux/Actions/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncionSelectFilter, PostFilters } from "../../redux/Actions/Actions";
 import style from "./Filtros.module.css";
 import { useState } from "react";
 
-const Filtro = ({ paginas }) => {
+const Filtro = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState(false);
-  const [stateFiltro, setFiltro] = useState({
-    Provincias: "",
-    servicios: [],
-    rating: "",
-    order: "",
-  });
+  const { Filtros } = useSelector((state) => state);
+  const [stateFiltro, setFiltro] = useState(Filtros);
 
   const Provincias = [
+    "BUENOS AIRES",
     "CATAMARCA",
     "CHACO",
     "CHUBUT",
@@ -66,31 +60,11 @@ const Filtro = ({ paginas }) => {
       ...stateFiltro,
       Provincias: event.target.value,
     });
-    // dispatch(FuncionSelectranting(null, null, event.target.value));
   };
 
   const onChange1 = async (event) => {
     setFiltro({ ...stateFiltro, rating: event.target.value });
-    // dispatch(FuncionSelectranting(null, event.target.value, null));
   };
-
-  // const onChange3 = (ser) => {
-  //   setState((prevState) => {
-  //     if (prevState) {
-  //       // Si el estado actual es true, se agrega el servicio al filtro
-  //       setFiltro({
-  //         ...stateFiltro,
-  //         servicios: [...stateFiltro.servicios, ser],
-  //       });
-  //     } else {
-  //       // Si el estado actual es false, se elimina el servicio del filtro
-  //       setFiltro({
-  //         ...stateFiltro,
-  //         servicios: stateFiltro.servicios.filter((s) => s !== ser),
-  //       });
-  //     }
-  //   });
-  // };
 
   const onChange3 = (ser) => {
     if (stateFiltro.servicios.includes(ser)) {
@@ -112,16 +86,48 @@ const Filtro = ({ paginas }) => {
     setFiltro({ ...stateFiltro, order: event.target.value });
   };
 
-  const FuncionFiltrar = () => {
-    dispatch(FuncionSelectranting(stateFiltro, paginas));
+  // FILTRAR
+  const FuncionFiltrar = (event) => {
+    event.preventDefault();
+    dispatch(PostFilters(stateFiltro)); // Para modificar el estado global
+    dispatch(FuncionSelectFilter(stateFiltro, 1)); // Para el get a la DB
   };
 
-  const FuncionOnclick = () => {
-    dispatch(FuncionAllHotel());
+  // CLEAN FILTROS
+  const FuncionOnclick = (event) => {
+    event.preventDefault();
+    document.forms["jorge"].reset();
+    setFiltro({
+      Provincias: "",
+      servicios: [],
+      rating: "",
+      order: "",
+      page: 1,
+    });
+
+    dispatch(
+      PostFilters({
+        Provincias: "",
+        servicios: [],
+        rating: "",
+        order: "",
+        page: 1,
+      })
+    );
+
+    dispatch(
+      FuncionSelectFilter({
+        Provincias: "",
+        servicios: [],
+        rating: "",
+        order: "",
+        page: 1,
+      })
+    );
   };
 
   return (
-    <div>
+    <form name="jorge">
       <select onChange={onChange} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
         {Provincias.map((pro, index) => (
@@ -153,12 +159,7 @@ const Filtro = ({ paginas }) => {
               <td className={style.td}>
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
-                  <input
-                    onChange={() => onChange3(Ser)}
-                    value={Ser}
-                    type="checkbox"
-                    id="checkbox"
-                  ></input>
+                  <input onChange={() => onChange3(Ser)} value={Ser} type="checkbox" id="checkbox"></input>
                   <span className={style.checkmark}></span>
                 </label>
               </td>
@@ -172,7 +173,7 @@ const Filtro = ({ paginas }) => {
       <button onClick={FuncionOnclick} className={style.button}>
         AllHotels
       </button>
-    </div>
+    </form>
   );
 };
 
