@@ -1,0 +1,23 @@
+
+.fullcontainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.btnrg{
+  padding-top: 1rem;
+  padding-right: 1rem;
+  text-align: right;
+  width: 100%;
+}

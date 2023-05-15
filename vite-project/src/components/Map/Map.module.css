@@ -1,0 +1,15 @@
+.leaflet {
+  width: 500px;
+  height: 400px;
+  border-radius: 10px;
+  border: 2px solid black;
+  -webkit-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
+  -moz-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
+  box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
+}
+
+.divMap {
+  display: flex;
+  justify-content: center;
+  margin: 40px;
+}

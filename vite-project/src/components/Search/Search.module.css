@@ -1,0 +1,79 @@
+.div {
+  margin: 20px;
+  display: flex;
+  padding: 25px;
+  width: 450px;
+  height: fit-content;
+  text-align: center;
+  -webkit-box-shadow: 10px 10px 42px -13px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 42px -13px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 42px -13px rgba(0, 0, 0, 0.75);
+}
+
+.divMayor {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  height: 50px;
+  margin: 20px;
+}
+
+.container {
+  width: 320px;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 5px);
+  transform: translateY(calc(-50% - 5px));
+}
+
+/* .input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  transition: 0.2s linear;
+  border: 2.5px solid black;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+} */
+
+/* .input:focus {
+  outline: none;
+  border: 0.5px solid black;
+  box-shadow: -5px -5px 0px black;
+} */
+.fancy {
+  width: 100px;
+  height: 55px;
+
+  /* padding: 0.5rem; */
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f7931e;
+  color: #fff;
+  cursor: pointer;
+  /* transition: background-color 0.3s ease-in-out; */
+}
+
+.container:hover > .icon {
+  animation: anim 1s linear infinite;
+}
+
+@keyframes anim {
+  0%,
+  100% {
+    transform: translateY(calc(-50% - 5px)) scale(1);
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 5px)) scale(1.1);
+  }
+}
