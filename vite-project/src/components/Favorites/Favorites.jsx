@@ -14,7 +14,7 @@ const Favoritos = () => {
 
   useEffect(() => {
     dispatch(FuncionAllFavoritesHotel(idUser));
-  }, []);
+  }, [favorites]);
 
   return (
     <div>

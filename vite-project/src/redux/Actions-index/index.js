@@ -10,3 +10,4 @@ export const SELECT_PROVINCE = "SELECT_PROVINCE";
 export const SELECT_RATING = "SELECT_RATING";
 export const ALL_SERVICE = "ALL_SERVICE";
 export const IDUSER = "IDUSER";
+export const POST_FILTERS = "POST_FILTERS";
