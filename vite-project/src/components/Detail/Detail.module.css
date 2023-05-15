@@ -19,6 +19,30 @@
   box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
   height: fit-content;
   display: flex;
+  margin: 50px;
+}
+@media (max-width: 450px) {
+  .div {
+    display: block;
+    overflow: hidden;
+    width: 290px;
+  }
+
+  .divContenedorServicio {
+    /* background-color: rgb(40, 126, 126); */
+    display: flex;
+    flex-direction: column;
+  }
+  .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-snap-align: center;
+  }
+  .carouselContainer {
+    flex-direction: column;
+    margin: 10px;
+  }
 }
 
 .section {
@@ -51,6 +75,8 @@
   -webkit-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
   -moz-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
   box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
+  margin: 50px;
+  text-align: center;
 }
 
 /* .divDescription {
@@ -64,10 +90,33 @@
 
 .divServicios {
   display: flex;
+  border: 1px solid black;
+  width: fit-content;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  background-color: orange;
+  scroll-snap-align: center;
 }
 
 .divPadre {
   display: flex;
   justify-content: end;
   width: 50px;
+}
+
+.p {
+  font-size: 25px;
+}
+
+.DivCarrusel {
+  width: 1500px;
+  display: flex;
+  justify-content: center;
+}
+
+.divContenedorServicio {
+  /* background-color: rgb(40, 126, 126); */
+  display: flex;
+  justify-content: center;
 }

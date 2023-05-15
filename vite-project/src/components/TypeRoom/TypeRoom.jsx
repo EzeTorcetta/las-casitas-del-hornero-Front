@@ -13,7 +13,7 @@ const TipoHabitacion = ({ id }) => {
 
   return TypeRoom?.map((room, index) => (
     <div key={index}>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem", margin: "10px" }}>
         <Card.Body>
           <Card.Title>{room.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{`$  ${room.price}`}</Card.Subtitle>

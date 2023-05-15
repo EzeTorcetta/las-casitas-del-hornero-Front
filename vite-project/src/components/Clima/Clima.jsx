@@ -55,7 +55,7 @@ export default function Clima() {
   };
   return (
     <div>
-      <h1 className={style.h1}>Clima</h1>
+      <h2 className={style.h2}>Clima</h2>
       <form className={style.form} autoComplete="off" onSubmit={onSubmit}>
         <input
           className={style.input}

@@ -1,53 +1,61 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { PostFavoriteHotel, DeleteFavoriteHotel } from "../../redux/Actions/Actions.js";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
+import axios from "axios";
 
 function Cards({ id, name, image, province }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const idUser = useSelector((state) => state.idUser);
   const FavHotels = useSelector((state) => state.FavHotels);
   const [isFav, setIsFav] = useState(false);
-  // const idUser = useSelector(sate => state.idUser)
 
   useEffect(() => {
-    FavHotels.forEach((fav) => {
-      if (fav.id === id) setIsFav(true);
+    FavHotels?.forEach((fav) => {
+      if (fav.id == id) setIsFav(true);
     });
-  }, []);
+  }, [FavHotels]);
 
-  const handleFavorite = () => {
-    // isFav ? deleteFavorite(props.id) : addFavorite();
-    //post (idHotel , idUser)
+  const handleFavorite = async (idUser, id) => {
     setIsFav(!isFav);
+    // isFav ? dispatch(DeleteFavoriteHotel(idUser, id)) : dispatch(PostFavoriteHotel(idUser, id));
+    isFav
+      ? await axios.delete(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${id}`)
+      : await axios.post(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${id}`);
   };
 
   return (
     <div className={style.container}>
       <Col key={id}>
-        <Link to={`/detail/${id}`}>
-          <Card className="bg-white text-white">
-            {Array.isArray(image) ? (
-              <Card.Img src={image[0]} alt="Card image" className={style.img} />
+        <Card className="bg-white text-white">
+          {Array.isArray(image) ? (
+            <Card.Img src={image[0]} alt="Card image" className={style.img} />
+          ) : (
+            <Card.Img src={image} alt="Card image" className={style.img} />
+          )}
+          <Card.ImgOverlay>
+            <Link to={`/detail/${id}`} className={style.link}>
+              <div className={style.infoContainer}>
+                <Card.Title className={style.info}>{name}</Card.Title>
+              </div>
+            </Link>
+            <div className={style.provinceContainer}>
+              <Card.Text className={style.province}>{province}</Card.Text>
+            </div>
+            {isFav ? (
+              <button onClick={() => handleFavorite(idUser, id)} className={style.button}>
+                ❤️
+              </button>
             ) : (
-              <Card.Img src={image} alt="Card image" className={style.img} />
+              <button onClick={() => handleFavorite(idUser, id)} className={style.button}>
+                🤍
+              </button>
             )}
-            <Card.ImgOverlay>
-              <Card.Title>{name}</Card.Title>
-              <Card.Text>{province}</Card.Text>
-              {isFav ? (
-                <button onClick={handleFavorite} className={style.button}>
-                  ❤️
-                </button>
-              ) : (
-                <button onClick={handleFavorite} className={style.button}>
-                  🤍
-                </button>
-              )}
-            </Card.ImgOverlay>
-          </Card>
-        </Link>
+          </Card.ImgOverlay>
+        </Card>
       </Col>
     </div>
   );
