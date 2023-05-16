@@ -1,6 +1,14 @@
-import { Home, Favoritos, Detail, Landing, FormularioRegistrar } from "./components/Index";
+//?---------------------------- IMPORTS --------------------------------
+import {
+  Home,
+  Favoritos,
+  Detail,
+  Landing,
+  FormularioRegistrar,
+} from "./components/Index";
 import { Route, Routes } from "react-router-dom";
 
+//?----------------- APP ------------------------------------
 function App() {
   return (
     <div>

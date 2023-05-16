@@ -1,17 +1,21 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { PostFavoriteHotel, DeleteFavoriteHotel } from "../../redux/Actions/Actions.js";
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
+//css
 import style from "./Card.module.css";
+
 import axios from "axios";
 
+//?----------------- COMPONENTE CARD ------------------------------------
 function Cards({ id, name, image, province }) {
-  // const dispatch = useDispatch();
   const idUser = useSelector((state) => state.idUser);
   const FavHotels = useSelector((state) => state.FavHotels);
   const [isFav, setIsFav] = useState(false);
+  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
   useEffect(() => {
     FavHotels?.forEach((fav) => {
@@ -21,10 +25,9 @@ function Cards({ id, name, image, province }) {
 
   const handleFavorite = async (idUser, id) => {
     setIsFav(!isFav);
-    // isFav ? dispatch(DeleteFavoriteHotel(idUser, id)) : dispatch(PostFavoriteHotel(idUser, id));
     isFav
-      ? await axios.delete(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${id}`)
-      : await axios.post(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${id}`);
+      ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`)
+      : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
   };
 
   return (
@@ -46,11 +49,17 @@ function Cards({ id, name, image, province }) {
               <Card.Text className={style.province}>{province}</Card.Text>
             </div>
             {isFav ? (
-              <button onClick={() => handleFavorite(idUser, id)} className={style.button}>
+              <button
+                onClick={() => handleFavorite(idUser, id)}
+                className={style.button}
+              >
                 ❤️
               </button>
             ) : (
-              <button onClick={() => handleFavorite(idUser, id)} className={style.button}>
+              <button
+                onClick={() => handleFavorite(idUser, id)}
+                className={style.button}
+              >
                 🤍
               </button>
             )}

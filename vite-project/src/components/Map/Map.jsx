@@ -1,12 +1,14 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
+//css
 import style from "./Map.module.css";
 import "leaflet/dist/leaflet.css";
 
+//?----------------- COMPONENTE MAPS ------------------------------------
 const Maps = ({ location, name }) => {
-  console.log(location);
-  console.log(name);
-
   const position = location;
+  
   return (
     <section className={style.divMapPadre}>
       <section className={style.divMap}>

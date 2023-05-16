@@ -1,8 +1,11 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 // import { Navbar, Container, Nav } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import style from "./NavDetail.module.css";
 import { useState, useEffect } from "react";
 
+//?----------------- COMPONENTE NAVBAR DETAIL ------------------------------------
 const NavDetail = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);

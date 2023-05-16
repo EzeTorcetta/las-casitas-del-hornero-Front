@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./Nav.module.css";
 
+//?----------------- COMPONENTE NAVBAR ------------------------------------
 const NavBar = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);

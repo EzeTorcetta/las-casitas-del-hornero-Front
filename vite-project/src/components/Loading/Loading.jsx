@@ -1,5 +1,7 @@
+//?---------------------------- IMPORTS --------------------------------
 import styles from "./Loading.module.css";
 
+//?----------------- COMPONENTE LOADING ------------------------------------
 const Loading = () => {
   return (
     <div className={styles.wifi}>

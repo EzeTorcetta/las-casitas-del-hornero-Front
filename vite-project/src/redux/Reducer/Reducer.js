@@ -1,18 +1,17 @@
+//?---------------------------- IMPORTS --------------------------------
 import {
-  ALL_HOTELS,
-  ALL_SERVICE,
-  ALL_FAVORITES_HOTELS,
+  GET_ALL_HOTELS,
   POST_FILTERS,
+  TYPE_ROOM,
+  SEARCH_HOTELS,
+  ALL_FAVORITES_HOTELS,
   DELETE_FAVORITE_HOTEL,
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
   IDUSER,
-  SEARCH_HOTELS,
-  TYPE_ROOM,
-  SELECT_PROVINCE,
-  SELECT_RATING,
-} from "../Actions-index/index";
+} from "../Actions";
 
+//?----------------- REDUCER ------------------------------------
 const InicialState = {
   Hotels: {},
   HotelsCopi: [],
@@ -20,9 +19,9 @@ const InicialState = {
   FavHotels: [],
   idUser: 0,
   TypeRoom: [],
-  Filtros: {
-    Provincias: "",
-    servicios: [],
+  Filters: {
+    provinces: "",
+    services: [],
     rating: "",
     order: "",
     page: 1,
@@ -31,17 +30,38 @@ const InicialState = {
 
 export const rootReducer = (state = InicialState, actions) => {
   switch (actions.type) {
-    case ALL_HOTELS:
+    case GET_ALL_HOTELS:
       return {
         ...state,
         Hotels: actions.payload,
         HotelsCopi: actions.payload,
+        // Hotels: { ...state.Hotels, allHotels: actions.payload },
       };
 
     case POST_FILTERS:
       return {
         ...state,
-        Filtros: actions.payload,
+        Filters: actions.payload,
+      };
+
+    case TYPE_ROOM:
+      return {
+        ...state,
+        TypeRoom: actions.payload,
+      };
+
+    //
+
+    case SEARCH_HOTELS:
+      return {
+        ...state,
+        Hotels: actions.payload,
+      };
+
+    case ALL_FAVORITES_HOTELS:
+      return {
+        ...state,
+        FavHotels: actions.payload,
       };
 
     case DETAIL_HOTEL:
@@ -56,49 +76,28 @@ export const rootReducer = (state = InicialState, actions) => {
         DetailHotel: {},
       };
 
-    case ALL_FAVORITES_HOTELS:
-      return {
-        ...state,
-        FavHotels: actions.payload,
-      };
-
     case IDUSER:
       return {
         ...state,
         idUser: actions.payload,
       };
-
-    case SEARCH_HOTELS:
-      return {
-        ...state,
-        Hotels: actions.payload,
-      };
-    case TYPE_ROOM:
-      return {
-        ...state,
-        TypeRoom: actions.payload,
-      };
-
-    case SELECT_PROVINCE:
-      return {
-        ...state,
-        Hotels: actions.payload,
-      };
-
-    case SELECT_RATING:
-      return {
-        ...state,
-        Hotels: actions.payload,
-        HotelsCopi: actions.payload,
-        // Hotels: { ...state.Hotels, allHotels: actions.payload },
-      };
-
-    case ALL_SERVICE:
-      return {
-        ...state,
-        Hotels: { ...state.Hotels, allHotels: actions.payload },
-        // Hotels: actions.payload,
-      };
+    // case ALL_SERVICE:
+    //   return {
+    //     ...state,
+    //     Hotels: { ...state.Hotels, allHotels: actions.payload },
+    //     // Hotels: actions.payload,
+    //   };
+    // case SELECT_PROVINCE:
+    //   return {
+    //     ...state,
+    //     Hotels: actions.payload,
+    //   };
+    // case ALL_HOTELS:
+    //   return {
+    //     ...state,
+    //     Hotels: actions.payload,
+    //     HotelsCopi: actions.payload,
+    //   };
 
     default:
       return { ...state };

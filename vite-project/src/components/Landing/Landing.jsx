@@ -1,8 +1,14 @@
-import styles from "./Landing.module.css";
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { Link } from "react-router-dom";
-import hornero from "../../assets/horneroleft.jpg";
+//css
+import styles from "./Landing.module.css";
+//components
 import { FormularioIngresa } from "../Index";
+//image
+import hornero from "../../assets/horneroleft.jpg";
 
+//?----------------- COMPONENTE LANDING ------------------------------------
 const Landing = () => {
   return (
     <div className={styles.fullcontainer}>
