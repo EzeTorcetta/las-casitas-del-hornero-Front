@@ -8,7 +8,7 @@ import Search from "./Search/Search";
 import FormularioRegistrar from "./Formularios/FormularioRegistrar/FormularioRegistrar";
 import FormularioIngresa from "./Formularios/FormularioIngresa/FormularioIngresa";
 import Landing from "./Landing/Landing";
-
+import BotonAuthGoogle from "./Formularios/FormularioIngresa/BotonAuthGoogle";
 export {
   Home,
   Detail,
@@ -19,4 +19,5 @@ export {
   FormularioRegistrar,
   FormularioIngresa,
   Landing,
+  BotonAuthGoogle,
 };

@@ -6,6 +6,7 @@ import style from "./FormularioUsuario.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 const FormularioIngresa = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -186,7 +187,6 @@ const FormularioIngresa = () => {
           Registrar
         </button>
       </form>
-
       {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );

@@ -6,6 +6,7 @@ import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import BotonAuthGoogle from "./BotonAuthGoogle";
 
 const FormularioIngresa = () => {
   const navigate = useNavigate();
@@ -52,6 +53,8 @@ const FormularioIngresa = () => {
       }
     }
   };
+
+
 
   return (
     <div className="container">
@@ -101,7 +104,7 @@ const FormularioIngresa = () => {
           Ingresar
         </button>
       </form>
-
+      <BotonAuthGoogle/>
       {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );
