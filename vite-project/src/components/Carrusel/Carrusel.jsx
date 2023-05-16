@@ -24,11 +24,7 @@ const Carrusel = ({ Hotels1 }) => {
             })
           ) : (
             <Carousel.Item className={style.item}>
-              <img
-                className={style.img}
-                src="https://www.cronista.com/files/image/159/159758/5ff7d1a380650.jpg"
-                alt="loading"
-              />
+              <img className={style.img} src="https://www.cronista.com/files/image/159/159758/5ff7d1a380650.jpg" alt="loading" />
               <Carousel.Caption>
                 {/* <h3>{Hotels1.name}</h3>
                   <p>{Hotels1.decription}</p> */}

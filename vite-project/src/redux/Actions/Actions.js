@@ -1,5 +1,5 @@
 import {
-  ALL_HOTELS,
+  // ALL_HOTELS,
   ALL_FAVORITES_HOTELS,
   // POST_FAVORITE_HOTEL,
   DELETE_FAVORITE_HOTEL,
@@ -8,9 +8,10 @@ import {
   SEARCH_HOTELS,
   IDUSER,
   TYPE_ROOM,
-  SELECT_PROVINCE,
+  // SELECT_PROVINCE,
   SELECT_RATING,
-  ALL_SERVICE,
+  // ALL_SERVICE,
+  POST_FILTERS,
 } from "../Actions-index/index";
 import axios from "axios";
 
@@ -65,9 +66,9 @@ import axios from "axios";
 //   };
 // };
 
-export const FuncionSelectranting = (filtros, page) => {
+export const FuncionSelectFilter = (filtros) => {
   let URL = "https://las-casitas-del-hornero-back.up.railway.app/hotels";
-  const { Provincias, servicios, rating, order } = filtros;
+  const { Provincias, servicios, rating, order, page } = filtros;
   console.log(filtros);
   console.log(Number(rating));
 
@@ -100,17 +101,23 @@ export const FuncionSelectranting = (filtros, page) => {
   };
 };
 
-export const FuncionAllHotel = (page = 1) => {
+export const PostFilters = (filtros) => {
   return async (dispatch) => {
-    try {
-      const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`);
-      console.log(response.data);
-      dispatch({ type: ALL_HOTELS, payload: response.data });
-    } catch (error) {
-      alert(error.response.data.error);
-    }
+    dispatch({ type: POST_FILTERS, payload: filtros });
   };
 };
+
+// export const FuncionAllHotel = (page = 1) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`);
+//       console.log(response.data);
+//       dispatch({ type: ALL_HOTELS, payload: response.data });
+//     } catch (error) {
+//       alert(error.response.data.error);
+//     }
+//   };
+// };
 
 // export const FuncionSelectService = () => {
 //   return async (dispatch) => {

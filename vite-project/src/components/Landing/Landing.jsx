@@ -12,7 +12,7 @@ const Landing = () => {
       <div className={styles.container}>
         <div className={styles.btnrg}>
           <Link to="/Registrar">
-            <button type="button" class="btn btn-warning btn-lg btn-block">
+            <button type="button" className="btn btn-warning btn-lg btn-block">
               Registrate
             </button>
           </Link>
