@@ -19,7 +19,6 @@ const Favorites = () => {
     dispatch(FuncionAllFavoritesHotel(idUser));
   }, [favorites]);
 
-  console.log(favorites)
   return (
     <div>
       <NavBar />
