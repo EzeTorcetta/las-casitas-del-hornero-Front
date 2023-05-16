@@ -11,6 +11,7 @@ import Search from "./Search/Search";
 import FormularioRegistrar from "./Formularios/FormularioRegistrar/FormularioRegistrar";
 import FormularioIngresa from "./Formularios/FormularioIngresa/FormularioIngresa";
 import Landing from "./Landing/Landing";
+import BotonAuthGoogle from "./Formularios/FormularioIngresa/BotonAuthGoogle";
 import Maps from "./Map/Map";
 import FuncionServices from "./Detail/FuncionServicios";
 import NavDetail from "./Nav/NavDetail";
@@ -41,4 +42,5 @@ export {
   FormularioRegistrar,
   FormularioIngresa,
   Landing,
+  BotonAuthGoogle,
 };

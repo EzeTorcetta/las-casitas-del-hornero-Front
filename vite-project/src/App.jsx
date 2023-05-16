@@ -5,6 +5,7 @@ import {
   Detail,
   Landing,
   FormularioRegistrar,
+  BotonAuthGoogle
 } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Detail/:id" element={<Detail />} />
         <Route path="/Registrar" element={<FormularioRegistrar />} />
         <Route path="/" element={<Landing />} />
+
       </Routes>
     </div>
   );
