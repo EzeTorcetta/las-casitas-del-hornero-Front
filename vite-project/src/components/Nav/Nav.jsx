@@ -1,87 +1,70 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import "./Nav.css";
+import style from "./Nav.module.css";
 
 const NavBar = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
 
-  const handleShowNavbar = () => {
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const toggleNavbar = () => {
     setShowNavbar(!showNavbar);
   };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth > 768) {
+      setShowNavbar(false);
+    }
+  }, [windowWidth]);
+
   return (
-    <nav className="navbar">
-      <div className="container">
-        <div className="logo"></div>
-        <div className="menu-icon" onClick={handleShowNavbar}>
-          <button>X</button>
+    <>
+      <div className={style.nav}>
+        <div className={style.logo}>
+          <img
+            className={style.img}
+            src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+            alt="LaCasitaDelHornero"
+          />
+          <p className={style.p}>CasitasDelHornero</p>
         </div>
-        <div className={`nav-elements  ${showNavbar && "active"}`}>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/blog">Blog</NavLink>
-            </li>
-            <li>
-              <NavLink to="/projects">Projects</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">About</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">Contact</NavLink>
-            </li>
-          </ul>
+
+        <div
+          className={
+            showNavbar || windowWidth > 768
+              ? `${style.links} ${style.show}`
+              : style.links
+          }
+        >
+          <NavLink
+            to={"/Favoritos"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+          >
+            Favoritos
+          </NavLink>
+          <NavLink
+            to={"/Home"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+          >
+            Home
+          </NavLink>
         </div>
       </div>
-    </nav>
+    </>
   );
-
-  // return (
-  //   <>
-  //     <div className={style.nav}>
-  //       <div className={style.logo}>
-  //         <img
-  //           className={style.img}
-  //           src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
-  //           alt=""
-  //         />
-  //         <p className={style.p}>CasitasDelHornero</p>
-  //       </div>
-
-  //       <div className={style.links}>
-  //         <ul
-  //           className={
-  //             menuVisible ? `${style.liDespliegue}` : `${style.liNoDespliegue}`
-  //           }
-  //         >
-  //           <NavLink
-  //             to={"/Favoritos"}
-  //             className={style.link}
-  //             onClick={() => setMenuVisible(false)}
-  //           >
-  //             Favoritos
-  //             <NavLink
-  //               to={"/Home"}
-  //               className={style.link}
-  //               onClick={() => setMenuVisible(false)}
-  //             >
-  //               Home
-  //             </NavLink>
-  //           </NavLink>
-  //         </ul>
-  //       </div>
-  //       <button className={style.menuToggle} onClick={toggleMenu}>
-  //         {menuVisible ? (
-  //           <li className={style.liDespliegue}></li>
-  //         ) : (
-  //           <li className={style.liNoDespliegue}></li>
-  //         )}
-  //       </button>
-  //     </div>
-  //   </>
-  // );
 };
 
 export default NavBar;

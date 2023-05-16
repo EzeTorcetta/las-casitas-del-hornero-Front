@@ -17,3 +17,14 @@
 .carousel {
   padding: 0 50px;
 }
+
+@media (max-width: 500px) {
+  .carousel {
+    width: 280px;
+    height: 300px;
+  }
+  .img {
+    width: 280px;
+    height: 300px;
+  }
+}
