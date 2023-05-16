@@ -1,11 +1,13 @@
 import "./sign-in.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FuncionIDUser } from "../../../redux/Actions/Actions";
 import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import BotonAuthGoogle from "./BotonAuthGoogle";
+import swal from "sweetalert";
 
 const FormularioIngresa = () => {
   const navigate = useNavigate();
@@ -32,9 +34,17 @@ const FormularioIngresa = () => {
     event.preventDefault();
 
     if (usuario.email === "" || usuario.password === "") {
-      alert("Debes completar todos los campos");
+      swal({
+        text: "Debes completar todos los campos",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     } else if (Error.password.length > 0 || Error.email.length > 0) {
-      alert("Tienes errores en los campos");
+      swal({
+        text: "Tienes errores en los campos",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     } else {
       try {
         const response = await axios.post(
@@ -44,11 +54,18 @@ const FormularioIngresa = () => {
         console.log(response.data.id);
         const idUser1 = response.data.id;
         dispatch(FuncionIDUser(idUser1));
-        alert(" Inicio de sesion con exito!!");
+        swal({
+          text: " Inicio de sesion con exito!!",
+          icon: "success",
+          buttons: "Aceptar",
+        });
         navigate("/Home");
       } catch (error) {
-        console.log(error);
-        alert(error.response.data.error);
+        swal({
+          text: error.response.data.error,
+          icon: "warning",
+          buttons: "Aceptar",
+        });
       }
     }
   };
@@ -85,23 +102,16 @@ const FormularioIngresa = () => {
           <span className={style.span}>{Error.password}</span>
           <label>password</label>
         </div>
-        {/* 
-        <div className="checkbox">
-          <input
-            className="box"
-            type="checkbox"
-            value="remember-me"
-            indeterminate
-          />
 
-          <label>Recordar</label>
-        </div> */}
-
-        <button className="w-100 btn btn-lg btn-warning" type="submit">
+        <button
+          // className="w-100 btn btn-lg btn-warning "
+          className={style.buton}
+          type="submit"
+        >
           Ingresar
         </button>
       </form>
-
+      <BotonAuthGoogle />
       {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );

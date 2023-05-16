@@ -1,6 +1,4 @@
 .container {
-  /* padding-top: 10vh; */
-
   width: fit-content;
   height: fit-content;
   scroll-snap-type: y mandatory;
@@ -15,25 +13,22 @@
 .carousel {
   width: 500px;
   height: 350px;
+  border-radius: 10px;
 }
 
 .img {
   width: 500px;
   height: 350px;
+  border-radius: 15px;
 }
 
-/* .sectionDescription {
-  height: fit-content;
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-  margin: 20px;
-  -webkit-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
-  -moz-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
-  box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
-  width: fit-content;
-  height: fit-content;
-  scroll-snap-type: y mandatory;
-  display: flex;
-  overflow-x: scroll;
-} */
+@media (max-width: 500px) {
+  .carousel {
+    width: 280px;
+    height: 300px;
+  }
+  .img {
+    width: 280px;
+    height: 300px;
+  }
+}

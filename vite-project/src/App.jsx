@@ -1,13 +1,15 @@
+//?---------------------------- IMPORTS --------------------------------
 import {
   Home,
   Favoritos,
   Detail,
   Landing,
   FormularioRegistrar,
+  BotonAuthGoogle
 } from "./components/Index";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
+//?----------------- APP ------------------------------------
 function App() {
   return (
     <div>
@@ -17,6 +19,7 @@ function App() {
         <Route path="/Detail/:id" element={<Detail />} />
         <Route path="/Registrar" element={<FormularioRegistrar />} />
         <Route path="/" element={<Landing />} />
+
       </Routes>
     </div>
   );
