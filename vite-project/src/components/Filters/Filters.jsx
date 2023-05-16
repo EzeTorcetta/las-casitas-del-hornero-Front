@@ -132,7 +132,7 @@ const Filter = () => {
   };
 
   return (
-    <form name="filterForm">
+    <form name="filterForm" className={style.form}>
       <select onChange={onChangeProvinces} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
         {provinces.map((pro, index) => (
@@ -172,12 +172,14 @@ const Filter = () => {
           </tbody>
         ))}
       </table>
-      <button onClick={FuncionFilter} className={style.button}>
-        Filtrar
-      </button>
-      <button onClick={FuncionCleanFilter} className={style.button}>
-        AllHotels
-      </button>
+      <div>
+        <button onClick={FuncionFilter} className={style.button}>
+          Filtrar
+        </button>
+        <button onClick={FuncionCleanFilter} className={style.button}>
+          AllHotels
+        </button>
+      </div>
     </form>
   );
 };

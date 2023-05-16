@@ -1,18 +1,14 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { Login } from "../../../redux/Actions/Actions";
+import { useDispatch } from "react-redux";
 import validacion2 from "./Validation";
 import style from "./FormularioUsuario.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-
 const FormularioIngresa = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const db = useSelector((state) => state.usuarios);
-  // console.log(db);
 
   const [usuario, setUsuario] = useState({
     username: "",
@@ -37,8 +33,6 @@ const FormularioIngresa = () => {
 
     setError(validacion2({ ...usuario, [property]: value }, Error));
   };
-
-  // console.log(usuario);
 
   const onChange = () => {
     if (usuario.admin === false) {

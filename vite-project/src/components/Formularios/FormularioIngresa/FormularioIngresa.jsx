@@ -1,6 +1,6 @@
 import "./sign-in.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FuncionIDUser } from "../../../redux/Actions/Actions";
 import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
@@ -70,8 +70,6 @@ const FormularioIngresa = () => {
     }
   };
 
-
-
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
@@ -104,23 +102,12 @@ const FormularioIngresa = () => {
           <span className={style.span}>{Error.password}</span>
           <label>password</label>
         </div>
-        {/* 
-        <div className="checkbox">
-          <input
-            className="box"
-            type="checkbox"
-            value="remember-me"
-            indeterminate
-          />
-
-          <label>Recordar</label>
-        </div> */}
 
         <button className="w-100 btn btn-lg btn-warning" type="submit">
           Ingresar
         </button>
       </form>
-      <BotonAuthGoogle/>
+      <BotonAuthGoogle />
       {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );

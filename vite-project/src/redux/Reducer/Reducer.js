@@ -8,7 +8,7 @@ import {
   DELETE_FAVORITE_HOTEL,
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
-  IDUSER
+  IDUSER,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -37,7 +37,7 @@ export const rootReducer = (state = InicialState, actions) => {
         HotelsCopi: actions.payload,
         // Hotels: { ...state.Hotels, allHotels: actions.payload },
       };
-      
+
     case POST_FILTERS:
       return {
         ...state,
@@ -50,7 +50,7 @@ export const rootReducer = (state = InicialState, actions) => {
         TypeRoom: actions.payload,
       };
 
-    // 
+    //
 
     case SEARCH_HOTELS:
       return {
@@ -59,10 +59,10 @@ export const rootReducer = (state = InicialState, actions) => {
       };
 
     case ALL_FAVORITES_HOTELS:
-        return {
-          ...state,
-          FavHotels: actions.payload,
-        };
+      return {
+        ...state,
+        FavHotels: actions.payload,
+      };
 
     case DETAIL_HOTEL:
       return {
@@ -75,7 +75,7 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         DetailHotel: {},
       };
-      
+
     case IDUSER:
       return {
         ...state,
@@ -91,14 +91,13 @@ export const rootReducer = (state = InicialState, actions) => {
     //   return {
     //     ...state,
     //     Hotels: actions.payload,
-    //   };   
+    //   };
     // case ALL_HOTELS:
     //   return {
     //     ...state,
     //     Hotels: actions.payload,
     //     HotelsCopi: actions.payload,
     //   };
-    
 
     default:
       return { ...state };

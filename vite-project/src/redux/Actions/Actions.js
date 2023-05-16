@@ -8,14 +8,14 @@ import {
   DELETE_FAVORITE_HOTEL,
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
-  IDUSER
+  IDUSER,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
 
 //?----------------- ACTIONS ------------------------------------
 //* ----------------- GET ALL HOTELS ------------------------------------
-const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app"
+const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 export const FuncionSelectFilter = (filters) => {
   let URL = `${URL_BASE}/hotels`;
   const { provinces, services, rating, order, page } = filters;
@@ -87,9 +87,7 @@ export const PostFilters = (filters) => {
 export const FuncionTypeRoomTypes = (idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `${URL_BASE}/roomTypes/${idHotel}`
-      );
+      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}`);
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
@@ -105,9 +103,7 @@ export const FuncionTypeRoomTypes = (idHotel) => {
 export const FuncionSearch = (nameHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `${URL_BASE}/hotels?name=${nameHotel}`
-      );
+      const response = await axios.get(`${URL_BASE}/hotels?name=${nameHotel}`);
       dispatch({ type: SEARCH_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -123,9 +119,7 @@ export const FuncionSearch = (nameHotel) => {
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `${URL_BASE}/favorites/${idUser}`
-      );
+      const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
       dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -176,9 +170,7 @@ export const DeleteFavoriteHotel = (idUser, idHotel) => {
 export const FuncionDetailHotel = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `${URL_BASE}/hotels/${id}`
-      );
+      const response = await axios.get(`${URL_BASE}/hotels/${id}`);
       dispatch({ type: DETAIL_HOTEL, payload: response.data });
     } catch (error) {
       swal({

@@ -10,7 +10,7 @@ const Carrusel = ({ HotelsCarrusel }) => {
   return (
     <div>
       <Carousel className={style.carousel}>
-        {HotelsCarrusel?(
+        {HotelsCarrusel ? (
           HotelsCarrusel?.map(({ id, name, image, decription }) => {
             return (
               <Carousel.Item className={style.item} key={id}>
@@ -26,8 +26,12 @@ const Carrusel = ({ HotelsCarrusel }) => {
           })
         ) : (
           <Carousel.Item className={style.item}>
-            <img className={style.img} src="https://www.cronista.com/files/image/159/159758/5ff7d1a380650.jpg" alt="loading" />
-            <Carousel.Caption/>
+            <img
+              className={style.img}
+              src="https://www.cronista.com/files/image/159/159758/5ff7d1a380650.jpg"
+              alt="loading"
+            />
+            <Carousel.Caption />
           </Carousel.Item>
         )}
       </Carousel>
