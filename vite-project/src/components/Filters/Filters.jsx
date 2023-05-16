@@ -1,16 +1,19 @@
+//?---------------------------- IMPORTS --------------------------------
 // import axios from "axios";
+//react
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncionSelectFilter, PostFilters } from "../../redux/Actions/Actions";
-import style from "./Filtros.module.css";
-import { useState } from "react";
+//css
+import style from "./Filters.module.css";
 
-const Filtro = () => {
+//?----------------- COMPONENTE FILTER ------------------------------------
+const Filter = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState(false);
-  const { Filtros } = useSelector((state) => state);
-  const [stateFiltro, setFiltro] = useState(Filtros);
+  const { Filters } = useSelector((state) => state);
+  const [stateFilter, setFilter] = useState(Filters);
 
-  const Provincias = [
+  const provinces = [
     "BUENOS AIRES",
     "CATAMARCA",
     "CHACO",
@@ -38,7 +41,7 @@ const Filtro = () => {
 
   const raiting = [1, 2, 3, 4, 5];
 
-  const Servicios = [
+  const services = [
     "Desayuno gratis",
     "Pileta",
     "Gimnasio",
@@ -55,54 +58,53 @@ const Filtro = () => {
     "Ascensor",
   ];
 
-  const onChange = async (event) => {
-    setFiltro({
-      ...stateFiltro,
-      Provincias: event.target.value,
+  const onChangeProvinces = async (event) => {
+    setFilter({
+      ...stateFilter,
+      provinces: event.target.value,
     });
   };
 
-  const onChange1 = async (event) => {
-    setFiltro({ ...stateFiltro, rating: event.target.value });
+  const onChangeRating = async (event) => {
+    setFilter({ ...stateFilter, rating: event.target.value });
   };
 
-  const onChange3 = (ser) => {
-    if (stateFiltro.servicios.includes(ser)) {
+  const onChangeServices = (ser) => {
+    if (stateFilter.services.includes(ser)) {
       // basicamente pregunte si ya lo incluye que lo filtre y lo saque sino
       // Remove the service from the filter
-      setFiltro({
-        ...stateFiltro,
-        servicios: stateFiltro.servicios.filter((s) => s !== ser),
+      setFilter({
+        ...stateFilter,
+        services: stateFilter.services.filter((s) => s !== ser),
       });
     } else {
       // sino que me permita setearlo
-
       // Add the service to the filter
-      setFiltro({
-        ...stateFiltro,
-        servicios: [...stateFiltro.servicios, ser],
+      setFilter({
+        ...stateFilter,
+        services: [...stateFilter.services, ser],
       });
     }
   };
 
   const onChangeOrder = (event) => {
-    setFiltro({ ...stateFiltro, order: event.target.value });
+    setFilter({ ...stateFilter, order: event.target.value });
   };
 
   // FILTRAR
-  const FuncionFiltrar = (event) => {
+  const FuncionFilter = (event) => {
     event.preventDefault();
-    dispatch(PostFilters(stateFiltro)); // Para modificar el estado global
-    dispatch(FuncionSelectFilter(stateFiltro, 1)); // Para el get a la DB
+    dispatch(PostFilters(stateFilter)); // Para modificar el estado global
+    dispatch(FuncionSelectFilter(stateFilter, 1)); // Para el get a la DB
   };
 
   // CLEAN FILTROS
-  const FuncionOnclick = (event) => {
+  const FuncionCleanFilter = (event) => {
     event.preventDefault();
-    document.forms["jorge"].reset();
-    setFiltro({
-      Provincias: "",
-      servicios: [],
+    document.forms["filterForm"].reset();
+    setFilter({
+      provinces: "",
+      services: [],
       rating: "",
       order: "",
       page: 1,
@@ -110,8 +112,8 @@ const Filtro = () => {
 
     dispatch(
       PostFilters({
-        Provincias: "",
-        servicios: [],
+        provinces: "",
+        services: [],
         rating: "",
         order: "",
         page: 1,
@@ -120,8 +122,8 @@ const Filtro = () => {
 
     dispatch(
       FuncionSelectFilter({
-        Provincias: "",
-        servicios: [],
+        provinces: "",
+        services: [],
         rating: "",
         order: "",
         page: 1,
@@ -130,16 +132,16 @@ const Filtro = () => {
   };
 
   return (
-    <form name="jorge">
-      <select onChange={onChange} className={style.select}>
+    <form name="filterForm">
+      <select onChange={onChangeProvinces} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
-        {Provincias.map((pro, index) => (
+        {provinces.map((pro, index) => (
           <option value={pro} key={index}>
             {pro}
           </option>
         ))}
       </select>
-      <select onChange={onChange1} className={style.select}>
+      <select onChange={onChangeRating} className={style.select}>
         <option hidden>Filtro Por raiting</option>
         {raiting.map((rant, index) => (
           <option value={rant} key={index}>
@@ -155,14 +157,14 @@ const Filtro = () => {
         <option value="RATINGASC">Menos Estrellas</option>
       </select>
       <table className={style.table}>
-        {Servicios.map((Ser, index) => (
+        {services.map((Ser, index) => (
           <tbody key={index}>
             <tr className={style.tr}>
               <td className={style.td}>{Ser}</td>
               <td className={style.td}>
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
-                  <input onChange={() => onChange3(Ser)} value={Ser} type="checkbox" id="checkbox"></input>
+                  <input onChange={() => onChangeServices(Ser)} value={Ser} type="checkbox" id="checkbox"></input>
                   <span className={style.checkmark}></span>
                 </label>
               </td>
@@ -170,14 +172,14 @@ const Filtro = () => {
           </tbody>
         ))}
       </table>
-      <button onClick={FuncionFiltrar} className={style.button}>
+      <button onClick={FuncionFilter} className={style.button}>
         Filtrar
       </button>
-      <button onClick={FuncionOnclick} className={style.button}>
+      <button onClick={FuncionCleanFilter} className={style.button}>
         AllHotels
       </button>
     </form>
   );
 };
 
-export default Filtro;
+export default Filter;

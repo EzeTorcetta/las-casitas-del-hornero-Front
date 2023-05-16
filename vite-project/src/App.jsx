@@ -1,3 +1,4 @@
+//?---------------------------- IMPORTS --------------------------------
 import {
   Home,
   Favoritos,
@@ -5,9 +6,9 @@ import {
   Landing,
   FormularioRegistrar,
 } from "./components/Index";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
+//?----------------- APP ------------------------------------
 function App() {
   return (
     <div>

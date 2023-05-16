@@ -1,8 +1,12 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 // import { Navbar, Container, Nav } from 'react-bootstrap';
-import { NavLink } from "react-router-dom";
-import style from "./NavDetail.module.css";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+//css
+import style from "./NavDetail.module.css";
 
+//?----------------- COMPONENTE NAVBAR DETAIL ------------------------------------
 const NavDetail = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 

@@ -1,13 +1,16 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncionAllFavoritesHotel } from "../../redux/Actions/Actions.js";
-import style from "./Favorites.module.css";
-import NavBar from "../Nav/Nav";
-import Footer from "../Footer/Footer";
 import Row from "react-bootstrap/Row";
-import Cards from "../Card/Card";
+//css
+import style from "./Favorites.module.css";
+//components
+import { NavBar,Footer,Cards } from "../Index.js";
 
-const Favoritos = () => {
+//?----------------- COMPONENTE FAVORITES ------------------------------------
+const Favorites = () => {
   const dispatch = useDispatch();
   const idUser = useSelector((state) => state.idUser);
   const favorites = useSelector((state) => state.FavHotels);
@@ -16,6 +19,7 @@ const Favoritos = () => {
     dispatch(FuncionAllFavoritesHotel(idUser));
   }, [favorites]);
 
+  console.log(favorites)
   return (
     <div>
       <NavBar />
@@ -32,4 +36,4 @@ const Favoritos = () => {
   );
 };
 
-export default Favoritos;
+export default Favorites;

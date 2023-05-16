@@ -1,3 +1,7 @@
+//?---------------------------- IMPORTS --------------------------------
+//css
+import style from "./Detail.module.css";
+//images
 import imagenDesayuno from "../../image/desayuno.png";
 import imagenPileta from "../../image/piscina.png";
 import imagenGimnasio from "../../image/gimnasio.png";
@@ -12,12 +16,10 @@ import imagenBañeraDeHidromasaje from "../../image/banera-de-hidromasaje.png";
 import imagenSpa from "../../image/spa.png";
 import imagenAccesoSillaDeRuedas from "../../image/senal-de-acceso-para-sillas-de-ruedas.png";
 import imagenAscensor from "../../image/ascensor.png";
-import style from "./Detail.module.css";
 
+//?----------------- COMPONENTE FUNCION SERVICES ------------------------------------
 const FuncionServices = ({ Services }) => {
-  console.log(Services);
-
-  const imagen = {
+  const image = {
     "Desayuno gratis": imagenDesayuno,
     Pileta: imagenPileta,
     Gimnasio: imagenGimnasio,
@@ -40,7 +42,7 @@ const FuncionServices = ({ Services }) => {
         <section className={style.divServicios} key={Ser.name}>
           <h2 className={style.h2}>{Ser.name}</h2>
           <div className={style.divPadre}>
-            <img className={style.img} src={imagen[Ser.name]} />
+            <img className={style.img} src={image[Ser.name]} />
           </div>
         </section>
       ))}
