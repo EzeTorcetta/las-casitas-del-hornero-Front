@@ -3,27 +3,11 @@
 }
 
 .section {
-  /* max-width: 100vw; */
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   scroll-snap-align: center;
-  /* margin: 40px; */
   padding: 0 50px;
 }
-
-/* .filtroContainer {
-  position: sticky;
-  top: 50;
-  margin-left: -50px;
-  width: 200px;
-  margin: 40px;
-} */
-
-/* .divCard {
-  height: 800px;
-  width: 100%;
-} */
 
 .divCard {
   width: 100%;

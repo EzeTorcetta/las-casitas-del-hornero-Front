@@ -1,39 +1,77 @@
-.img {
-  width: 300px; /* Establece un ancho fijo  */
-  height: 300px; /* Establece una altura fija */
+.container {
+  display: flex;
+  border-radius: 0.5rem;
+  min-width: 600px;
+  margin: 10px 0 10px 40px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+}
+
+.title {
+  padding: 1em;
+  min-width: 300px;
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+
+.name {
+  overflow-wrap: break-word;
+  border-radius: 10px;
+  padding: 0.2em;
+  font-weight: 900;
+  color: black;
+}
+
+.province {
+  background-color: rgb(228, 46, 0);
+  padding: 0.2em;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  transform: scale(0.8);
+}
+
+.rating {
+  margin: 0.5em;
+}
+
+.imgRating {
+  height: 20px;
+  width: auto;
+  /* padding: 0.2em; */
+}
+
+.imgHotel {
+  width: 300px;
+  height: 200px;
   object-fit: cover;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.imgContainer {
+  position: relative;
 }
 
 .button {
-  text-decoration: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 7px;
+  border-radius: 50%;
+}
+
+.description {
+  max-height: 200px;
+  overflow: hidden;
 }
 
 .link {
   text-decoration: none;
-  font-weight: 700;
+}
+.link:hover {
+  background-color: #fcb044;
 }
 
-.info {
-  color: white;
-  font-weight: 700;
-}
-
-.province {
-  color: white;
-  font-weight: 700;
-}
-
-.provinceContainer {
-  background-color: rgb(228, 46, 0);
-  max-width: fit-content;
-  padding: 0.2em;
-  border-radius: 10px;
-  transform: scale(0.8);
-}
-
-.infoContainer {
-  background-color: orange;
-  border-radius: 10px;
-  max-width: fit-content;
-  padding: 0.2em;
+@media (max-width: 450px) {
+  .div {
+  }
 }

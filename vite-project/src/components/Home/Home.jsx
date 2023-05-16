@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncionSelectFilter, FuncionAllFavoritesHotel } from "../../redux/Actions/Actions";
 import Cards from "../Card/Card";
-import Row from "react-bootstrap/Row";
 import Loading from "../Loading/Loading";
 import Paginado from "../Paginado/Paginado";
 
@@ -35,15 +34,11 @@ const Home = () => {
         {Hotels.allHotels?.length ? (
           <>
             <section className={`${style.section}`}>
-              {/* <div className={style.filtroContainer}> */}
               <Filtro />
-              {/* </div> */}
               <div className={style.divCard}>
-                {/* <Row xs={1} sm={2} lg={3} className="g-2"> */}
                 {Hotels.allHotels?.map(({ id, name, image, province, rating, description }) => (
                   <Cards key={id} id={id} name={name} image={image} province={province} rating={rating} description={description} />
                 ))}
-                {/* </Row> */}
               </div>
             </section>
           </>
