@@ -1,14 +1,18 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+//css
 import style from "./Nav.module.css";
 
+//?----------------- COMPONENTE NAVBAR ------------------------------------
 const NavBar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
-
+  
   return (
     <div className={style.nav}>
       <div className={style.logo}>

@@ -1,5 +1,7 @@
+//?---------------------------- IMPORTS --------------------------------
 import style from "./Footer.module.css";
 
+//?----------------- COMPONENTE FOOTER ------------------------------------
 const Footer = () => {
   return (
     <footer className={style.footer}>

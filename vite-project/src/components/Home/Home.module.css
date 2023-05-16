@@ -12,14 +12,15 @@
   /* margin: 150px; */
 }
 
-.item {
-  height: 90vh;
-}
-
 .filtroContainer {
   position: sticky;
   top: 50;
   margin-left: -50px;
   width: 200px;
   margin: 40px;
+}
+
+.divCard {
+  height: 800px;
+  width: 100%;
 }

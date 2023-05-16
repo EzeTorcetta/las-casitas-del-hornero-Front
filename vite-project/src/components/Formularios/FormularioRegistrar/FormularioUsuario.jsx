@@ -5,6 +5,7 @@ import validacion2 from "./Validation";
 import style from "./FormularioUsuario.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 
 const FormularioIngresa = () => {
@@ -71,11 +72,18 @@ const FormularioIngresa = () => {
           `https://las-casitas-del-hornero-back.up.railway.app/user`,
           { username, password, email, admin }
         );
-
-        alert("Usuarios registrado con exito!!");
+        swal({
+          text: "Usuarios registrado con exito!!",
+          icon: "success",
+          buttons: "Aceptar",
+        });
         navigate("/");
       } catch (error) {
-        alert(error.response.data.error);
+        swal({
+          text: error.response.data.error,
+          icon: "warning",
+          buttons: "Aceptar",
+        });
       }
     }
 
@@ -85,22 +93,39 @@ const FormularioIngresa = () => {
       usuario.password === "" ||
       usuario.repetir === ""
     )
-      return alert("Necesitas completar las áreas");
+      swal({
+        text: "Necesitas completar las áreas",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+
     if (
       db.find(
         (user) =>
           user.email === usuario.email || user.username === usuario.username
       )
     ) {
-      return alert("El email o usuario ya existe");
+      swal({
+        text: "El email o usuario ya existe",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     }
     if (usuario.password !== usuario.repetir) {
-      return alert("La password no coincide");
+      swal({
+        text: "La password no coincide",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     } else {
       {
         window.location.href = "Home";
       }
-      alert("usuario creado");
+      swal({
+        text: "usuario creado",
+        icon: "success",
+        buttons: "Aceptar",
+      });
     }
 
     setUsuario({
