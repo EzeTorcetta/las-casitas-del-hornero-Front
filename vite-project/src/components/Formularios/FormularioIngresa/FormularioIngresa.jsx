@@ -103,7 +103,11 @@ const FormularioIngresa = () => {
           <label>password</label>
         </div>
 
-        <button className="w-100 btn btn-lg btn-warning" type="submit">
+        <button
+          // className="w-100 btn btn-lg btn-warning "
+          className={style.buton}
+          type="submit"
+        >
           Ingresar
         </button>
       </form>
