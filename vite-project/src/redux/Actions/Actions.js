@@ -1,42 +1,41 @@
+//?---------------------------- IMPORTS --------------------------------
 import {
-  // ALL_HOTELS,
-  ALL_FAVORITES_HOTELS,
-  // POST_FAVORITE_HOTEL,
-  DELETE_FAVORITE_HOTEL,
-  DETAIL_CLEAR_HOTEL,
-  DETAIL_HOTEL,
-  SEARCH_HOTELS,
-  IDUSER,
-  TYPE_ROOM,
-  // SELECT_PROVINCE,
-  SELECT_RATING,
-  // ALL_SERVICE,
+  GET_ALL_HOTELS,
   POST_FILTERS,
-} from "../Actions-index/index";
+  TYPE_ROOM,
+  SEARCH_HOTELS,
+  ALL_FAVORITES_HOTELS,
+  DELETE_FAVORITE_HOTEL,
+  DETAIL_HOTEL,
+  DETAIL_CLEAR_HOTEL,
+  IDUSER,
+} from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
 
-export const FuncionSelectFilter = (filtros) => {
-  let URL = "https://las-casitas-del-hornero-back.up.railway.app/hotels";
-  const { Provincias, servicios, rating, order, page } = filtros;
-
-  /*https://las-casitas-del-hornero-back.up.railway.app/hotels?page=1&provinces=SAN%20JUAN*/
+//?----------------- ACTIONS ------------------------------------
+//* ----------------- GET ALL HOTELS ------------------------------------
+const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+export const FuncionSelectFilter = (filters) => {
+  let URL = `${URL_BASE}/hotels`;
+  const { provinces, services, rating, order, page } = filters;
 
   URL = URL + `?page=${page}`;
-
   return async (dispatch) => {
     try {
       if (Number(rating) !== 0) {
         URL = URL + `&rating=${Number(rating)}`;
       }
-      if (Provincias.length) {
-        URL = URL + `&provinces=${encodeURIComponent(Provincias)}`;
+      if (provinces.length) {
+        URL = URL + `&provinces=${encodeURIComponent(provinces)}`;
       }
       if (order.length) {
         URL = URL + `&order=${order}`;
       }
-      if (servicios.length) {
-        servicios.map((ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`));
+      if (services.length) {
+        services.map(
+          (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
+        );
       }
 
       const response = await axios.get(URL);
@@ -54,7 +53,7 @@ export const FuncionSelectFilter = (filtros) => {
         buttons: "Aceptar",
       });*/
 
-      dispatch({ type: SELECT_RATING, payload: response.data });
+      dispatch({ type: GET_ALL_HOTELS, payload: response.data });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -65,9 +64,10 @@ export const FuncionSelectFilter = (filtros) => {
   };
 };
 
-export const PostFilters = (filtros) => {
+//* ----------------- POST FILTERS ------------------------------------
+export const PostFilters = (filters) => {
   return async (dispatch) => {
-    dispatch({ type: POST_FILTERS, payload: filtros });
+    dispatch({ type: POST_FILTERS, payload: filters });
   };
 };
 
@@ -83,10 +83,11 @@ export const PostFilters = (filtros) => {
 //   };
 // };
 
+//* ----------------- TYPE ROOMS ------------------------------------
 export const FuncionTypeRoomTypes = (idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/roomTypes/${idHotel}`);
+      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}`);
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
@@ -98,13 +99,11 @@ export const FuncionTypeRoomTypes = (idHotel) => {
   };
 };
 
+//* ----------------- SEARCH ------------------------------------
 export const FuncionSearch = (nameHotel) => {
-  console.log(nameHotel);
-
   return async (dispatch) => {
     try {
-      const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?name=${nameHotel}`);
-      console.log(response.data);
+      const response = await axios.get(`${URL_BASE}/hotels?name=${nameHotel}`);
       dispatch({ type: SEARCH_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -116,10 +115,11 @@ export const FuncionSearch = (nameHotel) => {
   };
 };
 
+//* ----------------- ALL FAVORITES HOTELS ------------------------------------
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}`);
+      const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
       dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -131,13 +131,13 @@ export const FuncionAllFavoritesHotel = (idUser) => {
   };
 };
 
+//* ----------------- POST FAVORITE HOTEL ------------------------------------
 export const PostFavoriteHotel = (idUser, idHotel) => {
-  console.log(idUser, idHotel);
   return async () => {
     try {
-      const response = await axios.post(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${idHotel}`);
-      alert(response.data);
-      console.log(idUser, idHotel, response);
+      const response = await axios.post(
+        `${URL_BASE}/favorites/${idUser}/${idHotel}`
+      );
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -148,10 +148,13 @@ export const PostFavoriteHotel = (idUser, idHotel) => {
   };
 };
 
+//* ----------------- DELETE FAVORITE HOTEL ------------------------------------
 export const DeleteFavoriteHotel = (idUser, idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${idHotel}`);
+      const response = await axios.delete(
+        `${URL_BASE}/favorites/${idUser}/${idHotel}`
+      );
       dispatch({ type: DELETE_FAVORITE_HOTEL, payload: response.data });
     } catch (error) {
       swal({
@@ -163,10 +166,11 @@ export const DeleteFavoriteHotel = (idUser, idHotel) => {
   };
 };
 
+//* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionDetailHotel = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels/${id}`);
+      const response = await axios.get(`${URL_BASE}/hotels/${id}`);
       dispatch({ type: DETAIL_HOTEL, payload: response.data });
     } catch (error) {
       swal({
@@ -178,10 +182,12 @@ export const FuncionDetailHotel = (id) => {
   };
 };
 
+//* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionClearDetail = () => {
   return { type: DETAIL_CLEAR_HOTEL }; // cuando se desmonte el detail , el objeto se vacia.
 };
 
+//* ----------------- ID USER ------------------------------------
 export const FuncionIDUser = (idUser) => {
   return { type: IDUSER, payload: idUser }; // cuando se desmonte el detail , el objeto se vacia.
 };

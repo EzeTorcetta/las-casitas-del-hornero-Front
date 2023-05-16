@@ -45,14 +45,27 @@ const FormularioIngresa = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!usuario.username.length || !usuario.email.length || !usuario.password.length || !usuario.repetir.length) {
+    if (
+      !usuario.username.length ||
+      !usuario.email.length ||
+      !usuario.password.length ||
+      !usuario.repetir.length
+    ) {
       alert("Debes completar los campos");
-    } else if (Error.username.length > 0 || Error.email.length > 0 || Error.password.length > 0 || Error.repetir.length > 0) {
+    } else if (
+      Error.username.length > 0 ||
+      Error.email.length > 0 ||
+      Error.password.length > 0 ||
+      Error.repetir.length > 0
+    ) {
       alert("Tienes errores en los campos");
     } else {
       try {
         const { username, password, email, admin } = usuario;
-        await axios.post(`https://las-casitas-del-hornero-back.up.railway.app/user`, { username, password, email, admin });
+        await axios.post(
+          `https://las-casitas-del-hornero-back.up.railway.app/user`,
+          { username, password, email, admin }
+        );
         swal({
           text: "Usuarios registrado con exito!!",
           icon: "success",
@@ -68,14 +81,24 @@ const FormularioIngresa = () => {
       }
     }
 
-    if (usuario.username === "" || usuario.email === "" || usuario.password === "" || usuario.repetir === "")
+    if (
+      usuario.username === "" ||
+      usuario.email === "" ||
+      usuario.password === "" ||
+      usuario.repetir === ""
+    )
       swal({
         text: "Necesitas completar las áreas",
         icon: "warning",
         buttons: "Aceptar",
       });
 
-    if (db.find((user) => user.email === usuario.email || user.username === usuario.username)) {
+    if (
+      db.find(
+        (user) =>
+          user.email === usuario.email || user.username === usuario.username
+      )
+    ) {
       swal({
         text: "El email o usuario ya existe",
         icon: "warning",
@@ -169,7 +192,13 @@ const FormularioIngresa = () => {
         </div>
 
         <div className="checkbox">
-          <input className="box" type="checkbox" value="remember-me" indeterminate onClick={onChange} />
+          <input
+            className="box"
+            type="checkbox"
+            value="remember-me"
+            indeterminate
+            onClick={onChange}
+          />
           <label>Quiero registrar mi hotel !</label>
         </div>
 
@@ -177,6 +206,7 @@ const FormularioIngresa = () => {
           Registrar
         </button>
       </form>
+      {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );
 };

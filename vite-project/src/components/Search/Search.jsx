@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SeleccionHuespedes from "./SeleccionHuesped";
 import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datePicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import styles from "./Search.module.css";
 import { useDispatch } from "react-redux";

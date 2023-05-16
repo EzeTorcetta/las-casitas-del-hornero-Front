@@ -1,6 +1,10 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { Carousel } from "react-bootstrap";
+//css
 import style from "./CarruselDetail.module.css";
 
+//?----------------- COMPONENTE CARRUSEL DETAIL ------------------------------------
 const CarruselDetail = ({ image }) => {
   return (
     <>

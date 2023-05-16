@@ -1,16 +1,20 @@
+//?---------------------------- IMPORTS --------------------------------
+//react
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { PostFavoriteHotel, DeleteFavoriteHotel } from "../../redux/Actions/Actions.js";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
+
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
+//?----------------- COMPONENTE CARD ------------------------------------
 function Cards({ id, name, image, province, rating, description }) {
-  // const dispatch = useDispatch();
   const idUser = useSelector((state) => state.idUser);
   const FavHotels = useSelector((state) => state.FavHotels);
   const [isFav, setIsFav] = useState(false);
+  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   let ratingArray = Array(rating).fill(rating);
 
   useEffect(() => {
@@ -21,10 +25,7 @@ function Cards({ id, name, image, province, rating, description }) {
 
   const handleFavorite = async (idUser, id) => {
     setIsFav(!isFav);
-    // isFav ? dispatch(DeleteFavoriteHotel(idUser, id)) : dispatch(PostFavoriteHotel(idUser, id));
-    isFav
-      ? await axios.delete(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${id}`)
-      : await axios.post(`http://las-casitas-del-hornero-back.up.railway.app/favorites/${idUser}/${id}`);
+    isFav ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`) : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
   };
 
   return (

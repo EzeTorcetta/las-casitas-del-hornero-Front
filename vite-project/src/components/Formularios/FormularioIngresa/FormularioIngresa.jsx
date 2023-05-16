@@ -6,6 +6,7 @@ import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import BotonAuthGoogle from "./BotonAuthGoogle";
 import swal from "sweetalert";
 
 const FormularioIngresa = () => {
@@ -46,7 +47,10 @@ const FormularioIngresa = () => {
       });
     } else {
       try {
-        const response = await axios.post(`https://las-casitas-del-hornero-back.up.railway.app/user`, usuario);
+        const response = await axios.post(
+          `https://las-casitas-del-hornero-back.up.railway.app/user`,
+          usuario
+        );
         console.log(response.data.id);
         const idUser1 = response.data.id;
         dispatch(FuncionIDUser(idUser1));
@@ -103,6 +107,8 @@ const FormularioIngresa = () => {
           Ingresar
         </button>
       </form>
+      <BotonAuthGoogle />
+      {/* <a href="$"> Olvidé mi password </a> */}
     </div>
   );
 };
