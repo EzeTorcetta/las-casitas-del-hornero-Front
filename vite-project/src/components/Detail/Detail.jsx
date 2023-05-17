@@ -23,6 +23,7 @@ import imagenCorreo from "../../image/correo-electronico-vacio.png";
 import imagenTelefono from "../../image/llamada-telefonica.png";
 //css
 import style from "./Detail.module.css";
+import Reviews from "../Reviews/Reviews";
 
 //?----------------- COMPONENTE DETAIL ------------------------------------
 const Detail = () => {
@@ -125,6 +126,7 @@ const Detail = () => {
         <h1>Descripción</h1>
         <p>{DetailHotel.description}</p>
       </section>
+      <Reviews />
       {DetailHotel.location && DetailHotel.name && (
         <Maps location={DetailHotel.location} name={DetailHotel.name} />
       )}
