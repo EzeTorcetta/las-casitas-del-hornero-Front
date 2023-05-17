@@ -50,6 +50,18 @@
   text-decoration: none;
   color: black;
   margin-bottom: 10px;
+  /* Estilo base del enlace */
+  text-decoration: none;
+  transition: border-bottom 0.3s;
+
+  /* Agrega un borde inferior transparente */
+  /* border-bottom: 2px solid transparent; */
+}
+
+.link:hover {
+  /* Cambia el color del texto y el borde inferior en hover */
+  color: white;
+  border-bottom: 2px solid white;
 }
 
 .show {
@@ -71,4 +83,86 @@
     margin-right: 10px;
     text-align: center;
   }
+}
+
+.iconoCarrito {
+  width: 30px;
+  height: 25px;
+}
+
+.iconoUsuario {
+  width: 30px;
+  height: 30px;
+  margin: 20px;
+}
+
+.BotonUsuario {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 180px;
+  text-align: center;
+  height: 30px;
+  border: none;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  -webkit-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+}
+
+p {
+  margin: 10px;
+}
+
+.cta {
+  border: none;
+  background: white;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.hover:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

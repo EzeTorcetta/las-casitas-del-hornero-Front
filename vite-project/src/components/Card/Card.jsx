@@ -1,6 +1,7 @@
 //?---------------------------- IMPORTS --------------------------------
 //react
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { PostFavoriteHotel, DeleteFavoriteHotel } from "../../redux/Actions/Actions.js";
 import { Link } from "react-router-dom";
@@ -10,7 +11,8 @@ import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
 //?----------------- COMPONENTE CARD ------------------------------------
-function Cards({ id, name, image, province, rating, description }) {
+function Cards({ id, name, image, province, rating, description, valoration }) {
+  const navigate = useNavigate();
   const idUser = useSelector((state) => state.idUser);
   const FavHotels = useSelector((state) => state.FavHotels);
   const [isFav, setIsFav] = useState(false);
@@ -25,7 +27,13 @@ function Cards({ id, name, image, province, rating, description }) {
 
   const handleFavorite = async (idUser, id) => {
     setIsFav(!isFav);
-    isFav ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`) : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
+    isFav
+      ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`)
+      : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
+  };
+
+  const onClickDetail = () => {
+    navigate(`/detail/${id}`);
   };
 
   return (
@@ -33,28 +41,40 @@ function Cards({ id, name, image, province, rating, description }) {
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
         {isFav ? (
-          <button onClick={() => handleFavorite(idUser, id)} className={style.button}>
+          <button
+            onClick={() => handleFavorite(idUser, id)}
+            className={style.button}
+          >
             ❤️
           </button>
         ) : (
-          <button onClick={() => handleFavorite(idUser, id)} className={style.button}>
+          <button
+            onClick={() => handleFavorite(idUser, id)}
+            className={style.button}
+          >
             🤍
           </button>
         )}
       </div>
       <div className={style.title}>
-        <Link to={`/detail/${id}`} className={style.link}>
-          <h4 className={style.name}>{name}</h4>{" "}
-        </Link>
+        <h4 className={style.name}>{name}</h4>
+        <p>{valoration}</p>
         <h7 className={style.province}>{province}</h7>
         <div className={style.rating}>
           {ratingArray.map((_, index) => {
-            return <img className={style.imgRating} src={imgFav} alt="" key={index} />;
+            return (
+              <img
+                className={style.imgRating}
+                src={imgFav}
+                alt=""
+                key={index}
+              />
+            );
           })}
         </div>
-      </div>
-      <div className={style.description}>
-        <p>{description}</p>
+        <button onClick={onClickDetail} className={style.botonDetail}>
+          VER ALOJAMIENTO
+        </button>
       </div>
     </div>
   );

@@ -7,3 +7,4 @@ export const DELETE_FAVORITE_HOTEL = "DELETE_FAVORITE_HOTEL";
 export const DETAIL_HOTEL = "DETAIL_HOTEL";
 export const DETAIL_CLEAR_HOTEL = "DETAIL_CLEAR_HOTEL";
 export const IDUSER = "IDUSER";
+export const USER = "USER";

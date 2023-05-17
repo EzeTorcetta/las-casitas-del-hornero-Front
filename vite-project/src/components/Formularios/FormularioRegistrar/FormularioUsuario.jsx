@@ -7,7 +7,6 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const FormularioIngresa = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState({
@@ -15,7 +14,6 @@ const FormularioIngresa = () => {
     email: "",
     password: "",
     repetir: "",
-    admin: false,
   });
 
   const [Error, setError] = useState({
@@ -23,7 +21,6 @@ const FormularioIngresa = () => {
     email: "",
     password: "",
     repetir: "",
-    admin: false,
   });
 
   const handleChange = (event) => {
@@ -61,11 +58,12 @@ const FormularioIngresa = () => {
       alert("Tienes errores en los campos");
     } else {
       try {
-        const { username, password, email, admin } = usuario;
+        const { username, password, email } = usuario;
         await axios.post(
-          `https://las-casitas-del-hornero-back.up.railway.app/user`,
-          { username, password, email, admin }
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
+          { username, password, email }
         );
+
         swal({
           text: "Usuarios registrado con exito!!",
           icon: "success",
