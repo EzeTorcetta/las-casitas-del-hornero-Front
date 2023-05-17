@@ -9,11 +9,13 @@ import {
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
   IDUSER,
+  USER,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
 const InicialState = {
   Hotels: {},
+  User: { email: "", id: 0, rol: 0, username: "" },
   HotelsCopi: [],
   DetailHotel: {},
   FavHotels: [],
@@ -81,24 +83,12 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         idUser: actions.payload,
       };
-    // case ALL_SERVICE:
-    //   return {
-    //     ...state,
-    //     Hotels: { ...state.Hotels, allHotels: actions.payload },
-    //     // Hotels: actions.payload,
-    //   };
-    // case SELECT_PROVINCE:
-    //   return {
-    //     ...state,
-    //     Hotels: actions.payload,
-    //   };
-    // case ALL_HOTELS:
-    //   return {
-    //     ...state,
-    //     Hotels: actions.payload,
-    //     HotelsCopi: actions.payload,
-    //   };
-
+    case USER:
+      console.log(actions.payload);
+      return {
+        ...state,
+        User: actions.payload,
+      };
     default:
       return { ...state };
   }

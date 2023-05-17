@@ -151,6 +151,8 @@ const Filter = () => {
       </select>
       <select onChange={onChangeOrder} className={style.select}>
         <option hidden>Ordenar por</option>
+        <option value="VALORATIONDESC">Mayor Valoracion</option>
+        <option value="VALORATIONASC">Menor Valoracion</option>
         <option value="NAMEASC">Nombre A-Z</option>
         <option value="NAMEDESC">Nombre Z-A</option>
         <option value="RATINGDESC">Mas Estrellas</option>
@@ -164,7 +166,12 @@ const Filter = () => {
               <td className={style.td}>
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
-                  <input onChange={() => onChangeServices(Ser)} value={Ser} type="checkbox" id="checkbox"></input>
+                  <input
+                    onChange={() => onChangeServices(Ser)}
+                    value={Ser}
+                    type="checkbox"
+                    id="checkbox"
+                  ></input>
                   <span className={style.checkmark}></span>
                 </label>
               </td>

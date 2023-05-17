@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 //css
 import style from "./Favorites.module.css";
 //components
-import { NavBar, Footer, Cards } from "../Index.js";
+import { Cards } from "../Index.js";
 
 //?----------------- COMPONENTE FAVORITES ------------------------------------
 const Favorites = () => {
@@ -21,7 +21,6 @@ const Favorites = () => {
 
   return (
     <div>
-      <NavBar />
       <section className={style.section}>
         <Row xs={1} sm={2} lg={3} className="g-2">
           {favorites?.map(({ id, name, image, province }) => (
@@ -35,8 +34,6 @@ const Favorites = () => {
           ))}
         </Row>
       </section>
-      ;
-      <Footer />
     </div>
   );
 };

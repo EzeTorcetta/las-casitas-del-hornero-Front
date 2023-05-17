@@ -49,7 +49,7 @@ const Paginado = ({ paginas }) => {
           <button
             value={value}
             onClick={handlePage}
-            className={currentPage === value ? style.active : ""}
+            className={paginas ? style.active : ""} // le cambie paginas siquiente pagina === value.
             key={i}
           >
             {value}

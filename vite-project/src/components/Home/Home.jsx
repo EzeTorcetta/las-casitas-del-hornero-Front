@@ -6,11 +6,23 @@ import Row from "react-bootstrap/Row";
 //css
 import style from "./Home.module.css";
 //actions
-import { FuncionSelectFilter, FuncionAllFavoritesHotel } from "../../redux/Actions/Actions";
+import {
+  FuncionSelectFilter,
+  FuncionAllFavoritesHotel,
+} from "../../redux/Actions/Actions";
 //components
 // import Cards from "../Cards/Cards";
 // import Search from "../Search/Search";
-import { Filter, NavBar, Footer, Clima, Carrusel, Cards, Loading, Paginado } from "../Index";
+import {
+  Filter,
+  NavBar,
+  Footer,
+  Clima,
+  Carrusel,
+  Cards,
+  Loading,
+  Paginado,
+} from "../Index";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = () => {
@@ -36,14 +48,57 @@ const Home = () => {
         <Clima />
         {Hotels.allHotels?.length ? (
           <>
-            <section className={`${style.section}`}>
-              <Filter />
+            <section className={`${style.section} ${style.one}`}>
+              <div className={style.filtroContainer}>
+                <Filter />
+              </div>
               <div className={style.divCard}>
-                {Hotels.allHotels?.map(({ id, name, image, province, rating, description }) => (
-                  <Cards key={id} id={id} name={name} image={image} province={province} rating={rating} description={description} />
-                ))}
+                <Row xs={1} sm={2} lg={3} className="g-2">
+                  {Hotels.allHotels?.map(
+                    ({
+                      id,
+                      name,
+                      image,
+                      province,
+                      rating,
+                      description,
+                      valoration,
+                    }) => (
+                      <Cards
+                        key={id}
+                        id={id}
+                        name={name}
+                        image={image}
+                        province={province}
+                        rating={rating}
+                        description={description}
+                        valoration={valoration}
+                      />
+                    )
+                  )}
+                </Row>
               </div>
             </section>
+            {/* <section className={`${style.section}`}>
+              <Filter />
+              <div className={style.divContainerTheCards} >
+                <div className={style.divCard}>
+                  {Hotels.allHotels?.map(
+                    ({ id, name, image, province, rating, description }) => (
+                      <Cards
+                        key={id}
+                        id={id}
+                        name={name}
+                        image={image}
+                        province={province}
+                        rating={rating}
+                        description={description}
+                      />
+                    )
+                  )}
+                </div>
+              </div>
+            </section> */}
           </>
         ) : (
           <section className={`${style.section} ${style.one}`}>

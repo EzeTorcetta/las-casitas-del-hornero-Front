@@ -21,7 +21,8 @@ const validacion = (userData, erroresx) => {
   ) {
     errores.password = "";
   } else {
-    errores.password = "password invalida";
+    errores.password =
+      "La password debe tener al menos una letra en Mayuscula , Minusculas y numeros.";
   }
   return errores; // retornamos el objeto con los errores modificados..
 };
