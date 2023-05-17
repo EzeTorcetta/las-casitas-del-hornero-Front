@@ -48,11 +48,11 @@ const FormularioIngresa = () => {
     } else {
       try {
         const response = await axios.post(
-          `https://las-casitas-del-hornero-back.up.railway.app/user`,
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           usuario
         );
-        console.log(response.data.id);
-        const idUser1 = response.data.id;
+        console.log(response.data);
+        const idUser1 = response.data;
         dispatch(FuncionIDUser(idUser1));
         swal({
           text: " Inicio de sesion con exito!!",

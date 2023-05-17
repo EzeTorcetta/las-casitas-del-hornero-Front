@@ -63,7 +63,7 @@ const FormularioIngresa = () => {
       try {
         const { username, password, email, admin } = usuario;
         await axios.post(
-          `https://las-casitas-del-hornero-back.up.railway.app/user`,
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           { username, password, email, admin }
         );
         swal({
