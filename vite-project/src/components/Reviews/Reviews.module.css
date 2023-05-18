@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+input[type="number"] {
+  width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+button[type="submit"] {
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.comment {
+  color: black;
+  margin-top: 10px;
+  width: 70%;
+}
+
+.caja {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.caja img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+span {
+  color: orange;
+  text-decoration: orangered;
+  font-weight: bold;
+}
+
+.commentText {
+  flex-grow: 1;
+}

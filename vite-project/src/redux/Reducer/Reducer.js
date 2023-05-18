@@ -21,6 +21,10 @@ const InicialState = {
   HotelsCopi: [],
   DetailHotel: {},
   FavHotels: [],
+<<<<<<< HEAD
+=======
+  idUser: {},
+>>>>>>> 98cd87feb4d4f72746a0343a8ff13b12b23839e7
   TypeRoom: [],
   Filters: {
     provinces: "",
