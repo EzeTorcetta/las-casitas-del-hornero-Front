@@ -9,3 +9,4 @@ export const USER = "USER";
 export const GET_TROLLEY = "GET_TROLLEY";
 export const DELETE_TROLLEY = "DELETE_TROLLEY";
 export const DELETE_ALL_TROLLEY = "DELETE_ALL_TROLLEY";
+export const USER_LOGOUT = "USER_LOGOUT";

@@ -11,6 +11,7 @@ import {
   GET_TROLLEY,
   DELETE_TROLLEY,
   DELETE_ALL_TROLLEY,
+  USER_LOGOUT
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -80,11 +81,15 @@ export const rootReducer = (state = InicialState, actions) => {
       };
 
     case USER:
-      console.log(actions.payload);
       return {
         ...state,
         User: actions.payload,
       };
+      case USER_LOGOUT:
+        return {
+          ...state,
+          User: { email: "", id: 0, rol: 0, username: "" },
+        };
     case GET_TROLLEY:
       return {
         ...state,

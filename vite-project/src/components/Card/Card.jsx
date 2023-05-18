@@ -27,7 +27,6 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
   }, [FavHotels]);
 
   const handleFavorite = async (idUser, id) => {
-    console.log(idUser);
     if (idUser) {
       setIsFav(!isFav);
       isFav

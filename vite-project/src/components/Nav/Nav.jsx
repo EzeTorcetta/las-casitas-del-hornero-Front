@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import imageCarrito from "../../image/carrito-de-compras.png";
 import imagenSesion from "../../image/perfil.png";
 import imagenUsuario from "../../image/usuario (1).png";
 import style from "./Nav.module.css";
-import { PedirLocalStorage } from "../Index";
+import { Landing, PedirLocalStorage } from "../Index";
+import { LogOut } from "../../redux/Actions/Actions";
+import { useDispatch } from "react-redux";
+import ClearLocalStorage from "../LocalStorage/CleanLocalStorage";
 
 
 // import "NavButon.css";
@@ -12,8 +15,15 @@ import { PedirLocalStorage } from "../Index";
 //?----------------- COMPONENTE NAVBAR ------------------------------------
 const NavBar = () => {
   // const User = useSelector((state) => state.User);
+  const dispatch = useDispatch()
   let User = PedirLocalStorage();
-  let { email, rol } = User;
+  // let { email, rol } = User;
+
+  let email, rol;
+  if (User) {
+    email = User.email;
+    rol = User.rol;
+  }
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
@@ -35,6 +45,12 @@ const NavBar = () => {
       setShowNavbar(false);
     }
   }, [windowWidth]);
+
+  const logout = () => {
+    dispatch(LogOut());
+    ClearLocalStorage();
+    location.reload();
+  }
 
   return (
     <>
@@ -92,6 +108,7 @@ const NavBar = () => {
           )}
 
           {email ? (
+            <div>
             <NavLink
               to={"/Perfil"}
               className={style.link}
@@ -100,6 +117,8 @@ const NavBar = () => {
               <img className={style.img} src={imagenUsuario} />
               <p>{`${email}`}</p>
             </NavLink>
+            <button onClick={() => logout()}>LogOut</button>
+            </div>
           ) : (
             <NavLink
               to={"/"}

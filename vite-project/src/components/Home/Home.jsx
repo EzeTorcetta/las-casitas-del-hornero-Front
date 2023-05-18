@@ -58,7 +58,7 @@ const Home = () => {
     }
   }, []);
 
-  if(state === 0 && User.id === 0){
+  if(state === 0 && User?.id === 0){
     return(
       <AuthProvider 
         onUserLoggedIn={handleUserLoggedIn}
@@ -107,26 +107,6 @@ const Home = () => {
                 </Row>
               </div>
             </section>
-            {/* <section className={`${style.section}`}>
-              <Filter />
-              <div className={style.divContainerTheCards} >
-                <div className={style.divCard}>
-                  {Hotels.allHotels?.map(
-                    ({ id, name, image, province, rating, description }) => (
-                      <Cards
-                        key={id}
-                        id={id}
-                        name={name}
-                        image={image}
-                        province={province}
-                        rating={rating}
-                        description={description}
-                      />
-                    )
-                  )}
-                </div>
-              </div>
-            </section> */}
           </>
         ) : (
           <section className={`${style.section} ${style.one}`}>

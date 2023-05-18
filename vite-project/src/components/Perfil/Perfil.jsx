@@ -1,11 +1,24 @@
 import { useSelector } from "react-redux";
 import { NavBar, Footer, Favoritos, PedirLocalStorage } from "../Index";
 import style from "./Perfil.module.css";
+import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Perfil = () => {
   let User = PedirLocalStorage();
-  console.log(User);
+  const navigate = useNavigate();
   // const User = useSelector((state) => state.User);
+  
+  React.useEffect(() => {
+    if (!User) {
+      navigate("/Home");
+    }
+  }, [User, navigate]);
+
+  if (!User) {
+    return null;
+  }
+
   let { rol } = User;
 
   return (

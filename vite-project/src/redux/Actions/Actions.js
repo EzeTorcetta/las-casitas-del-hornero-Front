@@ -11,6 +11,7 @@ import {
   GET_TROLLEY,
   DELETE_ALL_TROLLEY,
   DELETE_TROLLEY,
+  USER_LOGOUT
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -122,7 +123,6 @@ export const FuncionSearch = (nameHotel) => {
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      console.log(idUser);
       const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
       dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
@@ -266,9 +266,13 @@ export const FuncionClearDetail = () => {
 //* ----------------- ID USER ------------------------------------
 
 export const GetUser = (User) => {
-  console.log(User);
   return {
     type: USER,
     payload: User,
   };
 };
+
+
+export const LogOut = () => {
+  return {type: USER_LOGOUT}
+}
