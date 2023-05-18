@@ -19,6 +19,7 @@ import NavBar from "./Nav/Nav";
 import Filter from "./Filters/Filters";
 import Clima from "./Clima/Clima";
 import Paginado from "./Paginado/Paginado";
+import { LogOut } from "./GoogleAuth/LogOut";
 import FormularioRegistra from "./Formularios/FormularioRegistrar/ConGoogle";
 
 export {
@@ -42,5 +43,6 @@ export {
   FormularioIngresa,
   Landing,
   BotonAuthGoogle,
-  FormularioRegistra
+  FormularioRegistra,
+  LogOut
 };

@@ -62,6 +62,13 @@ const NavBar = () => {
           >
             Home
           </NavLink>
+          <NavLink
+            to={"/Logout"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+          >
+            Logout
+          </NavLink>
         </div>
       </div>
     </>
