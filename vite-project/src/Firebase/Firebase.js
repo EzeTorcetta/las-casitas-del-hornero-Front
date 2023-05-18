@@ -25,3 +25,47 @@ export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+export const userExists = async (uid) => {
+  const docRef = doc(db, 'users', uid);
+  const res = await getDoc(docRef);
+  console.log(res);
+  return res.exists();
+}
+
+export const existsUsername = async (username) => {
+  const users = [];
+  const docsRef = collection(db, 'users');
+  const q = query(docsRef, where('username', '==', username));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    users.push(doc.data());
+  });
+  return users.length > 0 ? users[0].uid : null;
+}
+
+export const registerNewUser = async (user) => {
+try {
+  const collectionRef = collection(db, 'users');
+  const docRef = doc(collectionRef, user.uid);
+  await setDoc(docRef, user);
+} catch (error) {}
+}
+
+export const updateUser = async (user) => {
+  try {
+    const collectionRef = collection(db, 'users');
+    const docRef = doc(collectionRef, user.uid);
+    await setDoc(docRef, user);
+  } catch (error) {
+    
+  }
+}
+
+export const getUserInfo = async (uid) => {
+try {
+  const docRef = doc(db, 'users', uid);
+  const document = await getDoc(docRef);
+  return document.data();
+} catch (error) {}
+}

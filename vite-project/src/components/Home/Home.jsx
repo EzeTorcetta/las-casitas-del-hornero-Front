@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
+import AuthProvider from "../GoogleAuth/AuthProvider";
 //css
 import style from "./Home.module.css";
 //actions
@@ -19,6 +20,21 @@ const Home = () => {
   const { Filters, idUser } = useSelector((state) => state);
   // const FavHotels = useSelector((state) => state.FavHotels);
   const HotelsCopi = useSelector((state) => state.HotelsCopi);
+  const [currentUser, setCurrentUser] = useState({});
+  const [state, setState] = useState(0);
+
+      const handleUserLoggedIn = (user) => {
+        setCurrentUser(user);
+        setState(2)
+      }
+      
+      const handleUserNotRegistered = (user) => {
+        navigate('/Registrar')
+      }
+      
+      const handleUserNotLoggedIn = () => {
+        navigate('/Registrar');
+      }
 
   useEffect(() => {
     dispatch(FuncionAllFavoritesHotel(idUser));
@@ -26,6 +42,15 @@ const Home = () => {
       dispatch(FuncionSelectFilter(Filters));
     }
   }, []);
+
+  if(state === 0){
+    return(
+      <AuthProvider 
+        onUserLoggedIn={handleUserLoggedIn}
+        onUserNotLoggedIn={handleUserNotLoggedIn}
+        onUserNotRegistered={handleUserNotRegistered}>
+      </AuthProvider>)
+  }
 
   return (
     <>
@@ -55,6 +80,7 @@ const Home = () => {
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
+
       </div>
     </>
   );

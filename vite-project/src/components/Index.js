@@ -8,10 +8,9 @@ import Home from "./Home/Home";
 import Loading from "./Loading/Loading";
 import Footer from "./Footer/Footer";
 import Search from "./Search/Search";
-import FormularioRegistrar from "./Formularios/FormularioRegistrar/FormularioRegistrar";
 import FormularioIngresa from "./Formularios/FormularioIngresa/FormularioIngresa";
 import Landing from "./Landing/Landing";
-import BotonAuthGoogle from "./Formularios/FormularioIngresa/BotonAuthGoogle";
+import BotonAuthGoogle from "./GoogleAuth/BotonAuthGoogle";
 import Maps from "./Map/Map";
 import FuncionServices from "./Detail/FuncionServicios";
 import NavDetail from "./Nav/NavDetail";
@@ -20,6 +19,7 @@ import NavBar from "./Nav/Nav";
 import Filter from "./Filters/Filters";
 import Clima from "./Clima/Clima";
 import Paginado from "./Paginado/Paginado";
+import FormularioRegistra from "./Formularios/FormularioRegistrar/ConGoogle";
 
 export {
   Filter,
@@ -39,8 +39,8 @@ export {
   Loading,
   Search,
   Favoritos,
-  FormularioRegistrar,
   FormularioIngresa,
   Landing,
   BotonAuthGoogle,
+  FormularioRegistra
 };
