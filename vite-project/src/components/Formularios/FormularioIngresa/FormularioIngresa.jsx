@@ -52,18 +52,12 @@ const FormularioIngresa = () => {
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           usuario
         );
-<<<<<<< HEAD
 
         console.log(response.data);
 
         GuardarLocalStorage(response.data);
         dispatch(GetUser(response.data));
 
-=======
-        console.log(response.data);
-        const idUser1 = response.data;
-        dispatch(FuncionIDUser(idUser1));
->>>>>>> 98cd87feb4d4f72746a0343a8ff13b12b23839e7
         swal({
           text: " Inicio de sesion con exito!!",
           icon: "success",
