@@ -2,6 +2,7 @@ import { auth, getUserInfo, registerNewUser, userExists } from "../../Firebase/F
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { GuardarLocalStorage } from "../Index";
 
 const AuthProvider = ({
     children, 
@@ -18,6 +19,11 @@ const AuthProvider = ({
           if(isRegistered){
             const userInfo = await getUserInfo(user.uid);
             if(userInfo.processCompleted){
+              GuardarLocalStorage({
+                id:userInfo.uid,
+                email: userInfo.correo,
+                username: userInfo.username,
+              });
               onUserLoggedIn(userInfo);
             }else{
               onUserNotRegistered(userInfo);
@@ -29,9 +35,9 @@ const AuthProvider = ({
               profilePicture: '',
               username: '',
               processCompleted: false,
+              correo: user.email,
             });
             onUserNotRegistered(user);
-            console.log(user.displayName);
           }
         } else {
             onUserNotLoggedIn();

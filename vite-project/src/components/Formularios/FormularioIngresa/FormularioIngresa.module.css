@@ -1,5 +1,12 @@
+.DivError {
+  display: flex;
+  flex-direction: column;
+}
+
 .span {
-  color: rgb(255, 0, 0);
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
 }
 
 .buton {

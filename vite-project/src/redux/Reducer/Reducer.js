@@ -5,19 +5,23 @@ import {
   TYPE_ROOM,
   SEARCH_HOTELS,
   ALL_FAVORITES_HOTELS,
-  DELETE_FAVORITE_HOTEL,
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
-  IDUSER,
+  USER,
+  GET_TROLLEY,
+  DELETE_TROLLEY,
+  DELETE_ALL_TROLLEY,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
 const InicialState = {
+  Trolley: [],
   Hotels: {},
+  User: { email: "", id: 0, rol: 0, username: "" },
   HotelsCopi: [],
   DetailHotel: {},
   FavHotels: [],
-  idUser: 0,
+  idUser: {},
   TypeRoom: [],
   Filters: {
     provinces: "",
@@ -35,7 +39,6 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         Hotels: actions.payload,
         HotelsCopi: actions.payload,
-        // Hotels: { ...state.Hotels, allHotels: actions.payload },
       };
 
     case POST_FILTERS:
@@ -76,28 +79,28 @@ export const rootReducer = (state = InicialState, actions) => {
         DetailHotel: {},
       };
 
-    case IDUSER:
+    case USER:
+      console.log(actions.payload);
       return {
         ...state,
-        idUser: actions.payload,
+        User: actions.payload,
       };
-    // case ALL_SERVICE:
-    //   return {
-    //     ...state,
-    //     Hotels: { ...state.Hotels, allHotels: actions.payload },
-    //     // Hotels: actions.payload,
-    //   };
-    // case SELECT_PROVINCE:
-    //   return {
-    //     ...state,
-    //     Hotels: actions.payload,
-    //   };
-    // case ALL_HOTELS:
-    //   return {
-    //     ...state,
-    //     Hotels: actions.payload,
-    //     HotelsCopi: actions.payload,
-    //   };
+    case GET_TROLLEY:
+      return {
+        ...state,
+        Trolley: actions.payload,
+      };
+
+    case DELETE_TROLLEY:
+      return {
+        ...state,
+        Trolley: actions.payload,
+      };
+    case DELETE_ALL_TROLLEY:
+      return {
+        ...state,
+        Trolley: actions.payload,
+      };
 
     default:
       return { ...state };

@@ -4,9 +4,12 @@
 import { NavLink } from "react-router-dom";
 import style from "./NavDetail.module.css";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import image from "../../image/carrito-de-compras.png";
 
 //?----------------- COMPONENTE NAVBAR DETAIL ------------------------------------
 const NavDetail = () => {
+  const Email = useSelector((state) => state.Email);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
 
@@ -51,19 +54,36 @@ const NavDetail = () => {
               : style.links
           }
         >
-          <NavLink
-            to={"/Favoritos"}
-            className={style.link}
-            onClick={() => setShowNavbar(false)}
-          >
-            Favoritos
-          </NavLink>
+          {Email ? (
+            <NavLink
+              to={"/Perfil"}
+              className={style.link}
+              onClick={() => setShowNavbar(false)}
+            >
+              <p>{`${Email}`}</p>
+            </NavLink>
+          ) : (
+            <NavLink
+              to={"/"}
+              className={style.link}
+              onClick={() => setShowNavbar(false)}
+            >
+              <p>Iniciar Sesion</p>
+            </NavLink>
+          )}
           <NavLink
             to={"/Home"}
             className={style.link}
             onClick={() => setShowNavbar(false)}
           >
             Home
+          </NavLink>
+          <NavLink
+            to={"/Carrito"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+          >
+            <img className={style.iconoCarrito} src={image} />
           </NavLink>
         </div>
       </div>

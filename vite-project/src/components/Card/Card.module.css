@@ -4,6 +4,7 @@
   min-width: 600px;
   margin: 10px 0 10px 40px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+  height: fit-content;
 }
 
 .title {
@@ -22,7 +23,7 @@
 }
 
 .province {
-  background-color: rgb(228, 46, 0);
+  background-color: rgba(228, 46, 0, 0.999);
   padding: 0.2em;
   border-radius: 10px;
   color: white;
@@ -42,9 +43,9 @@
 
 .imgHotel {
   width: 300px;
-  height: 200px;
   object-fit: cover;
   border-radius: 0.5rem 0 0 0.5rem;
+  height: 100%;
 }
 
 .imgContainer {
@@ -57,6 +58,8 @@
   left: 0;
   margin: 7px;
   border-radius: 50%;
+  background-color: transparent;
+  border: none;
 }
 
 .description {
@@ -71,7 +74,21 @@
   background-color: #fcb044;
 }
 
+.botonDetail {
+  background-color: rgba(228, 110, 0, 0.999);
+  padding: 0.2em;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  border: none;
+  transform: scale(0.8);
+}
+
 @media (max-width: 450px) {
-  .div {
+  .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
   }
 }

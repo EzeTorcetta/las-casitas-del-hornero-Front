@@ -1,0 +1,14 @@
+.section {
+  padding-top: 10vh;
+  min-height: 80vh;
+}
+
+.divFavorites {
+  text-align: center;
+  padding: 20px;
+}
+
+.divRewies {
+  text-align: center;
+  padding: 20px;
+}

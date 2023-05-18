@@ -18,7 +18,6 @@ const FormularioRegistra = () => {
     email: "",
     password: "",
     repetir: "",
-    admin: false,
   });
 
   const [Error, setError] = useState({
@@ -26,7 +25,6 @@ const FormularioRegistra = () => {
     email: "",
     password: "",
     repetir: "",
-    admin: false,
   });
 
   const [state, setState] = useState(0);
@@ -70,11 +68,12 @@ const FormularioRegistra = () => {
       alert("Tienes errores en los campos");
     } else {
       try {
-        const { username, password, email, admin } = usuario;
+        const { username, password, email } = usuario;
         await axios.post(
-          `https://las-casitas-del-hornero-back.up.railway.app/user`,
-          { username, password, email, admin }
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
+          { username, password, email }
         );
+
         swal({
           text: "Usuarios registrado con exito!!",
           icon: "success",
@@ -139,7 +138,7 @@ const FormularioRegistra = () => {
     });
   };
 
-  if(state === 3){
+  
     return (
       <div className="container">
         <form onSubmit={handleSubmit}>
@@ -220,14 +219,9 @@ const FormularioRegistra = () => {
         {/* <a href="$"> Olvidé mi password </a> */}
       </div>
       );
-  }
   
-    return (
-    <AuthProvider 
-    onUserLoggedIn={handleUserLoggedIn}
-onUserNotLoggedIn={handleUserNotLoggedIn}
-onUserNotRegistered={handleUserNotRegistered}>
-    </AuthProvider>)
+  
+    
 };
 
 export default FormularioRegistra;

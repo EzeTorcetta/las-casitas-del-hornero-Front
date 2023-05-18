@@ -20,6 +20,10 @@ import Filter from "./Filters/Filters";
 import Clima from "./Clima/Clima";
 import Paginado from "./Paginado/Paginado";
 import { LogOut } from "./GoogleAuth/LogOut";
+import Trolley from "./Trolley/Trolley";
+import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
+import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
+import Perfil from "./Perfil/Perfil";
 import FormularioRegistra from "./Formularios/FormularioRegistrar/ConGoogle";
 
 export {
@@ -44,5 +48,9 @@ export {
   Landing,
   BotonAuthGoogle,
   FormularioRegistra,
-  LogOut
+  LogOut,
+  Trolley,
+  Perfil,
+  GuardarLocalStorage,
+  PedirLocalStorage,
 };

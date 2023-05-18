@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import imageCarrito from "../../image/carrito-de-compras.png";
+import imagenSesion from "../../image/perfil.png";
+import imagenUsuario from "../../image/usuario (1).png";
 import style from "./Nav.module.css";
+import { PedirLocalStorage } from "../Index";
+
+
+// import "NavButon.css";
 
 //?----------------- COMPONENTE NAVBAR ------------------------------------
 const NavBar = () => {
+  // const User = useSelector((state) => state.User);
+  let User = PedirLocalStorage();
+  let { email, rol } = User;
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
 
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
-  };
-
-  const toggleNavbar = () => {
-    setShowNavbar(!showNavbar);
   };
 
   useEffect(() => {
@@ -48,13 +55,63 @@ const NavBar = () => {
               : style.links
           }
         >
-          <NavLink
-            to={"/Favoritos"}
-            className={style.link}
-            onClick={() => setShowNavbar(false)}
-          >
-            Favoritos
-          </NavLink>
+          {rol === 2 ? (
+            <NavLink
+              to={"/Proveedor"}
+              className={style.link}
+              onClick={() => setShowNavbar(false)}
+            >
+              <button className={style.button}>Proveer Hotel</button>
+            </NavLink>
+          ) : rol === 3 ? (
+            <NavLink
+              to={"/SuperAdmin"}
+              className={style.link}
+              onClick={() => setShowNavbar(false)}
+            >
+              <button className={style.button}>Administrar Usuarios</button>
+            </NavLink>
+          ) : (
+            <>
+              <NavLink
+                to={"/UserForm"}
+                className={style.link}
+                onClick={() => setShowNavbar(false)}
+              >
+                <button className={style.button}>Quiero Ser Proveedor</button>
+              </NavLink>
+
+              <NavLink
+                to={"/Carrito"}
+                className={style.link}
+                onClick={() => setShowNavbar(false)}
+              >
+                <img className={style.iconoCarrito} src={imageCarrito} />
+              </NavLink>
+            </>
+          )}
+
+          {email ? (
+            <NavLink
+              to={"/Perfil"}
+              className={style.link}
+              onClick={() => setShowNavbar(false)}
+            >
+              <img className={style.img} src={imagenUsuario} />
+              <p>{`${email}`}</p>
+            </NavLink>
+          ) : (
+            <NavLink
+              to={"/"}
+              className={style.link}
+              onClick={() => setShowNavbar(false)}
+            >
+              <button className={style.BotonUsuario}>
+                <img className={style.iconoCarrito} src={imagenSesion} />
+                <p>Iniciar Sesion</p>
+              </button>
+            </NavLink>
+          )}
           <NavLink
             to={"/Home"}
             className={style.link}
