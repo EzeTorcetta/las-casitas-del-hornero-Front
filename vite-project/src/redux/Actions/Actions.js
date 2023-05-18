@@ -5,16 +5,18 @@ import {
   TYPE_ROOM,
   SEARCH_HOTELS,
   ALL_FAVORITES_HOTELS,
-  DELETE_FAVORITE_HOTEL,
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
-  IDUSER,
   USER,
+  GET_TROLLEY,
+  DELETE_ALL_TROLLEY,
+  DELETE_TROLLEY,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
 
 //?----------------- ACTIONS ------------------------------------
+
 //* ----------------- GET ALL HOTELS ------------------------------------
 const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 export const FuncionSelectFilter = (filters) => {
@@ -120,6 +122,7 @@ export const FuncionSearch = (nameHotel) => {
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
+      console.log(idUser);
       const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
       dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
@@ -150,22 +153,6 @@ export const PostFavoriteHotel = (idUser, idHotel) => {
 };
 
 //* ----------------- DELETE FAVORITE HOTEL ------------------------------------
-export const DeleteFavoriteHotel = (idUser, idHotel) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.delete(
-        `${URL_BASE}/favorites/${idUser}/${idHotel}`
-      );
-      dispatch({ type: DELETE_FAVORITE_HOTEL, payload: response.data });
-    } catch (error) {
-      swal({
-        text: error.response.data.error,
-        icon: "warning",
-        buttons: "Aceptar",
-      });
-    }
-  };
-};
 
 //* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionDetailHotel = (id) => {
@@ -183,15 +170,100 @@ export const FuncionDetailHotel = (id) => {
   };
 };
 
+//*------------------------------TROLLEY------------------------------*//
+// trolley es ===> carrito manga de giles!!😐
+
+/*cartRouter.get("/:id_user", getCartHandler);
+cartRouter.delete("/:id_user", deleteAllCartHandler);
+cartRouter.post("/:id_user/:id_roomtype", postCartHandler);*/
+
+export const GetTrolley = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/carts/${idUser}`);
+
+      console.log(response.data);
+      dispatch({ type: GET_TROLLEY, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*-----------Delete del carrito (todo lo que hay en el carrito).
+
+export const DeleteTrolley = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`${URL_BASE}/carts/${idUser}`);
+
+      console.log(response.data);
+      dispatch({ type: DELETE_TROLLEY, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*-----------Delete del carrito (un solo carrito).
+cartRouter.delete("/:id_user/:id_roomtype", deleteCartHandler);
+
+export const DeleteAllTrolley = (idUser, idTypeRoom) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(
+        `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
+      );
+
+      console.log(response.data);
+      dispatch({ type: DELETE_ALL_TROLLEY, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*---------------------Post del Trolley.
+
+//cartRouter.post("/:id_user/:id_roomtype", postCartHandler);
+
+// export const PostTrolley = (idUser, idTypeRoom) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.delete(
+//         `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
+//       );
+
+//       console.log(response.data);
+//       dispatch({ type: POST_TROLLEY, payload: response.data });
+//     } catch (error) {
+//       swal({
+//         text: error.response.data.error,
+//         icon: "warning",
+//         buttons: "Aceptar",
+//       });
+//     }
+//   };
+// };
+
 //* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionClearDetail = () => {
   return { type: DETAIL_CLEAR_HOTEL }; // cuando se desmonte el detail , el objeto se vacia.
 };
 
 //* ----------------- ID USER ------------------------------------
-export const FuncionIDUser = (idUser) => {
-  return { type: IDUSER, payload: idUser }; // cuando se desmonte el detail , el objeto se vacia.
-};
 
 export const GetUser = (User) => {
   console.log(User);

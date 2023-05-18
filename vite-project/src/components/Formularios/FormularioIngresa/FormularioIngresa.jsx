@@ -1,12 +1,13 @@
 import "./sign-in.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { FuncionIDUser, GetUser } from "../../../redux/Actions/Actions";
+import { GetUser } from "../../../redux/Actions/Actions";
 import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BotonAuthGoogle from "./BotonAuthGoogle";
+import { GuardarLocalStorage } from "../../Index";
 import swal from "sweetalert";
 
 const FormularioIngresa = () => {
@@ -51,10 +52,12 @@ const FormularioIngresa = () => {
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           usuario
         );
+
         console.log(response.data);
-        const idUser1 = response.data.id;
-        dispatch(FuncionIDUser(idUser1));
+
+        GuardarLocalStorage(response.data);
         dispatch(GetUser(response.data));
+
         swal({
           text: " Inicio de sesion con exito!!",
           icon: "success",
@@ -86,8 +89,10 @@ const FormularioIngresa = () => {
             value={usuario.email}
             name="email"
           />
-          <span className={style.span}>{Error.email}</span>
           <label>Email</label>
+        </div>
+        <div className={style.DivError}>
+          <span className={style.span}>{Error.email}</span>
         </div>
 
         <div className="form-floating">
@@ -100,8 +105,10 @@ const FormularioIngresa = () => {
             value={usuario.password}
             name="password"
           />
-          <span className={style.span}>{Error.password}</span>
           <label>password</label>
+        </div>
+        <div className={style.DivError}>
+          <p className={style.span}>{Error.password}</p>
         </div>
 
         <button
