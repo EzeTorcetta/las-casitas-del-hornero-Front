@@ -3,7 +3,7 @@ const validacion2 = (userData, erroresx) => {
   //username:
 
   if (!userData.username.length) {
-    errores.username = "Username vacio";
+    errores.username = "Campo Requerido";
   } else if (typeof userData.username === "string") {
     errores.username = "";
   } else {
@@ -11,7 +11,7 @@ const validacion2 = (userData, erroresx) => {
   }
 
   if (!userData.email) {
-    errores.email = "Email vacio";
+    errores.email = "Campo Requerido";
   } else if (userData.email.length > 35) {
     errores.email = "El email no debe superar los 35 caracteres...";
   } else if (
@@ -24,14 +24,17 @@ const validacion2 = (userData, erroresx) => {
 
   //password:
 
-  if (userData.password.length < 6 && userData.password.length > 10) {
+  if (!userData.password.length) {
+    errores.password = "Campo Requerido";
+  } else if (userData.password.length < 6 && userData.password.length > 10) {
     errores.password = "La longitud debe ser mayor de 6 y menor a 10 ";
   } else if (
     /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(userData.password)
   ) {
     errores.password = "";
   } else {
-    errores.password = "password invalida";
+    errores.password =
+      "La password debe tener al menos una letra en Mayuscula , Minusculas y numeros.";
   }
 
   if (userData.repetir.length < 6 && userData.repetir.length > 10) {

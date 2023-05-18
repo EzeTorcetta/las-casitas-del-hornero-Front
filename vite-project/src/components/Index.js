@@ -20,7 +20,9 @@ import NavBar from "./Nav/Nav";
 import Filter from "./Filters/Filters";
 import Clima from "./Clima/Clima";
 import Paginado from "./Paginado/Paginado";
-import Carrito from "./Carrito/Carrito";
+import Trolley from "./Trolley/Trolley";
+import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
+import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
 import Perfil from "./Perfil/Perfil";
 
 export {
@@ -45,6 +47,8 @@ export {
   FormularioIngresa,
   Landing,
   BotonAuthGoogle,
-  Carrito,
+  Trolley,
   Perfil,
+  GuardarLocalStorage,
+  PedirLocalStorage,
 };

@@ -22,18 +22,20 @@ import {
   Cards,
   Loading,
   Paginado,
+  PedirLocalStorage,
 } from "../Index";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = () => {
   const dispatch = useDispatch();
   const Hotels = useSelector((state) => state.Hotels);
-  const { Filters, idUser } = useSelector((state) => state);
+  const { Filters } = useSelector((state) => state);
   // const FavHotels = useSelector((state) => state.FavHotels);
   const HotelsCopi = useSelector((state) => state.HotelsCopi);
+  let User = PedirLocalStorage();
 
   useEffect(() => {
-    dispatch(FuncionAllFavoritesHotel(idUser));
+    // dispatch(FuncionAllFavoritesHotel(User.id));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }

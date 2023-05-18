@@ -6,7 +6,7 @@ import {
   Detail,
   Landing,
   FormularioRegistrar,
-  Carrito,
+  Trolley,
   Perfil,
 } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
@@ -21,8 +21,11 @@ function App() {
         <Route path="/Detail/:id" element={<Detail />} />
         <Route path="/Registrar" element={<FormularioRegistrar />} />
         <Route path="/" element={<Landing />} />
-        <Route path="/Carrito" element={<Carrito />} />
+        <Route path="/Carrito" element={<Trolley />} />
         <Route path="/Perfil" element={<Perfil />} />
+        {/* <Route path="/UserForm" element={<FomrAdmin />} /> */}
+        {/* <Route path="/Proveedor" element={<Proveedor />} />
+        <Route path="/SuperAdmin" element={<SuperAdmin />} /> */}
       </Routes>
     </div>
   );
