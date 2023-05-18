@@ -25,15 +25,31 @@ import {
   Paginado,
   PedirLocalStorage,
 } from "../Index";
+import { useNavigate } from "react-router-dom";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = () => {
   const dispatch = useDispatch();
   const Hotels = useSelector((state) => state.Hotels);
   const { Filters } = useSelector((state) => state);
-  // const FavHotels = useSelector((state) => state.FavHotels);
   const HotelsCopi = useSelector((state) => state.HotelsCopi);
   let User = PedirLocalStorage();
+  const [currentUser, setCurrentUser] = useState({});
+  const [state, setState] = useState(0);
+  const navigate = useNavigate()
+
+      const handleUserLoggedIn = (user) => {
+        setCurrentUser(user);
+        setState(2)
+      }
+      
+      const handleUserNotRegistered = (user) => {
+        navigate('/Registrar')
+      }
+      
+      const handleUserNotLoggedIn = () => {
+        navigate('/Registrar');
+      }
 
   useEffect(() => {
     // dispatch(FuncionAllFavoritesHotel(User.id));
@@ -42,7 +58,7 @@ const Home = () => {
     }
   }, []);
 
-  if(state === 0){
+  if(state === 0 && User.id === 0){
     return(
       <AuthProvider 
         onUserLoggedIn={handleUserLoggedIn}
