@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
+import AuthProvider from "../GoogleAuth/AuthProvider";
 //css
 import style from "./Home.module.css";
 //actions
@@ -40,6 +41,15 @@ const Home = () => {
       dispatch(FuncionSelectFilter(Filters));
     }
   }, []);
+
+  if(state === 0){
+    return(
+      <AuthProvider 
+        onUserLoggedIn={handleUserLoggedIn}
+        onUserNotLoggedIn={handleUserNotLoggedIn}
+        onUserNotRegistered={handleUserNotRegistered}>
+      </AuthProvider>)
+  }
 
   return (
     <>
@@ -112,6 +122,7 @@ const Home = () => {
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
+
       </div>
     </>
   );

@@ -6,8 +6,8 @@ import validacion from "./Validations";
 import style from "./FormularioIngresa.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import BotonAuthGoogle from "./BotonAuthGoogle";
 import { GuardarLocalStorage } from "../../Index";
+import { BotonAuthGoogle } from "../../Index";
 import swal from "sweetalert";
 
 const FormularioIngresa = () => {

@@ -5,9 +5,10 @@ import {
   Favoritos,
   Detail,
   Landing,
-  FormularioRegistrar,
   Trolley,
   Perfil,
+  BotonAuthGoogle,
+  FormularioRegistra
 } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
 
@@ -19,7 +20,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         {/* <Route path="/Favoritos" element={<Favoritos />} /> */}
         <Route path="/Detail/:id" element={<Detail />} />
-        <Route path="/Registrar" element={<FormularioRegistrar />} />
+        <Route path="/Registrar" element={<FormularioRegistra />} />
         <Route path="/" element={<Landing />} />
         <Route path="/Carrito" element={<Trolley />} />
         <Route path="/Perfil" element={<Perfil />} />

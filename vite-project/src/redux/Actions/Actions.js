@@ -214,7 +214,7 @@ export const DeleteTrolley = (idUser) => {
 };
 
 //*-----------Delete del carrito (un solo carrito).
-cartRouter.delete("/:id_user/:id_roomtype", deleteCartHandler);
+// cartRouter.delete("/:id_user/:id_roomtype", deleteCartHandler);
 
 export const DeleteAllTrolley = (idUser, idTypeRoom) => {
   return async (dispatch) => {
