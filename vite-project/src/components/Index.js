@@ -23,9 +23,14 @@ import Trolley from "./Trolley/Trolley";
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
 import Perfil from "./Perfil/Perfil";
-import FormularioRegistra from "./Formularios/FormularioRegistrar/ConGoogle";
+import FormLocal from "./Formularios/FormularioRegistrar/FormLocal";
+import FormGoogle from "./Formularios/FormularioRegistrar/FormGoogle";
+
+
 
 export {
+  FormGoogle,
+  FormLocal,
   Filter,
   Clima,
   Paginado,
@@ -49,6 +54,5 @@ export {
   Trolley,
   Perfil,
   GuardarLocalStorage,
-  PedirLocalStorage,
-  FormularioRegistra
+  PedirLocalStorage
 };

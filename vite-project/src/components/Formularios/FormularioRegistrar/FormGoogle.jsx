@@ -8,7 +8,7 @@ import swal from "sweetalert";
 import AuthProvider from "../../GoogleAuth/AuthProvider";
 import { existsUsername, updateUser } from "../../../Firebase/Firebase";
 
-const FormularioRegistra = () => {
+const FormGoogle = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -91,4 +91,4 @@ onUserNotRegistered={handleUserNotRegistered}>
     </AuthProvider>)
 };
 
-export default FormularioRegistra;
+export default FormGoogle;

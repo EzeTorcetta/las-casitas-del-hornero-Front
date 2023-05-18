@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import validacion2 from "./Validation";
 import style from "./FormularioUsuario.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import AuthProvider from "../../GoogleAuth/AuthProvider";
 
-const FormularioRegistra = () => {
+const FormLocal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -130,6 +129,8 @@ const FormularioRegistra = () => {
       });
     }
 
+    
+
     setUsuario({
       username: "",
       email: "",
@@ -138,7 +139,6 @@ const FormularioRegistra = () => {
     });
   };
 
-  if(state === 3){
     return (
       <div className="container">
         <form onSubmit={handleSubmit}>
@@ -199,34 +199,20 @@ const FormularioRegistra = () => {
             />
             <span className={style.span}>{Error.repetir}</span>
             <label>Repetir password</label>
-          </div>
-  
-          <div className="checkbox">
-            <input
-              className="box"
-              type="checkbox"
-              value="remember-me"
-              indeterminate
-              onClick={onChange}
-            />
-            <label>Quiero registrar mi hotel !</label>
-          </div>
-  
+          </div>  
           <button className="w-100 btn btn-lg btn-warning" type="submit">
             Registrar
           </button>
+          <Link to="/">
+            <button type="button" className="w-100 btn btn-lg btn-warning">
+              Volver
+            </button>
+          </Link>
         </form>
         {/* <a href="$"> Olvidé mi password </a> */}
       </div>
       );
-  }
-  
-    return (
-    <AuthProvider 
-    onUserLoggedIn={handleUserLoggedIn}
-onUserNotLoggedIn={handleUserNotLoggedIn}
-onUserNotRegistered={handleUserNotRegistered}>
-    </AuthProvider>)
+    
 };
 
-export default FormularioRegistra;
+export default FormLocal;

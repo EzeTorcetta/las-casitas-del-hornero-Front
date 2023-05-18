@@ -17,7 +17,7 @@ const Landing = () => {
       </div>
       <div className={styles.container}>
         <div className={styles.btnrg}>
-          <Link to="/Registrar">
+          <Link to="/RegistroLocal">
             <button type="button" className="btn btn-warning btn-lg btn-block">
               Registrate
             </button>
