@@ -78,7 +78,7 @@ export const PostFilters = (filters) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`);
-//       console.log(response.data);
+//
 //       dispatch({ type: ALL_HOTELS, payload: response.data });
 //     } catch (error) {
 //       alert(error.response.data.error);
@@ -122,7 +122,6 @@ export const FuncionSearch = (nameHotel) => {
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      console.log(idUser);
       const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
       dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
     } catch (error) {
@@ -180,29 +179,21 @@ cartRouter.post("/:id_user/:id_roomtype", postCartHandler);*/
 export const GetTrolley = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/carts/${idUser}`);
+      const response = await axios.get(`${URL_BASE}/cart/${idUser}`);
 
-      console.log(response.data);
       dispatch({ type: GET_TROLLEY, payload: response.data });
-    } catch (error) {
-      swal({
-        text: error.response.data.error,
-        icon: "warning",
-        buttons: "Aceptar",
-      });
-    }
+    } catch (error) {}
   };
 };
 
 //*-----------Delete del carrito (todo lo que hay en el carrito).
 
-export const DeleteTrolley = (idUser) => {
+export const DeleteAllTrolley = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`${URL_BASE}/carts/${idUser}`);
+      await axios.delete(`${URL_BASE}/cart/${idUser}`);
 
-      console.log(response.data);
-      dispatch({ type: DELETE_TROLLEY, payload: response.data });
+      dispatch({ type: DELETE_ALL_TROLLEY, payload: [] });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -216,15 +207,12 @@ export const DeleteTrolley = (idUser) => {
 //*-----------Delete del carrito (un solo carrito).
 // cartRouter.delete("/:id_user/:id_roomtype", deleteCartHandler);
 
-export const DeleteAllTrolley = (idUser, idTypeRoom) => {
+export const DeleteTrolley = (idUser, idTypeRoom) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(
-        `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
-      );
+      await axios.delete(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
 
-      console.log(response.data);
-      dispatch({ type: DELETE_ALL_TROLLEY, payload: response.data });
+      dispatch({ type: DELETE_TROLLEY, payload: idTypeRoom });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -246,7 +234,7 @@ export const DeleteAllTrolley = (idUser, idTypeRoom) => {
 //         `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
 //       );
 
-//       console.log(response.data);
+//
 //       dispatch({ type: POST_TROLLEY, payload: response.data });
 //     } catch (error) {
 //       swal({
@@ -266,7 +254,6 @@ export const FuncionClearDetail = () => {
 //* ----------------- ID USER ------------------------------------
 
 export const GetUser = (User) => {
-  console.log(User);
   return {
     type: USER,
     payload: User,

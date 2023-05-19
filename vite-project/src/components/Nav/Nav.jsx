@@ -6,11 +6,10 @@ import imagenUsuario from "../../image/usuario (1).png";
 import style from "./Nav.module.css";
 import { PedirLocalStorage } from "../Index";
 
-
 // import "NavButon.css";
 
 //?----------------- COMPONENTE NAVBAR ------------------------------------
-const NavBar = () => {
+const NavBar = ({ countCarrito }) => {
   // const User = useSelector((state) => state.User);
   let User = PedirLocalStorage();
   let { email, rol } = User;
@@ -87,6 +86,7 @@ const NavBar = () => {
                 onClick={() => setShowNavbar(false)}
               >
                 <img className={style.iconoCarrito} src={imageCarrito} />
+                <div>{countCarrito}</div>
               </NavLink>
             </>
           )}

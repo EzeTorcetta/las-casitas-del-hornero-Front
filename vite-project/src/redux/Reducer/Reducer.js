@@ -42,6 +42,7 @@ export const rootReducer = (state = InicialState, actions) => {
       };
 
     case POST_FILTERS:
+      console.log(actions.payload);
       return {
         ...state,
         Filters: actions.payload,
@@ -94,7 +95,7 @@ export const rootReducer = (state = InicialState, actions) => {
     case DELETE_TROLLEY:
       return {
         ...state,
-        Trolley: actions.payload,
+        Trolley: state.Trolley.filter((tro) => tro.id !== actions.payload),
       };
     case DELETE_ALL_TROLLEY:
       return {

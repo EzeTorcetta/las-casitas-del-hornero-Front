@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
-import AuthProvider from "../GoogleAuth/AuthProvider";
+// import AuthProvider from "../GoogleAuth/AuthProvider";
 //css
 import style from "./Home.module.css";
 //actions
 import {
   FuncionSelectFilter,
   FuncionAllFavoritesHotel,
+  GetTrolley,
 } from "../../redux/Actions/Actions";
 //components
 // import Cards from "../Cards/Cards";
@@ -28,7 +29,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 //?----------------- COMPONENTE HOME ------------------------------------
-const Home = () => {
+const Home = ({ countCarrito, setCountCarrito }) => {
   const dispatch = useDispatch();
   const Hotels = useSelector((state) => state.Hotels);
   const { Filters } = useSelector((state) => state);
@@ -36,40 +37,45 @@ const Home = () => {
   let User = PedirLocalStorage();
   const [currentUser, setCurrentUser] = useState({});
   const [state, setState] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const Trolleys = useSelector((state) => state.Trolley);
 
-      const handleUserLoggedIn = (user) => {
-        setCurrentUser(user);
-        setState(2)
-      }
-      
-      const handleUserNotRegistered = (user) => {
-        navigate('/Registrar')
-      }
-      
-      const handleUserNotLoggedIn = () => {
-        navigate('/Registrar');
-      }
+  setCountCarrito((countCarrito = Trolleys.length));
+
+  const handleUserLoggedIn = (user) => {
+    setCurrentUser(user);
+    setState(2);
+  };
+
+  const handleUserNotRegistered = (user) => {
+    navigate("/Registrar");
+  };
+
+  const handleUserNotLoggedIn = () => {
+    navigate("/Registrar");
+  };
 
   useEffect(() => {
     // dispatch(FuncionAllFavoritesHotel(User.id));
+    dispatch(GetTrolley(User.id));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }
   }, []);
 
-  if(state === 0 && User.id === 0){
-    return(
-      <AuthProvider 
-        onUserLoggedIn={handleUserLoggedIn}
-        onUserNotLoggedIn={handleUserNotLoggedIn}
-        onUserNotRegistered={handleUserNotRegistered}>
-      </AuthProvider>)
-  }
+  // if (state === 0 && User.id === 0) {
+  //   return (
+  //     <AuthProvider
+  //       onUserLoggedIn={handleUserLoggedIn}
+  //       onUserNotLoggedIn={handleUserNotLoggedIn}
+  //       onUserNotRegistered={handleUserNotRegistered}
+  //     ></AuthProvider>
+  //   );
+  // }
 
   return (
     <>
-      <NavBar />
+      <NavBar countCarrito={countCarrito} />
       <div className={style.container}>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
         {/* <Search /> */}
@@ -138,7 +144,6 @@ const Home = () => {
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
-
       </div>
     </>
   );
