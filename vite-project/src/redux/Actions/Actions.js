@@ -1,6 +1,9 @@
 //?---------------------------- IMPORTS --------------------------------
 import {
   GET_ALL_HOTELS,
+  GET_ALL_PROVINCES,
+  GET_LOCALITY,
+  GET_DEPARTMENT,
   POST_FILTERS,
   TYPE_ROOM,
   SEARCH_HOTELS,
@@ -11,7 +14,8 @@ import {
   GET_TROLLEY,
   DELETE_ALL_TROLLEY,
   DELETE_TROLLEY,
-  USER_LOGOUT
+  USER_LOGOUT,
+  SERVICES,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -74,18 +78,6 @@ export const PostFilters = (filters) => {
     dispatch({ type: POST_FILTERS, payload: filters });
   };
 };
-
-// export const FuncionAllHotel = (page = 1) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`);
-//       console.log(response.data);
-//       dispatch({ type: ALL_HOTELS, payload: response.data });
-//     } catch (error) {
-//       alert(error.response.data.error);
-//     }
-//   };
-// };
 
 //* ----------------- TYPE ROOMS ------------------------------------
 export const FuncionTypeRoomTypes = (idHotel) => {
@@ -152,8 +144,6 @@ export const PostFavoriteHotel = (idUser, idHotel) => {
   };
 };
 
-//* ----------------- DELETE FAVORITE HOTEL ------------------------------------
-
 //* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionDetailHotel = (id) => {
   return async (dispatch) => {
@@ -172,10 +162,6 @@ export const FuncionDetailHotel = (id) => {
 
 //*------------------------------TROLLEY------------------------------*//
 // trolley es ===> carrito manga de giles!!😐
-
-/*cartRouter.get("/:id_user", getCartHandler);
-cartRouter.delete("/:id_user", deleteAllCartHandler);
-cartRouter.post("/:id_user/:id_roomtype", postCartHandler);*/
 
 export const GetTrolley = (idUser) => {
   return async (dispatch) => {
@@ -272,7 +258,44 @@ export const GetUser = (User) => {
   };
 };
 
+//* ----------------------- LOG OUT -----------------------------
 
 export const LogOut = () => {
   return {type: USER_LOGOUT}
-}
+};
+
+//* ----------------------- GET PROVINCES -----------------------------
+
+export const getProvinces = () => {
+  return async function (dispatch){
+      const response = await axios.get(`${URL_BASE}/locations`);
+      dispatch({ type: GET_ALL_PROVINCES, payload: response.data});
+  }
+};
+
+//* ----------------------- GET LOCALITY -----------------------------
+
+export const getLocality = (id_province) => {
+  return async function (dispatch){
+      const response = await axios.get(`${URL_BASE}/locations/${id_province}`);
+      dispatch({ type: GET_LOCALITY, payload: response.data});
+  }
+};
+
+//* ----------------------- GET DEPARTMENT -----------------------------
+
+export const getDepartment = (id_department) => {
+  return async function (dispatch){
+      const response = await axios.get(`${URL_BASE}/locations/${id_department}`);
+      dispatch({ type: GET_DEPARTMENT, payload: response.data});
+  }
+};
+
+//* ----------------------- GET SERVICES -----------------------------
+
+export const getServices = () => {
+  return async function (dispatch){
+      const response = await axios.get(`${URL_BASE}/services`);
+      dispatch({ type: SERVICES, payload: response.data});
+  }
+};

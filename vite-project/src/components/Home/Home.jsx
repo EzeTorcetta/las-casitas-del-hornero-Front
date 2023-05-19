@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
 import AuthProvider from "../GoogleAuth/AuthProvider";
+import { auth } from "../../Firebase/Firebase";
 //css
 import style from "./Home.module.css";
 //actions
@@ -37,7 +38,7 @@ const Home = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [state, setState] = useState(0);
   const navigate = useNavigate()
-
+// console.log(auth);
       const handleUserLoggedIn = (user) => {
         setCurrentUser(user);
         setState(2)

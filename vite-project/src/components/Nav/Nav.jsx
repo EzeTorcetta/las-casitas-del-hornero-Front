@@ -17,11 +17,11 @@ const NavBar = () => {
   // const User = useSelector((state) => state.User);
   const dispatch = useDispatch()
   let User = PedirLocalStorage();
-  // let { email, rol } = User;
+  // let { username, rol } = User;
 
-  let email, rol;
+  let username, rol;
   if (User) {
-    email = User.email;
+    username = User.username;
     rol = User.rol;
   }
 
@@ -107,7 +107,7 @@ const NavBar = () => {
             </>
           )}
 
-          {email ? (
+          {username ? (
             <div>
             <NavLink
               to={"/Perfil"}
@@ -115,7 +115,7 @@ const NavBar = () => {
               onClick={() => setShowNavbar(false)}
             >
               <img className={style.img} src={imagenUsuario} />
-              <p>{`${email}`}</p>
+              <p>{`${username}`}</p>
             </NavLink>
             <button onClick={() => logout()}>LogOut</button>
             </div>
@@ -137,6 +137,13 @@ const NavBar = () => {
             onClick={() => setShowNavbar(false)}
           >
             Home
+          </NavLink>
+          <NavLink
+            to={"/Logout"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+          >
+            Logout
           </NavLink>
         </div>
       </div>

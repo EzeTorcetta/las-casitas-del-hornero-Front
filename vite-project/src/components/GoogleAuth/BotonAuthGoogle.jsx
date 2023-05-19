@@ -4,15 +4,18 @@ import "./BotonGogle.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthProvider from "./AuthProvider";
+import { GuardarLocalStorage } from "../Index";
+import { useDispatch } from "react-redux";
+import { GetUser } from "../../redux/Actions/Actions";
+import axios from "axios";
 
 const BotonAuthGoogle = () => {
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // const [currentUser, setCurrentUser] = useState(null);
   
   const [state, setCurrentState] = useState(0);
-
   // useEffect(()=>{
   //   setCurrentState(1);
   //   onAuthStateChanged(auth, async (user) => {
@@ -32,14 +35,14 @@ const BotonAuthGoogle = () => {
   //   }
   // }), [navigate]});
 
-  const handleOnClick = async () => {
+  const handleOnClick = async (user) => {
+
     const googleProvider = new GoogleAuthProvider();
-    
 
     const signInWithGoogle = async (googleProvider) => {
       try {
         const res = await signInWithPopup(auth, googleProvider);
-        console.log(res);
+        console.log(res)
       } catch (error) {
         console.error(error);
       }

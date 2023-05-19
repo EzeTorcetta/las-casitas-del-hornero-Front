@@ -138,7 +138,7 @@ const FormLocal = () => {
       repetir: "",
     });
   };
-
+  
     return (
       <div className="container">
         <form onSubmit={handleSubmit}>
@@ -212,7 +212,7 @@ const FormLocal = () => {
         {/* <a href="$"> Olvidé mi password </a> */}
       </div>
       );
-    
+
 };
 
 export default FormLocal;

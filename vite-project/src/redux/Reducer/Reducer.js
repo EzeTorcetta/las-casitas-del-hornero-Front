@@ -11,7 +11,11 @@ import {
   GET_TROLLEY,
   DELETE_TROLLEY,
   DELETE_ALL_TROLLEY,
-  USER_LOGOUT
+  USER_LOGOUT,
+  GET_ALL_PROVINCES,
+  GET_LOCALITY,
+  GET_DEPARTMENT,
+  SERVICES
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -24,8 +28,14 @@ const InicialState = {
   FavHotels: [],
   idUser: {},
   TypeRoom: [],
+  Provinces: [],
+  Department: [],
+  Locality: [],
+  Services:[],
   Filters: {
     provinces: "",
+    department:"",
+    locality:"",
     services: [],
     rating: "",
     order: "",
@@ -95,7 +105,6 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         Trolley: actions.payload,
       };
-
     case DELETE_TROLLEY:
       return {
         ...state,
@@ -105,6 +114,27 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         Trolley: actions.payload,
+      };
+
+    case GET_ALL_PROVINCES:
+      return {
+        ...state,
+        Provinces: actions.payload,
+      };
+    case GET_LOCALITY:
+      return {
+        ...state,
+        Department: actions.payload,
+      };
+    case GET_DEPARTMENT:
+      return {
+        ...state,
+        Locality: actions.payload,
+      };
+    case SERVICES:
+      return {
+        ...state,
+        Services: actions.payload,
       };
 
     default:

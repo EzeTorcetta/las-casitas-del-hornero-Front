@@ -1,69 +1,51 @@
 //?---------------------------- IMPORTS --------------------------------
 // import axios from "axios";
 //react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncionSelectFilter, PostFilters } from "../../redux/Actions/Actions";
+import { FuncionSelectFilter, PostFilters, getDepartment, getProvinces, getServices } from "../../redux/Actions/Actions";
 //css
 import style from "./Filters.module.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
-  const { Filters } = useSelector((state) => state);
+  const { Filters, Provinces, Services } = useSelector((state) => state);
   const [stateFilter, setFilter] = useState(Filters);
+  const [province, setProvince] = useState('');
+  const [department, setDepartment] = useState('');
 
-  const provinces = [
-    "BUENOS AIRES",
-    "CATAMARCA",
-    "CHACO",
-    "CHUBUT",
-    "CORDOBA",
-    "CORRIENTES",
-    "ENTRE RIOS",
-    "FORMOSA",
-    "JUJUY",
-    "LA PAMPA",
-    "LA RIOJA",
-    "MENDOZA",
-    "MISIONES",
-    "NEUQUEN",
-    "RIO NEGRO",
-    "SALTA",
-    "SAN JUAN",
-    "SAN LUIS",
-    "SANTA CRUZ",
-    "SANTA FE",
-    "SANTIAGO DEL ESTERO",
-    "TIERRA DEL FUEGO",
-    "TUCUMAN",
-  ];
-
+  useEffect( ()=>{
+    dispatch(getProvinces());
+    dispatch(getServices());
+  },[dispatch])
+  
   const raiting = [1, 2, 3, 4, 5];
 
-  const services = [
-    "Desayuno gratis",
-    "Pileta",
-    "Gimnasio",
-    "Hotel frente a la playa",
-    "Wi-Fi",
-    "Estacionamiento",
-    "Aire acondicionado",
-    "Restaurante",
-    "Mascotas permitidas",
-    "Familias",
-    "Bañera de hidromasaje",
-    "Spa",
-    "Acceso silla de ruedas",
-    "Ascensor",
-  ];
-
   const onChangeProvinces = async (event) => {
+    console.log(event.target.value)
+    setProvince(event.target.value)
     setFilter({
       ...stateFilter,
       provinces: event.target.value,
     });
+    // dispatch(getDepartment(event.target.value))
   };
+
+  // const onChangeDeparment = async (event) => {
+  //   setDepartment(event.target)
+  //   setFilter({
+  //     ...stateFilter,
+  //     department: event.target.value,
+  //   });
+  // };
+
+  // const onChangeLocality = async (event) => {
+  //   setFilter({
+  //     ...stateFilter,
+  //     locality: event.target.value,
+  //   });
+  // };
 
   const onChangeRating = async (event) => {
     setFilter({ ...stateFilter, rating: event.target.value });
@@ -104,6 +86,8 @@ const Filter = () => {
     document.forms["filterForm"].reset();
     setFilter({
       provinces: "",
+      department:"",
+      locality:"",
       services: [],
       rating: "",
       order: "",
@@ -113,6 +97,8 @@ const Filter = () => {
     dispatch(
       PostFilters({
         provinces: "",
+        department:"",
+        locality:"",
         services: [],
         rating: "",
         order: "",
@@ -123,6 +109,8 @@ const Filter = () => {
     dispatch(
       FuncionSelectFilter({
         provinces: "",
+        department:"",
+        locality:"",
         services: [],
         rating: "",
         order: "",
@@ -135,12 +123,39 @@ const Filter = () => {
     <form name="filterForm" className={style.form}>
       <select onChange={onChangeProvinces} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
-        {provinces.map((pro, index) => (
-          <option value={pro} key={index}>
-            {pro}
+        {Provinces.map((pro) => (
+          <option value={pro.nombre} key={pro.id}>
+            {pro.nombre}
           </option>
         ))}
       </select>
+
+
+      {/* {province?(<>
+        <select onChange={onChangeDeparment} className={style.select}>
+        <option hidden>Filtro Por Departamento</option>
+        {Department.map((pro) => (
+          <option value={pro.nombre} key={pro.id}>
+            {pro.nombre}
+          </option>
+        ))}
+      </select>
+      </>):(<></>)}
+
+      {department?(<>
+        <select onChange={onChangeLocality} className={style.select}>
+        <option hidden>Filtro Por Localidad</option>
+        {Provinces.map((pro) => (
+          <option value={pro.nombre} key={pro.id}>
+            {pro.nombre}
+          </option>
+        ))}
+      </select>
+      </>):(<></>)} */}
+
+
+
+
       <select onChange={onChangeRating} className={style.select}>
         <option hidden>Filtro Por raiting</option>
         {raiting.map((rant, index) => (
@@ -159,16 +174,16 @@ const Filter = () => {
         <option value="RATINGASC">Menos Estrellas</option>
       </select>
       <table className={style.table}>
-        {services.map((Ser, index) => (
-          <tbody key={index}>
+        {Services.map((Ser) => (
+          <tbody key={Ser.id}>
             <tr className={style.tr}>
-              <td className={style.td}>{Ser}</td>
+              <td className={style.td}>{Ser.name}</td>
               <td className={style.td}>
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
                   <input
-                    onChange={() => onChangeServices(Ser)}
-                    value={Ser}
+                    onChange={() => onChangeServices(Ser.id)}
+                    value={Ser.name}
                     type="checkbox"
                     id="checkbox"
                   ></input>
