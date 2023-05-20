@@ -9,6 +9,7 @@ import {
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
   IDUSER,
+  NEW_REVIEW,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -190,4 +191,10 @@ export const FuncionClearDetail = () => {
 //* ----------------- ID USER ------------------------------------
 export const FuncionIDUser = (idUser) => {
   return { type: IDUSER, payload: idUser }; // cuando se desmonte el detail , el objeto se vacia.
+};
+
+export const NewReview = () => {
+  return (dispatch) => {
+    dispatch({ type: NEW_REVIEW });
+  };
 };

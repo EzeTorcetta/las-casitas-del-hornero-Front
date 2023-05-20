@@ -9,6 +9,7 @@ import {
   DETAIL_HOTEL,
   DETAIL_CLEAR_HOTEL,
   IDUSER,
+  NEW_REVIEW,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -26,6 +27,7 @@ const InicialState = {
     order: "",
     page: 1,
   },
+  Reviews: 0,
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -74,6 +76,12 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         DetailHotel: {},
+      };
+
+    case NEW_REVIEW:
+      return {
+        ...state,
+        Reviews: +1,
       };
 
     case IDUSER:
