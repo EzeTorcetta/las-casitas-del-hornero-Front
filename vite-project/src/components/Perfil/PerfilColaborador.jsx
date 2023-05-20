@@ -1,5 +1,6 @@
 import { NavBar, Footer, Favoritos, PedirLocalStorage } from "../Index";
-import style from "./Perfil.module.css";
+import PartnerHotels from "../PartnerHotels/PartnerHotels";
+import style from "./PerfilColaborador.module.css";
 const PerfilColaborador = () => {
     let User = PedirLocalStorage();
 
@@ -13,9 +14,23 @@ const PerfilColaborador = () => {
             </div>
         </section>
         <section className={style.section}>
-            <div className={style.divFavorites}>
-                <br />
+            <div className={style.divConteiner}>
                 <h1>Tus Hoteles</h1>
+                <div className={style.divHotels}>
+                    <br />
+                    <PartnerHotels/>    
+                    <button>Agregar Hoteles</button>
+                </div>
+            </div>
+        </section>
+        <section className={style.section}>
+            <div className={style.divConteiner}>
+                <h1>Reservas</h1>
+            </div>
+        </section>
+        <section className={style.section}>
+            <div className={style.divConteiner}>
+                <h1>Reviews</h1>
             </div>
         </section>
         <Footer />

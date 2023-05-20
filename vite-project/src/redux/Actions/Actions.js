@@ -16,6 +16,7 @@ import {
   DELETE_TROLLEY,
   USER_LOGOUT,
   SERVICES,
+  ALL_PARTNER_HOTELS,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -307,4 +308,22 @@ export const getServices = () => {
       const response = await axios.get(`${URL_BASE}/services`);
       dispatch({ type: SERVICES, payload: response.data});
   }
+};
+
+
+//* ----------------- ALL PARTNER HOTELS ------------------------------------
+export const FuncionAllPartnerHotel = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/hotels?id_user=${idUser}`);
+      console.log(response.data)
+      dispatch({ type: ALL_PARTNER_HOTELS, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
 };

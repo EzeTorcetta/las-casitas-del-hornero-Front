@@ -15,7 +15,8 @@ import {
   GET_ALL_PROVINCES,
   GET_LOCALITY,
   GET_DEPARTMENT,
-  SERVICES
+  SERVICES,
+  ALL_PARTNER_HOTELS
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -32,6 +33,7 @@ const InicialState = {
   Department: [],
   Locality: [],
   Services:[],
+  PartnerHotels:[],
   Filters: {
     provinces: "",
     department:"",
@@ -135,6 +137,11 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         Services: actions.payload,
+      };
+    case ALL_PARTNER_HOTELS:
+      return {
+        ...state,
+        PartnerHotels: actions.payload,
       };
 
     default:
