@@ -23,12 +23,17 @@ import { LogOut } from "./GoogleAuth/LogOut";
 import Trolley from "./Trolley/Trolley";
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
-import Perfil from "./Perfil/Perfil";
 import FormLocal from "./Formularios/FormularioRegistrar/FormLocal";
 import FormGoogle from "./Formularios/FormularioRegistrar/FormGoogle";
-
+import PerfilColaborador from "./Perfil/PerfilColaborador";
+import PerfilSuperAdmin from "./Perfil/PerfilSuperAdmin";
+import PerfilUsuario from "./Perfil/PerfilUsuario";
+import Perfil from "./Perfil/Perfil";
 
 export {
+  PerfilColaborador,
+  PerfilSuperAdmin,
+  PerfilUsuario,
   FormGoogle,
   FormLocal,
   Filter,

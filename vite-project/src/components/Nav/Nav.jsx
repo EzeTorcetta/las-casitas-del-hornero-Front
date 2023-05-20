@@ -8,6 +8,8 @@ import { Landing, PedirLocalStorage } from "../Index";
 import { LogOut } from "../../redux/Actions/Actions";
 import { useDispatch } from "react-redux";
 import ClearLocalStorage from "../LocalStorage/CleanLocalStorage";
+import { auth } from "../../Firebase/Firebase";
+import { signOut } from "firebase/auth";
 
 
 // import "NavButon.css";
@@ -46,8 +48,13 @@ const NavBar = () => {
     }
   }, [windowWidth]);
 
-  const logout = () => {
-    dispatch(LogOut());
+  const logout = async () => {
+    if(auth){
+      await signOut(auth);
+    }
+    else{
+      dispatch(LogOut());
+    }
     ClearLocalStorage();
     location.reload();
   }
@@ -117,7 +124,7 @@ const NavBar = () => {
               <img className={style.img} src={imagenUsuario} />
               <p>{`${username}`}</p>
             </NavLink>
-            <button onClick={() => logout()} className={style.link}>LogOut</button>
+            <button onClick={() => logout()} className={style.link}>Logout</button>
             </div>
           ) : (
             <NavLink
