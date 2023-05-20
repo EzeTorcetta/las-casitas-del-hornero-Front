@@ -26,7 +26,7 @@ import swal from "sweetalert";
 const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 export const FuncionSelectFilter = (filters) => {
   let URL = `${URL_BASE}/hotels`;
-  const { provinces, services, rating, order, page } = filters;
+  const { provinces, services, rating, order, page, department, locality, } = filters;
 
   URL = URL + `?page=${page}`;
   return async (dispatch) => {
@@ -35,7 +35,13 @@ export const FuncionSelectFilter = (filters) => {
         URL = URL + `&rating=${Number(rating)}`;
       }
       if (provinces.length) {
-        URL = URL + `&provinces=${encodeURIComponent(provinces)}`;
+        URL = URL + `&province=${encodeURIComponent(provinces)}`;
+      }
+      if (department.length) {
+        URL = URL + `&department=${encodeURIComponent(department)}`;
+      }
+      if (locality.length) {
+        URL = URL + `&locality=${encodeURIComponent(locality)}`;
       }
       if (order.length) {
         URL = URL + `&order=${order}`;
@@ -45,6 +51,8 @@ export const FuncionSelectFilter = (filters) => {
           (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
         );
       }
+
+      console.log(URL)
 
       const response = await axios.get(URL);
 
@@ -273,23 +281,24 @@ export const getProvinces = () => {
   }
 };
 
+//* ----------------------- GET DEPARTMENT -----------------------------
+
+export const getDepartment = (id_province) => {
+  return async function (dispatch){
+      const response = await axios.get(`${URL_BASE}/locations?id_province=${id_province}`);
+      dispatch({ type: GET_DEPARTMENT, payload: response.data});
+  }
+};
+
 //* ----------------------- GET LOCALITY -----------------------------
 
-export const getLocality = (id_province) => {
+export const getLocality = (id_departament) => {
   return async function (dispatch){
-      const response = await axios.get(`${URL_BASE}/locations/${id_province}`);
+      const response = await axios.get(`${URL_BASE}/locations?id_department=${id_departament}`);
       dispatch({ type: GET_LOCALITY, payload: response.data});
   }
 };
 
-//* ----------------------- GET DEPARTMENT -----------------------------
-
-export const getDepartment = (id_department) => {
-  return async function (dispatch){
-      const response = await axios.get(`${URL_BASE}/locations/${id_department}`);
-      dispatch({ type: GET_DEPARTMENT, payload: response.data});
-  }
-};
 
 //* ----------------------- GET SERVICES -----------------------------
 

@@ -3,49 +3,50 @@
 //react
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncionSelectFilter, PostFilters, getDepartment, getProvinces, getServices } from "../../redux/Actions/Actions";
+import { FuncionSelectFilter, PostFilters, getDepartment, getLocality, getProvinces, getServices } from "../../redux/Actions/Actions";
 //css
 import style from "./Filters.module.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
-  const { Filters, Provinces, Services } = useSelector((state) => state);
+  const { Filters, Services, Provinces, Department, Locality } = useSelector((state) => state);
   const [stateFilter, setFilter] = useState(Filters);
-  const [province, setProvince] = useState('');
-  const [department, setDepartment] = useState('');
+  const [provinceId, setProvinceId] = useState('');
+  const [departmentId, setDepartmentId] = useState('');
 
   useEffect( ()=>{
     dispatch(getProvinces());
     dispatch(getServices());
-  },[dispatch])
+    if(provinceId.length)dispatch(getDepartment(provinceId))
+    if(departmentId.length)dispatch(getLocality(departmentId))
+  },[dispatch,provinceId,departmentId])
   
   const raiting = [1, 2, 3, 4, 5];
 
+  
   const onChangeProvinces = async (event) => {
-    console.log(event.target.value)
-    setProvince(event.target.value)
     setFilter({
       ...stateFilter,
       provinces: event.target.value,
     });
-    // dispatch(getDepartment(event.target.value))
+    setProvinceId(event.target.options[event.target.selectedIndex].getAttribute('id'))
   };
 
-  // const onChangeDeparment = async (event) => {
-  //   setDepartment(event.target)
-  //   setFilter({
-  //     ...stateFilter,
-  //     department: event.target.value,
-  //   });
-  // };
+   const onChangeDeparment = async (event) => {
+    setFilter({
+      ...stateFilter,
+      department: event.target.value,
+    });
+    setDepartmentId(event.target.options[event.target.selectedIndex].getAttribute('id'))
+  };
 
-  // const onChangeLocality = async (event) => {
-  //   setFilter({
-  //     ...stateFilter,
-  //     locality: event.target.value,
-  //   });
-  // };
+  const onChangeLocality = async (event) => {
+    setFilter({
+      ...stateFilter,
+      locality: event.target.value,
+    });
+  };
 
   const onChangeRating = async (event) => {
     setFilter({ ...stateFilter, rating: event.target.value });
@@ -84,6 +85,8 @@ const Filter = () => {
   const FuncionCleanFilter = (event) => {
     event.preventDefault();
     document.forms["filterForm"].reset();
+    setProvinceId('')
+    setDepartmentId('')
     setFilter({
       provinces: "",
       department:"",
@@ -124,37 +127,33 @@ const Filter = () => {
       <select onChange={onChangeProvinces} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
         {Provinces.map((pro) => (
-          <option value={pro.nombre} key={pro.id}>
+          <option id={pro.id} value={pro.nombre} key={pro.id}>
             {pro.nombre}
           </option>
         ))}
-      </select>
+      </select> 
 
-
-      {/* {province?(<>
+      {provinceId.length?(<>
         <select onChange={onChangeDeparment} className={style.select}>
         <option hidden>Filtro Por Departamento</option>
-        {Department.map((pro) => (
-          <option value={pro.nombre} key={pro.id}>
-            {pro.nombre}
+        {Department.map((dep) => (
+          <option id={dep.id} value={dep.nombre}>
+            {dep.nombre}
           </option>
         ))}
       </select>
       </>):(<></>)}
 
-      {department?(<>
+      {departmentId.length?(<>
         <select onChange={onChangeLocality} className={style.select}>
         <option hidden>Filtro Por Localidad</option>
-        {Provinces.map((pro) => (
-          <option value={pro.nombre} key={pro.id}>
-            {pro.nombre}
+        {Locality.map((loc) => (
+          <option id={loc.id} value={loc.nombre}>
+            {loc.nombre}
           </option>
         ))}
       </select>
-      </>):(<></>)} */}
-
-
-
+      </>):(<></>)}
 
       <select onChange={onChangeRating} className={style.select}>
         <option hidden>Filtro Por raiting</option>

@@ -121,12 +121,12 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         Provinces: actions.payload,
       };
-    case GET_LOCALITY:
+    case GET_DEPARTMENT:
       return {
         ...state,
         Department: actions.payload,
       };
-    case GET_DEPARTMENT:
+    case GET_LOCALITY:
       return {
         ...state,
         Locality: actions.payload,

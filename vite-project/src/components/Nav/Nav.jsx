@@ -117,7 +117,7 @@ const NavBar = () => {
               <img className={style.img} src={imagenUsuario} />
               <p>{`${username}`}</p>
             </NavLink>
-            <button onClick={() => logout()}>LogOut</button>
+            <button onClick={() => logout()} className={style.link}>LogOut</button>
             </div>
           ) : (
             <NavLink
