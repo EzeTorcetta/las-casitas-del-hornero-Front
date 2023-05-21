@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import validacion2 from "./Validation";
-import style from "./FormularioUsuario.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import swal from "sweetalert";
-// import AuthProvider from "../../GoogleAuth/AuthProvider";
-// import { existsUsername, updateUser } from "../../../Firebase/Firebase";
+import AuthProvider from "../../GoogleAuth/AuthProvider";
+import { existsUsername, updateUser } from "../../../Firebase/Firebase";
+
+
+
 
 const FormGoogle = () => {
   const dispatch = useDispatch();

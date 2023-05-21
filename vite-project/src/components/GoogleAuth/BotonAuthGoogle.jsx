@@ -1,39 +1,17 @@
-import { auth, userExists } from "../../Firebase/Firebase";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { auth  } from "../../Firebase/Firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import "./BotonGogle.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthProvider from "./AuthProvider";
-import { GuardarLocalStorage } from "../Index";
 import { useDispatch } from "react-redux";
-import { GetUser } from "../../redux/Actions/Actions";
-import axios from "axios";
 
 const BotonAuthGoogle = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [currentUser, setCurrentUser] = useState(null);
   
   const [state, setCurrentState] = useState(0);
-  // useEffect(()=>{
-  //   setCurrentState(1);
-  //   onAuthStateChanged(auth, async (user) => {
-  //   if(user){
-  //     const isRegistered = await userExists(user.uid);
-  //     if(isRegistered){
-  //       navigate('/Home');
-  //       setCurrentState(2);
-  //     } else{
-  //       navigate('/Registrar');
-  //       setCurrentState(3);
-  //       console.log(user.displayName);
-  //     }
-  //   } else {
-  //     setCurrentState(4);
-  //     console.log("No hay nadie autenticado...")
-  //   }
-  // }), [navigate]});
 
   const handleOnClick = async (user) => {
 
@@ -55,7 +33,7 @@ const handleUserLoggedIn = (user) => {
 }
 
 const handleUserNotRegistered = (user) => {
-  navigate('/Registrar');
+  navigate('/RegistroGoogle');
 }
 
 const handleUserNotLoggedIn = () => {

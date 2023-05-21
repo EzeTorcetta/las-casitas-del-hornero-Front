@@ -48,9 +48,9 @@ const FormularioIngresa = () => {
       });
     } else {
       try {
-        const response = await axios.post(
-          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
-          usuario
+          const response = await axios.post(
+            `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
+            usuario
         );
 
         GuardarLocalStorage(response.data);
