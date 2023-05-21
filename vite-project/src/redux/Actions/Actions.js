@@ -17,6 +17,10 @@ import {
   USER_LOGOUT,
   SERVICES,
   ALL_PARTNER_HOTELS,
+  NEW_REVIEW,
+  GET_BOOKYNG,
+  GET_USERS,
+  CHANGE_ROL,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -52,9 +56,6 @@ export const FuncionSelectFilter = (filters) => {
           (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
         );
       }
-
-      console.log(URL)
-
       const response = await axios.get(URL);
 
       /*  swal({
@@ -177,7 +178,6 @@ export const GetTrolley = (idUser) => {
     try {
       const response = await axios.get(`${URL_BASE}/carts/${idUser}`);
 
-      console.log(response.data);
       dispatch({ type: GET_TROLLEY, payload: response.data });
     } catch (error) {
       swal({
@@ -195,8 +195,6 @@ export const DeleteTrolley = (idUser) => {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`${URL_BASE}/carts/${idUser}`);
-
-      console.log(response.data);
       dispatch({ type: DELETE_TROLLEY, payload: response.data });
     } catch (error) {
       swal({
@@ -217,8 +215,6 @@ export const DeleteAllTrolley = (idUser, idTypeRoom) => {
       const response = await axios.delete(
         `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
       );
-
-      console.log(response.data);
       dispatch({ type: DELETE_ALL_TROLLEY, payload: response.data });
     } catch (error) {
       swal({
@@ -316,7 +312,6 @@ export const FuncionAllPartnerHotel = (idUser) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${URL_BASE}/hotels?id_user=${idUser}`);
-      console.log(response.data)
       dispatch({ type: ALL_PARTNER_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -327,3 +322,36 @@ export const FuncionAllPartnerHotel = (idUser) => {
     }
   };
 };
+
+//* ----------------- ALL NEW REVIEW ------------------------------------
+export const NewReview = () => {
+  return (dispatch) => {
+    dispatch({ type: NEW_REVIEW });
+  };
+};
+
+//* ----------------- GET BOOKYNG ------------------------------------
+export const getBooking = (id, rol) => {
+  return async function (dispatch){
+    const response = await axios.get(`${URL_BASE}/booking?id_user=${id}&rol=${rol}`);
+    dispatch({ type: GET_BOOKYNG, payload: response.data});
+}
+};
+
+
+//* ----------------- GET USERS ------------------------------------
+export const getUsers = (id) => {
+  return async function (dispatch){
+    const response = await axios.get(`${URL_BASE}/user/${id}`);
+    dispatch({ type: GET_USERS, payload: response.data});
+  }
+};
+
+//* ----------------- CHANGE ROL ------------------------------------
+export const changeRol = (data) => {
+  return async function (dispatch){
+    const response = await axios.put(`${URL_BASE}/user`,data);
+    dispatch({ type: CHANGE_ROL, payload: response.data});
+}
+};
+

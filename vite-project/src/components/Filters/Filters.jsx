@@ -181,7 +181,7 @@ const Filter = () => {
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
                   <input
-                    onChange={() => onChangeServices(Ser.id)}
+                    onChange={() => onChangeServices(Ser.name)}
                     value={Ser.name}
                     type="checkbox"
                     id="checkbox"

@@ -29,8 +29,18 @@ import PerfilColaborador from "./Perfil/PerfilColaborador";
 import PerfilSuperAdmin from "./Perfil/PerfilSuperAdmin";
 import PerfilUsuario from "./Perfil/PerfilUsuario";
 import Perfil from "./Perfil/Perfil";
+import ClearLocalStorage from "./LocalStorage/CleanLocalStorage";
+import ReviewPartner from "./ReviewPartner/ReviewPartner";
+import Booking from "./Booking/Booking";
+import GetUsers from "./GetUsers/GetUser";
+
+
 
 export {
+  GetUsers,
+  Booking,
+  ReviewPartner,
+  ClearLocalStorage,
   PerfilColaborador,
   PerfilSuperAdmin,
   PerfilUsuario,

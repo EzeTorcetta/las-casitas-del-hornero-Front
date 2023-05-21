@@ -1,13 +1,22 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import style from "./Reviews.module.css";
+import axios from "axios";
+import { NewReview } from "../../redux/Actions/Actions";
+import { PedirLocalStorage } from "../Index";
+import { FuncionDetailHotel } from "../../redux/Actions/Actions";
+
 
 export default function Reviews() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [rating, setRating] = useState(0);
+  const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.idUser.username);
+  let User = PedirLocalStorage();
+  const Hotel = useSelector((state) => state.DetailHotel);
+
+  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -23,8 +32,26 @@ export default function Reviews() {
     setComments([...comments, newCommentObject]);
     setNewComment("");
     setRating(0);
+    const datos = {
+      username: User.username,
+      review: newCommentObject.comment,
+      punctuation: newCommentObject.rating,
+    };
+
+    axios
+      .post(`${URL_BASE}/review/${Hotel.id}`, datos)
+      .then(function (response) {
+        console.log("La solicitud POST se realizó correctamente");
+      })
+      .catch(function (error) {
+        console.error("Error al realizar la solicitud POST", error);
+      });
+    dispatch(NewReview());
+    dispatch(FuncionDetailHotel(Hotel.id))
   };
 
+  console.log(Hotel);
+  
   return (
     <div className={style.container}>
       <h2>Reviews:</h2>
@@ -46,16 +73,16 @@ export default function Reviews() {
         <button type="submit">Enviar</button>
       </form>
       <div className={style.comment}>
-        {comments.map((commentObject, index) => (
+        {Hotel.Reviews?.map((review, index) => (
           <div className={style.caja} key={index}>
             <img
               src="https://www.softzone.es/app/uploads-softzone.es/2018/04/guest.png"
               alt=""
             />
             <div className={style.commentText}>
-              <h3>{user}:</h3>
-              <p>{commentObject.comment}</p>
-              <span>{commentObject.rating}⭐</span>
+              <h3>{review.username}:</h3>
+              <p>{review.review}</p>
+              <span>{review.punctuation}⭐</span>
             </div>
           </div>
         ))}

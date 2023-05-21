@@ -9,6 +9,7 @@ import style from "./Card.module.css";
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
+
 //?----------------- COMPONENTE CARD ------------------------------------
 function Cards({ id, name, image, province, rating, description, valoration }) {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
     <div className={style.container}>
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
-        {isFav ? (
+        {!User || User?.rol === 1?isFav ? (
           <button
             onClick={() => handleFavorite(User?.id, id)}
             className={style.button}
@@ -58,7 +59,7 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
           >
             🤍
           </button>
-        )}
+        ):(<></>)}
       </div>
       <div className={style.title}>
         <h4 className={style.name}>{name}</h4>

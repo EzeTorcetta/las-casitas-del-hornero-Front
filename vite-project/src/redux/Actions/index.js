@@ -15,3 +15,8 @@ export const GET_LOCALITY = "GET_LOCALITY";
 export const GET_DEPARTMENT = "GET_DEPARTMENT";
 export const SERVICES = "SERVICES";
 export const ALL_PARTNER_HOTELS = "ALL_PARTNER_HOTELS";
+export const NEW_REVIEW = "NEW_REVIEW";
+export const GET_BOOKYNG = "GET_BOOKYNG";
+export const GET_USERS = "GET_USERS";
+export const CHANGE_ROL = "CHANGE_ROL";
+

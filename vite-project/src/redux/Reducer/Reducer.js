@@ -16,7 +16,11 @@ import {
   GET_LOCALITY,
   GET_DEPARTMENT,
   SERVICES,
-  ALL_PARTNER_HOTELS
+  ALL_PARTNER_HOTELS,
+  NEW_REVIEW,
+  GET_BOOKYNG,
+  GET_USERS,
+  CHANGE_ROL
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -34,6 +38,8 @@ const InicialState = {
   Locality: [],
   Services:[],
   PartnerHotels:[],
+  Booking:[],
+  Users:[],
   Filters: {
     provinces: "",
     department:"",
@@ -43,6 +49,7 @@ const InicialState = {
     order: "",
     page: 1,
   },
+  Reviews: 0,
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -53,21 +60,16 @@ export const rootReducer = (state = InicialState, actions) => {
         Hotels: actions.payload,
         HotelsCopi: actions.payload,
       };
-
     case POST_FILTERS:
       return {
         ...state,
         Filters: actions.payload,
       };
-
     case TYPE_ROOM:
       return {
         ...state,
         TypeRoom: actions.payload,
       };
-
-    //
-
     case SEARCH_HOTELS:
       return {
         ...state,
@@ -85,13 +87,16 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         DetailHotel: actions.payload,
       };
-
     case DETAIL_CLEAR_HOTEL:
       return {
         ...state,
         DetailHotel: {},
       };
-
+    case NEW_REVIEW:
+      return {
+        ...state,
+        Reviews: +1,
+      };
     case USER:
       return {
         ...state,
@@ -142,6 +147,20 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         PartnerHotels: actions.payload,
+      };
+    case GET_BOOKYNG:
+      return {
+        ...state,
+        Booking: actions.payload,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        Users: actions.payload,
+      };
+    case CHANGE_ROL:
+      return {
+        ...state,
       };
 
     default:

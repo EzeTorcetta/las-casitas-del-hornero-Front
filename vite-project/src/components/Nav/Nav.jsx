@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
 import imagenSesion from "../../image/perfil.png";
 import imagenUsuario from "../../image/usuario (1).png";
-import style from "./Nav.module.css";
-import { Landing, PedirLocalStorage } from "../Index";
+import { PedirLocalStorage, ClearLocalStorage } from "../Index";
 import { LogOut } from "../../redux/Actions/Actions";
-import { useDispatch } from "react-redux";
-import ClearLocalStorage from "../LocalStorage/CleanLocalStorage";
 import { auth } from "../../Firebase/Firebase";
 import { signOut } from "firebase/auth";
-
-
-// import "NavButon.css";
+import style from "./Nav.module.css";
 
 //?----------------- COMPONENTE NAVBAR ------------------------------------
 const NavBar = () => {
