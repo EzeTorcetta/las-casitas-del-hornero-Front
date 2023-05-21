@@ -89,6 +89,7 @@ const FormularioIngresa = () => {
               value={usuario.email}
               name="email"
             />
+            <span className={style.span}>{Error.email}</span>
             <input
               type="password"
               className="form-control"
@@ -98,8 +99,10 @@ const FormularioIngresa = () => {
               value={usuario.password}
               name="password"
             />
-
-            <div className={style.divErrores}>
+            <div className={style.DivSpanPassword}>
+              <span className={style.span}>{Error.password}</span>
+            </div>
+            {/* <div className={style.divErrores}>
               <div className={style.divErrorPassword}>
                 <h4 className={style.label}>--Error de la password:</h4>
                 <p className={style.span}>
@@ -115,13 +118,15 @@ const FormularioIngresa = () => {
                   {!Error.email ? "No hay errores en este campo." : Error.email}
                 </p>
               </div>
-            </div>
+            </div> */}
 
             <button className={style.buton} type="submit">
               Ingresar
             </button>
           </form>
-          <BotonAuthGoogle />
+          <div className={style.butonGoogleDiv}>
+            <BotonAuthGoogle />
+          </div>
         </div>
       </div>
     </>

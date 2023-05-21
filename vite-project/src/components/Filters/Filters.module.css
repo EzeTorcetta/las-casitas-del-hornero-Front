@@ -7,10 +7,6 @@
   margin-top: 3px;
 }
 
-.input {
-  background-color: #f7931e;
-}
-
 .select {
   appearance: none;
   cursor: pointer;
@@ -56,7 +52,7 @@
   user-select: none;
 }
 
-.checkbox_btn input {
+.checkbox_btn .inputServices {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -78,7 +74,7 @@
   border: 1.6px solid black;
   transition: 0.2s linear;
 }
-.checkbox_btn input:checked ~ .checkmark {
+.checkbox_btn .inputServices:checked ~ .checkmark {
   background-color: transparent;
 }
 
@@ -98,14 +94,14 @@
   transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
 }
 
-.checkbox_btn input:checked ~ .checkmark:after {
+.checkbox_btn .inputServices:checked ~ .checkmark:after {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, -50%) rotate(0deg) scale(1);
   animation: pulse 1s ease-in;
 }
 
-.checkbox_btn input:checked ~ .checkmark {
+.checkbox_btn .inputServices:checked ~ .checkmark {
   transform: rotate(45deg);
   border: none;
 }
@@ -118,4 +114,10 @@
   50% {
     transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
   }
+}
+
+.inputSearch {
+  max-width: 238px;
+  background-color: rgb(255, 218, 173);
+  margin: 10px;
 }
