@@ -15,7 +15,7 @@ import style from "./Nav.module.css";
 //?----------------- COMPONENTE NAVBAR ------------------------------------
 const NavBar = ({ countCarrito }) => {
   // const User = useSelector((state) => state.User);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let User = PedirLocalStorage();
   // let { username, rol } = User;
 
@@ -27,7 +27,21 @@ const NavBar = ({ countCarrito }) => {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
+  const handleLogout = () => {
+    // Lógica para realizar el logout
+    // ...
+  };
+
+  const handleVerPerfil = () => {
+    // Lógica para ver el perfil
+    // ...
+  };
+  const handleChangeTipoCuenta = () => {
+    // Lógica para cambiar el tipo de cuenta
+    // ...
+  };
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
   };
@@ -47,15 +61,14 @@ const NavBar = ({ countCarrito }) => {
   }, [windowWidth]);
 
   const logout = async () => {
-    if(auth){
+    if (auth) {
       await signOut(auth);
-    }
-    else{
+    } else {
       dispatch(LogOut());
     }
     ClearLocalStorage();
     location.reload();
-  }
+  };
 
   return (
     <>
@@ -95,14 +108,6 @@ const NavBar = ({ countCarrito }) => {
           ) : (
             <>
               <NavLink
-                to={"/UserForm"}
-                className={style.link}
-                onClick={() => setShowNavbar(false)}
-              >
-                <button className={style.button}>Quiero Ser Proveedor</button>
-              </NavLink>
-
-              <NavLink
                 to={"/Carrito"}
                 className={style.link}
                 onClick={() => setShowNavbar(false)}
@@ -115,17 +120,50 @@ const NavBar = ({ countCarrito }) => {
             </>
           )}
 
+          <NavLink
+            to={"/Home"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+          >
+            <div className={style.divHome}>
+              <div className={style.divHome1}>Home</div>
+            </div>
+          </NavLink>
+
           {username ? (
-            <div>
-            <NavLink
-              to={"/Perfil"}
-              className={style.link}
-              onClick={() => setShowNavbar(false)}
-            >
-              <img className={style.img} src={imagenUsuario} />
-              <p>{`${username}`}</p>
-            </NavLink>
-            <button onClick={() => logout()} className={style.link}>Logout</button>
+            <div className={style.perfil}>
+              <button
+                onClick={() => setShowMenu(!showMenu)}
+                className={style.profileButton}
+              >
+                <img className={style.img} src={imagenUsuario} alt="Perfil" />
+                <span className={style.NombreUsuario}>{username}</span>
+              </button>
+              {showMenu && (
+                <ul className={style.menu}>
+                  <li>
+                    <button onClick={handleLogout} className={style.menuOption}>
+                      Logout
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleVerPerfil}
+                      className={style.menuOption}
+                    >
+                      Ver Perfil
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleChangeTipoCuenta}
+                      className={style.menuOption}
+                    >
+                      Quiero ser proveedor
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           ) : (
             <NavLink
@@ -139,15 +177,6 @@ const NavBar = ({ countCarrito }) => {
               </button>
             </NavLink>
           )}
-          <NavLink
-            to={"/Home"}
-            className={style.link}
-            onClick={() => setShowNavbar(false)}
-          >
-            <div className={style.divHome}>
-              <div className={style.divHome1}>Home</div>
-            </div>
-          </NavLink>
         </div>
       </div>
     </>

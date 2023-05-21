@@ -22,19 +22,12 @@
   border-radius: 30px;
 }
 
-.p {
-  font-size: 18px;
-  font-weight: bold;
-}
-
 .menuButton {
   position: absolute;
   top: 50%;
-  right: -20px;
-  transform: translateY(-50%);
   background: none;
   border: none;
-  cursor: pointer;
+
   font-size: 18px;
 }
 
@@ -78,6 +71,7 @@
 .iconoCarrito {
   width: 30px;
   height: 25px;
+  margin-top: 10px;
 }
 
 .iconoUsuario {
@@ -96,15 +90,11 @@
   text-align: center;
   height: 30px;
   border: none;
-  font-size: 20px;
+  font-size: 10px;
   color: rgb(0, 0, 0);
   -webkit-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
-}
-
-p {
-  margin: 10px;
 }
 
 .button {
@@ -144,21 +134,73 @@ p {
   width: 30px;
   height: 25px;
   text-align: center;
+  margin-top: 10px;
 }
 .divCarritoCount {
   margin: 20px;
   display: flex;
   justify-content: start;
+  margin-top: 30px;
 }
 
 .divHome {
   display: flex;
   width: 80px;
   height: 80px;
+  margin-top: 15px;
 }
 
 .divHome1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.perfil {
+  margin-top: 30px;
+  font-size: 11px;
+  position: relative;
+}
+
+.profileButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.menuOption {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+/* Estilos adicionales según tu necesidad */
+
+.menuOption:hover {
+  background-color: #94949446;
+  border-radius: 15px;
+}
+
+.menuOption:focus {
+  outline: none;
+}
+
+.menuOption:last-child {
+  margin-bottom: 0;
 }
