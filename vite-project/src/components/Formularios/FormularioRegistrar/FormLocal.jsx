@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import validacion2 from "./Validation";
 import style from "./FormularioUsuario.module.css";
+import "./FormularioLocal.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
@@ -57,14 +58,22 @@ const FormLocal = () => {
       !usuario.password.length ||
       !usuario.repetir.length
     ) {
-      alert("Debes completar los campos");
+      swal({
+        text: "Debes completar los campos",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     } else if (
       Error.username.length > 0 ||
       Error.email.length > 0 ||
       Error.password.length > 0 ||
       Error.repetir.length > 0
     ) {
-      alert("Tienes errores en los campos");
+      swal({
+        text: "Tienes Errores en los campos",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     } else {
       try {
         const { username, password, email } = usuario;
@@ -129,8 +138,6 @@ const FormLocal = () => {
       });
     }
 
-    
-
     setUsuario({
       username: "",
       email: "",
@@ -138,69 +145,75 @@ const FormLocal = () => {
       repetir: "",
     });
   };
-  
-    return (
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <h1 className="h3 mb-3 fw-normal">Bienvenido {currentUser.displayName}</h1>
-          <p>Para terminar el proceso, elige un nombre de usuario</p>
-  
-          <div className="form-floating">
+
+  return (
+    <div className="DivContenedorPadre">
+      <div className="form-container">
+        <div className="DivDeBienvenido">
+          <h1 className="h3 mb-3 fw-normal">
+            Bienvenido {currentUser.displayName}
+          </h1>
+        </div>
+        <form className="form" onSubmit={handleSubmit}>
+          {/*--------------------------------UserName----------------------------------*/}
+          <div className="input-group">
+            <label for="username">Username</label>
             <input
               type="text"
-              className="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
+              name="username"
+              id="username"
+              placeholder=""
               onChange={handleChange}
               value={usuario.username}
-              name="username"
             />
-            <span className={style.span}>{Error.username}</span>
-            <label>Username</label>
           </div>
-  
-          <div className="form-floating">
+          <span className={style.span}>{Error.username}</span>
+
+          {/*--------------------------------Emial----------------------------------*/}
+
+          <div className="input-group">
+            <label for="email">email</label>
             <input
               type="email"
-              className="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
+              name="email"
+              id="email"
+              placeholder=""
               onChange={handleChange}
               value={usuario.email}
-              name="email"
             />
-            <span className={style.span}>{Error.email}</span>
-            <label>Email</label>
           </div>
-  
-          <div className="form-floating">
+          <span className={style.span}>{Error.email}</span>
+
+          {/*--------------------------------Password----------------------------------*/}
+
+          <div className="input-group">
+            <label for="password">Password</label>
             <input
               type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password"
+              name="password"
+              id="password"
+              placeholder=""
               onChange={handleChange}
               value={usuario.password}
-              name="password"
             />
-            <span className={style.span}>{Error.password}</span>
-            <label>password</label>
           </div>
-  
-          <div className="form-floating">
+          <span className={style.span}>{Error.password}</span>
+
+          {/*--------------------------------Password----------------------------------*/}
+
+          <div className="input-group">
+            <label for="Repetirpassword">Repetir Password</label>
             <input
               type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Password"
+              name="repetir"
+              id="repetir"
+              placeholder=""
               onChange={handleChange}
               value={usuario.repetir}
-              name="repetir"
             />
-            <span className={style.span}>{Error.repetir}</span>
-            <label>Repetir password</label>
-          </div>  
-          <button className="w-100 btn btn-lg btn-warning" type="submit">
+          </div>
+          <span className={style.span}>{Error.repetir}</span>
+          <button className="sign" type="submit">
             Registrar
           </button>
           <Link to="/">
@@ -209,10 +222,10 @@ const FormLocal = () => {
             </button>
           </Link>
         </form>
-        {/* <a href="$"> Olvidé mi password </a> */}
+        <div></div>
       </div>
-      );
-
+    </div>
+  );
 };
 
 export default FormLocal;

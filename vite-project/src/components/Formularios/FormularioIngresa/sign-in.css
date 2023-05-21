@@ -30,6 +30,7 @@
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 7px 7px 10px 3px #3e291028;
+  padding: 25px;
 }
 
 .form {

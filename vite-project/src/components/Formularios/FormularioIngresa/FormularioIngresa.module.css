@@ -39,3 +39,16 @@
 .buton:hover {
   background-color: #ffca2c;
 }
+
+.butonGoogleDiv {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.DivSpanPassword {
+  max-width: 200px;
+  flex-wrap: wrap;
+  font-size: 16px;
+  font-weight: 1000px;
+}
