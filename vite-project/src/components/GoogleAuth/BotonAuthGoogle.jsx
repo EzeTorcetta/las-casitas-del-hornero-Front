@@ -20,7 +20,7 @@ const BotonAuthGoogle = () => {
     const signInWithGoogle = async (googleProvider) => {
       try {
         const res = await signInWithPopup(auth, googleProvider);
-        console.log(res)
+        console.log(res.user.stsTokenManager)
       } catch (error) {
         console.error(error);
       }

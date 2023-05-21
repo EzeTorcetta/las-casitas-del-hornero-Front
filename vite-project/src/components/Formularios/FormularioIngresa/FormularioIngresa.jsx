@@ -74,10 +74,10 @@ const FormularioIngresa = () => {
 
   return (
     <>
-      <div class="main">
+      <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
-        <div class="login">
-          <form onSubmit={handleSubmit} class="form">
+        <div className="login">
+          <form onSubmit={handleSubmit} className="form">
             <h1 className="h3 mb-3 fw-normal">Ingresa</h1>
 
             <input
@@ -102,24 +102,6 @@ const FormularioIngresa = () => {
             <div className={style.DivSpanPassword}>
               <span className={style.span}>{Error.password}</span>
             </div>
-            {/* <div className={style.divErrores}>
-              <div className={style.divErrorPassword}>
-                <h4 className={style.label}>--Error de la password:</h4>
-                <p className={style.span}>
-                  {!Error.password
-                    ? "No hay errores en este campo."
-                    : Error.password}
-                </p>
-              </div>
-
-              <div className={style.divErrorEmail}>
-                <h4 className={style.label}>--Error del Email:</h4>
-                <p className={style.span}>
-                  {!Error.email ? "No hay errores en este campo." : Error.email}
-                </p>
-              </div>
-            </div> */}
-
             <button className={style.buton} type="submit">
               Ingresar
             </button>
