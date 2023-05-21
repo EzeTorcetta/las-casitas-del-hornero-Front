@@ -50,7 +50,15 @@ function App() {
             />
           }
         />
-        <Route path="/Perfil" element={<Perfil />} />
+        <Route
+          path="/Perfil"
+          element={
+            <Perfil
+              countCarrito={countCarrito}
+              setCountCarrito={setCountCarrito}
+            />
+          }
+        />
         {/* <Route path="/UserForm" element={<FomrAdmin />} /> */}
         {/* <Route path="/Proveedor" element={<Proveedor />} />
         <Route path="/SuperAdmin" element={<SuperAdmin />} /> */}

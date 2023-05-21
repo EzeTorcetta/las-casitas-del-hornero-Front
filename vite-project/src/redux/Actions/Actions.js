@@ -11,6 +11,8 @@ import {
   GET_TROLLEY,
   DELETE_ALL_TROLLEY,
   DELETE_TROLLEY,
+  UP_DATE_TROLLEY,
+  PUT_AMOUNT_TROLLEY,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -151,8 +153,6 @@ export const PostFavoriteHotel = (idUser, idHotel) => {
   };
 };
 
-//* ----------------- DELETE FAVORITE HOTEL ------------------------------------
-
 //* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionDetailHotel = (id) => {
   return async (dispatch) => {
@@ -182,7 +182,13 @@ export const GetTrolley = (idUser) => {
       const response = await axios.get(`${URL_BASE}/cart/${idUser}`);
 
       dispatch({ type: GET_TROLLEY, payload: response.data });
-    } catch (error) {}
+    } catch (error) {
+      // swal({
+      //   text: error.response.data.error,
+      //   icon: "warning",
+      //   buttons: "Aceptar",
+      // });
+    }
   };
 };
 
@@ -223,29 +229,32 @@ export const DeleteTrolley = (idUser, idTypeRoom) => {
   };
 };
 
+export const putAmountTrolley = (value, idUser, id_Roomtype) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `${URL_BASE}/cart/${idUser}/${id_Roomtype}?putAmount=${value}`
+      );
+      dispatch({
+        type: PUT_AMOUNT_TROLLEY,
+        payload: { id: id_Roomtype, amount: response.data },
+      });
+      console.log(response.data);
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
 //*---------------------Post del Trolley.
 
-//cartRouter.post("/:id_user/:id_roomtype", postCartHandler);
-
-// export const PostTrolley = (idUser, idTypeRoom) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.delete(
-//         `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
-//       );
-
-//
-//       dispatch({ type: POST_TROLLEY, payload: response.data });
-//     } catch (error) {
-//       swal({
-//         text: error.response.data.error,
-//         icon: "warning",
-//         buttons: "Aceptar",
-//       });
-//     }
-//   };
-// };
-
+export const UpdateTrolley = (ArrayNuevoTrolley) => {
+  return { type: UP_DATE_TROLLEY, payload: ArrayNuevoTrolley };
+};
 //* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionClearDetail = () => {
   return { type: DETAIL_CLEAR_HOTEL }; // cuando se desmonte el detail , el objeto se vacia.

@@ -7,43 +7,54 @@ import {
   GetTrolley,
   DeleteAllTrolley,
   DeleteTrolley,
+  putAmountTrolley,
 } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
 import Card from "react-bootstrap/Card";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 
-const Trolley = ({ setCountCarrito, countCarrito }) => {
+const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const dispatch = useDispatch();
-  const [ArrayDeCarrito, setArrayDeCarrito] = useState([]);
-  const [ObjetoDeCarrito, setObjetoDeCarrito] = useState({});
   const User = PedirLocalStorage();
-  const Trolleys = useSelector((state) => state.Trolley);
-  const ArrayDeTrolley = Trolleys.map((tro) => {
+  const Trolley = useSelector((state) => state.Trolley);
+  const ObjetoTrolley = useSelector((state) => state.ObjetoTrolley);
+  const [isLoading, setIsLoading] = useState(true);
+  const [TotalPrecio, setTotalPrecio] = useState([]);
+
+  // const [ObjetoCount, setObjetoCount] = useState({});
+
+  const ArrayCarritoModificado = Trolley.map((tro) => {
+    // setObjetoCount({ id: tro.id, count: tro.amount });
     return { id: tro.id, amount: tro.amount };
   });
-  const [ObjetoDeRoomType, setObjetoDeRoomType] = useState(ArrayDeTrolley);
+  const totalPrecio = Trolley.reduce((total, { price, amount }) => {
+    return total + Math.ceil(price * amount);
+  }, 0); // destructuro  { price, amount } de cada objeto del array.
+  // const [ArrayCount, setArrayCount] = useState(ArrayCarritoModificado);
   //contador de cada uno
   //*---------------------------------contador de cafa tipo de habitacion:
 
-  setCountCarrito((countCarrito = Trolleys.length));
+  setCountCarrito(Trolley.length);
 
   useEffect(() => {
-    dispatch(GetTrolley(User.id));
-  }, [Trolley]);
+    if (isLoading) {
+      dispatch(GetTrolley(User.id));
+      setIsLoading(false);
+    }
+  }, [ObjetoTrolley, Trolley]);
 
   const FuncionReservar = async (idUser) => {
     try {
-      const response = await axios.put(
-        `${URL_BASE}/booking/${idUser}` /*array de objetos*/
-      );
+      await axios.put(`${URL_BASE}/booking/${idUser}`, ArrayCarritoModificado);
 
       swal({
         text: "Habitacion/es reservadas con exito!!!",
-        icon: "saccess",
+        icon: "success",
         buttons: "Aceptar",
       });
+      dispatch(DeleteAllTrolley(idUser));
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -53,44 +64,28 @@ const Trolley = ({ setCountCarrito, countCarrito }) => {
     }
   };
 
-  //*---------------------Funcion de Botones para contador Individual:
+  //*---------------------modificacion del contador:
 
-  //*---------------------Funcion de Botones para contador Familiar:
+  const FuncionCount = (value, idUser, id_Rommtype) => {
+    dispatch(putAmountTrolley(value, idUser, id_Rommtype));
+    dispatch(GetTrolley(User.id));
+    //dispatch(UpdateTrolley(updatedTrolley)); // Actualiza el estado del carrito con el nuevo arreglo
 
-  //*---------------------Funcion de Botones para contador Suite:
+    if (ObjetoTrolley.amount) {
+      const objeto = Trolley.find((tro) => tro.id === id_Rommtype);
+
+      const PrecioBase = objeto.price;
+
+      const newAmount =
+        value === "up" ? ObjetoTrolley.amount + 1 : ObjetoTrolley.amount - 1;
+      const newPrice = PrecioBase * newAmount;
+      console.log(newPrice);
+
+      console.log(TotalPrecio);
+    }
+  };
 
   //*---------------------------------------------------------
-
-  const FuncionCount = async (value, idUser, id_Rommtype) => {
-    // response =  put  `${URL_BASE}/cart/${idUser}/${id_Rommtype}?putAmount=${up - down}
-
-    try {
-      const response = await axios.put(
-        `${URL_BASE}/cart/${idUser}/${id_Rommtype}?putAmount=${value}`
-      );
-
-      const objeto = (ObjetoDeRoomType.find(
-        (tro) => tro.id === id_Rommtype
-      ).amount = response.data);
-
-      // console.log(objetoFiltrado);
-
-      // const Objeto = { ...objetoFiltrado, amount: response.data };
-
-      // setObjetoDeCarrito(Objeto);
-
-      setObjetoDeRoomType([...ObjetoDeRoomType, objeto]);
-
-      console.log(response.data);
-      // setCount(response.data);
-    } catch (error) {
-      swal({
-        text: error.response.data.error,
-        icon: "warning",
-        buttons: "Aceptar",
-      });
-    }
-  };
 
   const FuncionDeleteCarrito = (idUser, idTypeRoom) => {
     setCountCarrito(countCarrito - 1);
@@ -120,7 +115,7 @@ const Trolley = ({ setCountCarrito, countCarrito }) => {
         </button>
       </div>
       <section className={style.section}>
-        {Trolleys?.map(({ id, name, image, price, stock, people, amount }) => (
+        {Trolley?.map(({ id, name, image, price, stock, people, amount }) => (
           <div className={style.CardCarrito} key={id}>
             <Card style={{ width: "18rem", margin: "10px" }}>
               <Card.Body>
@@ -131,7 +126,10 @@ const Trolley = ({ setCountCarrito, countCarrito }) => {
                   X
                 </button>
                 <Card.Title>{name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{`$  ${price}`}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">
+                  Precio:
+                  {`$  ${price}`}
+                </Card.Subtitle>
                 <Card.Text>People: {people}</Card.Text>
                 <img className={style.img} src={image} />
                 <Card.Text>stock :{stock}</Card.Text>
@@ -140,16 +138,19 @@ const Trolley = ({ setCountCarrito, countCarrito }) => {
                     value="up"
                     className={style.botonCount}
                     onClick={() => FuncionCount("up", User.id, id)}
+                    disabled={amount === stock - 1 || amount > stock}
                   >
                     +
                   </button>
                   <div className={style.spanCount}>
-                    {ObjetoDeRoomType.find((tro) => tro.id === id)?.amount}
+                    {ObjetoTrolley.id === id ? ObjetoTrolley.amount : amount}
+                    {/*ESTA MAL ESTO*/}
                   </div>
                   <button
                     value="down"
                     className={style.botonCount}
                     onClick={() => FuncionCount("down", User.id, id)}
+                    disabled={amount <= 1}
                   >
                     -
                   </button>
@@ -159,72 +160,14 @@ const Trolley = ({ setCountCarrito, countCarrito }) => {
           </div>
         ))}
       </section>
+
+      <div className={style.divTotalPrecio}>
+        <h1 className={style.h1}>Precio Total : ${totalPrecio}</h1>
+      </div>
+
       <Footer />
     </>
   );
 };
 
-export default Trolley;
-
-{
-  /* {name === "Individual" ? (
-  <div className={style.divCount}>
-    <button
-      value="up"
-      className={style.botonCount}
-      //onClick={() => FuncionIncrementCountIndividual(id)}
-    >
-      +
-    </button>
-    <div className={style.spanCount}></div>
-    <button
-      value="down"
-      className={style.botonCount}
-      // onClick={FuncionDecrementCountIndividual}
-    >
-      -
-    </button>
-  </div>
-) : name === "Suite" ? (
-  <div className={style.divCount}>
-    <button
-      value="up"
-      className={style.botonCount}
-      // onClick={() => FuncionIncrementCountSuite(id)}
-    >
-      +
-    </button>
-
-    <div className={style.spanCount}>
-      {/* {countHabitacionSuite} 
-    </div>
-    <button
-      value="down"
-      className={style.botonCount}
-      // onClick={FuncionDecrementCountSuite}
-    >
-      -
-    </button>
-  </div>
-) : (
-  <div className={style.divCount}>
-    <button
-      value="up"
-      className={style.botonCount}
-      // onClick={() => FuncionIncrementCountFamiliar(id)}
-    >
-      +
-    </button>
-    <div className={style.spanCount}>
-       {countHabitacionFamiliar} 
-    </div>
-    <button
-      value="down"
-      className={style.botonCount}
-      //  onClick={FuncionDecrementCountFamiliar}
-    >
-      -
-    </button>
-  </div>
-)} */
-}
+export default Trolleys;

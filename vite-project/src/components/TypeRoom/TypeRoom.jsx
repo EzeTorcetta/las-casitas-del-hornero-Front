@@ -13,15 +13,12 @@ import { v4 as uuidv4 } from "uuid";
 
 //?----------------- COMPONENTE ROOM TYPE  ------------------------------------
 const TypeRoom = ({ id, setCountCarrito, countCarrito, name, Trolleys }) => {
-  console.log(Trolleys);
-
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const User = PedirLocalStorage();
   const dispatch = useDispatch();
   const [State, setState] = useState([]);
   const { TypeRoom } = useSelector((state) => state);
 
-  console.log(Trolleys);
   const FuncionPostCarrito = async (
     idUser,
     idTypeRoom,

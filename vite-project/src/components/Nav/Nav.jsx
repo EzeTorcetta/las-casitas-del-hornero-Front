@@ -85,8 +85,10 @@ const NavBar = ({ countCarrito }) => {
                 className={style.link}
                 onClick={() => setShowNavbar(false)}
               >
-                <img className={style.iconoCarrito} src={imageCarrito} />
-                <div>{countCarrito}</div>
+                <div className={style.divCarritoCount}>
+                  <div className={style.countCarritoDiv}>{countCarrito}</div>
+                  <img className={style.iconoCarrito} src={imageCarrito} />
+                </div>
               </NavLink>
             </>
           )}
@@ -117,7 +119,9 @@ const NavBar = ({ countCarrito }) => {
             className={style.link}
             onClick={() => setShowNavbar(false)}
           >
-            Home
+            <div className={style.divHome}>
+              <div className={style.divHome1}>Home</div>
+            </div>
           </NavLink>
         </div>
       </div>

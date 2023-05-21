@@ -11,11 +11,14 @@ import {
   GET_TROLLEY,
   DELETE_TROLLEY,
   DELETE_ALL_TROLLEY,
+  PUT_AMOUNT_TROLLEY,
+  UP_DATE_TROLLEY,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
 const InicialState = {
   Trolley: [],
+  ObjetoTrolley: {},
   Hotels: {},
   User: { email: "", id: 0, rol: 0, username: "" },
   HotelsCopi: [],
@@ -102,7 +105,18 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         Trolley: actions.payload,
       };
+    case PUT_AMOUNT_TROLLEY:
+      return {
+        ...state,
+        ObjetoTrolley: actions.payload,
+      };
 
+    case UP_DATE_TROLLEY:
+      console.log(actions.payload);
+      return {
+        ...state,
+        Trolley: actions.payload,
+      };
     default:
       return { ...state };
   }

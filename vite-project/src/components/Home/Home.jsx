@@ -25,6 +25,7 @@ import {
   Loading,
   Paginado,
   PedirLocalStorage,
+  Search,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +40,8 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const [state, setState] = useState(0);
   const navigate = useNavigate();
   const Trolleys = useSelector((state) => state.Trolley);
+
+  console.log(Trolleys);
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -78,7 +81,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
       <NavBar countCarrito={countCarrito} />
       <div className={style.container}>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
-        {/* <Search /> */}
+        <Search />
         <Clima />
         {Hotels.allHotels?.length ? (
           <>

@@ -8,7 +8,12 @@
   -webkit-box-shadow: 10px 10px 42px -13px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 42px -13px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 42px -13px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
 }
+
+/* .divHijo {
+  background-color: #000000;
+} */
 
 .divMayor {
   width: 100%;
@@ -17,6 +22,7 @@
 }
 
 .input {
+  background-color: rgb(180, 180, 180);
   height: 50px;
   margin: 20px;
 }
@@ -36,7 +42,7 @@
 .fancy {
   width: 100px;
   height: 55px;
-
+  margin-top: 18px;
   border-radius: 0.5rem;
   border: none;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
