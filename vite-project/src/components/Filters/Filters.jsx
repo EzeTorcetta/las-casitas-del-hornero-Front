@@ -70,6 +70,10 @@ const Filter = () => {
     }
   };
 
+  const onChangeName = (event) => {
+    setFilter({ ...stateFilter, name: event.target.value });
+  };
+
   const onChangeOrder = (event) => {
     setFilter({ ...stateFilter, order: event.target.value });
   };
@@ -95,6 +99,7 @@ const Filter = () => {
       rating: "",
       order: "",
       page: 1,
+      name: "",
     });
 
     dispatch(
@@ -106,6 +111,7 @@ const Filter = () => {
         rating: "",
         order: "",
         page: 1,
+        name: "",
       })
     );
 
@@ -118,12 +124,28 @@ const Filter = () => {
         rating: "",
         order: "",
         page: 1,
+        name: "",
       })
     );
   };
 
   return (
     <form name="filterForm" className={style.form}>
+      {/* <Search /> */}
+
+      <div className={style.div}>
+        {/* <div className={styles.divHijo}> */}
+
+        <input
+          className={style.input}
+          type="text"
+          name="text"
+          placeholder="Buscar un Hotel"
+          onChange={onChangeName}
+        />
+      </div>
+      {/* </div> */}
+
       <select onChange={onChangeProvinces} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
         {Provinces.map((pro) => (

@@ -51,6 +51,7 @@ const InicialState = {
     rating: "",
     order: "",
     page: 1,
+    name: "",
   },
   Reviews: 0,
 };
@@ -171,9 +172,7 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
       };
-
     case UP_DATE_TROLLEY:
-      console.log(actions.payload);
       return {
         ...state,
         Trolley: actions.payload,

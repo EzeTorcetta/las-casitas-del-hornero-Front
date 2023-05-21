@@ -4,14 +4,16 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import styles from "./Search.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import MyCalendar from "./Calendario";
-// import { FuncionSearch } from "../../redux/Actions/Actions";
+import { FuncionSelectFilter, PostFilters } from "../../redux/Actions/Actions";
 registerLocale("es", es);
 
 const Search = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState("");
+  // const [state, setState] = useState("");
+  const { Filters } = useSelector((state) => state);
+  const [stateFilter, setFilter] = useState(Filters);
 
   // const [state, setState] = useState(new Date("2023", "05", "09"));
   // const [SearchAll, setSearchAll] = useState({
@@ -30,11 +32,12 @@ const Search = () => {
   // };
 
   const onChangeText = (event) => {
-    setState(event.target.value);
+    setFilter({ ...stateFilter, name: event.target.value });
   };
 
-  const FuncionSearchAll = (name) => {
-    // dispatch(FuncionSearch(name));
+  const FuncionSearchAll = () => {
+    dispatch(PostFilters(stateFilter));
+    dispatch(FuncionSelectFilter(stateFilter, 1));
   };
 
   // const FuncionSearchAll = () => {
@@ -46,17 +49,15 @@ const Search = () => {
     <div className={styles.divMayor}>
       <div className={styles.div}>
         {/* <div className={styles.divHijo}> */}
+
         <input
           className={styles.input}
           type="text"
           name="text"
-          placeholder="Buscar una Provincia"
+          placeholder="Buscar un Hotel"
           onChange={onChangeText}
         />
-        <button
-          className={styles.fancy}
-          onClick={() => FuncionSearchAll(state)}
-        >
+        <button className={styles.fancy} onClick={() => FuncionSearchAll()}>
           Buscar
         </button>
       </div>

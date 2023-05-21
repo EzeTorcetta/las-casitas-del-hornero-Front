@@ -7,6 +7,10 @@
   margin-top: 3px;
 }
 
+.input {
+  background-color: #f7931e;
+}
+
 .select {
   appearance: none;
   cursor: pointer;

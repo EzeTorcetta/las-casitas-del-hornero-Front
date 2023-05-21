@@ -62,21 +62,25 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
         ):(<></>)}
       </div>
       <div className={style.title}>
-        <h4 className={style.name}>{name}</h4>
-        <p>{valoration}</p>
-        <h3 className={style.province}>{province}</h3>
-        <div className={style.rating}>
-          {ratingArray.map((_, index) => {
-            return (
-              <img
-                className={style.imgRating}
-                src={imgFav}
-                alt=""
-                key={index}
-              />
-            );
-          })}
+        <div className={style.divJose}>
+          <div className={style.divJose1}>
+            <h4 className={style.name}>{name}</h4>
+            <div className={style.rating}>
+              {ratingArray.map((_, index) => {
+                return (
+                  <img
+                    className={style.imgRating}
+                    src={imgFav}
+                    alt=""
+                    key={index}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <p>Valoracion Del Hotel :{valoration}</p>
         </div>
+        <h3 className={style.province}>{province}</h3>
         <button onClick={onClickDetail} className={style.botonDetail}>
           VER ALOJAMIENTO
         </button>

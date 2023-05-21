@@ -53,8 +53,6 @@ const FormularioIngresa = () => {
           usuario
         );
 
-        console.log(response.data);
-
         GuardarLocalStorage(response.data);
         dispatch(GetUser(response.data));
 

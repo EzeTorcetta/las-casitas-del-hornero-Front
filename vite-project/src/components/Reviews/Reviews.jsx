@@ -5,6 +5,7 @@ import axios from "axios";
 import { NewReview } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
 import { FuncionDetailHotel } from "../../redux/Actions/Actions";
+import swal from "sweetalert";
 
 
 export default function Reviews() {
@@ -41,17 +42,23 @@ export default function Reviews() {
     axios
       .post(`${URL_BASE}/review/${Hotel.id}`, datos)
       .then(function (response) {
-        console.log("La solicitud POST se realizó correctamente");
+        swal({
+          text: "Se realizó correctamente la reseña de este hotel",
+          icon: "success",
+          buttons: "Aceptar",
+        });
       })
       .catch(function (error) {
-        console.error("Error al realizar la solicitud POST", error);
+        swal({
+          text: "Ya realizó una reseña en este hotel",
+          icon: "warning",
+          buttons: "Aceptar",
+        });
       });
     dispatch(NewReview());
     dispatch(FuncionDetailHotel(Hotel.id))
   };
 
-  console.log(Hotel);
-  
   return (
     <div className={style.container}>
       <h2>Reviews:</h2>
