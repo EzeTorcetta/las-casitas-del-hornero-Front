@@ -25,7 +25,6 @@ import {
   Loading,
   Paginado,
   PedirLocalStorage,
-  Search,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 
@@ -81,8 +80,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
       <NavBar countCarrito={countCarrito} />
       <div className={style.container}>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
-        <Search />
-        <Clima />
+
         {Hotels.allHotels?.length ? (
           <>
             <section className={`${style.section} ${style.one}`}>
@@ -119,23 +117,23 @@ const Home = ({ countCarrito, setCountCarrito }) => {
             {/* <section className={`${style.section}`}>
               <Filter />
               <div className={style.divContainerTheCards} >
-                <div className={style.divCard}>
-                  {Hotels.allHotels?.map(
-                    ({ id, name, image, province, rating, description }) => (
-                      <Cards
-                        key={id}
-                        id={id}
-                        name={name}
-                        image={image}
-                        province={province}
-                        rating={rating}
-                        description={description}
-                      />
-                    )
+              <div className={style.divCard}>
+              {Hotels.allHotels?.map(
+                ({ id, name, image, province, rating, description }) => (
+                  <Cards
+                  key={id}
+                  id={id}
+                  name={name}
+                  image={image}
+                  province={province}
+                  rating={rating}
+                  description={description}
+                  />
+                  )
                   )}
-                </div>
-              </div>
-            </section> */}
+                  </div>
+                  </div>
+                </section> */}
           </>
         ) : (
           <section className={`${style.section} ${style.one}`}>
@@ -143,6 +141,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
           </section>
         )}
 
+        <Clima />
         <Paginado paginas={Hotels.numPages} />
         <section className={`${style.section} ${style.two}`}></section>
 

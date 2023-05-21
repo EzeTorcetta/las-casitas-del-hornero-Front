@@ -66,9 +66,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
 
   //*---------------------modificacion del contador:
 
-  const FuncionCount = (value, idUser, id_Rommtype) => {
-    dispatch(putAmountTrolley(value, idUser, id_Rommtype));
-    dispatch(GetTrolley(User.id));
+  const FuncionCount = async (value, idUser, id_Rommtype) => {
+    await dispatch(putAmountTrolley(value, idUser, id_Rommtype));
+    await dispatch(GetTrolley(User.id));
     //dispatch(UpdateTrolley(updatedTrolley)); // Actualiza el estado del carrito con el nuevo arreglo
 
     if (ObjetoTrolley.amount) {
@@ -137,8 +137,8 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
                   <button
                     value="up"
                     className={style.botonCount}
-                    onClick={() => FuncionCount("up", User.id, id)}
-                    disabled={amount === stock - 1 || amount > stock}
+                    onClick={() => FuncionCount("up", User.id, id, stock)}
+                    disabled={amount === stock || amount > stock}
                   >
                     +
                   </button>
@@ -149,12 +149,13 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
                   <button
                     value="down"
                     className={style.botonCount}
-                    onClick={() => FuncionCount("down", User.id, id)}
+                    onClick={() => FuncionCount("down", User.id, id, stock)}
                     disabled={amount <= 1}
                   >
                     -
                   </button>
                 </div>
+                {/* <button onClick={FuncionConfirmar}>Confirmar</button> */}
               </Card.Body>
             </Card>
           </div>

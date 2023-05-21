@@ -1,10 +1,11 @@
 .container {
   display: flex;
   border-radius: 0.5rem;
-  min-width: 600px;
-  margin: 10px 0 10px 40px;
+  min-width: 1000px;
+  /* margin: 10px 0 10px 40px; */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
   height: fit-content;
+  margin-left: 120px;
 }
 
 .title {
@@ -33,6 +34,7 @@
 
 .rating {
   margin: 0.5em;
+  margin-bottom: 22px;
 }
 
 .imgRating {
@@ -91,4 +93,15 @@
     flex-direction: column;
     max-width: 200px;
   }
+}
+
+.divJose {
+  width: 80vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.divJose1 {
+  display: flex;
+  align-items: center;
 }

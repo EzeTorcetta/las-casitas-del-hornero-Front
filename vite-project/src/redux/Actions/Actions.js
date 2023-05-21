@@ -23,7 +23,7 @@ import swal from "sweetalert";
 const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 export const FuncionSelectFilter = (filters) => {
   let URL = `${URL_BASE}/hotels`;
-  const { provinces, services, rating, order, page } = filters;
+  const { provinces, services, rating, order, page, name } = filters;
 
   URL = URL + `?page=${page}`;
   return async (dispatch) => {
@@ -36,6 +36,9 @@ export const FuncionSelectFilter = (filters) => {
       }
       if (order.length) {
         URL = URL + `&order=${order}`;
+      }
+      if (name.length) {
+        URL = URL + `&name=${name}`;
       }
       if (services.length) {
         services.map(
@@ -105,10 +108,12 @@ export const FuncionTypeRoomTypes = (idHotel) => {
 };
 
 //* ----------------- SEARCH ------------------------------------
-export const FuncionSearch = (nameHotel) => {
+export const FuncionSearch = (nameHotel, page) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/hotels?name=${nameHotel}`);
+      const response = await axios.get(
+        `${URL_BASE}/hotels?page=${page}&name=${nameHotel}`
+      );
       dispatch({ type: SEARCH_HOTELS, payload: response.data });
     } catch (error) {
       swal({

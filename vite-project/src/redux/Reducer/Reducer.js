@@ -32,6 +32,7 @@ const InicialState = {
     rating: "",
     order: "",
     page: 1,
+    name: "",
   },
 };
 
@@ -59,11 +60,11 @@ export const rootReducer = (state = InicialState, actions) => {
 
     //
 
-    case SEARCH_HOTELS:
-      return {
-        ...state,
-        Hotels: actions.payload,
-      };
+    // case SEARCH_HOTELS:
+    //   return {
+    //     ...state,
+    //     Hotels: actions.payload,
+    //   };
 
     case ALL_FAVORITES_HOTELS:
       return {
