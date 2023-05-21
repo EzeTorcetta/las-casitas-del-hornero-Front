@@ -44,6 +44,8 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .link {
@@ -64,6 +66,8 @@
   .links {
     flex-direction: row;
     text-align: center;
+    align-items: center;
+    justify-content: center;
   }
 
   .link {
@@ -76,20 +80,4 @@
 .iconoCarrito {
   width: 30px;
   height: 25px;
-}
-@media (min-width: 769px) {
-  .menuButton {
-    display: none;
-  }
-
-  .links {
-    flex-direction: row;
-    text-align: center;
-  }
-
-  .link {
-    margin-bottom: 0;
-    margin-right: 10px;
-    text-align: center;
-  }
 }
