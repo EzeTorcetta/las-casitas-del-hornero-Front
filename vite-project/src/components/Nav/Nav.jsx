@@ -29,9 +29,14 @@ const NavBar = ({ countCarrito }) => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleLogout = () => {
-    // Lógica para realizar el logout
-    // ...
+  const handleLogout = async () => {
+    if (auth) {
+      await signOut(auth);
+    } else {
+      dispatch(LogOut());
+    }
+    ClearLocalStorage();
+    location.reload();
   };
 
   const handleVerPerfil = () => {
@@ -60,15 +65,6 @@ const NavBar = ({ countCarrito }) => {
     }
   }, [windowWidth]);
 
-  const logout = async () => {
-    if (auth) {
-      await signOut(auth);
-    } else {
-      dispatch(LogOut());
-    }
-    ClearLocalStorage();
-    location.reload();
-  };
 
   return (
     <>
@@ -89,36 +85,7 @@ const NavBar = ({ countCarrito }) => {
               : style.links
           }
         >
-          {rol === 2 ? (
-            <NavLink
-              to={"/Proveedor"}
-              className={style.link}
-              onClick={() => setShowNavbar(false)}
-            >
-              <button className={style.button}>Proveer Hotel</button>
-            </NavLink>
-          ) : rol === 3 ? (
-            <NavLink
-              to={"/SuperAdmin"}
-              className={style.link}
-              onClick={() => setShowNavbar(false)}
-            >
-              <button className={style.button}>Administrar Usuarios</button>
-            </NavLink>
-          ) : (
-            <>
-              <NavLink
-                to={"/Carrito"}
-                className={style.link}
-                onClick={() => setShowNavbar(false)}
-              >
-                <div className={style.divCarritoCount}>
-                  <div className={style.countCarritoDiv}>{countCarrito}</div>
-                  <img className={style.iconoCarrito} src={imageCarrito} />
-                </div>
-              </NavLink>
-            </>
-          )}
+          
 
           <NavLink
             to={"/Home"}
@@ -137,29 +104,54 @@ const NavBar = ({ countCarrito }) => {
                 className={style.profileButton}
               >
                 <img className={style.img} src={imagenUsuario} alt="Perfil" />
-                <span className={style.NombreUsuario}>{username}</span>
+                <p>{`${username}`}</p>
+                {/* <span className={style.NombreUsuario}>{`${username}`}</span> */}
               </button>
               {showMenu && (
                 <ul className={style.menu}>
                   <li>
-                    <button onClick={handleLogout} className={style.menuOption}>
-                      Logout
-                    </button>
-                  </li>
-                  <li>
+                    <NavLink
+                     to={"/Perfil"}
+                     onClick={() => setShowNavbar(false)}
+                     >
                     <button
                       onClick={handleVerPerfil}
                       className={style.menuOption}
                     >
                       Ver Perfil
                     </button>
+                    </NavLink>
                   </li>
                   <li>
-                    <button
-                      onClick={handleChangeTipoCuenta}
-                      className={style.menuOption}
-                    >
-                      Quiero ser proveedor
+                    {rol === 2 ? (
+                      <NavLink
+                        to={""}
+                        className={style.link}
+                        onClick={() => setShowNavbar(false)}
+                      >
+                        <button className={style.menuOption}>Proveer Hotel</button>
+                      </NavLink>
+                    ) : rol === 3 ? (
+                      <NavLink
+                        to={""}
+                        className={style.link}
+                        onClick={() => setShowNavbar(false)}
+                      >
+                        <button className={style.menuOption}>Administrar Usuarios</button>
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to={""}
+                        className={style.link}
+                        onClick={() => setShowNavbar(false)}
+                      >
+                        <button className={style.menuOption}>Quiero ser Proveedor</button>
+                      </NavLink>
+                    )}
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className={style.menuOption}>
+                      Logout
                     </button>
                   </li>
                 </ul>
