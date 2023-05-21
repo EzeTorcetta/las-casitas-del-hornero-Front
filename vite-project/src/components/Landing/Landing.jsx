@@ -1,15 +1,29 @@
 //?---------------------------- IMPORTS --------------------------------
 //react
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //css
 import styles from "./Landing.module.css";
 //components
-import { FormularioIngresa } from "../Index";
+import { FormularioIngresa, PedirLocalStorage } from "../Index";
 //image
 import hornero from "../../assets/horneroleft.jpg";
+import { useEffect } from "react";
 
 //?----------------- COMPONENTE LANDING ------------------------------------
 const Landing = () => {
+  const User = PedirLocalStorage();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  if (User) {
+    navigate("/Home");
+  }
+  }, [User, navigate]);
+
+  if (User) {
+    return null;
+  }
+
   return (
     <div className={styles.fullcontainer}>
       <div className={styles.container}>

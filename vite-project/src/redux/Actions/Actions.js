@@ -21,6 +21,8 @@ import {
   GET_BOOKYNG,
   GET_USERS,
   CHANGE_ROL,
+  UP_DATE_TROLLEY,
+  PUT_AMOUNT_TROLLEY,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -88,6 +90,18 @@ export const PostFilters = (filters) => {
     dispatch({ type: POST_FILTERS, payload: filters });
   };
 };
+
+// export const FuncionAllHotel = (page = 1) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`);
+//
+//       dispatch({ type: ALL_HOTELS, payload: response.data });
+//     } catch (error) {
+//       alert(error.response.data.error);
+//     }
+//   };
+// };
 
 //* ----------------- TYPE ROOMS ------------------------------------
 export const FuncionTypeRoomTypes = (idHotel) => {
@@ -176,26 +190,27 @@ export const FuncionDetailHotel = (id) => {
 export const GetTrolley = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/carts/${idUser}`);
+      const response = await axios.get(`${URL_BASE}/cart/${idUser}`);
 
       dispatch({ type: GET_TROLLEY, payload: response.data });
     } catch (error) {
-      swal({
-        text: error.response.data.error,
-        icon: "warning",
-        buttons: "Aceptar",
-      });
+      // swal({
+      //   text: error.response.data.error,
+      //   icon: "warning",
+      //   buttons: "Aceptar",
+      // });
     }
   };
 };
 
 //*-----------Delete del carrito (todo lo que hay en el carrito).
 
-export const DeleteTrolley = (idUser) => {
+export const DeleteAllTrolley = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`${URL_BASE}/carts/${idUser}`);
-      dispatch({ type: DELETE_TROLLEY, payload: response.data });
+      await axios.delete(`${URL_BASE}/cart/${idUser}`);
+
+      dispatch({ type: DELETE_ALL_TROLLEY, payload: [] });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -209,13 +224,33 @@ export const DeleteTrolley = (idUser) => {
 //*-----------Delete del carrito (un solo carrito).
 // cartRouter.delete("/:id_user/:id_roomtype", deleteCartHandler);
 
-export const DeleteAllTrolley = (idUser, idTypeRoom) => {
+export const DeleteTrolley = (idUser, idTypeRoom) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(
-        `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
+      await axios.delete(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
+
+      dispatch({ type: DELETE_TROLLEY, payload: idTypeRoom });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+export const putAmountTrolley = (value, idUser, id_Roomtype) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `${URL_BASE}/cart/${idUser}/${id_Roomtype}?putAmount=${value}`
       );
-      dispatch({ type: DELETE_ALL_TROLLEY, payload: response.data });
+      dispatch({
+        type: PUT_AMOUNT_TROLLEY,
+        payload: { id: id_Roomtype, amount: response.data },
+      });
+      console.log(response.data);
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -228,27 +263,9 @@ export const DeleteAllTrolley = (idUser, idTypeRoom) => {
 
 //*---------------------Post del Trolley.
 
-//cartRouter.post("/:id_user/:id_roomtype", postCartHandler);
-
-// export const PostTrolley = (idUser, idTypeRoom) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.delete(
-//         `${URL_BASE}/carts/${idUser}/${idTypeRoom}`
-//       );
-
-//       console.log(response.data);
-//       dispatch({ type: POST_TROLLEY, payload: response.data });
-//     } catch (error) {
-//       swal({
-//         text: error.response.data.error,
-//         icon: "warning",
-//         buttons: "Aceptar",
-//       });
-//     }
-//   };
-// };
-
+export const UpdateTrolley = (ArrayNuevoTrolley) => {
+  return { type: UP_DATE_TROLLEY, payload: ArrayNuevoTrolley };
+};
 //* ----------------- DETAIL HOTELS ------------------------------------
 export const FuncionClearDetail = () => {
   return { type: DETAIL_CLEAR_HOTEL }; // cuando se desmonte el detail , el objeto se vacia.

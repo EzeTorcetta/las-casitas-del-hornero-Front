@@ -1,12 +1,23 @@
 import { NavBar, Footer, Favoritos, PedirLocalStorage, Booking } from "../Index";
 import style from "./Perfil.module.css";
+import { GetTrolley } from "../../redux/Actions/Actions";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-const PerfilUsuario = () => {
+const PerfilUsuario = ({countCarrito,setCountCarrito}) => {
+  const Trolleys = useSelector((state) => state.Trolley);
+  const dispatch = useDispatch();
   let User = PedirLocalStorage();
+
+  setCountCarrito((countCarrito = Trolleys.length));
+
+  useEffect(() => {
+    dispatch(GetTrolley(User.id));
+  }, []);
 
   return (
     <>
-    <NavBar />
+    <NavBar countCarrito={countCarrito} />
     <section>
       <div>
         <h1>{`Buenos dias ${User.username}!`}</h1>
@@ -24,7 +35,6 @@ const PerfilUsuario = () => {
       <div className={style.divRewies}>
       <h1>Booking</h1>
       <Booking />
-      {/* get booking user, mandar id y rol por query, ruta: /booking?id_user=&rol=1*/}
       </div>
     </section>
     <Footer />

@@ -118,5 +118,6 @@
 .divContenedorServicio {
   /* background-color: rgb(40, 126, 126); */
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }

@@ -75,53 +75,58 @@ const FormularioIngresa = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <h1 className="h3 mb-3 fw-normal">Ingresa</h1>
+    <>
+      <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true" />
+        <div class="login">
+          <form onSubmit={handleSubmit} class="form">
+            <h1 className="h3 mb-3 fw-normal">Ingresa</h1>
 
-        <div className="form-floating">
-          <input
-            type="email"
-            className="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-            onChange={handleChange}
-            value={usuario.email}
-            name="email"
-          />
-          <label>Email</label>
-        </div>
-        <div className={style.DivError}>
-          <span className={style.span}>{Error.email}</span>
-        </div>
+            <input
+              type="email"
+              className="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+              onChange={handleChange}
+              value={usuario.email}
+              name="email"
+            />
+            <input
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              onChange={handleChange}
+              value={usuario.password}
+              name="password"
+            />
 
-        <div className="form-floating">
-          <input
-            type="password"
-            className="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            onChange={handleChange}
-            value={usuario.password}
-            name="password"
-          />
-          <label>password</label>
-        </div>
-        <div className={style.DivError}>
-          <p className={style.span}>{Error.password}</p>
-        </div>
+            <div className={style.divErrores}>
+              <div className={style.divErrorPassword}>
+                <h4 className={style.label}>--Error de la password:</h4>
+                <p className={style.span}>
+                  {!Error.password
+                    ? "No hay errores en este campo."
+                    : Error.password}
+                </p>
+              </div>
 
-        <button
-          // className="w-100 btn btn-lg btn-warning "
-          className={style.buton}
-          type="submit"
-        >
-          Ingresar
-        </button>
-      </form>
-      <BotonAuthGoogle />
-      {/* <a href="$"> Olvidé mi password </a> */}
-    </div>
+              <div className={style.divErrorEmail}>
+                <h4 className={style.label}>--Error del Email:</h4>
+                <p className={style.span}>
+                  {!Error.email ? "No hay errores en este campo." : Error.email}
+                </p>
+              </div>
+            </div>
+
+            <button className={style.buton} type="submit">
+              Ingresar
+            </button>
+          </form>
+          <BotonAuthGoogle />
+        </div>
+      </div>
+    </>
   );
 };
 

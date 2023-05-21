@@ -20,12 +20,15 @@ import {
   NEW_REVIEW,
   GET_BOOKYNG,
   GET_USERS,
-  CHANGE_ROL
+  CHANGE_ROL,
+  PUT_AMOUNT_TROLLEY,
+  UP_DATE_TROLLEY,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
 const InicialState = {
   Trolley: [],
+  ObjetoTrolley: {},
   Hotels: {},
   User: { email: "", id: 0, rol: 0, username: "" },
   HotelsCopi: [],
@@ -61,6 +64,7 @@ export const rootReducer = (state = InicialState, actions) => {
         HotelsCopi: actions.payload,
       };
     case POST_FILTERS:
+      console.log(actions.payload);
       return {
         ...state,
         Filters: actions.payload,
@@ -115,12 +119,17 @@ export const rootReducer = (state = InicialState, actions) => {
     case DELETE_TROLLEY:
       return {
         ...state,
-        Trolley: actions.payload,
+        Trolley: state.Trolley.filter((tro) => tro.id !== actions.payload),
       };
     case DELETE_ALL_TROLLEY:
       return {
         ...state,
         Trolley: actions.payload,
+      };
+    case PUT_AMOUNT_TROLLEY:
+      return {
+        ...state,
+        ObjetoTrolley: actions.payload,
       };
 
     case GET_ALL_PROVINCES:
@@ -163,6 +172,12 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
       };
 
+    case UP_DATE_TROLLEY:
+      console.log(actions.payload);
+      return {
+        ...state,
+        Trolley: actions.payload,
+      };
     default:
       return { ...state };
   }

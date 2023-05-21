@@ -45,6 +45,7 @@ const Search = () => {
   return (
     <div className={styles.divMayor}>
       <div className={styles.div}>
+        {/* <div className={styles.divHijo}> */}
         <input
           className={styles.input}
           type="text"
@@ -59,6 +60,7 @@ const Search = () => {
           Buscar
         </button>
       </div>
+      {/* </div> */}
     </div>
   );
 };

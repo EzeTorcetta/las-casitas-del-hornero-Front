@@ -5,8 +5,8 @@ import style from "./FormularioUsuario.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import AuthProvider from "../../GoogleAuth/AuthProvider";
-import { existsUsername, updateUser } from "../../../Firebase/Firebase";
+// import AuthProvider from "../../GoogleAuth/AuthProvider";
+// import { existsUsername, updateUser } from "../../../Firebase/Firebase";
 
 const FormGoogle = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const FormGoogle = () => {
 
   //---------------ESTADOS-----------------
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
   const [state, setState] = useState(0);
 
@@ -23,72 +23,78 @@ const FormGoogle = () => {
   //-------------HANDLERS----------------
 
   const handleUserLoggedIn = (user) => {
-    navigate('/Home');
-  }
-  
+    navigate("/Home");
+  };
+
   const handleUserNotRegistered = (user) => {
     setCurrentUser(user);
     setState(3);
-  }
-  
+  };
+
   const handleUserNotLoggedIn = () => {
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const handleInputUsername = (event) => {
     setUsername(event.target.value);
   };
 
   const handleContinue = async () => {
-    if(username !== ''){
+    if (username !== "") {
       const exists = await existsUsername(username);
-      if(exists){
+      if (exists) {
         setState(5);
-      } else{
-        const tmp = {...currentUser};
+      } else {
+        const tmp = { ...currentUser };
         tmp.username = username;
         tmp.processCompleted = true;
         await updateUser(tmp);
         setState(6);
       }
     }
-  }
+  };
 
-  if(state === 3 || state === 5){
+  if (state === 3 || state === 5) {
     return (
       <div className="container">
-          <h1>¡Bienvenido {currentUser.displayName}!</h1>
-          <h3>Parece que no estas registrado :/</h3>
-          <p>Para terminar el proceso, elige un nombre de usuario</p>
-          {state === 5 ? <p>Nombre de usuario ya existe</p> : ""}
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              onChange={handleInputUsername}
-            />
-            <label>Username</label>
-          </div>
-          <button className="w-100 btn btn-lg btn-warning" onClick={handleContinue}>
-            Continuar
-          </button>
+        <h1>¡Bienvenido {currentUser.displayName}!</h1>
+        <h3>Parece que no estas registrado :/</h3>
+        <p>Para terminar el proceso, elige un nombre de usuario</p>
+        {state === 5 ? <p>Nombre de usuario ya existe</p> : ""}
+        <div className="form-floating">
+          <input
+            type="text"
+            className="form-control"
+            id="floatingInput"
+            onChange={handleInputUsername}
+          />
+          <label>Username</label>
+        </div>
+        <button
+          className="w-100 btn btn-lg btn-warning"
+          onClick={handleContinue}
+        >
+          Continuar
+        </button>
       </div>
-      );
+    );
   }
 
-  if(state === 6){
-    return <div>
-      <h1>Felicidades, usuario creado con éxito</h1>
-      <Link to="/Home">Continuar</Link>
-    </div>
-  }
+  if (state === 6) {
     return (
-    <AuthProvider 
-    onUserLoggedIn={handleUserLoggedIn}
-onUserNotLoggedIn={handleUserNotLoggedIn}
-onUserNotRegistered={handleUserNotRegistered}>
-    </AuthProvider>)
+      <div>
+        <h1>Felicidades, usuario creado con éxito</h1>
+        <Link to="/Home">Continuar</Link>
+      </div>
+    );
+  }
+  return (
+    <AuthProvider
+      onUserLoggedIn={handleUserLoggedIn}
+      onUserNotLoggedIn={handleUserNotLoggedIn}
+      onUserNotRegistered={handleUserNotRegistered}
+    ></AuthProvider>
+  );
 };
 
 export default FormGoogle;

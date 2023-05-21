@@ -10,11 +10,9 @@ import Footer from "./Footer/Footer";
 import Search from "./Search/Search";
 import FormularioIngresa from "./Formularios/FormularioIngresa/FormularioIngresa";
 import Landing from "./Landing/Landing";
-import BotonAuthGoogle from "./GoogleAuth/BotonAuthGoogle";
 import Maps from "./Map/Map";
 import FuncionServices from "./Detail/FuncionServicios";
-import NavDetail from "./Nav/NavDetail";
-import TipoHabitacion from "./TypeRoom/TypeRoom";
+import TypeRoom from "./TypeRoom/TypeRoom";
 import NavBar from "./Nav/Nav";
 import Filter from "./Filters/Filters";
 import Clima from "./Clima/Clima";
@@ -33,10 +31,12 @@ import ClearLocalStorage from "./LocalStorage/CleanLocalStorage";
 import ReviewPartner from "./ReviewPartner/ReviewPartner";
 import Booking from "./Booking/Booking";
 import GetUsers from "./GetUsers/GetUser";
+import BotonAuthGoogle from "./GoogleAuth/BotonAuthGoogle";
 
 
 
 export {
+  BotonAuthGoogle,
   GetUsers,
   Booking,
   ReviewPartner,
@@ -50,8 +50,7 @@ export {
   Clima,
   Paginado,
   NavBar,
-  TipoHabitacion,
-  NavDetail,
+  TypeRoom,
   FuncionServices,
   Maps,
   Cards,
@@ -65,10 +64,9 @@ export {
   Favoritos,
   FormularioIngresa,
   Landing,
-  BotonAuthGoogle,
   LogOut,
   Trolley,
   Perfil,
   GuardarLocalStorage,
-  PedirLocalStorage
+  PedirLocalStorage,
 };

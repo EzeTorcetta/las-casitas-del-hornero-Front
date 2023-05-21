@@ -1,4 +1,140 @@
 .section {
   padding-top: 10vh;
   min-height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px;
+  margin: 20px;
+}
+
+.divTotalPrecio {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  margin: 35px;
+  margin-left: 5px;
+}
+
+.h1 {
+  background-color: #b7ec97;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 30px;
+}
+
+.button {
+  margin: 10px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 7px;
+  border: none;
+  background: #1ffb65;
+  color: rgb(255, 255, 255);
+  font-family: inherit;
+  text-align: center;
+  font-size: 15px;
+  box-shadow: 0px 14px 56px -11px #a3f56f;
+  width: 10em;
+  padding: 1em;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+  color: white;
+}
+
+.button span:after {
+  content: "Ahora!!";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.7s;
+  color: white;
+}
+
+.button:hover span {
+  padding-right: 3.55em;
+}
+
+.button:hover span:after {
+  opacity: 4;
+  right: 0;
+}
+
+.img {
+  width: 250px;
+  height: 250px;
+}
+
+.botonEliminar {
+  font-size: 18px;
+  background-color: rgb(233, 107, 107);
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  -webkit-box-shadow: 4px 6px 11px 1px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 4px 6px 11px 1px rgba(0, 0, 0, 0.51);
+  box-shadow: 4px 6px 11px 1px rgba(0, 0, 0, 0.51);
+  margin: 10px;
+}
+
+.botonEliminar:hover {
+  background-color: red;
+}
+
+.BotonElinimarCarrito {
+  background-color: rgb(231, 87, 87);
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 30px;
+}
+
+.BotonElinimarCarrito:hover {
+  background-color: rgb(255, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.CardCarrito {
+  margin: 30px;
+}
+
+.divBotonEliminarTodo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.botonCount {
+  width: 40px;
+  background-color: rgb(30, 140, 140);
+  color: white;
+  font-size: 25px;
+  border-radius: 5px;
+}
+
+.spanCount {
+  text-align: center;
+  padding: 10px;
+  color: white;
+  background-color: rgb(210, 201, 201);
+  width: 40px;
+}
+
+.divCount {
+  display: flex;
+  margin: 10px;
+}
+
+.button {
 }

@@ -10,8 +10,10 @@ import { auth } from "../../Firebase/Firebase";
 import { signOut } from "firebase/auth";
 import style from "./Nav.module.css";
 
+// import "NavButon.css";
+
 //?----------------- COMPONENTE NAVBAR ------------------------------------
-const NavBar = () => {
+const NavBar = ({ countCarrito }) => {
   // const User = useSelector((state) => state.User);
   const dispatch = useDispatch()
   let User = PedirLocalStorage();
@@ -105,7 +107,10 @@ const NavBar = () => {
                 className={style.link}
                 onClick={() => setShowNavbar(false)}
               >
-                <img className={style.iconoCarrito} src={imageCarrito} />
+                <div className={style.divCarritoCount}>
+                  <div className={style.countCarritoDiv}>{countCarrito}</div>
+                  <img className={style.iconoCarrito} src={imageCarrito} />
+                </div>
               </NavLink>
             </>
           )}
@@ -139,14 +144,9 @@ const NavBar = () => {
             className={style.link}
             onClick={() => setShowNavbar(false)}
           >
-            Home
-          </NavLink>
-          <NavLink
-            to={"/Logout"}
-            className={style.link}
-            onClick={() => setShowNavbar(false)}
-          >
-            Logout
+            <div className={style.divHome}>
+              <div className={style.divHome1}>Home</div>
+            </div>
           </NavLink>
         </div>
       </div>

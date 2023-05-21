@@ -11,6 +11,7 @@ import style from "./Home.module.css";
 import {
   FuncionSelectFilter,
   FuncionAllFavoritesHotel,
+  GetTrolley,
 } from "../../redux/Actions/Actions";
 //components
 // import Cards from "../Cards/Cards";
@@ -25,11 +26,12 @@ import {
   Loading,
   Paginado,
   PedirLocalStorage,
+  Search,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 
 //?----------------- COMPONENTE HOME ------------------------------------
-const Home = () => {
+const Home = ({ countCarrito, setCountCarrito }) => {
   const dispatch = useDispatch();
   const Hotels = useSelector((state) => state.Hotels);
   const { Filters } = useSelector((state) => state);
@@ -37,23 +39,26 @@ const Home = () => {
   let User = PedirLocalStorage();
   const [currentUser, setCurrentUser] = useState({});
   const [state, setState] = useState(0);
-  const navigate = useNavigate()
-// console.log(auth);
-      const handleUserLoggedIn = (user) => {
-        setCurrentUser(user);
-        setState(2)
-      }
-      
-      const handleUserNotRegistered = (user) => {
-        navigate('/Registrar')
-      }
-      
-      const handleUserNotLoggedIn = () => {
-        navigate('/Registrar');
-      }
+  const navigate = useNavigate();
+  const Trolleys = useSelector((state) => state.Trolley);
 
-  useEffect(() => {
-    // dispatch(FuncionAllFavoritesHotel(User.id));
+  setCountCarrito((countCarrito = Trolleys.length));
+
+  const handleUserLoggedIn = (user) => {
+    setCurrentUser(user);
+    setState(2);
+  };
+
+  const handleUserNotRegistered = (user) => {
+    navigate("/Registrar");
+  };
+
+  const handleUserNotLoggedIn = () => {
+    navigate("/Registrar");
+  };
+
+  useEffect(() => {   
+    if(User)dispatch(GetTrolley(User.id));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }
@@ -70,10 +75,10 @@ const Home = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar countCarrito={countCarrito} />
       <div className={style.container}>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
-        {/* <Search /> */}
+        <Search />
         <Clima />
         {Hotels.allHotels?.length ? (
           <>
@@ -119,7 +124,6 @@ const Home = () => {
         <section className={`${style.section} ${style.two}`}></section>
 
         <Footer />
-
       </div>
     </>
   );
