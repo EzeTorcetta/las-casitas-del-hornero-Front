@@ -18,6 +18,21 @@
   border-radius: 10px;
 }
 .saludo {
+  justify-content: center;
+  text-align: center;
   align-items: center;
-  display: flex;
+}
+.section {
+  padding-top: 10vh;
+  min-height: 10vh;
+}
+
+.divFavorites {
+  text-align: center;
+  padding: 30px;
+}
+
+.divRewies {
+  text-align: center;
+  padding: 20px;
 }
