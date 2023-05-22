@@ -3,42 +3,54 @@
 //react
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncionSelectFilter, PostFilters, getDepartment, getLocality, getProvinces, getServices } from "../../redux/Actions/Actions";
+import {
+  FuncionSelectFilter,
+  PostFilters,
+  getDepartment,
+  getLocality,
+  getProvinces,
+  getServices,
+} from "../../redux/Actions/Actions";
 //css
 import style from "./Filters.module.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
-  const { Filters, Services, Provinces, Department, Locality } = useSelector((state) => state);
+  const { Filters, Services, Provinces, Department, Locality } = useSelector(
+    (state) => state
+  );
   const [stateFilter, setFilter] = useState(Filters);
-  const [provinceId, setProvinceId] = useState('');
-  const [departmentId, setDepartmentId] = useState('');
+  const [provinceId, setProvinceId] = useState("");
+  const [departmentId, setDepartmentId] = useState("");
 
-  useEffect( ()=>{
+  useEffect(() => {
     dispatch(getProvinces());
     dispatch(getServices());
-    if(provinceId.length)dispatch(getDepartment(provinceId))
-    if(departmentId.length)dispatch(getLocality(departmentId))
-  },[dispatch,provinceId,departmentId])
-  
+    if (provinceId.length) dispatch(getDepartment(provinceId));
+    if (departmentId.length) dispatch(getLocality(departmentId));
+  }, [dispatch, provinceId, departmentId]);
+
   const raiting = [1, 2, 3, 4, 5];
 
-  
   const onChangeProvinces = async (event) => {
     setFilter({
       ...stateFilter,
       provinces: event.target.value,
     });
-    setProvinceId(event.target.options[event.target.selectedIndex].getAttribute('id'))
+    setProvinceId(
+      event.target.options[event.target.selectedIndex].getAttribute("id")
+    );
   };
 
-   const onChangeDeparment = async (event) => {
+  const onChangeDeparment = async (event) => {
     setFilter({
       ...stateFilter,
       department: event.target.value,
     });
-    setDepartmentId(event.target.options[event.target.selectedIndex].getAttribute('id'))
+    setDepartmentId(
+      event.target.options[event.target.selectedIndex].getAttribute("id")
+    );
   };
 
   const onChangeLocality = async (event) => {
@@ -89,12 +101,12 @@ const Filter = () => {
   const FuncionCleanFilter = (event) => {
     event.preventDefault();
     document.forms["filterForm"].reset();
-    setProvinceId('')
-    setDepartmentId('')
+    setProvinceId("");
+    setDepartmentId("");
     setFilter({
       provinces: "",
-      department:"",
-      locality:"",
+      department: "",
+      locality: "",
       services: [],
       rating: "",
       order: "",
@@ -105,8 +117,8 @@ const Filter = () => {
     dispatch(
       PostFilters({
         provinces: "",
-        department:"",
-        locality:"",
+        department: "",
+        locality: "",
         services: [],
         rating: "",
         order: "",
@@ -118,8 +130,8 @@ const Filter = () => {
     dispatch(
       FuncionSelectFilter({
         provinces: "",
-        department:"",
-        locality:"",
+        department: "",
+        locality: "",
         services: [],
         rating: "",
         order: "",
@@ -131,21 +143,13 @@ const Filter = () => {
 
   return (
     <form name="filterForm" className={style.form}>
-      {/* <Search /> */}
-
-      <div className={style.div}>
-        {/* <div className={styles.divHijo}> */}
-
-        <input
-          className={style.input}
-          type="text"
-          name="text"
-          placeholder="Buscar un Hotel"
-          onChange={onChangeName}
-        />
-      </div>
-      {/* </div> */}
-
+      <input
+        className={style.inputSearch}
+        type="text"
+        name="text"
+        placeholder="Buscar un Hotel"
+        onChange={onChangeName}
+      />
       <select onChange={onChangeProvinces} className={style.select}>
         <option hidden>Filtro Por Provincia</option>
         {Provinces.map((pro) => (
@@ -153,29 +157,36 @@ const Filter = () => {
             {pro.nombre}
           </option>
         ))}
-      </select> 
-
-      {provinceId.length?(<>
-        <select onChange={onChangeDeparment} className={style.select}>
-        <option hidden>Filtro Por Departamento</option>
-        {Department.map((dep) => (
-          <option id={dep.id} value={dep.nombre}>
-            {dep.nombre}
-          </option>
-        ))}
       </select>
-      </>):(<></>)}
+      {provinceId.length ? (
+        <>
+          <select onChange={onChangeDeparment} className={style.select}>
+            <option hidden>Filtro Por Departamento</option>
+            {Department.map((dep) => (
+              <option id={dep.id} value={dep.nombre}>
+                {dep.nombre}
+              </option>
+            ))}
+          </select>
+        </>
+      ) : (
+        <></>
+      )}
 
-      {departmentId.length?(<>
-        <select onChange={onChangeLocality} className={style.select}>
-        <option hidden>Filtro Por Localidad</option>
-        {Locality.map((loc) => (
-          <option id={loc.id} value={loc.nombre}>
-            {loc.nombre}
-          </option>
-        ))}
-      </select>
-      </>):(<></>)}
+      {departmentId.length ? (
+        <>
+          <select onChange={onChangeLocality} className={style.select}>
+            <option hidden>Filtro Por Localidad</option>
+            {Locality.map((loc) => (
+              <option id={loc.id} value={loc.nombre}>
+                {loc.nombre}
+              </option>
+            ))}
+          </select>
+        </>
+      ) : (
+        <></>
+      )}
 
       <select onChange={onChangeRating} className={style.select}>
         <option hidden>Filtro Por raiting</option>
@@ -203,6 +214,7 @@ const Filter = () => {
                 <label className={style.checkbox_btn}>
                   <label htmlFor="checkbox"></label>
                   <input
+                    className={style.inputServices}
                     onChange={() => onChangeServices(Ser.name)}
                     value={Ser.name}
                     type="checkbox"
