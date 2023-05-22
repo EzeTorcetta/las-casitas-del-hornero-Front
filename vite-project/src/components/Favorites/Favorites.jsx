@@ -28,16 +28,23 @@ const Favorites = () => {
     <div>
       <section className={style.section}>
         <Row xs={1} sm={2} lg={3} className="g-2">
-          {favorites?.map(({ id, name, image, province, rating }) => (
-            <Cards
-              key={id}
-              id={id}
-              name={name}
-              image={image}
-              rating={rating}
-              province={province}
-            />
-          ))}
+          {favorites.length ? (
+            favorites.map(
+              ({ id, name, image, province, rating, valoration }) => (
+                <Cards
+                  key={id}
+                  id={id}
+                  name={name}
+                  image={image}
+                  rating={rating}
+                  province={province}
+                  valoration={valoration}
+                />
+              )
+            )
+          ) : (
+            <h3>No hay favoritos</h3>
+          )}
         </Row>
       </section>
     </div>

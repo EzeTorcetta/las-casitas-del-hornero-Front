@@ -103,7 +103,7 @@
 }
 
 .divJose {
-  min-width: 650px;
+  width: 80vh;
   display: flex;
   justify-content: space-between;
 }
