@@ -32,7 +32,9 @@
 }
 
 .links {
+  text-decoration: none;
   display: flex;
+  color: white;
   flex-direction: column;
   list-style-type: none;
   padding: 0;
