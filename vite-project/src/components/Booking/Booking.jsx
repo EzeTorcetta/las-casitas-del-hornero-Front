@@ -18,9 +18,14 @@ const Booking = () => {
       {booking?.map((book, index) => {
         return (
           <div key={index} className={style.booking}>
-            <h3>{`${book.hotelName}`}</h3>
-            <div>{`Precio individual: ${book.individualPrice}`}</div>
-            <div>{`Precio total: ${book.totalPrice}`}</div>
+            <h3 className={style.hotelName}>{`${book.hotelName}`}</h3>
+            <div className={style.individualPrice}>
+              {" "}
+              {`Precio individual: ${book.individualPrice}`}
+            </div>
+            <div className={style.totalPrice}>
+              {`Precio total: ${book.totalPrice}`}
+            </div>
           </div>
         );
       })}
