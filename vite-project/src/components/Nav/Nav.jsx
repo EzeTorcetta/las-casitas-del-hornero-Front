@@ -75,7 +75,7 @@ const NavBar = ({ countCarrito }) => {
               src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
               alt="LaCasitaDelHornero"
             />
-            <p className={style.p}>CasitasDelHornero</p>
+            <p className={style.tituloLogo}>CasitasDelHornero</p>
           </div>
         </NavLink>
 
