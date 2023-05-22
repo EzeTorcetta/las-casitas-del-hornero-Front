@@ -1,14 +1,14 @@
 import { useState } from "react";
 import validacion from "./Validations";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import style from "./FormularioTipoHabitacion.module.css";
 import { useSelector } from "react-redux";
 
 const FormularioTipoHab = () => {
-
-  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+  const URL_BASE =
+    "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
   const { state } = useLocation();
   const id = useSelector((state) => state.idHotelForm);
@@ -190,12 +190,20 @@ const FormularioTipoHab = () => {
           />
           <label>URL de la foto.</label>
         </div>
-
+        <span className={style.hidden}>hidden</span>
         <button
           className="w-100 btn btn-lg btn-warning"
           type="submit">
           Registrar
         </button>
+        <span className={style.hidden}>hidden</span>
+        <NavLink to={"/Home"}>
+          <button
+            className="w-100 btn btn-lg btn-warning"
+            type="button">
+            Finalizar
+          </button>
+        </NavLink>
       </form>
     </div>
   );

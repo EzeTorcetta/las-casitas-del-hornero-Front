@@ -71,58 +71,46 @@ const NavBar = ({ countCarrito }) => {
   return (
     <>
       <div className={style.nav}>
-        <div className={style.logo}>
-          <img
-            className={style.img}
-            src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
-            alt="LaCasitaDelHornero"
-          />
-          <p className={style.p}>CasitasDelHornero</p>
-        </div>
+        <NavLink to={"/Home"} className={style.links}>
+          <div className={style.logo}>
+            <img
+              className={style.img}
+              src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+              alt="LaCasitaDelHornero"
+            />
+            <div className={style.tituloLogo}>CasitasDelHornero</div>
+          </div>
+        </NavLink>
 
         <div
           className={
             showNavbar || windowWidth > 768
               ? `${style.links} ${style.show}`
               : style.links
-          }
-        >
-          {rol === 2 ? (
+          }>
+          {rol === 1 ? (
             <NavLink
-              to={"/Proveedor"}
+              to={"/Carrito"}
               className={style.link}
-              onClick={() => setShowNavbar(false)}
-            >
-              <button className={style.button}>Proveer Hotel</button>
-            </NavLink>
-          ) : rol === 3 ? (
-            <NavLink
-              to={"/SuperAdmin"}
-              className={style.link}
-              onClick={() => setShowNavbar(false)}
-            >
-              <button className={style.button}>Administrar Usuarios</button>
+              onClick={() => setShowNavbar(false)}>
+              <div className={style.divCarritoCount}>
+                <div className={style.countCarritoDiv}>
+                  {countCarrito}
+                </div>
+                <img
+                  className={style.iconoCarrito}
+                  src={imageCarrito}
+                />
+              </div>
             </NavLink>
           ) : (
-            <>
-              <NavLink
-                to={"/Carrito"}
-                className={style.link}
-                onClick={() => setShowNavbar(false)}
-              >
-                <div className={style.divCarritoCount}>
-                  <div className={style.countCarritoDiv}>{countCarrito}</div>
-                  <img className={style.iconoCarrito} src={imageCarrito} />
-                </div>
-              </NavLink>
-            </>
+            <></>
           )}
 
           <NavLink
             to={"/Home"}
             className={style.link}
-            onClick={() => setShowNavbar(false)}
-          >
+            onClick={() => setShowNavbar(false)}>
             <div className={style.divHome}>
               <div className={style.divHome1}>Home</div>
             </div>
@@ -132,31 +120,62 @@ const NavBar = ({ countCarrito }) => {
             <div className={style.perfil}>
               <button
                 onClick={() => setShowMenu(!showMenu)}
-                className={style.profileButton}
-              >
-                <img className={style.img} src={imagenUsuario} alt="Perfil" />
-                <p className={style.NombreUsuario}>{username}</p>
+                className={style.profileButton}>
+                <img
+                  className={style.img}
+                  src={imagenUsuario}
+                  alt="Perfil"
+                />
+                <p>{`${username}`}</p>
+                {/* <span className={style.NombreUsuario}>{`${username}`}</span> */}
               </button>
               {showMenu && (
                 <ul className={style.menu}>
                   <li>
-                    <button
-                      onClick={handleVerPerfil}
-                      className={style.menuOption}
-                    >
-                      Ver Perfil
-                    </button>
+                    <NavLink
+                      to={"/Perfil"}
+                      onClick={() => setShowNavbar(false)}>
+                      <button
+                        onClick={handleVerPerfil}
+                        className={style.menuOption}>
+                        Ver Perfil
+                      </button>
+                    </NavLink>
+                  </li>
+                  <li>
+                    {/* {rol === 2 ? (
+                      <NavLink
+                        to={""}
+                        className={style.link}
+                        onClick={() => setShowNavbar(false)}>
+                        <button className={style.menuOption}>
+                          Proveer Hotel
+                        </button>
+                      </NavLink>
+                    ) : rol === 3 ? (
+                      <NavLink
+                        to={""}
+                        className={style.link}
+                        onClick={() => setShowNavbar(false)}>
+                        <button className={style.menuOption}>
+                          Administrar Usuarios
+                        </button>
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to={""}
+                        className={style.link}
+                        onClick={() => setShowNavbar(false)}>
+                        <button className={style.menuOption}>
+                          Quiero ser Proveedor
+                        </button>
+                      </NavLink>
+                    )} */}
                   </li>
                   <li>
                     <button
-                      onClick={handleChangeTipoCuenta}
-                      className={style.menuOption}
-                    >
-                      Quiero ser proveedor
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={handleLogout} className={style.menuOption}>
+                      onClick={handleLogout}
+                      className={style.menuOption}>
                       Logout
                     </button>
                   </li>
@@ -167,10 +186,12 @@ const NavBar = ({ countCarrito }) => {
             <NavLink
               to={"/"}
               className={style.link}
-              onClick={() => setShowNavbar(false)}
-            >
+              onClick={() => setShowNavbar(false)}>
               <button className={style.BotonUsuario}>
-                <img className={style.iconoCarrito} src={imagenSesion} />
+                <img
+                  className={style.iconoCarrito}
+                  src={imagenSesion}
+                />
                 <p>Iniciar Sesion</p>
               </button>
             </NavLink>

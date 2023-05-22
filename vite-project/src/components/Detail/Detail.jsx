@@ -92,7 +92,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
         <h1>Descripción</h1>
         <p>{DetailHotel.description}</p>
       </section>
-      <Reviews />
+      
       {DetailHotel.location && DetailHotel.name && (
         <Maps location={DetailHotel.location} name={DetailHotel.name} />
       )}
@@ -108,6 +108,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
           <p onClick={setHotel}>Agregar Room Type</p>
         </NavLink>
       </section>
+      <Reviews />
       <Footer />
     </div>
   );
