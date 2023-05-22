@@ -4,6 +4,7 @@ import PartnerHotels from "../PartnerHotels/PartnerHotels";
 import style from "./PerfilColaborador.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncionAllPartnerHotel } from "../../redux/Actions/Actions";
+import { NavLink } from "react-router-dom";
 
 const PerfilColaborador = () => {
     let User = PedirLocalStorage();
@@ -33,7 +34,11 @@ const PerfilColaborador = () => {
                 <div className={style.divHotels}>
                     <br />
                     <PartnerHotels hotels={hotels}/>
-                    <button>Agregar Hoteles</button>
+
+                    <NavLink to={"/FormHotel"}>
+                        <p>Agregar Hotel</p>    
+                    </NavLink>
+
                 </div>
             </div>
         </section>

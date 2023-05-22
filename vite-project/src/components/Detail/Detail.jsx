@@ -2,7 +2,7 @@
 //react
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 //components
 import {
   CarruselDetail,
@@ -17,6 +17,7 @@ import {
   FuncionDetailHotel,
   FuncionClearDetail,
   GetTrolley,
+  idHotelForm,
 } from "../../redux/Actions/Actions";
 //image
 import imagen from "../../image/favorito.png";
@@ -44,6 +45,10 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   }, [id]);
 
   setCountCarrito((countCarrito = Trolleys.length));
+
+  const setHotel = async () => {
+    await dispatch(idHotelForm(id))
+  }
 
   let array = Array(DetailHotel.rating).fill(DetailHotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
 
@@ -99,6 +104,9 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
           countCarrito={countCarrito}
           id={id}
         />
+        <NavLink to="/FormRoomType">
+          <p onClick={setHotel}>Agregar Room Type</p>
+        </NavLink>
       </section>
       <Footer />
     </div>

@@ -86,6 +86,18 @@ const NavBar = ({ countCarrito }) => {
           }
         >
           
+          {rol===1?(
+            <NavLink
+            to={"/Carrito"}
+            className={style.link}
+            onClick={() => setShowNavbar(false)}
+            >
+              <div className={style.divCarritoCount}>
+                <div className={style.countCarritoDiv}>{countCarrito}</div>
+                <img className={style.iconoCarrito} src={imageCarrito} />
+              </div>
+            </NavLink>
+          ):(<></>)}
 
           <NavLink
             to={"/Home"}

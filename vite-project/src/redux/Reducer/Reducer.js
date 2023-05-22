@@ -23,6 +23,7 @@ import {
   CHANGE_ROL,
   PUT_AMOUNT_TROLLEY,
   UP_DATE_TROLLEY,
+  ID_HOTEL_FORM
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -54,6 +55,7 @@ const InicialState = {
     name: "",
   },
   Reviews: 0,
+  idHotelForm:'',
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -65,7 +67,6 @@ export const rootReducer = (state = InicialState, actions) => {
         HotelsCopi: actions.payload,
       };
     case POST_FILTERS:
-      console.log(actions.payload);
       return {
         ...state,
         Filters: actions.payload,
@@ -177,6 +178,11 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         Trolley: actions.payload,
       };
+    case ID_HOTEL_FORM:
+      return {
+        ...state,
+        idHotelForm: actions.payload,
+      }
     default:
       return { ...state };
   }

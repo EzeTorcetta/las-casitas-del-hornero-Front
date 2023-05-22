@@ -1,0 +1,17 @@
+.form {
+    min-width: 500px;
+    max-width: 500px;
+  }
+  
+  .error {
+    visibility: visible;
+    color: rgb(255, 0, 0);
+  }
+  
+  .hidden {
+    visibility: hidden;
+  }
+  
+  .tipoHab {
+    color: grey;
+  }

@@ -32,10 +32,14 @@ import ReviewPartner from "./ReviewPartner/ReviewPartner";
 import Booking from "./Booking/Booking";
 import GetUsers from "./GetUsers/GetUser";
 import BotonAuthGoogle from "./GoogleAuth/BotonAuthGoogle";
+import FormularioHotel from "./Formularios/FormularioHotel/FormularioHotel";
+import FormularioTipoHab from "./Formularios/FormularioTipoHabitacion/FormularioTipoHabitacion";
 
 
 
 export {
+  FormularioHotel,
+  FormularioTipoHab,
   BotonAuthGoogle,
   GetUsers,
   Booking,

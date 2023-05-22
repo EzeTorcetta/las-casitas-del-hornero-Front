@@ -23,6 +23,7 @@ import {
   CHANGE_ROL,
   UP_DATE_TROLLEY,
   PUT_AMOUNT_TROLLEY,
+  ID_HOTEL_FORM
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -377,3 +378,9 @@ export const changeRol = (data) => {
 }
 };
 
+//* ----------------- ID HOTEL FORM ------------------------------------
+export const idHotelForm = (id) => {
+  return async function (dispatch){
+    dispatch({ type: ID_HOTEL_FORM, payload: id });
+}
+};
