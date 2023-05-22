@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
 import imagenSesion from "../../image/perfil.png";
@@ -28,19 +28,17 @@ const NavBar = ({ countCarrito }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Lógica para realizar el logout
-    // ...
+    logout();
   };
 
   const handleVerPerfil = () => {
-    // Lógica para ver el perfil
-    // ...
+    navigate("/Perfil");
   };
   const handleChangeTipoCuenta = () => {
-    // Lógica para cambiar el tipo de cuenta
-    // ...
+    navigate("/UserForm");
   };
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
@@ -137,15 +135,10 @@ const NavBar = ({ countCarrito }) => {
                 className={style.profileButton}
               >
                 <img className={style.img} src={imagenUsuario} alt="Perfil" />
-                <span className={style.NombreUsuario}>{username}</span>
+                <p className={style.NombreUsuario}>{username}</p>
               </button>
               {showMenu && (
                 <ul className={style.menu}>
-                  <li>
-                    <button onClick={handleLogout} className={style.menuOption}>
-                      Logout
-                    </button>
-                  </li>
                   <li>
                     <button
                       onClick={handleVerPerfil}
@@ -160,6 +153,11 @@ const NavBar = ({ countCarrito }) => {
                       className={style.menuOption}
                     >
                       Quiero ser proveedor
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className={style.menuOption}>
+                      Logout
                     </button>
                   </li>
                 </ul>

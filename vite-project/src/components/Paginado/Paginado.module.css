@@ -26,3 +26,8 @@
   text-decoration: underline;
   font-weight: bold;
 }
+.nonactive {
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+}
