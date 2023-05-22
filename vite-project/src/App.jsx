@@ -10,6 +10,8 @@ import {
   FormLocal,
   FormGoogle,
   LogOut,
+  FormularioHotel,
+  FormularioTipoHab
 } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
 
@@ -23,6 +25,10 @@ function App() {
         <Route path="/RegistroLocal" element={<FormLocal />} />
         <Route path="/RegistroGoogle" element={<FormGoogle />} />
         <Route path="/Logout" element={<LogOut />} />
+
+        <Route path="/FormHotel" element={<FormularioHotel />} />
+        <Route path="/FormRoomType" element={<FormularioTipoHab />} />
+
         <Route path="/" element={<Landing />} />
         <Route
           path="/Home"

@@ -1,0 +1,91 @@
+.form {
+    max-width: 500px;
+    max-width: 500px;
+  }
+  
+  .error {
+    visibility: visible;
+    color: rgb(255, 0, 0);
+  }
+  
+  .hidden {
+    visibility: hidden;
+  }
+  
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .checkmark {
+    border: solid 1px grey;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.3em;
+    width: 1.3em;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 5);
+  }
+  
+  .container input:checked ~ .checkmark {
+    background-image: linear-gradient(#ff9b21, #ffa02b);
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .container .checkmark:after {
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+  }
+  
+  .checkContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .checkbox {
+    margin: 0 100px;
+  }
+  
+  .nameService {
+    color: #212529;
+    font-weight: 400;
+  }
+  
+  .select {
+    appearance: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 0.5rem;
+    background-color: orange;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 7px;
+    border: 2px solid white;
+    margin: 5px;
+  }
