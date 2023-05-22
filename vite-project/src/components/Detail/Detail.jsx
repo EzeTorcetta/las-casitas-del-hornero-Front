@@ -47,8 +47,8 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   setCountCarrito((countCarrito = Trolleys.length));
 
   const setHotel = async () => {
-    await dispatch(idHotelForm(id))
-  }
+    await dispatch(idHotelForm(id));
+  };
 
   let array = Array(DetailHotel.rating).fill(DetailHotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
 
@@ -94,7 +94,10 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
       </section>
       <Reviews />
       {DetailHotel.location && DetailHotel.name && (
-        <Maps location={DetailHotel.location} name={DetailHotel.name} />
+        <Maps
+          location={DetailHotel.location}
+          name={DetailHotel.name}
+        />
       )}
       <section className={`${style.section} ${style.two}`}>
         <TypeRoom

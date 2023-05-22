@@ -6,12 +6,13 @@ import swal from "sweetalert";
 import style from "./FormularioTipoHabitacion.module.css";
 import { useSelector } from "react-redux";
 
-const FormularioTipoHab = () => {
+const FormularioTipoHab = (props) => {
   const URL_BASE =
     "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
   const { state } = useLocation();
-  const id = useSelector((state) => state.idHotelForm);
+  const idHotelForm = useSelector((state) => state.idHotelForm);
+  const id = state?.id_hotel || idHotelForm;
   const resetTipoHab = {
     people: "",
     price: "",
@@ -74,7 +75,7 @@ const FormularioTipoHab = () => {
         icon: "success",
         buttons: "Aceptar",
       });
-      navigate("/Proveedor/TipoHab", {
+      navigate("/FormRoomType", {
         state: { id_hotel: state.id_hotel },
         replace: true,
       });
