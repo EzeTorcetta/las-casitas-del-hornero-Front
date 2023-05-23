@@ -32,11 +32,17 @@
 }
 
 .links {
+  text-decoration: none;
   display: flex;
+  color: white;
   flex-direction: column;
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.tituloLogo {
+  color: white;
 }
 
 .link {
@@ -80,12 +86,12 @@
   margin: 20px;
 }
 
-.BotonUsuario {
+/* .BotonUsuario {
   display: flex;
   justify-content: center;
   overflow: hidden;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: transparent;
   width: 180px;
   text-align: center;
   height: 30px;
@@ -95,6 +101,38 @@
   -webkit-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+}
+
+.IniciarSesion {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: orange;
+  width: 180px;
+  text-align: center;
+  height: 40px;
+  border: none;
+  font-size: 10px;
+  color: rgb(0, 0, 0);
+  -webkit-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
+}
+.IniciarSesion p{
+  margin-top: 15px;
+  
+} */
+.BotonUsuario {
+  /* display: flex; */
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  background-color: orange;
+  border:0px;
+  width: 100px;
+  
 }
 
 .button {

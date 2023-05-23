@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  NavBar,
-  Footer,
-  Favoritos,
-  PedirLocalStorage,
-  ReviewPartner,
-} from "../Index";
+import { NavBar, Footer, PedirLocalStorage, ReviewPartner } from "../Index";
 import PartnerHotels from "../PartnerHotels/PartnerHotels";
 import style from "./PerfilColaborador.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,7 +34,6 @@ const PerfilColaborador = () => {
           <div className={style.divHotels}>
             <br />
             <PartnerHotels hotels={hotels} />
-
             <NavLink to={"/FormHotel"}>
               <p>Agregar Hotel</p>
             </NavLink>

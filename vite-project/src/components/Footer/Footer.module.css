@@ -1,9 +1,13 @@
 .footer {
-  height: 20vh;
+  height: 5vh;
   width: 100%;
   background-color: rgb(254, 255, 218);
   color: orange;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.footer p{
+  margin-bottom: 90px;
 }

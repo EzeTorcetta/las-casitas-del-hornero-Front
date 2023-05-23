@@ -1,7 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PedirLocalStorage } from "../Index";
-import { useEffect, useState } from "react";
 import { changeRol, getUsers } from "../../redux/Actions/Actions";
+import style from "./GetUser.module.css";
+import imagenUsuario from "../../image/usuario (1).png";
 
 const GetUsers = () => {
   const dispatch = useDispatch();
@@ -33,29 +35,37 @@ const GetUsers = () => {
   };
 
   return (
-    <>
+    <div className={style.container}>
       {users?.map((usuario) => (
-        <div key={usuario.id}>
+        <div key={usuario.id} className={style.card}>
+          <img className={style.img} src={imagenUsuario} alt="Perfil" />
           <h3>{usuario.username}</h3>
           <p>{usuario.email}</p>
           {usuario.rol === 1 && <p>rol: Usuario</p>}
           {usuario.rol === 2 && <p>rol: Partner</p>}
           {usuario.rol === 3 && <p>rol: superadmin</p>}
-          <button onClick={() => handleSelectUser(usuario.id)}>Cambiar rol</button>
+          <button onClick={() => handleSelectUser(usuario.id)}>
+            Cambiar rol
+          </button>
           {showOptions && selectedUserId === usuario.id && (
             <>
-              <select value={selectedUserRole} onChange={(e) => setSelectedUserRole(e.target.value)}>
+              <select
+                value={selectedUserRole}
+                onChange={(e) => setSelectedUserRole(e.target.value)}
+              >
                 <option hidden>seleccionar rol</option>
                 <option value={1}>Usuario</option>
                 <option value={2}>Partner</option>
                 <option value={3}>superadmin</option>
               </select>
-              <button onClick={handleRoleChange}>Confirmar</button>
+              <button className={style.confirm} onClick={handleRoleChange}>
+                Confirmar
+              </button>
             </>
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
