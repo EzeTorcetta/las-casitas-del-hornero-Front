@@ -34,10 +34,14 @@ import GetUsers from "./GetUsers/GetUser";
 import BotonAuthGoogle from "./GoogleAuth/BotonAuthGoogle";
 import FormularioHotel from "./Formularios/FormularioHotel/FormularioHotel";
 import FormularioTipoHab from "./Formularios/FormularioTipoHabitacion/FormularioTipoHabitacion";
-
-
+import Error404 from "./Error404/Error";
+import OlvidasteLaPassword from "./OlvidasteLaPassword/OlvidasteLaPassword";
+import RestablecerContraseña from "./OlvidasteLaPassword/RestablecerContraseña";
 
 export {
+  OlvidasteLaPassword,
+  RestablecerContraseña,
+  Error404,
   FormularioHotel,
   FormularioTipoHab,
   BotonAuthGoogle,
