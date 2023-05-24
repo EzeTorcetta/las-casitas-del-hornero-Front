@@ -1,15 +1,15 @@
 import { useDispatch } from "react-redux";
-import { getCurrencyRateAPI } from "../../redux/Actions/Actions.js";
+import { setCurrencySymbol } from "../../redux/Actions/Actions.js";
 
 const SymbolsCurrency = () => {
   const dispatch = useDispatch();
 
   const onChangeCurrency = (event) => {
-    dispatch(getCurrencyRateAPI(event.target.value));
+    dispatch(setCurrencySymbol(event.target.value));
   };
 
   return (
-    <select onChange={onChangeCurrency}>
+    <select name="select" onChange={onChangeCurrency}>
       <option value="AED">
         Dírham de los Emiratos Árabes Unidos
       </option>
@@ -40,14 +40,14 @@ const SymbolsCurrency = () => {
       <option value="BTC">Bitcoin</option>
       <option value="BTN">Ngultrum butanés</option>
       <option value="BWP">Pula de Botsuana</option>
-      <option value="BYN">Nuevo rublo bielorruso</option>
-      <option value="BYR">Rublo bielorruso</option>
+      <option value="BYN">Rublo bielorruso</option>
       <option value="BZD">Dólar de Belice</option>
       <option value="CAD">Dólar canadiense</option>
       <option value="CDF">Franco congoleño</option>
       <option value="CHF">Franco suizo</option>
       <option value="CLF">Unidad de Cuenta Chilena (UF)</option>
       <option value="CLP">Peso chileno</option>
+      <option value="CNH">Yuan chino (en el extranjero)</option>
       <option value="CNY">Yuan chino</option>
       <option value="COP">Peso colombiano</option>
       <option value="CRC">Colón costarricense</option>
@@ -104,8 +104,6 @@ const SymbolsCurrency = () => {
       <option value="LKR">Rupia de Sri Lanka</option>
       <option value="LRD">Dólar liberiano</option>
       <option value="LSL">Lesoto Loti</option>
-      <option value="LTL">Litas lituana</option>
-      <option value="LVL">Lats de Letonia</option>
       <option value="LYD">Dinar libio</option>
       <option value="MAD">Dírham marroquí</option>
       <option value="MDL">leu moldavo</option>
@@ -114,7 +112,7 @@ const SymbolsCurrency = () => {
       <option value="MMK">Kyat de Birmania</option>
       <option value="MNT">Tugrik mongol</option>
       <option value="MOP">Pataca de Macao</option>
-      <option value="MRO">Ouguiya mauritano</option>
+      <option value="MRU">Ouguiya mauritano</option>
       <option value="MUR">Rupia de Mauricio</option>
       <option value="MVR">Rufiyaa de Maldivas</option>
       <option value="MWK">Kwacha de Malawi</option>
@@ -147,11 +145,14 @@ const SymbolsCurrency = () => {
       <option value="SEK">Corona sueca</option>
       <option value="SGD">Dólar de Singapur</option>
       <option value="SHP">Libra de Santa Elena</option>
-      <option value="SLE">Leona de Sierra Leona</option>
       <option value="SLL">Leona de Sierra Leona</option>
       <option value="SOS">Chelín somalí</option>
       <option value="SRD">Dólar surinamés</option>
-      <option value="STD">Dobra de Santo Tomé y Príncipe</option>
+      <option value="SSP">Libra de Sudán del Sur</option>
+      <option value="STD">
+        Dobra de Santo Tomé y Príncipe (pre-2018)
+      </option>
+      <option value="STN">Santo Tomé y Príncipe Dobra</option>
       <option value="SVC">Colón Salvadoreño</option>
       <option value="SYP">Libra siria</option>
       <option value="SZL">Suazi Lilangeni</option>
@@ -159,7 +160,7 @@ const SymbolsCurrency = () => {
       <option value="TJS">Somoni tayiko</option>
       <option value="TMT">Manat turkmenistán</option>
       <option value="TND">Dinar tunecino</option>
-      <option value="TOP">Tongan Paʻanga</option>
+      <option value="TOP">BA"Tongan Pa'anga</option>
       <option value="TRY">Lira turca</option>
       <option value="TTD">Dólar de Trinidad y Tobago</option>
       <option value="TWD">Nuevo dólar taiwanés</option>
@@ -169,17 +170,24 @@ const SymbolsCurrency = () => {
       <option value="USD">Dólar de los Estados Unidos</option>
       <option value="UYU">Peso uruguayo</option>
       <option value="UZS">Uzbekistán Som</option>
-      <option value="VEF">Venezolana Bolívar Fuerte</option>
-      <option value="VES">Soberano Bolívar</option>
+      <option value="VEF">Venezolano Bolívar Fuerte (Antiguo)</option>
+      <option value="VES">Venezolano Bolívar Soberano</option>
       <option value="VND">Dong vietnamita</option>
       <option value="VUV">Vanuatu Vatu</option>
       <option value="WST">Samoano Tala</option>
       <option value="XAF">Franco CFA BEAC</option>
-      <option value="XAG">Plata (onza troy)</option>
-      <option value="XAU">Oro (onza troy)</option>
+      <option value="XAG">Onza de plata</option>
+      <option value="XAU">Onza de oro</option>
       <option value="XCD">Dólar del Caribe Oriental</option>
       <option value="XDR">Derechos especiales de giro</option>
-      <option value="XOF">Franco CFA BC</option>
+      <option value="XOF">Franco CFA BCEAO</option>
+      <option value="XPD">Onza de paladio</option>
+      <option value="XPF">Franco CFP</option>
+      <option value="XPT">Onza de platino</option>
+      <option value="YER">Rial yemení</option>
+      <option value="ZAR">Rand sudafricano</option>
+      <option value="ZMW">Kwacha zambiano</option>
+      <option value="ZWL">Dólar de Zimbabue"</option>
     </select>
   );
 };

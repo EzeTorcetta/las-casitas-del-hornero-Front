@@ -12,7 +12,7 @@ import {
   FuncionSelectFilter,
   FuncionAllFavoritesHotel,
   GetTrolley,
-  getCurrencyBaseAPI,
+  getCurrencyRateAPI,
 } from "../../redux/Actions/Actions";
 //components
 // import Cards from "../Cards/Cards";
@@ -62,7 +62,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
 
   useEffect(() => {
     if (User) dispatch(GetTrolley(User.id));
-    if (!currencyExchange.base) dispatch(getCurrencyBaseAPI("ARS"));
+    if (!currencyExchange.rate) dispatch(getCurrencyRateAPI());
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }

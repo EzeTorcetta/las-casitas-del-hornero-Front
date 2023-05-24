@@ -24,7 +24,7 @@ import {
   PUT_AMOUNT_TROLLEY,
   UP_DATE_TROLLEY,
   ID_HOTEL_FORM,
-  GET_CURRENCY_BASE,
+  SET_CURRENCY_SYMBOL,
   GET_CURRENCY_RATE,
 } from "../Actions";
 
@@ -188,20 +188,20 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         idHotelForm: actions.payload,
       };
-    case GET_CURRENCY_BASE:
-      return {
-        ...state,
-        currencyExchange: {
-          ...state.currencyExchange,
-          base: actions.payload,
-        },
-      };
     case GET_CURRENCY_RATE:
       return {
         ...state,
         currencyExchange: {
           ...state.currencyExchange,
           rate: actions.payload,
+        },
+      };
+    case SET_CURRENCY_SYMBOL:
+      return {
+        ...state,
+        currencyExchange: {
+          ...state.currencyExchange,
+          symbol: actions.payload,
         },
       };
     default:

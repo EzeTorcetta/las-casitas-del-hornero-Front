@@ -24,8 +24,8 @@ import {
   UP_DATE_TROLLEY,
   PUT_AMOUNT_TROLLEY,
   ID_HOTEL_FORM,
-  GET_CURRENCY_BASE,
   GET_CURRENCY_RATE,
+  SET_CURRENCY_SYMBOL,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -409,16 +409,17 @@ export const idHotelForm = (id) => {
     dispatch({ type: ID_HOTEL_FORM, payload: id });
   };
 };
-//* ----------------- BASE CURRENCY ----------------------------------
-export const getCurrencyBaseAPI = (currencySymbol) => {
+
+// //* ----------------- GET CURRENCY RATE API----------------------------------
+export const getCurrencyRateAPI = () => {
   try {
     return async function (dispatch) {
       const response = await axios.get(
-        `http://data.fixer.io/api/latest?access_key=103d465b515d3001d0386221b0bd6796&symbols=${currencySymbol}`
+        `https://openexchangerates.org/api/latest.json?app_id=d7185c1a1d0d4580a879e291d173af8a`
       );
       dispatch({
-        type: GET_CURRENCY_BASE,
-        payload: response.data.rates[currencySymbol],
+        type: GET_CURRENCY_RATE,
+        payload: response.data.rates,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -430,24 +431,10 @@ export const getCurrencyBaseAPI = (currencySymbol) => {
     });
   }
 };
-// //* ----------------- RATE CURRENCY ----------------------------------
-export const getCurrencyRateAPI = (currencySymbol) => {
-  try {
-    return async function (dispatch) {
-      const response = await axios.get(
-        `http://data.fixer.io/api/latest?access_key=103d465b515d3001d0386221b0bd6796&symbols=${currencySymbol}`
-      );
-      dispatch({
-        type: GET_CURRENCY_RATE,
-        payload: response.data.rates[currencySymbol],
-      });
-    };
-    // eslint-disable-next-line no-unreachable
-  } catch (error) {
-    swal({
-      text: error.response.data.error,
-      icon: "warning",
-      buttons: "Aceptar",
-    });
-  }
+
+// //* ----------------- SET CURRENCY SYMBOL----------------------------------
+export const setCurrencySymbol = (currencySymbol) => {
+  return async function (dispatch) {
+    dispatch({ type: SET_CURRENCY_SYMBOL, payload: currencySymbol });
+  };
 };
