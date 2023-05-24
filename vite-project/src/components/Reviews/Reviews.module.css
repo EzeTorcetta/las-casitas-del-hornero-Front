@@ -1,29 +1,29 @@
-/* .container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
 }
 
-h2 {
+.container h2 {
   color: black;
   text-align: center;
 }
 
-form {
+.container form {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-input[type="text"] {
+.container input[type="text"] {
   width: 300px;
   padding: 10px;
   border: none;
   border-radius: 5px;
   margin-right: 10px;
 }
-input[type="number"] {
+.container input[type="number"] {
   width: 100px;
   padding: 10px;
   border: none;
@@ -31,7 +31,7 @@ input[type="number"] {
   margin-right: 10px;
 }
 
-button[type="submit"] {
+.container button[type="submit"] {
   background-color: orange;
   color: white;
   border: none;
@@ -58,12 +58,8 @@ button[type="submit"] {
   margin-right: 10px;
   border-radius: 50%;
 }
-span {
+.container span {
   color: orange;
   text-decoration: orangered;
   font-weight: bold;
 }
-
-.commentText {
-  flex-grow: 1;
-} */

@@ -77,6 +77,7 @@ const FormLocal = () => {
     } else {
       try {
         const { username, password, email } = usuario;
+        //await axios.get(`http://localhost:3001/email/${email}`); //! cambiar en el deploy
         await axios.post(
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           { username, password, email }
@@ -108,43 +109,43 @@ const FormLocal = () => {
         icon: "warning",
         buttons: "Aceptar",
       });
-
-    if (
-      db.find(
-        (user) =>
-          user.email === usuario.email || user.username === usuario.username
-      )
-    ) {
-      swal({
-        text: "El email o usuario ya existe",
-        icon: "warning",
-        buttons: "Aceptar",
-      });
-    }
-    if (usuario.password !== usuario.repetir) {
-      swal({
-        text: "La password no coincide",
-        icon: "warning",
-        buttons: "Aceptar",
-      });
-    } else {
-      {
-        window.location.href = "Home";
-      }
-      swal({
-        text: "usuario creado",
-        icon: "success",
-        buttons: "Aceptar",
-      });
-    }
-
-    setUsuario({
-      username: "",
-      email: "",
-      password: "",
-      repetir: "",
-    });
   };
+  //   if (
+  //     db.find(
+  //       (user) =>
+  //         user.email === usuario.email || user.username === usuario.username
+  //     )
+  //   ) {
+  //     swal({
+  //       text: "El email o usuario ya existe",
+  //       icon: "warning",
+  //       buttons: "Aceptar",
+  //     });
+  //   }
+  //   if (usuario.password !== usuario.repetir) {
+  //     swal({
+  //       text: "La password no coincide",
+  //       icon: "warning",
+  //       buttons: "Aceptar",
+  //     });
+  //   } else {
+  //     {
+  //       window.location.href = "Home";
+  //     }
+  //     swal({
+  //       text: "usuario creado",
+  //       icon: "success",
+  //       buttons: "Aceptar",
+  //     });
+  //   }
+
+  //   setUsuario({
+  //     username: "",
+  //     email: "",
+  //     password: "",
+  //     repetir: "",
+  //   });
+  // };
 
   return (
     <div className="DivContenedorPadre">
@@ -157,7 +158,7 @@ const FormLocal = () => {
         <form className="form" onSubmit={handleSubmit}>
           {/*--------------------------------UserName----------------------------------*/}
           <div className="input-group">
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               name="username"
@@ -172,7 +173,7 @@ const FormLocal = () => {
           {/*--------------------------------Emial----------------------------------*/}
 
           <div className="input-group">
-            <label for="email">email</label>
+            <label htmlFor="email">email</label>
             <input
               type="email"
               name="email"
@@ -187,7 +188,7 @@ const FormLocal = () => {
           {/*--------------------------------Password----------------------------------*/}
 
           <div className="input-group">
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"
@@ -202,7 +203,7 @@ const FormLocal = () => {
           {/*--------------------------------Password----------------------------------*/}
 
           <div className="input-group">
-            <label for="Repetirpassword">Repetir Password</label>
+            <label htmlFor="Repetirpassword">Repetir Password</label>
             <input
               type="password"
               name="repetir"

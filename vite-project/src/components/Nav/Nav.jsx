@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
 import imagenSesion from "../../image/perfil.png";
@@ -29,24 +29,17 @@ const NavBar = ({ countCarrito }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    if (auth) {
-      await signOut(auth);
-    } else {
-      dispatch(LogOut());
-    }
-    ClearLocalStorage();
-    location.reload();
+  const handleLogout = () => {
+    logout();
   };
 
   const handleVerPerfil = () => {
-    // Lógica para ver el perfil
-    // ...
+    navigate("/Perfil");
   };
   const handleChangeTipoCuenta = () => {
-    // Lógica para cambiar el tipo de cuenta
-    // ...
+    navigate("/UserForm");
   };
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
@@ -65,6 +58,16 @@ const NavBar = ({ countCarrito }) => {
       setShowNavbar(false);
     }
   }, [windowWidth]);
+
+  const logout = async () => {
+    if (auth) {
+      await signOut(auth);
+    } else {
+      dispatch(LogOut());
+    }
+    ClearLocalStorage();
+    location.reload();
+  };
 
   return (
     <>
@@ -143,7 +146,7 @@ const NavBar = ({ countCarrito }) => {
                     </NavLink>
                   </li>
                   <li>
-                    {rol === 2 ? (
+                    {/* {rol === 2 ? (
                       <NavLink
                         to={""}
                         className={style.link}
@@ -170,7 +173,7 @@ const NavBar = ({ countCarrito }) => {
                           Quiero ser Proveedor
                         </button>
                       </NavLink>
-                    )}
+                    )} */}
                   </li>
                   <li>
                     <button

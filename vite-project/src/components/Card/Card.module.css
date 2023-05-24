@@ -30,6 +30,7 @@
   color: white;
   font-weight: bold;
   text-align: center;
+  font-size: 20px;
 }
 
 .rating {
@@ -102,7 +103,7 @@
 }
 
 .divJose {
-  min-width: 650px;
+  width: 80vh;
   display: flex;
   justify-content: space-between;
 }
