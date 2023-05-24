@@ -67,7 +67,6 @@ const TypeRoom = ({
         <Card.Body>
           <Card.Title>{room.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            {/* {`$  ${room.price}`} */}
             <GetCurrencyExchange value={room.price} />
           </Card.Subtitle>
           <Card.Text>People: {room.people}</Card.Text>
