@@ -12,6 +12,7 @@ import {
   FuncionSelectFilter,
   FuncionAllFavoritesHotel,
   GetTrolley,
+  getCurrencyBaseAPI,
 } from "../../redux/Actions/Actions";
 //components
 // import Cards from "../Cards/Cards";
@@ -40,6 +41,9 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const [state, setState] = useState(0);
   const navigate = useNavigate();
   const Trolleys = useSelector((state) => state.Trolley);
+  const currencyExchange = useSelector(
+    (state) => state.currencyExchange
+  );
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -56,20 +60,21 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     navigate("/Registrar");
   };
 
-  useEffect(() => {   
-    if(User)dispatch(GetTrolley(User.id));
+  useEffect(() => {
+    if (User) dispatch(GetTrolley(User.id));
+    if (!currencyExchange.base) dispatch(getCurrencyBaseAPI("ARS"));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }
   }, []);
 
-  if(state === 0 && User?.id === 0){
-    return(
-      <AuthProvider 
+  if (state === 0 && User?.id === 0) {
+    return (
+      <AuthProvider
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleUserNotLoggedIn}
-        onUserNotRegistered={handleUserNotRegistered}>
-      </AuthProvider>)
+        onUserNotRegistered={handleUserNotRegistered}></AuthProvider>
+    );
   }
 
   return (
@@ -120,7 +125,8 @@ const Home = ({ countCarrito, setCountCarrito }) => {
 
         <Clima />
         <Paginado paginas={Hotels.numPages} />
-        <section className={`${style.section} ${style.two}`}></section>
+        <section
+          className={`${style.section} ${style.two}`}></section>
 
         <Footer />
       </div>
