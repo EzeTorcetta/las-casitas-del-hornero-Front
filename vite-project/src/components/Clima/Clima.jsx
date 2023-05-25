@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./Clima.module.css";
+import { useSelector } from "react-redux";
 
 const VITE_API_KEY = "bf29d6808d85484fb42200108231005";
 const API_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${VITE_API_KEY}&q=`;
@@ -20,6 +21,21 @@ export default function Clima() {
     icon: "",
     conditionText: "",
   });
+
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Clima: "Climate",
+      Buscar: "Search",
+      Ciudad: "City *",
+    },
+    es: {
+      Clima: "Clima",
+      Buscar: "Buscar",
+      Ciudad: "Ciudad *",
+    },
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -55,19 +71,19 @@ export default function Clima() {
   };
   return (
     <div>
-      <h2 className={style.h2}>Clima</h2>
+      <h2 className={style.h2}>{translations[idioma].Clima}</h2>
       <form className={style.form} autoComplete="off" onSubmit={onSubmit}>
         <input
           className={style.input}
           id="city"
-          placeholder="Ciudad *"
+          placeholder={translations[idioma].Ciudad}
           value={city}
           required
           onChange={(e) => setCity(e.target.value)}
         ></input>
         {error && <p style={{ color: "red" }}>{error.message}</p>}
         <button className={style.button} type="submit">
-          Buscar
+          {translations[idioma].Buscar}
         </button>
       </form>
 

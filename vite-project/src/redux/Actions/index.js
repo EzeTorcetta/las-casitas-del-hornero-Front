@@ -22,3 +22,4 @@ export const CHANGE_ROL = "CHANGE_ROL";
 export const PUT_AMOUNT_TROLLEY = "PUT_AMOUNT_TROLLEY";
 export const UP_DATE_TROLLEY = "UP_DATE_TROLLEY";
 export const ID_HOTEL_FORM = "ID_HOTEL_FORM";
+export const UPDATE_LANGUAGE = "UPDATE_LANGUAGE";

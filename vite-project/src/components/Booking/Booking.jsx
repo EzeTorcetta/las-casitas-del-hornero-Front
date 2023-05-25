@@ -12,6 +12,18 @@ const Booking = () => {
   useEffect(() => {
     dispatch(getBooking(User.id, User.rol));
   }, [dispatch]);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Precioindividual: "Individual Price",
+      Preciototal: "Total Price",
+    },
+    es: {
+      Precioindividual: "Precio individual",
+      Preciototal: "Precio total",
+    },
+  };
 
   return (
     <div className={style.container}>
@@ -21,10 +33,10 @@ const Booking = () => {
             <h3 className={style.hotelName}>{`${book.hotelName}`}</h3>
             <div className={style.individualPrice}>
               {" "}
-              {`Precio individual: ${book.individualPrice}`}
+              {`${translations[idioma].Precioindividual}: ${book.individualPrice}`}
             </div>
             <div className={style.totalPrice}>
-              {`Precio total: ${book.totalPrice}`}
+              {`${translations[idioma].Precioindividual}: ${book.totalPrice}`}
             </div>
           </div>
         );

@@ -9,7 +9,6 @@ import style from "./Card.module.css";
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
-
 //?----------------- COMPONENTE CARD ------------------------------------
 function Cards({ id, name, image, province, rating, description, valoration }) {
   const dispatch = useDispatch();
@@ -36,6 +35,18 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
       dispatch(FuncionAllFavoritesHotel(User.id));
     }
   };
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      ValoracionDelHotel: "Hotel Rating",
+      VerAlojamiento: "See Accommodation",
+    },
+    es: {
+      ValoracionDelHotel: "Valoracion Del Hotel",
+      VerAlojamiento: "Ver Alojamiento",
+    },
+  };
 
   const onClickDetail = () => {
     navigate(`/detail/${id}`);
@@ -45,21 +56,25 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
     <div className={style.container}>
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
-        {!User || User?.rol === 1?isFav ? (
-          <button
-            onClick={() => handleFavorite(User?.id, id)}
-            className={style.button}
-          >
-            ❤️
-          </button>
+        {!User || User?.rol === 1 ? (
+          isFav ? (
+            <button
+              onClick={() => handleFavorite(User?.id, id)}
+              className={style.button}
+            >
+              ❤️
+            </button>
+          ) : (
+            <button
+              onClick={() => handleFavorite(User?.id, id)}
+              className={style.button}
+            >
+              🤍
+            </button>
+          )
         ) : (
-          <button
-            onClick={() => handleFavorite(User?.id, id)}
-            className={style.button}
-          >
-            🤍
-          </button>
-        ):(<></>)}
+          <></>
+        )}
       </div>
       <div className={style.title}>
         <div className={style.divJose}>
@@ -78,11 +93,13 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
               })}
             </div>
           </div>
-          <p>Valoracion Del Hotel :{valoration}</p>
+          <p>
+            {translations[idioma].ValoracionDelHotel} :{valoration}
+          </p>
         </div>
         <h3 className={style.province}>{province}</h3>
         <button onClick={onClickDetail} className={style.botonDetail}>
-          VER ALOJAMIENTO
+          {translations[idioma].VerAlojamiento}
         </button>
       </div>
     </div>
