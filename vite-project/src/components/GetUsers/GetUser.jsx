@@ -12,6 +12,7 @@ const GetUsers = () => {
   const users = useSelector((state) => state.Users);
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserRole, setSelectedUserRole] = useState("");
+  console.log(selectedUserRole);
   const [showOptions, setShowOptions] = useState(false);
 
   console.log(selectedUserRole);
@@ -20,16 +21,15 @@ const GetUsers = () => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
 
-  const handleRoleChange = () => {
+  const handleRoleChange = async () => {
     const data = {
       id_user: selectedUserId,
       rol: selectedUserRole,
     };
-    dispatch(changeRol(data));
+    await dispatch(changeRol(data));
     setShowOptions(false);
-    setTimeout(() => {
-      dispatch(getUsers(user.id));
-    }, 200);
+
+    await dispatch(getUsers(user.id));
   };
 
   const handleSelectUser = (userId) => {
@@ -57,8 +57,9 @@ const GetUsers = () => {
                   value={selectedUserRole}
                   onChange={(e) => setSelectedUserRole(e.target.value)}
                 >
-                  <option value="2">Admin</option>
+                  <option hidden>Seleccionar Rol</option>
                   <option value="1">User</option>
+                  <option value="2">Admin</option>
                   <option value="3">Superadmin</option>
                 </select>
               ) : (
@@ -89,54 +90,12 @@ const GetUsers = () => {
   };
 
   return (
-    <div className={style.ContainerDeTodosLosUser}>
-      <div className={style.divMuiTable}>
-        <MUIDataTable
-          title="Lista De Usuarios"
-          data={users}
-          columns={columnas}
-          options={options}
-        />
-      </div>
-
-      {/* <MaterialTable columnas={columnas} data={users} /> */}
-      {/* {users?.map((usuario) => (
-        <div className={style.ContainerUser} key={usuario.id}>
-          {usuario.rol === 1 && <p>rol: Usuario</p>}
-          {usuario.rol === 2 && <p>rol: Partner</p>}
-          {usuario.rol === 3 && <p>rol: superadmin</p>}
-
-          <button
-            className={style.BotonRol}
-            onClick={() => handleSelectUser(usuario.id)}
-          >
-            Cambiar rol
-          </button>
-
-          {showOptions && selectedUserId === usuario.id && (
-            <>
-              <select
-                className={style.selectUserRole}
-                value={selectedUserRole}
-                onChange={(e) => setSelectedUserRole(e.target.value)}
-              >
-                <option hidden>seleccionar rol</option>
-                <option value={1}>Usuario</option>
-                <option value={2}>Partner</option>
-                <option value={3}>superadmin</option>
-              </select>
-              <button
-                className={style.BotonConfirmar}
-                onClick={handleRoleChange}
-              >
-                Confirmar
-              </button>
-            </>
-          )}
-        </div>
-      ))}
-    ); */}
-    </div>
+    <MUIDataTable
+      title="Lista De Usuarios"
+      data={users}
+      columns={columnas}
+      options={options}
+    />
   );
 };
 

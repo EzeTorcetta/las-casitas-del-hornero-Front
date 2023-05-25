@@ -77,7 +77,7 @@ const FormLocal = () => {
     } else {
       try {
         const { username, password, email } = usuario;
-        //await axios.get(`http://localhost:3001/email/${email}`); //! cambiar en el deploy
+        await axios.get(`http://localhost:3001/email/Registro/${email}`); //! cambiar en el deploy
         await axios.post(
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           { username, password, email }

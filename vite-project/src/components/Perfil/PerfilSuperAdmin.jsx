@@ -1,3 +1,8 @@
+import {
+  EstadisticasLineal,
+  EstadisticasBarra,
+  EstadisticasDoughnut,
+} from "../../Estadisticas/Estadisticas";
 import { NavBar, Footer, PedirLocalStorage, GetUsers } from "../Index";
 import "./PerfilSuperAdmin.css";
 
@@ -14,9 +19,16 @@ const PerfilSuperAdmin = () => {
         </div>
       </section>
       <section>
-        <div>
+        <div className="DivGetUsers">
           {/* <h1>Usuarios</h1> */}
           <GetUsers />
+        </div>
+      </section>
+      <section>
+        <div className="DivEstadisticas">
+          <EstadisticasLineal />
+          <EstadisticasBarra />
+          <EstadisticasDoughnut />
         </div>
       </section>
       <section className="Footer">

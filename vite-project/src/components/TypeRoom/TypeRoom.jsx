@@ -12,7 +12,7 @@ import { FuncionTypeRoomTypes, GetTrolley } from "../../redux/Actions/Actions";
 import { v4 as uuidv4 } from "uuid";
 
 //?----------------- COMPONENTE ROOM TYPE  ------------------------------------
-const TypeRoom = ({ id, setCountCarrito, countCarrito, name, Trolleys }) => {
+const TypeRoom = ({ id, Trolleys }) => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const User = PedirLocalStorage();
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const TypeRoom = ({ id, setCountCarrito, countCarrito, name, Trolleys }) => {
     nameRoomType,
     Trolleys
   ) => {
-    if(User){
+    if (User) {
       try {
         await axios.post(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
         swal({
@@ -59,7 +59,7 @@ const TypeRoom = ({ id, setCountCarrito, countCarrito, name, Trolleys }) => {
           <Card.Text>People: {room.people}</Card.Text>
           <img className={style.img} src={room.image} />
           <Card.Text>stock : {room.stock}</Card.Text>
-          {User?.rol!==2 && User?.rol!==3?(
+          {User?.rol !== 2 && User?.rol !== 3 ? (
             <button
               className={style.BotonCarrito}
               onClick={() =>
@@ -68,8 +68,10 @@ const TypeRoom = ({ id, setCountCarrito, countCarrito, name, Trolleys }) => {
             >
               + Agregar al Carrito
             </button>
-          ):(<></>)}
-          
+          ) : (
+            <></>
+          )}
+
           {/* {room.name === "Individual" ? (
             <button
               className={style.BotonCarrito}

@@ -11,7 +11,6 @@ import {
 } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
 import Card from "react-bootstrap/Card";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -27,9 +26,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-  if (!User) {
-    navigate("/Home");
-  }
+    if (!User) {
+      navigate("/Home");
+    }
   }, [User, navigate]);
 
   if (!User) {
@@ -58,10 +57,12 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
     }
   }, [ObjetoTrolley, Trolley]);
 
-  const FuncionReservar = async (idUser) => {
-    try {
-      await axios.put(`${URL_BASE}/booking/${idUser}`, ArrayCarritoModificado);
+  const FuncionReservar = async (idUser, email) => {
+    console.log(email);
 
+    try {
+      await axios.get(`http://localhost:3001/email/Reserva/${email}`);
+      await axios.put(`${URL_BASE}/booking/${idUser}`, ArrayCarritoModificado);
       swal({
         text: "Habitacion/es reservadas con exito!!!",
         icon: "success",
@@ -121,7 +122,7 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
           Delete All Trolleys
         </button>
         <button
-          onClick={() => FuncionReservar(User.id)}
+          onClick={() => FuncionReservar(User.id, User.email)}
           className={style.button}
         >
           <span>Reservar</span>

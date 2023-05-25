@@ -19,8 +19,12 @@ import Clima from "./Clima/Clima";
 import Paginado from "./Paginado/Paginado";
 import { LogOut } from "./GoogleAuth/LogOut";
 import Trolley from "./Trolley/Trolley";
+//*------------------LoclaStorage-----------------------------------*//
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
+import GuardarDatosParaCambiarPassword from "./LocalStorage/PutPasswordLocalStorage/GuardarDatosParaCambiarPassword";
+import PedirEmailLocalStorage from "./LocalStorage/PutPasswordLocalStorage/PedirEmailLocalStorage";
+//*----------------------------------------------------------------*//
 import FormLocal from "./Formularios/FormularioRegistrar/FormLocal";
 import FormGoogle from "./Formularios/FormularioRegistrar/FormGoogle";
 import PerfilColaborador from "./Perfil/PerfilColaborador";
@@ -77,4 +81,6 @@ export {
   Perfil,
   GuardarLocalStorage,
   PedirLocalStorage,
+  GuardarDatosParaCambiarPassword,
+  PedirEmailLocalStorage,
 };

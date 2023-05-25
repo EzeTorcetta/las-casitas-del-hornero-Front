@@ -2,6 +2,7 @@ import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import "./OlvidasteLaPassword.css";
+import { GuardarDatosParaCambiarPassword } from "../Index";
 import { useNavigate } from "react-router-dom";
 
 const OlvidasteLaPassword = () => {
@@ -48,7 +49,8 @@ const OlvidasteLaPassword = () => {
           buttons: "Aceptar",
         });
       } else {
-        axios.get(`http://localhost:3001/email?email=${stateInput}`); //! cambiar en el deploy
+        GuardarDatosParaCambiarPassword(stateInput);
+        await axios.get(`http://localhost:3001/email?email=${stateInput}`); //! cambiar en el deploy
         swal({
           text: "Te enviamos un mail con instrucciones para restablecer tu contraseña",
           icon: "success",
@@ -71,7 +73,7 @@ const OlvidasteLaPassword = () => {
         <div className="card_Padre_Supremo">
           <div className="card">
             <div className="div_Span_Title">
-              <span className="card__title">OLVIDE MI CONSTRASEÑA!</span>
+              <span className="card__title">OLVIDE MI CONTRASEÑA!</span>
             </div>
             <p className="card__content">
               Ingresa tu email y te enviaremos la nueva contraseña.
