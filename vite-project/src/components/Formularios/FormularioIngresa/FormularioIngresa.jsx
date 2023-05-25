@@ -76,10 +76,19 @@ const FormularioIngresa = () => {
   return (
     <>
       <div className="main">
+        {/* <h1 className={style.landing_title}>CASITAS DEL HORNERO</h1> */}
+        <div className={style.logo}>
+          <img
+            src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+            alt=""
+            className={style.logo_img}
+          />
+          <h1 className={style.title}>CASITAS DEL HORNERO</h1>
+        </div>
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="login">
           <form onSubmit={handleSubmit} className="form">
-            <h1 className="h3 mb-3 fw-normal">Ingresa</h1>
+            <h2 className="h3 mb-3 fw-normal">Ingresa</h2>
 
             <input
               type="email"
@@ -106,7 +115,9 @@ const FormularioIngresa = () => {
             <button className={style.buton} type="submit">
               Ingresar
             </button>
-            <Link to={"/OlvidasteLaPassword"}>Olvidaste la contraseña?</Link>
+            <div className={style.password_forgot}>
+              <Link to={"/OlvidasteLaPassword"}>Olvidaste la contraseña?</Link>
+            </div>
           </form>
           <div className={style.butonGoogleDiv}>
             <BotonAuthGoogle />
