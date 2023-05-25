@@ -56,20 +56,21 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     navigate("/Registrar");
   };
 
-  useEffect(() => {   
-    if(User)dispatch(GetTrolley(User.id));
+  useEffect(() => {
+    if (User) dispatch(GetTrolley(User.id));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }
   }, []);
 
-  if(state === 0 && User?.id === 0){
-    return(
-      <AuthProvider 
+  if (state === 0 && User?.id === 0) {
+    return (
+      <AuthProvider
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleUserNotLoggedIn}
-        onUserNotRegistered={handleUserNotRegistered}>
-      </AuthProvider>)
+        onUserNotRegistered={handleUserNotRegistered}
+      ></AuthProvider>
+    );
   }
 
   return (
@@ -85,31 +86,30 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                 <Filter />
               </div>
               <div className={style.divCard}>
-                <Row xs={1} sm={2} lg={3} className="g-2">
-                  {Hotels.allHotels?.map(
-                    ({
-                      id,
-                      name,
-                      image,
-                      province,
-                      rating,
-                      description,
-                      valoration,
-                    }) => (
-                      <Cards
-                        key={id}
-                        id={id}
-                        name={name}
-                        image={image}
-                        province={province}
-                        rating={rating}
-                        description={description}
-                        valoration={valoration}
-                      />
-                    )
-                  )}
-                </Row>
+                {Hotels.allHotels?.map(
+                  ({
+                    id,
+                    name,
+                    image,
+                    province,
+                    rating,
+                    description,
+                    valoration,
+                  }) => (
+                    <Cards
+                      key={id}
+                      id={id}
+                      name={name}
+                      image={image}
+                      province={province}
+                      rating={rating}
+                      description={description}
+                      valoration={valoration}
+                    />
+                  )
+                )}
               </div>
+              <Clima />
             </section>
           </>
         ) : (
@@ -118,7 +118,6 @@ const Home = ({ countCarrito, setCountCarrito }) => {
           </section>
         )}
 
-        <Clima />
         <Paginado paginas={Hotels.numPages} />
         <section className={`${style.section} ${style.two}`}></section>
 

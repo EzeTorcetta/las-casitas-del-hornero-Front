@@ -1,36 +1,55 @@
 .container {
+  background-color: rgba(255, 174, 25, 0.904);
+  background-color: rgb(255, 246, 207);
   display: flex;
+  padding: 1em;
+  margin-bottom: 0.2em;
   border-radius: 0.5rem;
-  min-width: 85%;
-  /* margin: 10px 0 10px 40px; */
+  min-width: 100%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
   height: fit-content;
-  margin-left: 8.5em;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+.imgContainer{
+display: flex;
+flex-basis: 30%;
+}
+
+.container:hover {
+  background-color: rgba(254, 172, 20, 0.773);
+  transform: scale(1.01);
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
 }
 
 .title {
   padding: 1em;
-  min-width: 300px;
-  max-width: 300px;
-  overflow-wrap: break-word;
+
+  /* overflow-wrap: break-word; */
 }
 
 .name {
-  overflow-wrap: break-word;
-  border-radius: 10px;
-  padding: 0.2em;
-  font-weight: bold;
-  color: black;
-}
-
-.province {
   background-color: rgba(228, 46, 0, 0.999);
   padding: 0.2em;
   border-radius: 10px;
   color: white;
   font-weight: bold;
   text-align: center;
-  font-size: 20px;
+}
+
+
+.province {
+  overflow-wrap: break-word;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  padding: 0.2em;
+  font-weight: bold;
+  color: black;
 }
 
 .rating {
@@ -73,6 +92,7 @@
 .link {
   text-decoration: none;
 }
+
 .link:hover {
   background-color: #fcb044;
 }
@@ -88,27 +108,41 @@
   transform: scale(0.8);
 }
 
-@media (max-width: 450px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-    max-width: 200px;
-  }
+
+.valoracion {
+  font-weight: 700;
 }
 
-@media (max-width: 1275px) {
-  p {
-    display: none;
-  }
-}
-
-.divJose {
-  width: 80vh;
-  display: flex;
-  justify-content: space-between;
-}
 
 .divJose1 {
   display: flex;
   align-items: center;
+  justify-content: start;
 }
+@media (max-width:576px) {
+  .container {
+      flex-direction: column;
+      padding: 0;
+      margin-bottom: 0;
+      border-radius: 0;
+      box-shadow: none;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -ms-border-radius: 0;
+      -o-border-radius: 0;
+    border-top: 2px solid white;
+}
+.imgHotel {
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+}
+
+
+/* .divJose {
+  display: flex;
+  flex-direction: row;
+} */
