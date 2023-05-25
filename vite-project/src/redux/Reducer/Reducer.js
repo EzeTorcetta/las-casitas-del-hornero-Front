@@ -23,7 +23,7 @@ import {
   CHANGE_ROL,
   PUT_AMOUNT_TROLLEY,
   UP_DATE_TROLLEY,
-  ID_HOTEL_FORM
+  ID_HOTEL_FORM,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -40,22 +40,24 @@ const InicialState = {
   Provinces: [],
   Department: [],
   Locality: [],
-  Services:[],
-  PartnerHotels:[],
-  Booking:[],
-  Users:[],
+  Services: [],
+  PartnerHotels: [],
+  Booking: [],
+  Users: [],
   Filters: {
     provinces: "",
-    department:"",
-    locality:"",
+    department: "",
+    locality: "",
     services: [],
     rating: "",
     order: "",
     page: 1,
     name: "",
+    checkIn: "",
+    checkOut: "",
   },
   Reviews: 0,
-  idHotelForm:'',
+  idHotelForm: "",
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -108,11 +110,11 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         User: actions.payload,
       };
-      case USER_LOGOUT:
-        return {
-          ...state,
-          User: { email: "", id: 0, rol: 0, username: "" },
-        };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        User: { email: "", id: 0, rol: 0, username: "" },
+      };
     case GET_TROLLEY:
       return {
         ...state,
@@ -182,7 +184,7 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         idHotelForm: actions.payload,
-      }
+      };
     default:
       return { ...state };
   }

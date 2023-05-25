@@ -88,10 +88,13 @@ const RestablecerContraseña = () => {
 
         const { password } = statePassword;
 
-        await axios.put(`http://localhost:3001/user/password`, {
-          email,
-          password,
-        });
+        await axios.put(
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/password`,
+          {
+            email,
+            password,
+          }
+        );
       }
     } catch (error) {
       swal({

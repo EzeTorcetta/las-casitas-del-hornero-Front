@@ -50,7 +50,9 @@ const OlvidasteLaPassword = () => {
         });
       } else {
         GuardarDatosParaCambiarPassword(stateInput);
-        await axios.get(`http://localhost:3001/email?email=${stateInput}`); //! cambiar en el deploy
+        await axios.get(
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/email?email=${stateInput}`
+        ); //! cambiar en el deploy
         swal({
           text: "Te enviamos un mail con instrucciones para restablecer tu contraseña",
           icon: "success",

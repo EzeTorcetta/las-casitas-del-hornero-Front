@@ -5,11 +5,12 @@ import axios from "axios";
 import swal from "sweetalert";
 import style from "./FormularioTipoHabitacion.module.css";
 import { useSelector } from "react-redux";
+import { PedirLocalStorage } from "../../Index";
 
 const FormularioTipoHab = () => {
-  const URL_BASE =
-    "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
+  const User = PedirLocalStorage();
   const { state } = useLocation();
   const id = useSelector((state) => state.idHotelForm);
   const resetTipoHab = {
@@ -18,6 +19,7 @@ const FormularioTipoHab = () => {
     name: "",
     image: "",
     stock: "",
+    id_user: User.id,
   };
   const [tipoHab, setTipoHab] = useState(resetTipoHab);
   const [error, setError] = useState({});
@@ -60,7 +62,7 @@ const FormularioTipoHab = () => {
         buttons: "Aceptar",
       });
 
-    const { people, price, name, image, stock } = tipoHab;
+    const { people, price, name, image, stock, id_user } = tipoHab;
     try {
       await axios.post(`${URL_BASE}/roomtypes/${id}`, {
         people: Number(people),
@@ -68,6 +70,7 @@ const FormularioTipoHab = () => {
         name: tipo[people] || "Multiple",
         image,
         stock,
+        id_user,
       });
       swal({
         text: "Tus habitaciones se registraron con éxito! ",
@@ -102,9 +105,7 @@ const FormularioTipoHab = () => {
 
     <div className="container">
       <form onSubmit={handleSubmit} className={style.form}>
-        <h1 className="h3 mb-3 fw-normal">
-          Registra las habitaciones:
-        </h1>
+        <h1 className="h3 mb-3 fw-normal">Registra las habitaciones:</h1>
 
         {/* CANTIDAD DE PERSONAS */}
 
@@ -191,16 +192,12 @@ const FormularioTipoHab = () => {
           <label>URL de la foto.</label>
         </div>
         <span className={style.hidden}>hidden</span>
-        <button
-          className="w-100 btn btn-lg btn-warning"
-          type="submit">
+        <button className="w-100 btn btn-lg btn-warning" type="submit">
           Registrar
         </button>
         <span className={style.hidden}>hidden</span>
         <NavLink to={"/Home"}>
-          <button
-            className="w-100 btn btn-lg btn-warning"
-            type="button">
+          <button className="w-100 btn btn-lg btn-warning" type="button">
             Finalizar
           </button>
         </NavLink>

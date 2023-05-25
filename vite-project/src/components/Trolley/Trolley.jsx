@@ -61,7 +61,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
     console.log(email);
 
     try {
-      await axios.get(`http://localhost:3001/email/Reserva/${email}`);
+      await axios.get(
+        `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Reserva/${email}`
+      );
       await axios.put(`${URL_BASE}/booking/${idUser}`, ArrayCarritoModificado);
       swal({
         text: "Habitacion/es reservadas con exito!!!",

@@ -7,7 +7,6 @@ import { PedirLocalStorage } from "../Index";
 import { FuncionDetailHotel } from "../../redux/Actions/Actions";
 import swal from "sweetalert";
 
-
 export default function Reviews() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -50,13 +49,13 @@ export default function Reviews() {
       })
       .catch(function (error) {
         swal({
-          text: "Ya realizó una reseña en este hotel",
+          text: error.response.data.error,
           icon: "warning",
           buttons: "Aceptar",
         });
       });
     dispatch(NewReview());
-    dispatch(FuncionDetailHotel(Hotel.id))
+    dispatch(FuncionDetailHotel(Hotel.id));
   };
 
   return (
