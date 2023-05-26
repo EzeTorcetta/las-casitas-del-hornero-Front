@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { getCurrencyRateAPI } from "../../redux/Actions/Actions.js";
+import "./currency.css";
+import logocurrency from "../../image/dolar.png";
 
 const SymbolsCurrency = () => {
   const dispatch = useDispatch();
@@ -9,7 +11,9 @@ const SymbolsCurrency = () => {
   };
 
   return (
-    <select onChange={onChangeCurrency}>
+    <div className="currency-container">
+    <img src={logocurrency} alt='logocurrency' className="logocurrency"/>
+    <select onChange={onChangeCurrency} class='select-bar'>
       <option value="AED">
         Dírham de los Emiratos Árabes Unidos
       </option>
@@ -181,6 +185,7 @@ const SymbolsCurrency = () => {
       <option value="XDR">Derechos especiales de giro</option>
       <option value="XOF">Franco CFA BC</option>
     </select>
+    </div>
   );
 };
 

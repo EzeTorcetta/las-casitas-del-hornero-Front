@@ -24,3 +24,4 @@ export const UP_DATE_TROLLEY = "UP_DATE_TROLLEY";
 export const ID_HOTEL_FORM = "ID_HOTEL_FORM";
 export const GET_CURRENCY_BASE = "GET_CURRENCY_BASE";
 export const GET_CURRENCY_RATE = "GET_CURRENCY_RATE";
+export const SET_THEME = "SET_THEME";

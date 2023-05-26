@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
+import carritoblanco from "../../image/carrito-de-compras-blanco.png";
 import imagenSesion from "../../image/perfil.png";
 import imagenUsuario from "../../image/usuario (1).png";
 import { PedirLocalStorage, ClearLocalStorage } from "../Index";
@@ -9,7 +10,8 @@ import { LogOut } from "../../redux/Actions/Actions";
 import { auth } from "../../Firebase/Firebase";
 import { signOut } from "firebase/auth";
 import SymbolsCurrency from "../CurrencyExchange/SymbolsCurrency";
-import style from "./Nav.module.css";
+import "./Nav.css";
+import SwitchButton from "../SwitchButton/SwitchButton";
 
 // import "NavButon.css";
 
@@ -29,6 +31,7 @@ const NavBar = ({ countCarrito }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const theme = useSelector((state) => state.theme)
 
   const handleLogout = async () => {
     if (auth) {
@@ -67,41 +70,54 @@ const NavBar = ({ countCarrito }) => {
   }, [windowWidth]);
 
   return (
-    <>
-      <div className={style.nav}>
-        <NavLink to={"/Home"} className={style.links}>
-          <div className={style.logo}>
+    <div>
+
+        
+      
+      <div className={theme === 'light' ? 'navlight' : 'navdark'}>
+      
+        <NavLink to={"/Home"} className='links'>
+          
+          <div className='logo'>
+            
             <img
-              className={style.img}
+              className='img'
               src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
               alt="LaCasitaDelHornero"
             />
-            <div className={style.tituloLogo}>CasitasDelHornero</div>
+            <div className='tituloLogo'>CasitasDelHornero</div>
+            
           </div>
+          
         </NavLink>
-
+        <SwitchButton/>
         <SymbolsCurrency />
-
+        
+        
         <div
           className={
             showNavbar || windowWidth > 768
-              ? `${style.links} ${style.show}`
-              : style.links
+              ? `${'links'} ${'show'}`
+              : 'links'
           }>
           {rol === 1 ? (
             <NavLink
               to={"/Carrito"}
-              className={style.link}
+              className='enlaces'
               onClick={() => setShowNavbar(false)}>
-              <div className={style.divCarritoCount}>
-                <div className={style.countCarritoDiv}>
+                
+              <div className='divCarritoCount'>
+                <div className='countCarritoDiv'>
                   {countCarrito}
                 </div>
+                
                 <img
-                  className={style.iconoCarrito}
-                  src={imageCarrito}
+                  className='iconoCarrito'
+                  src={theme === 'light' ? imageCarrito :carritoblanco}
                 />
+                
               </div>
+              
             </NavLink>
           ) : (
             <></>
@@ -109,35 +125,35 @@ const NavBar = ({ countCarrito }) => {
 
           <NavLink
             to={"/Home"}
-            className={style.link}
+            
             onClick={() => setShowNavbar(false)}>
-            <div className={style.divHome}>
-              <div className={style.divHome1}>Home</div>
-            </div>
+            
+              <div className='enlaces'>Home</div>
+            
           </NavLink>
 
           {username ? (
-            <div className={style.perfil}>
+            <div className='perfil'>
               <button
                 onClick={() => setShowMenu(!showMenu)}
-                className={style.profileButton}>
+                className='profileButton'>
                 <img
-                  className={style.img}
+                  className='img'
                   src={imagenUsuario}
                   alt="Perfil"
                 />
-                <p>{`${username}`}</p>
+                <p className="username">{`${username}`}</p>
                 {/* <span className={style.NombreUsuario}>{`${username}`}</span> */}
               </button>
               {showMenu && (
-                <ul className={style.menu}>
+                <ul className='menu'>
                   <li>
                     <NavLink
                       to={"/Perfil"}
                       onClick={() => setShowNavbar(false)}>
                       <button
                         onClick={handleVerPerfil}
-                        className={style.menuOption}>
+                        className='menuOption'>
                         Ver Perfil
                       </button>
                     </NavLink>
@@ -146,27 +162,27 @@ const NavBar = ({ countCarrito }) => {
                     {rol === 2 ? (
                       <NavLink
                         to={""}
-                        className={style.link}
+                        className='link'
                         onClick={() => setShowNavbar(false)}>
-                        <button className={style.menuOption}>
+                        <button className='menuOption'>
                           Proveer Hotel
                         </button>
                       </NavLink>
                     ) : rol === 3 ? (
                       <NavLink
                         to={""}
-                        className={style.link}
+                        className='link'
                         onClick={() => setShowNavbar(false)}>
-                        <button className={style.menuOption}>
+                        <button className='menuOption'>
                           Administrar Usuarios
                         </button>
                       </NavLink>
                     ) : (
                       <NavLink
                         to={""}
-                        className={style.link}
+                     
                         onClick={() => setShowNavbar(false)}>
-                        <button className={style.menuOption}>
+                        <button className='menuOption'>
                           Quiero ser Proveedor
                         </button>
                       </NavLink>
@@ -175,7 +191,7 @@ const NavBar = ({ countCarrito }) => {
                   <li>
                     <button
                       onClick={handleLogout}
-                      className={style.menuOption}>
+                      className='menuOption'>
                       Logout
                     </button>
                   </li>
@@ -185,20 +201,21 @@ const NavBar = ({ countCarrito }) => {
           ) : (
             <NavLink
               to={"/"}
-              className={style.link}
+              className='link'
               onClick={() => setShowNavbar(false)}>
-              <button className={style.BotonUsuario}>
+              <button className='BotonUsuario'>
                 <img
-                  className={style.iconoCarrito}
+                  className='iconoCarrito'
                   src={imagenSesion}
                 />
                 <p>Iniciar Sesion</p>
               </button>
             </NavLink>
           )}
+          
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

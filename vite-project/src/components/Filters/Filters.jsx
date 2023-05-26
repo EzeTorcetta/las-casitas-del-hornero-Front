@@ -12,7 +12,7 @@ import {
   getServices,
 } from "../../redux/Actions/Actions";
 //css
-import style from "./Filters.module.css";
+import "./Filters.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
@@ -22,6 +22,7 @@ const Filter = () => {
   const [stateFilter, setFilter] = useState(Filters);
   const [provinceId, setProvinceId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     dispatch(getProvinces());
@@ -145,32 +146,36 @@ const Filter = () => {
   };
 
   return (
-    <form name="filterForm" className={style.form}>
-      <input
-        className={style.inputSearch}
+    <div>
+      
+      
+    <form name="filterForm" className={ theme === 'light' ? 'filterform' : 'formdark'}>
+    <input
         type="text"
         name="text"
-        placeholder="Buscar un Hotel"
+        className={theme === 'light' ? 'inputSearch' : 'inputSearch-dark'}
+        placeholder="Buscar un Hotel . . ."
         onChange={onChangeName}
       />
-      <select onChange={onChangeProvinces} className={style.select}>
+      <select onChange={onChangeProvinces} className={theme === 'light' ? 'select' : 'select-dark'}>
         <option hidden>Filtro Por Provincia</option>
         {Provinces.map((pro) => (
           <option id={pro.id} value={pro.nombre} key={pro.id}>
             {pro.nombre}
-          </option>
+        </option>
         ))}
       </select>
+      
       {provinceId.length ? (
         <>
           <select
             onChange={onChangeDeparment}
-            className={style.select}>
+            className='select'>
             <option hidden>Filtro Por Departamento</option>
             {Department.map((dep) => (
-              <option id={dep.id} value={dep.nombre}>
+            <option id={dep.id} value={dep.nombre}>
                 {dep.nombre}
-              </option>
+            </option>
             ))}
           </select>
         </>
@@ -182,66 +187,67 @@ const Filter = () => {
         <>
           <select
             onChange={onChangeLocality}
-            className={style.select}>
+            className='select'>
             <option hidden>Filtro Por Localidad</option>
             {Locality.map((loc) => (
-              <option id={loc.id} value={loc.nombre}>
+            <option id={loc.id} value={loc.nombre}>
                 {loc.nombre}
-              </option>
+            </option>
             ))}
           </select>
         </>
       ) : (
         <></>
       )}
-
-      <select onChange={onChangeRating} className={style.select}>
-        <option hidden>Filtro Por raiting</option>
-        {raiting.map((rant, index) => (
+        <select onChange={onChangeRating} className={theme === 'light' ? 'select' : 'select-dark'}>
+          <option hidden>Filtro Por raiting</option>
+          {raiting.map((rant, index) => (
           <option value={rant} key={index}>
             {rant}
           </option>
         ))}
       </select>
-      <select onChange={onChangeOrder} className={style.select}>
-        <option hidden>Ordenar por</option>
-        <option value="VALORATIONDESC">Mayor Valoracion</option>
-        <option value="VALORATIONASC">Menor Valoracion</option>
-        <option value="NAMEASC">Nombre A-Z</option>
-        <option value="NAMEDESC">Nombre Z-A</option>
-        <option value="RATINGDESC">Mas Estrellas</option>
-        <option value="RATINGASC">Menos Estrellas</option>
-      </select>
-      <table className={style.table}>
-        {Services.map((Ser) => (
-          <tbody key={Ser.id}>
-            <tr className={style.tr}>
-              <td className={style.td}>{Ser.name}</td>
-              <td className={style.td}>
-                <label className={style.checkbox_btn}>
-                  <label htmlFor="checkbox"></label>
-                  <input
-                    className={style.inputServices}
-                    onChange={() => onChangeServices(Ser.name)}
-                    value={Ser.name}
-                    type="checkbox"
-                    id="checkbox"></input>
-                  <span className={style.checkmark}></span>
-                </label>
-              </td>
-            </tr>
-          </tbody>
-        ))}
-      </table>
+      <select onChange={onChangeOrder} className={theme === 'light' ? 'select' : 'select-dark'}>
+          <option hidden>Ordenar por</option>
+          <option value="VALORATIONDESC">Mayor Valoracion</option>
+          <option value="VALORATIONASC">Menor Valoracion</option>
+          <option value="NAMEASC">Nombre A-Z</option>
+          <option value="NAMEDESC">Nombre Z-A</option>
+          <option value="RATINGDESC">Mas Estrellas</option>
+          <option value="RATINGASC">Menos Estrellas</option>
+        </select>
+          <table className={theme === 'light' ? 'filter-table' : 'filter-table-dark'}>
+            {Services.map((Ser) => (
+              <tbody key={Ser.id}>
+                <tr>
+                  <td>{Ser.name}</td>
+                  <td>
+                    <label className='checkbox_btn'>
+                      <label htmlFor="checkbox"></label>
+                      <input
+                        className='inputServices'
+                        onChange={() => onChangeServices(Ser.name)}
+                        value={Ser.name}
+                        type="checkbox"
+                        id="checkbox"></input>
+                      <span className='checkmark'></span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            ))}
+          </table>
+
       <div>
-        <button onClick={FuncionFilter} className={style.button}>
+        <button onClick={FuncionFilter} className='filtrar-button'>
           Filtrar
         </button>
-        <button onClick={FuncionCleanFilter} className={style.button}>
+        <button onClick={FuncionCleanFilter} className='filtrar-button'>
           AllHotels
         </button>
       </div>
     </form>
+    </div>
   );
 };
 

@@ -3,19 +3,19 @@
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //css
-import style from "./Carrusel.module.css";
+import "./Carrusel.css";
 
 //?----------------- COMPONENTE CARRUSEL ------------------------------------
 const Carrusel = ({ HotelsCarrusel }) => {
   return (
-    <div>
-      <Carousel className={style.carousel}>
+    <div className="carrusel-container">
+      <Carousel>
         {HotelsCarrusel ? (
           HotelsCarrusel?.map(({ id, name, image, decription }) => {
             return (
-              <Carousel.Item className={style.item} key={id}>
+              <Carousel.Item className='items' key={id}>
                 <Link to={`/detail/${id}`}>
-                  <img className={style.img} src={image[0]} alt="loading" />
+                  <img className='imgenes' src={image[0]} alt="loading" />
                   <Carousel.Caption>
                     <h3>{name}</h3>
                     <p>{decription}</p>
@@ -25,9 +25,9 @@ const Carrusel = ({ HotelsCarrusel }) => {
             );
           })
         ) : (
-          <Carousel.Item className={style.item}>
+          <Carousel.Item className='items'>
             <img
-              className={style.img}
+              className='imgenes'
               src="https://www.cronista.com/files/image/159/159758/5ff7d1a380650.jpg"
               alt="loading"
             />

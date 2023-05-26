@@ -1,0 +1,116 @@
+.cardcontainer{
+display: flex;
+flex-direction: row;
+width: 65rem;
+height: 15rem;
+padding: 2rem;
+padding-left: 4rem;
+border-radius: 0.5rem;
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+justify-content: space-between;
+margin-bottom: 1rem;
+}
+
+.cardcontainer-dark{
+  display: flex;
+  flex-direction: row;
+  width: 65rem;
+  height: 15rem;
+  padding: 2rem;
+  padding-left: 4rem;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  background-color: rgb(69, 71, 145);
+  }
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  width: 18rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgHotel {
+  height:100%;
+  object-fit: cover;
+  border-radius: .5rem;
+}
+
+.botonfavorito {
+  margin: 20px;
+  border-radius: 50%;
+  border: none;
+  width: 1.5rem;
+  background-color: #ccc;
+}
+
+.name {
+  font-weight: bold;
+  color: black;
+}
+
+.rating {
+  height: 100%;
+  margin-bottom: .5rem;
+}
+
+.imgRating {
+  height: 20px;
+  width: auto;
+}
+
+.province {
+  background-color: rgba(228, 46, 0, 0.999);
+  padding: 0.2em;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+
+
+
+
+.description {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.link {
+  text-decoration: none;
+}
+.link:hover {
+  background-color: #fcb044;
+}
+
+.botonDetail {
+  background-color: rgba(228, 110, 0, 0.999);
+  padding: 0.2em;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  border: none;
+  transform: scale(0.8);
+}
+
+@media (max-width: 450px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 1275px) {
+  p {
+    display: none;
+  }
+}
+
