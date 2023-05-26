@@ -17,8 +17,9 @@ import style from "./Filters.module.css";
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
-  const { Filters, Services, Provinces, Department, Locality } =
-    useSelector((state) => state);
+  const { Filters, Services, Provinces, Department, Locality } = useSelector(
+    (state) => state
+  );
   const [stateFilter, setFilter] = useState(Filters);
   const [provinceId, setProvinceId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
@@ -38,9 +39,7 @@ const Filter = () => {
       provinces: event.target.value,
     });
     setProvinceId(
-      event.target.options[event.target.selectedIndex].getAttribute(
-        "id"
-      )
+      event.target.options[event.target.selectedIndex].getAttribute("id")
     );
   };
 
@@ -50,9 +49,7 @@ const Filter = () => {
       department: event.target.value,
     });
     setDepartmentId(
-      event.target.options[event.target.selectedIndex].getAttribute(
-        "id"
-      )
+      event.target.options[event.target.selectedIndex].getAttribute("id")
     );
   };
 
@@ -163,9 +160,7 @@ const Filter = () => {
       </select>
       {provinceId.length ? (
         <>
-          <select
-            onChange={onChangeDeparment}
-            className={style.select}>
+          <select onChange={onChangeDeparment} className={style.select}>
             <option hidden>Filtro Por Departamento</option>
             {Department.map((dep) => (
               <option id={dep.id} value={dep.nombre}>
@@ -180,9 +175,7 @@ const Filter = () => {
 
       {departmentId.length ? (
         <>
-          <select
-            onChange={onChangeLocality}
-            className={style.select}>
+          <select onChange={onChangeLocality} className={style.select}>
             <option hidden>Filtro Por Localidad</option>
             {Locality.map((loc) => (
               <option id={loc.id} value={loc.nombre}>
@@ -225,7 +218,8 @@ const Filter = () => {
                     onChange={() => onChangeServices(Ser.name)}
                     value={Ser.name}
                     type="checkbox"
-                    id="checkbox"></input>
+                    id="checkbox"
+                  ></input>
                   <span className={style.checkmark}></span>
                 </label>
               </td>
@@ -238,7 +232,7 @@ const Filter = () => {
           Filtrar
         </button>
         <button onClick={FuncionCleanFilter} className={style.button}>
-          AllHotels
+          Limpiar filtros
         </button>
       </div>
     </form>

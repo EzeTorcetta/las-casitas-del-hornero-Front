@@ -76,7 +76,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      <div className={style.container}>
+      <div className={style.home_container}>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
 
         {Hotels.allHotels?.length ? (
@@ -92,6 +92,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                     name,
                     image,
                     province,
+                    department,
                     rating,
                     description,
                     valoration,
@@ -102,6 +103,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                       name={name}
                       image={image}
                       province={province}
+                      department={department}
                       rating={rating}
                       description={description}
                       valoration={valoration}
