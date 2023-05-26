@@ -37,6 +37,65 @@ const reducer = (state, action) => {
   }
 };
 
+const idioma = useSelector((state) => state.idioma);
+
+const translations = {
+  en: {
+    CompletarTodos: "Please complete all fields",
+    Aceptar: "Accept",
+    ProblemaProvincias: "There was a problem loading the Provinces",
+    ErrorDepartamentos: "There was a problem loading the Departments",
+    ErrorLocalidad: "There was a problem loading the Locations",
+    ErrorServicios: "There was a problem loading services",
+    ErrorCampos: "You have errors in the fields",
+    HotelExito: "Your hotel was registered successfully!",
+    ErrorCarga: "Please try again, there was a problem loading your hotel",
+    RegistraTuHotel: "Register your hotel!",
+    NombreDelHotel: "Name of the hotel",
+    NotiMail: "Email notification",
+    NumeroTelefonico: "Phone Number",
+    DescripcionOpcional: "An optional Description",
+    Valoracion: "Hotel Valoration",
+    Clasificacion: "Hotel Rating",
+    SeleccionProvincia: "Select the Province where your hotel is located:",
+    SeleccionDepartamento: "Select the Department where your hotel is located:",
+    SeleccionLocalidad: "Select the City where your hotel is located:",
+    SeleccionServicios: "Select the services that your hotel has:",
+    CargaFoto: "Upload your hotel photo:",
+    URLFoto: "Photo url",
+    UbicacionHotel: "Change the location where your hotel is located:",
+    Registrar: "To register",
+  },
+  es: {
+    CompletarTodos: "Por favor completa todos los campos",
+    Aceptar: "Aceptar",
+    ProblemaProvincias: "Ocurrio un problema al cargar las Provincias",
+    ErrorDepartamentos: "Ocurrio un problema al cargar los Departamentos",
+    ErrorLocalidad: "Ocurrio un problema al cargar las Localidades",
+    ErrorServicios: "Ocurrio un problema al cargar los servicios",
+    ErrorCampos: "Tienes errores en los campos",
+    HotelExito: "Tu hotel se registro con éxito!",
+    ErrorCarga:
+      "Por favor vuelve a intentarlo, ocurrio un problema al cargar tu hotel",
+    RegistraTuHotel: "Registra tu hotel!",
+    NombreDelHotel: "Nombre del hotel",
+    NotiMail: "Email de notificación",
+    NumeroTelefonico: "Numero Telefonico",
+    DescripcionOpcional: "Una descriptión opcional.",
+    Valoracion: "Valoración del hotel",
+    Clasificacion: "Clasificación del hotel",
+    SeleccionProvincia: "Selecciona la Provincia donde se encuentra tu hotel:",
+    SeleccionDepartamento:
+      "Selecciona el Departamento donde se encuentra tu hotel:",
+    SeleccionLocalidad: "Selecciona la Localidad donde se encuentra tu hotel:",
+    SeleccionServicios: "Selecciona los servicios que tiene tu hotel:",
+    CargaFoto: "Carga la foto de tu hotel:",
+    URLFoto: "URL de la foto",
+    UbicacionHotel: "Cambia la ubicación donde se encuentra tu hotel:",
+    Registrar: "Registrar",
+  },
+};
+
 const FormularioHotel = () => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
@@ -58,7 +117,7 @@ const FormularioHotel = () => {
     rating: "",
     province: "",
     department: "",
-    locality:"",
+    locality: "",
     services: [],
     image: [],
     location: [],
@@ -74,9 +133,9 @@ const FormularioHotel = () => {
       dispatch({ type: "GET_PROVINCES", payload: response.data });
     } catch (error) {
       swal({
-        text: "Ocurrio un problema al cargar las Provincias.",
+        text: translations[idioma].ProblemaProvincias,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -89,9 +148,9 @@ const FormularioHotel = () => {
       dispatch({ type: "GET_DEPARTMENTS", payload: response.data });
     } catch (error) {
       swal({
-        text: "Ocurrio un problema al cargar los Departamentos.",
+        text: translations[idioma].ErrorDepartamentos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -104,9 +163,9 @@ const FormularioHotel = () => {
       dispatch({ type: "GET_LOCALITIES", payload: response.data });
     } catch (error) {
       swal({
-        text: "Ocurrio un problema al cargar las Localidades.",
+        text: translations[idioma].ErrorLocalidad,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -117,9 +176,9 @@ const FormularioHotel = () => {
       setServices(response.data);
     } catch (error) {
       swal({
-        text: "Ocurrio un problema al cargar los servicios.",
+        text: translations[idioma].ErrorServicios,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -155,13 +214,9 @@ const FormularioHotel = () => {
     const id = Number(event.target.id);
     if (checked) {
       setHotel({ ...hotel, services: [...hotel.services, id] });
-      setError(
-        validacion({ ...hotel, services: [...hotel.services, id] })
-      );
+      setError(validacion({ ...hotel, services: [...hotel.services, id] }));
     } else {
-      const removed = hotel.services.filter(
-        (service) => service !== id
-      );
+      const removed = hotel.services.filter((service) => service !== id);
       setHotel({ ...hotel, services: [...removed] });
       setError(validacion({ ...hotel, services: [...removed] }));
     }
@@ -211,16 +266,16 @@ const FormularioHotel = () => {
       !hotel.location.length
     )
       return swal({
-        text: "Por favor completa todos los campos.",
+        text: translations[idioma].CompletarTodos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
 
     if (Object.entries(error).length)
       return swal({
-        text: "Tienes errores en los campos",
+        text: translations[idioma].ErrorCampos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
 
     const {
@@ -237,40 +292,37 @@ const FormularioHotel = () => {
       image,
       location,
     } = hotel;
-    console.log(hotel)
+    console.log(hotel);
     try {
-      const { data } = await axios.post(
-        `${URL_BASE}/hotels/${User.id}`,
-        {
-          name,
-          email,
-          phoneNumber,
-          description,
-          valoration: Number(valoration),
-          rating: Number(rating),
-          province,
-          department,
-          locality,
-          services,
-          image,
-          location,
-        }
-      );
-      swal({
-        text: "Tu hotel se registro con éxito!",
-        icon: "success",
-        buttons: "Aceptar",
+      const { data } = await axios.post(`${URL_BASE}/hotels/${User.id}`, {
+        name,
+        email,
+        phoneNumber,
+        description,
+        valoration: Number(valoration),
+        rating: Number(rating),
+        province,
+        department,
+        locality,
+        services,
+        image,
+        location,
       });
-      dispatch(idHotelForm(data.id))
+      swal({
+        text: translations[idioma].HotelExito,
+        icon: "success",
+        buttons: translations[idioma].Aceptar,
+      });
+      dispatch(idHotelForm(data.id));
       navigate("/FormRoomType", {
         state: { id_hotel: data.id },
         replace: true,
       });
     } catch (error) {
       swal({
-        text: "Por favor vuelve a intentarlo, ocurrio un problema al cargar tu hotel.",
+        text: translations[idioma].ErrorCarga,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -283,7 +335,9 @@ const FormularioHotel = () => {
 
     <div className="container">
       <form onSubmit={handleSubmit} className={style.form}>
-        <h1 className="h3 mb-3 fw-normal">Registra tu hotel!</h1>
+        <h1 className="h3 mb-3 fw-normal">
+          {translations[idioma].RegistraTuHotel}
+        </h1>
 
         {/* NOMBRE DEL HOTEL */}
 
@@ -297,12 +351,12 @@ const FormularioHotel = () => {
             type="text"
             className="form-control"
             id="name"
-            placeholder="Nombre del hotel."
+            placeholder={translations[idioma].NombreDelHotel}
             onChange={handleChange}
             value={hotel.name}
             name="name"
           />
-          <label>Nombre del hotel.</label>
+          <label>{translations[idioma].NombreDelHotel}</label>
         </div>
 
         {/* EMAIL PARA LA GESTION DEL HOTEL */}
@@ -317,12 +371,12 @@ const FormularioHotel = () => {
             type="email"
             className="form-control"
             id="email"
-            placeholder="Email de notificación."
+            placeholder={translations[idioma].NotiMail}
             onChange={handleChange}
             value={hotel.email}
             name="email"
           />
-          <label>Email de notificación.</label>
+          <label>{translations[idioma].NotiMail}.</label>
         </div>
 
         {/* TELEFONO DE CONTACTO */}
@@ -337,12 +391,12 @@ const FormularioHotel = () => {
             type="tel"
             className="form-control"
             id="phoneNumber"
-            placeholder="Número telefónico."
+            placeholder={translations[idioma].NumeroTelefonico}
             onChange={handleChange}
             value={hotel.phoneNumber}
             name="phoneNumber"
           />
-          <label>Número telefónico.</label>
+          <label>{translations[idioma].NumeroTelefonico}.</label>
         </div>
 
         {/* UNA DESCRIPCION OPCIONAL */}
@@ -353,12 +407,12 @@ const FormularioHotel = () => {
             type="text"
             className="form-control"
             id="description"
-            placeholder="Una descriptión opcional."
+            placeholder={translations[idioma].DescripcionOpcional}
             onChange={handleChange}
             value={hotel.description}
             name="description"
           />
-          <label>Una descriptión opcional.</label>
+          <label>{translations[idioma].DescripcionOpcional}.</label>
         </div>
 
         {/* VALORACION DEL HOTEL */}
@@ -373,12 +427,12 @@ const FormularioHotel = () => {
             type="text"
             className="form-control"
             id="valoration"
-            placeholder="Valoración del hotel."
+            placeholder={translations[idioma].Valoracion}
             onChange={handleChange}
             value={hotel.valoration}
             name="valoration"
           />
-          <label>Valoración del hotel.</label>
+          <label>{translations[idioma].Valoracion}.</label>
         </div>
 
         {/* CLASIFICACION DEL HOTEL */}
@@ -393,19 +447,17 @@ const FormularioHotel = () => {
             type="text"
             className="form-control"
             id="rating"
-            placeholder="Clasificación del hotel."
+            placeholder={translations[idioma].Clasificacion}
             onChange={handleChange}
             value={hotel.rating}
             name="rating"
           />
-          <label>Clasificación del hotel.</label>
+          <label>{translations[idioma].Clasificacion}</label>
         </div>
 
         {/* LOCATION DONDE SE UBICA EL HOTEL*/}
 
-        <div>
-          Selecciona la Provincia donde se encuentra tu hotel:
-        </div>
+        <div>{translations[idioma].SeleccionProvincia}</div>
         <select onChange={onChangeProvinces} className={style.select}>
           {location.provinces?.map(({ nombre, id }) => (
             <option value={nombre} key={id} id={id}>
@@ -415,12 +467,8 @@ const FormularioHotel = () => {
         </select>
         {location.departments.length ? (
           <div>
-            <div>
-              Selecciona el Departamento donde se encuentra tu hotel:
-            </div>
-            <select
-              onChange={onChangeDepartments}
-              className={style.select}>
+            <div>{translations[idioma].SeleccionDepartamento}</div>
+            <select onChange={onChangeDepartments} className={style.select}>
               {location.departments?.map(({ nombre, id }) => (
                 <option value={nombre} key={id} id={id}>
                   {nombre}
@@ -433,12 +481,8 @@ const FormularioHotel = () => {
         )}
         {location.localities.length ? (
           <div>
-            <div>
-              Selecciona la Localidad donde se encuentra tu hotel:
-            </div>
-            <select
-              onChange={onChangeLocalities}
-              className={style.select}>
+            <div>{translations[idioma].SeleccionLocalidad} </div>
+            <select onChange={onChangeLocalities} className={style.select}>
               {location.localities?.map(({ nombre, id }) => (
                 <option value={nombre} key={id} id={id}>
                   {nombre}
@@ -457,10 +501,8 @@ const FormularioHotel = () => {
         ) : (
           <span className={style.hidden}>hidden</span>
         )}
-        <div>Selecciona los servicios que tiene tu hotel:</div>
-        <span
-          onChange={onChangeServices}
-          className={style.checkContainer}>
+        <div>{translations[idioma].SeleccionServicios} </div>
+        <span onChange={onChangeServices} className={style.checkContainer}>
           {services?.map((service) => (
             <div key={service.id} className={style.checkbox}>
               <label className={style.container}>
@@ -472,9 +514,7 @@ const FormularioHotel = () => {
                 />
                 <div className={style.checkmark}></div>
               </label>
-              <span className={style.nameService}>
-                {service.name}
-              </span>
+              <span className={style.nameService}>{service.name}</span>
             </div>
           ))}
         </span>
@@ -486,30 +526,28 @@ const FormularioHotel = () => {
         ) : (
           <span className={style.hidden}>hidden</span>
         )}
-        <div>Carga la foto de tu hotel:</div>
+        <div>{translations[idioma].CargaFoto} </div>
         {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
         <div className="form-floating">
           <input
             type="text"
             className="form-control"
             id="image"
-            placeholder="URL de la foto."
+            placeholder={translations[idioma].URLFoto}
             onChange={onChangeImage}
             value={hotel.image}
             name="image"
           />
-          <label>URL de la foto.</label>
+          <label>{translations[idioma].URLFoto}.</label>
         </div>
 
         {/* GEOLOCALIZACION DEL HOTEL */}
 
-        <div>Cambia la ubicación donde se encuentra tu hotel:</div>
+        <div>{translations[idioma].UbicacionHotel}</div>
         <Maps location={geoposition} setLocation={setGeoposition} />
 
-        <button
-          className="w-100 btn btn-lg btn-warning"
-          type="submit">
-          Registrar
+        <button className="w-100 btn btn-lg btn-warning" type="submit">
+          {translations[idioma].Registrar}
         </button>
       </form>
     </div>

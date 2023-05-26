@@ -7,12 +7,12 @@ import { PedirLocalStorage } from "../Index";
 import { FuncionDetailHotel } from "../../redux/Actions/Actions";
 import swal from "sweetalert";
 
-
 export default function Reviews() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [rating, setRating] = useState(0);
   const dispatch = useDispatch();
+  const [shouldReload, setShouldReload] = useState(false);
 
   let User = PedirLocalStorage();
   const Hotel = useSelector((state) => state.DetailHotel);
@@ -26,6 +26,11 @@ export default function Reviews() {
   const handleRatingChange = (event) => {
     setRating(parseInt(event.target.value));
   };
+  useEffect(() => {
+    if (shouldReload) {
+      window.location.reload();
+    }
+  }, [shouldReload]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,7 +61,8 @@ export default function Reviews() {
         });
       });
     dispatch(NewReview());
-    dispatch(FuncionDetailHotel(Hotel.id))
+    dispatch(FuncionDetailHotel(Hotel.id));
+    setShouldReload(true);
   };
 
   return (
