@@ -131,7 +131,7 @@ const NavBar = ({ countCarrito }) => {
     <li>
       <a>{`${username}`}</a>
         <ul className="menu-vertical">
-          <li><a href="/admin">Perfil</a></li>
+          <li><a href="/Perfil">Perfil</a></li>
           {rol === 2 ? <li><a href="">Proveer Hotel</a></li> : 
           rol === 3 ? <li><a href="">Administrar Usuarios</a></li> : 
           <li><a href="">Quiero ser proveedor</a></li>}
