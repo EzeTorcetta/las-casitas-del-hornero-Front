@@ -46,6 +46,8 @@ export const FuncionSelectFilter = (filters) => {
     department,
     locality,
     name,
+    checkIn,
+    checkOut,
   } = filters;
 
   URL = URL + `?page=${page}`;
@@ -69,6 +71,20 @@ export const FuncionSelectFilter = (filters) => {
       if (name.length) {
         URL = URL + `&name=${name}`;
       }
+
+      //*----------------------------------------Fechas:
+
+      //http://localhost:3001/hotels?page=1&services=Pileta&checkIn=2023-05-27&checkOut=2023-05-28
+
+      if (checkOut.length) {
+        URL = URL + `&checkIn=${checkIn}`;
+      }
+      if (checkIn.length) {
+        URL = URL + `&checkOut=${checkOut}`;
+      }
+
+      //*------------------------------------------------------*//
+
       if (services.length) {
         services.map(
           (ser) =>
@@ -410,7 +426,7 @@ export const idHotelForm = (id) => {
   };
 };
 
-// //* ----------------- GET CURRENCY RATE API----------------------------------
+//* ----------------- GET CURRENCY RATE API----------------------------------
 export const getCurrencyRateAPI = () => {
   try {
     return async function (dispatch) {

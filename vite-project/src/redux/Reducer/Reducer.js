@@ -55,6 +55,8 @@ const InicialState = {
     order: "",
     page: 1,
     name: "",
+    checkIn: "",
+    checkOut: "",
   },
   Reviews: 0,
   idHotelForm: "",

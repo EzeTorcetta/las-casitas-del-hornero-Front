@@ -3,6 +3,7 @@ import "./OlvidasteLaPassword.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
+import { PedirEmailLocalStorage } from "../Index";
 
 const RestablecerContraseña = () => {
   const navigate = useNavigate();
@@ -45,8 +46,6 @@ const RestablecerContraseña = () => {
     return Errores;
   };
 
-  //*-----------------------------//
-
   //*----------------------Cambios de estados:
   const OnchangePassword = (event) => {
     console.log(event.target);
@@ -83,10 +82,19 @@ const RestablecerContraseña = () => {
         });
       } else {
         // Aca voy hacer el axios.put(para actualizar las contraseñas)
-        //
-        //
-        //
-        //
+        const email = PedirEmailLocalStorage();
+
+        console.log(email);
+
+        const { password } = statePassword;
+
+        await axios.put(
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/password`,
+          {
+            email,
+            password,
+          }
+        );
       }
     } catch (error) {
       swal({

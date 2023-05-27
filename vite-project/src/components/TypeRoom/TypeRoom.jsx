@@ -16,15 +16,8 @@ import {
 import { v4 as uuidv4 } from "uuid";
 
 //?----------------- COMPONENTE ROOM TYPE  ------------------------------------
-const TypeRoom = ({
-  id,
-  setCountCarrito,
-  countCarrito,
-  name,
-  Trolleys,
-}) => {
-  const URL_BASE =
-    "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+const TypeRoom = ({ id, Trolleys }) => {
+  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const User = PedirLocalStorage();
   const dispatch = useDispatch();
   const [State, setState] = useState([]);

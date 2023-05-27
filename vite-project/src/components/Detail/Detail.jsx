@@ -121,9 +121,13 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               countCarrito={countCarrito}
               id={id}
             />
-            <NavLink to="/FormRoomType">
-              <p onClick={setHotel}>Agregar Room Type</p>
-            </NavLink>
+            {User.rol === 2 ? (
+              <NavLink to="/FormRoomType">
+                <p onClick={setHotel}>Agregar Room Type</p>
+              </NavLink>
+            ) : (
+              ""
+            )}
           </section>
           <Reviews />
           <Footer />

@@ -11,6 +11,7 @@ const FormularioTipoHab = (props) => {
   const URL_BASE =
     "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
+  const User = PedirLocalStorage();
   const { state } = useLocation();
   const idHotelForm = useSelector((state) => state.idHotelForm);
   const id = state?.id_hotel || idHotelForm;
@@ -20,6 +21,7 @@ const FormularioTipoHab = (props) => {
     name: "",
     image: [],
     stock: "",
+    id_user: User.id,
   };
   const [tipoHab, setTipoHab] = useState(resetTipoHab);
   const [error, setError] = useState({});
@@ -64,7 +66,7 @@ const FormularioTipoHab = (props) => {
         buttons: "Aceptar",
       });
 
-    const { people, price, name, image, stock } = tipoHab;
+    const { people, price, name, image, stock, id_user } = tipoHab;
     try {
       const res = await axios.post(`${URL_BASE}/roomtypes/${id}`, {
         people: Number(people),
@@ -72,6 +74,7 @@ const FormularioTipoHab = (props) => {
         name: tipo[people] || "Multiple",
         image,
         stock,
+        id_user,
       });
       swal({
         text: "Tus habitaciones se registraron con éxito! ",
@@ -287,9 +290,7 @@ const FormularioTipoHab = (props) => {
         </div>
 
         <span className={style.hidden}>hidden</span>
-        <button
-          className="w-100 btn btn-lg btn-warning"
-          type="submit">
+        <button className="w-100 btn btn-lg btn-warning" type="submit">
           Registrar
         </button>
         <span className={style.hidden}>hidden</span>

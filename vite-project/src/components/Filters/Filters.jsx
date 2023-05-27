@@ -1,6 +1,8 @@
 //?---------------------------- IMPORTS --------------------------------
-// import axios from "axios";
-//react
+import "react-datepicker/dist/react-datepicker.css";
+import es from "date-fns/locale/es";
+import DatePicker, { registerLocale } from "react-datepicker";
+registerLocale("es", es);
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,8 +19,21 @@ import style from "./Filters.module.css";
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
-  const { Filters, Services, Provinces, Department, Locality } =
-    useSelector((state) => state);
+  const { Filters, Services, Provinces, Department, Locality } = useSelector(
+    (state) => state
+  );
+  //*-----------------------------------------------------Fechas:
+  const [stateCheckIn, setStateCheckIn] = useState(
+    new Date("2023", "01", "01")
+  );
+  const [stateCheckInString, setStateCheckInString] = useState("");
+  const [stateCheckOut, setStateCheckOut] = useState(
+    new Date("2023", "05", "09")
+  );
+  const [stateCheckOutString, setStateCheckOutString] = useState("");
+
+  //*-----------------------------------------------------------------*//
+
   const [stateFilter, setFilter] = useState(Filters);
   const [provinceId, setProvinceId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
@@ -30,17 +45,123 @@ const Filter = () => {
     if (departmentId.length) dispatch(getLocality(departmentId));
   }, [dispatch, provinceId, departmentId]);
 
-  const raiting = [1, 2, 3, 4, 5];
+  //*---------------------------------------Calendarios Funciones :
 
+  //?-----------------------------------------------CheckIn:
+
+  const onChangeCheckIn = (state) => {
+    //validar que el checkIn no sea mayor que la fecha checkout antes de setear el estado:
+    // validar que tanto el mes como el dia o año no sean mayores a los del checkOut
+
+    const checkInDate = new Date(state);
+    const checkOutDate = new Date(stateCheckOut);
+
+    if (checkInDate.getTime() <= checkOutDate.getTime()) {
+      const array = state.toString().split(" ");
+      console.log(array);
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      let acumulador = [];
+      for (let i = 0; i <= 3; i++) {
+        if (i === 3) {
+          acumulador.unshift(array[i]);
+        } else if (i === 2) {
+          acumulador.unshift(array[i]);
+        } else if (i === 1) {
+          let numero = monthNames.indexOf(array[i]) + 1;
+
+          if (numero >= 10) {
+            acumulador.push(numero.toString());
+          } else {
+            acumulador.push("0" + numero.toString());
+          }
+        }
+      }
+      let stateModificado = acumulador.join("-");
+      setStateCheckInString(stateModificado);
+      setStateCheckIn(state);
+
+      //*------------------------------------Set:
+      setFilter({ ...stateFilter, checkIn: stateModificado });
+    } else {
+      alert("no se puede reservar una fecha mayor que el checkOut");
+    }
+  };
+  console.log(stateCheckInString);
+
+  //?-----------------------------------------CheckOut :
+  const onChangeCheckOut = (state) => {
+    const checkOutDate = new Date(state);
+    const checkInDate = new Date(stateCheckIn);
+
+    if (checkOutDate.getTime() >= checkInDate.getTime()) {
+      const array = state.toString().split(" ");
+      console.log(array);
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      let acumulador = [];
+      for (let i = 0; i <= 3; i++) {
+        if (i === 3) {
+          acumulador.unshift(array[i]);
+        } else if (i === 2) {
+          acumulador.unshift(array[i]);
+        } else if (i === 1) {
+          let numero = monthNames.indexOf(array[i]) + 1;
+
+          if (numero >= 10) {
+            acumulador.push(numero.toString());
+          } else {
+            acumulador.push("0" + numero.toString());
+          }
+        }
+      }
+      let stateModificado = acumulador.join("-");
+      setStateCheckOutString(stateModificado);
+      setStateCheckOut(state);
+      //*------------------------------------Set:
+      setFilter({ ...stateFilter, checkOut: stateModificado });
+    } else {
+      alert("La Fecha CheckOut No debe ser menor al CheckIn");
+    }
+  };
+  console.log(stateCheckOutString);
+
+  //------------------------------------------------------//
+
+  const raiting = [1, 2, 3, 4, 5];
   const onChangeProvinces = async (event) => {
     setFilter({
       ...stateFilter,
       provinces: event.target.value,
     });
     setProvinceId(
-      event.target.options[event.target.selectedIndex].getAttribute(
-        "id"
-      )
+      event.target.options[event.target.selectedIndex].getAttribute("id")
     );
   };
 
@@ -50,9 +171,7 @@ const Filter = () => {
       department: event.target.value,
     });
     setDepartmentId(
-      event.target.options[event.target.selectedIndex].getAttribute(
-        "id"
-      )
+      event.target.options[event.target.selectedIndex].getAttribute("id")
     );
   };
 
@@ -115,6 +234,8 @@ const Filter = () => {
       order: "",
       page: 1,
       name: "",
+      checkIn: "",
+      checkOut: "",
     });
 
     dispatch(
@@ -127,6 +248,8 @@ const Filter = () => {
         order: "",
         page: 1,
         name: "",
+        checkIn: "",
+        checkOut: "",
       })
     );
 
@@ -140,6 +263,8 @@ const Filter = () => {
         order: "",
         page: 1,
         name: "",
+        checkIn: "",
+        checkOut: "",
       })
     );
   };
@@ -163,9 +288,7 @@ const Filter = () => {
       </select>
       {provinceId.length ? (
         <>
-          <select
-            onChange={onChangeDeparment}
-            className={style.select}>
+          <select onChange={onChangeDeparment} className={style.select}>
             <option hidden>Filtro Por Departamento</option>
             {Department.map((dep) => (
               <option id={dep.id} value={dep.nombre}>
@@ -177,12 +300,9 @@ const Filter = () => {
       ) : (
         <></>
       )}
-
       {departmentId.length ? (
         <>
-          <select
-            onChange={onChangeLocality}
-            className={style.select}>
+          <select onChange={onChangeLocality} className={style.select}>
             <option hidden>Filtro Por Localidad</option>
             {Locality.map((loc) => (
               <option id={loc.id} value={loc.nombre}>
@@ -194,7 +314,6 @@ const Filter = () => {
       ) : (
         <></>
       )}
-
       <select onChange={onChangeRating} className={style.select}>
         <option hidden>Filtro Por raiting</option>
         {raiting.map((rant, index) => (
@@ -212,6 +331,22 @@ const Filter = () => {
         <option value="RATINGDESC">Mas Estrellas</option>
         <option value="RATINGASC">Menos Estrellas</option>
       </select>
+      <label>CheckIn :</label>
+      <DatePicker
+        selected={stateCheckIn}
+        onChange={onChangeCheckIn}
+        locale="es"
+        className="pickers"
+        dateFormat="dd 'de' MMMM 'de' yyyy"
+      />
+      <label>CheckOut :</label>
+      <DatePicker
+        selected={stateCheckOut}
+        onChange={onChangeCheckOut}
+        locale="es"
+        className="pickers"
+        dateFormat="dd 'de' MMMM 'de' yyyy"
+      />
       <table className={style.table}>
         {Services.map((Ser) => (
           <tbody key={Ser.id}>
@@ -225,7 +360,8 @@ const Filter = () => {
                     onChange={() => onChangeServices(Ser.name)}
                     value={Ser.name}
                     type="checkbox"
-                    id="checkbox"></input>
+                    id="checkbox"
+                  ></input>
                   <span className={style.checkmark}></span>
                 </label>
               </td>
