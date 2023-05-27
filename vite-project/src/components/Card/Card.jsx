@@ -5,13 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { PedirLocalStorage } from "../Index";
 import { useSelector, useDispatch } from "react-redux";
 import { FuncionAllFavoritesHotel } from "../../redux/Actions/Actions.js";
-import "./Card.css";
+import style from "./Card.module.css";
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
-
 //?----------------- COMPONENTE CARD ------------------------------------
-function Cards({ id, name, image, province, rating, description, valoration }) {
+function Cards({
+  id,
+  name,
+  image,
+  province,
+  department,
+  rating,
+  description,
+  valoration,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const FavHotels = useSelector((state) => state.FavHotels);
@@ -43,44 +51,48 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
   };
 
   return (
-    <div className={theme === 'light' ? "cardcontainer" : 'cardcontainer-dark'}>
-      
-      <div>
-        <img src={image[0]} alt="" className='imgHotel' />
-        {!User || User?.rol === 1?isFav ? (
-          <button
-            onClick={() => handleFavorite(User?.id, id)}
-            className='botonfavorito'
-          >
-            ❤️
-          </button>
+    <div className={style.container}>
+      <div className={style.imgContainer}>
+        <img src={image[0]} alt="" className={style.imgHotel} />
+        {!User || User?.rol === 1 ? (
+          isFav ? (
+            <button
+              onClick={() => handleFavorite(User?.id, id)}
+              className={style.button}
+            >
+              ❤️
+            </button>
+          ) : (
+            <button
+              onClick={() => handleFavorite(User?.id, id)}
+              className={style.button}
+            >
+              🤍
+            </button>
+          )
         ) : (
-          <button
-            onClick={() => handleFavorite(User?.id, id)}
-            className='botonfavorito'
-          >
-            🤍
-          </button>
-        ):(<></>)}
+          <></>
+        )}
       </div>
-
-      <div className='textContainer'>          
-        <h4 className='name'>{name}</h4>
-        <div className='rating'>
+      <div className={style.title}>
+        <h4 className={style.name}>{name}</h4>
+        <div className={style.rating}>
           {ratingArray.map((_, index) => {
             return (
               <img
-                className='imgRating'
+                className={style.imgRating}
                 src={imgFav}
                 alt=""
                 key={index}
               />
-                );
-              })}
+            );
+          })}
         </div>
-        <p>Valoracion Del Hotel :{valoration}</p>
-        <h3 className='province'>{province}</h3>
-        <button onClick={onClickDetail} className='botonDetail'>
+        <p className={style.punctuation}>Valoracion Del Hotel :{valoration}</p>
+        <p className={style.province}>
+          {department},{province}
+        </p>
+        <button onClick={onClickDetail} className={style.botonDetail}>
           VER ALOJAMIENTO
         </button>
       </div>

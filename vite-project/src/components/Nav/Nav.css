@@ -6,8 +6,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 3;
+  /*encima de to */
   background-color: orange;
-  z-index: 3; /* encima de todo */
   color: white;
 }
 
@@ -24,6 +25,9 @@
 
 .logo {
   display: flex;
+
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
   padding-left: 4rem;
 }
@@ -33,6 +37,14 @@
   height: 40px;
   margin-right: 10px;
   border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+
+.p {
+  margin-bottom: 0;
 }
 
 .enlaces {
@@ -109,10 +121,9 @@ background-color: rgb(253, 198, 95);
 
 
 .links {
-  text-decoration: none;
+
   display: flex;
-  color: white;
-  flex-direction: column;
+  flex-direction: row;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -132,7 +143,7 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
 }
 
-@media (min-width: 769px) {
+/* @media (min-width: 769px) {
   .menuButton {
     display: none;
   }
@@ -147,6 +158,9 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin-right: 10px;
     text-align: center;
   }
+} */
+.username {
+  margin: 0;
 }
 
 .iconoCarrito {
@@ -161,12 +175,12 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 20px;
 }
 
-/* .BotonUsuario {
+.BotonUsuario {
   display: flex;
   justify-content: center;
   overflow: hidden;
   border-radius: 5px;
-  background-color: transparent;
+  background-color: #ffffff;
   width: 180px;
   text-align: center;
   height: 30px;
@@ -176,37 +190,6 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   -webkit-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
-}
-
-.IniciarSesion {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 5px;
-  background-color: orange;
-  width: 180px;
-  text-align: center;
-  height: 40px;
-  border: none;
-  font-size: 10px;
-  color: rgb(0, 0, 0);
-  -webkit-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 22px -13px rgba(0, 0, 0, 0.75);
-}
-.IniciarSesion p{
-  margin-top: 15px;
-  
-} */
-.BotonUsuario {
-  /* display: flex; */
-  width: 80px;
-  height: 80px;
-  margin-top: 10px;
-  background-color: orange;
-  border: 0px;
-  width: 100px;
 }
 
 .button {
@@ -249,6 +232,7 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-top: 10px;
   
 }
+
 .divCarritoCount {
   padding-top: 1rem;
   display: flex;
@@ -280,12 +264,11 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .menu {
-
   position: absolute;
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background-color: rgb(247, 231, 211);
+  background-color: white;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -305,6 +288,10 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 .menuOption:hover {
   background-color: #94949446;
   border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 .menuOption:focus {
@@ -313,7 +300,4 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 .menuOption:last-child {
   margin-bottom: 0;
-}
-ul {
-  list-style-type: none;
 }

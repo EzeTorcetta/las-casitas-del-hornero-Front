@@ -24,26 +24,27 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      <section>
-        <div className={style.saludo}>
-          <h2>Bienvenido {`${User.username}`}</h2>
-          <p>{`${User.email}`}</p>
-        </div>
-      </section>
-      <section className={style.section}>
-        <div className={style.divFavorites}>
-          <br />
-          <h1>Tus favoritos</h1>
-          <Favoritos />
-        </div>
-      </section>
-      <section className={style.section}>
-        <div className={style.divRewies}>
-          <h1>Booking</h1>
-          <Booking />
-        </div>
-      </section>
-      <Footer />
+      <div className={style.perfil_container}>
+        <section>
+          <div className={style.saludo}>
+            <h2>{`${User.username}`}</h2>
+            <p>{`${User.email}`}</p>
+          </div>
+        </section>
+        <section className={style.section}>
+          <div className={style.divFavorites}>
+            <h2>favoritos</h2>
+            <Favoritos />
+          </div>
+        </section>
+        <section className={style.section}>
+          <div className={style.divRewies}>
+            <h2>Booking</h2>
+            <Booking />
+          </div>
+        </section>
+        <Footer />
+      </div>
     </>
   );
 };

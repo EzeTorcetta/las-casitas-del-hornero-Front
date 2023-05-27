@@ -1,73 +1,25 @@
-.filterform {
-  
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: center;
- 
-  padding: 1rem 3rem 0rem 3rem;
-  border-radius: 1rem;
-  width: 40rem;
-  
-}
-
-.formdark {
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  
-  padding: 1rem 3rem 0rem 3rem;
-  
-  border-radius: 1rem;
-  width: 40rem;
-}
-
-.inputSearch {
-  /* background-color: rgb(255, 218, 173); */
-  /* margin: 10px; */
-  background-color: #ccc;
-  appearance: none;
-  color: white;
-  border-radius: .4rem;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: 4rem;
-  border: none;
-  text-align: center;
-  font-family: 'Courier New', Courier, monospace;
-  margin-bottom: 1rem;
-}
-
-.inputSearch-dark {
-  /* background-color: rgb(255, 218, 173); */
-  /* margin: 10px; */
-  background-color: white;
-  appearance: none;
-  color: black;
-  border-radius: .4rem;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: 4rem;
-  border: none;
-  text-align: center;
-  font-family: 'Courier New', Courier, monospace;
-  margin-bottom: 1rem;
+  margin-top: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 240px;
+  /* background-color: lightpink; */
 }
 
 .select {
   background-color: orange;
   appearance: none;
   color: white;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 3rem;
   border: none;
   margin: 5px;
-  text-align: center;
+  padding: 0.5rem;
 }
 
 .select-dark {
@@ -96,7 +48,6 @@
   margin-top: 3rem;
   height: 30rem;
   margin-bottom: 3rem;
-
   color: white;
 }
 
@@ -104,7 +55,7 @@
   display: block;
   position: relative;
   cursor: pointer;
- 
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -112,7 +63,7 @@
 }
 
 
-.filtrar-button {
+.button {
   width: 100px;
   height: 55px;
   border-radius: 0.5rem;
@@ -123,11 +74,6 @@
   cursor: pointer;
   margin: 10px;
 }
-
-
-
-
-
 
 .checkbox_btn .inputServices {
   position: absolute;
@@ -140,7 +86,6 @@
 .checkbox_btn label {
   cursor: pointer;
   font-size: 14px;
-  
 }
 
 .checkmark {
@@ -152,7 +97,8 @@
   border: 1.6px solid black;
   transition: 0.2s linear;
 }
-.checkbox_btn .inputServices:checked ~ .checkmark {
+
+.checkbox_btn .inputServices:checked~.checkmark {
   background-color: transparent;
 }
 
@@ -172,30 +118,54 @@
   transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
 }
 
-.checkbox_btn .inputServices:checked ~ .checkmark:after {
+.checkbox_btn .inputServices:checked~.checkmark:after {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, -50%) rotate(0deg) scale(1);
   animation: pulse 1s ease-in;
 }
 
-.checkbox_btn .inputServices:checked ~ .checkmark {
+.checkbox_btn .inputServices:checked~.checkmark {
   transform: rotate(45deg);
   border: none;
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     transform: translate(-50%, -50%) rotate(0deg) scale(1);
   }
+
   50% {
     transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
   }
 }
 
-
 .inputSearch::placeholder {
   color: white;
   opacity: 1;
+}
+
+.Checks {
+  background-color: ;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  width: 100%;
+  margin-bottom: 1.5em 0;
+}
+
+.pickers {
+  text-align: center;
+  width: 100%;
+  height: 55px;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f7931e;
+  color: #fff;
+  cursor: pointer;
+  margin: .6em 0;
 }

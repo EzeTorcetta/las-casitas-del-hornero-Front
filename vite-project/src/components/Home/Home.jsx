@@ -7,6 +7,7 @@ import AuthProvider from "../GoogleAuth/AuthProvider";
 import { auth } from "../../Firebase/Firebase";
 //css
 import "./Home.css";
+import style from "./Home.module.css";
 //actions
 import {
   FuncionSelectFilter,
@@ -30,8 +31,6 @@ import {
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 import SwitchButton from "../SwitchButton/SwitchButton";
-
-
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = ({ countCarrito, setCountCarrito }) => {
@@ -78,39 +77,31 @@ const Home = ({ countCarrito, setCountCarrito }) => {
       <AuthProvider
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleUserNotLoggedIn}
-        onUserNotRegistered={handleUserNotRegistered}></AuthProvider>
+        onUserNotRegistered={handleUserNotRegistered}>
+      </AuthProvider>
     );
   }
 
   return (
-    
-    <div className={theme === 'light' ? 'fullcontainer-light' : 'fullcontainer-dark'}>
-
-      <div>
-        <NavBar countCarrito={countCarrito} />
-      </div>
-      
-      <div>
+    <>
+      <NavBar countCarrito={countCarrito} />
+      <div className={style.home_container}>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
-      </div>
-      
-      <div className="mainsection">
-        
-        <div>
-          <Filter />
-        </div>
-
-        <div>
 
         {Hotels.allHotels?.length ? (
-            
-              <div>
+          <>
+            <section className={`${style.section} ${style.one}`}>
+              <div className={style.filtroContainer}>
+                <Filter />
+              </div>
+              <div className={style.divCard}>
                 {Hotels.allHotels?.map(
                   ({
                     id,
                     name,
                     image,
                     province,
+                    department,
                     rating,
                     description,
                     valoration,
@@ -121,36 +112,30 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                       name={name}
                       image={image}
                       province={province}
+                      department={department}
                       rating={rating}
                       description={description}
                       valoration={valoration}
                     />
                   )
                 )}
-           </div>
-  
-      ) : (
-          <Loading />
-      )
-      }
+              </div>
+              <Clima />
+            </section>
+          </>
+        ) : (
+          <section className={`${style.section} ${style.one}`}>
+            <Loading />
+          </section>
+        )}
 
-        </div>
-
-      </div>
-
-      <div>
-        <Clima />
-      </div>
-
-      <div>
         <Paginado paginas={Hotels.numPages} />
-      </div>
-        
-      <div>
+        <section className={`${style.section} ${style.two}`}></section>
+
         <Footer />
+
       </div>
-        
-    </div>
+    </>
   );
 };
 

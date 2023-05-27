@@ -1,7 +1,19 @@
 /* Estilos para el componente Clima */
-body {
-  background-color: #fff;
-  font-family: Arial, sans-serif;
+.container {
+  background-color: rgb(255, 255, 255);
+  height: fit-content;
+  padding: 1em;
+  flex-basis: 20%;
+  border-radius: 12px;
+  box-shadow: 7px 7px 15px 10px #3e291028;
+}
+
+.container:hover {
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
 }
 
 .h2 {

@@ -1,0 +1,135 @@
+.container {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  padding: 0;
+  margin-left: .2em;
+  margin-right: .2em;
+  margin-bottom: 1em;
+  border-radius: 0.5rem;
+  width: 49%;
+ height: fit-content;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+}
+.imgContainer{
+display: flex;
+flex-basis: 40%;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-left: .5em;
+  padding-bottom: .8em;
+
+  /* overflow-wrap: break-word; */
+}
+
+.name {
+  margin: 0;
+  border: 0;
+  padding: 0.2em;
+  color: black;
+  text-align: left;
+}
+
+.imgRating {
+  height: 20px;
+  width: auto;
+}
+
+.province {
+  overflow-wrap: break-word;
+  font-size: 1.1rem;
+}
+.rating {
+  margin-top: 0;
+}
+
+.punctuation {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.imgHotel {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem 0 0 0.5rem;
+  height: 100%;
+}
+
+.description {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  background-color: #fcb044;
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 7px;
+  border-radius: 50%;
+  border: none;
+}
+
+.botonDetail {
+  border: 2px solid black;
+  opacity: 0.8;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  background-color: rgb(225, 228, 231);
+box-shadow:  2px 2px rgba(0, 0, 0, 0.616)
+}
+.botonDetail:hover {
+  background-color: #fcb044;
+  opacity: 1;
+}
+@media (max-width:1200px){
+  .container{
+    flex-basis: 100%;
+  }
+}
+@media (max-width:768px) {
+
+}
+@media (max-width:576px) {
+  .container {
+    flex-direction: column;
+    padding: 0;
+    border-top: 2px solid white;
+    overflow: hidden;
+}
+.imgContainer {
+  object-fit: cover;
+  background-color: #fcb044;
+  flex-basis: 50%;
+}
+.imgHotel {
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+.title {
+  flex-basis: 50%;
+}
+
+}

@@ -14,7 +14,7 @@ import {
   getServices,
 } from "../../redux/Actions/Actions";
 //css
-import "./Filters.css";
+import style from "./Filters.module.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
@@ -272,66 +272,62 @@ const Filter = () => {
 
   return (
     <div>
-      
-      
-    <form name="filterForm" className={ theme === 'light' ? 'filterform' : 'formdark'}>
-    <input
-        type="text"
-        name="text"
-        className={theme === 'light' ? 'inputSearch' : 'inputSearch-dark'}
-        placeholder="Buscar un Hotel . . ."
-        onChange={onChangeName}
-      />
-      <select onChange={onChangeProvinces} className={theme === 'light' ? 'select' : 'select-dark'}>
-        <option hidden>Filtro Por Provincia</option>
-        {Provinces.map((pro) => (
-          <option id={pro.id} value={pro.nombre} key={pro.id}>
-            {pro.nombre}
-        </option>
-        ))}
-      </select>
-      
-      {provinceId.length ? (
-        <>
-          <select
-            onChange={onChangeDeparment}
-            className='select'>
-            <option hidden>Filtro Por Departamento</option>
-            {Department.map((dep) => (
-            <option id={dep.id} value={dep.nombre}>
-                {dep.nombre}
+
+
+      <form name="filterForm" className={theme === 'light' ? style.form : style.formdark}>
+        <input
+          type="text"
+          name="text"
+          className={theme === 'light' ? style.inputSearch : style.inputSearch - dark}
+          placeholder="Buscar un Hotel . . ."
+          onChange={onChangeName}
+        />
+        <select onChange={onChangeProvinces} className={theme === 'light' ? style.select : style.select - dark}>
+          <option hidden>Filtro Por Provincia</option>
+          {Provinces.map((pro) => (
+            <option id={pro.id} value={pro.nombre} key={pro.id}>
+              {pro.nombre}
             </option>
-            ))}
-          </select>
-        </>
-      ) : (
-        <></>
-      )}
-      {departmentId.length ? (
-        <>
-          <select
-            onChange={onChangeLocality}
-            className='select'>
-            <option hidden>Filtro Por Localidad</option>
-            {Locality.map((loc) => (
-            <option id={loc.id} value={loc.nombre}>
-                {loc.nombre}
-            </option>
-            ))}
-          </select>
-        </>
-      ) : (
-        <></>
-      )}
-        <select onChange={onChangeRating} className={theme === 'light' ? 'select' : 'select-dark'}>
+          ))}
+        </select>
+
+        {provinceId.length ? (
+          <>
+            <select onChange={onChangeDeparment} className={style.select}>
+              <option hidden>Filtro Por Departamento</option>
+              {Department.map((dep) => (
+                <option id={dep.id} value={dep.nombre}>
+                  {dep.nombre}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <></>
+        )}
+        {departmentId.length ? (
+          <>
+            <select onChange={onChangeLocality} className={style.select}>
+              <option hidden>Filtro Por Localidad</option>
+              {Locality.map((loc) => (
+                <option id={loc.id} value={loc.nombre}>
+                  {loc.nombre}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <></>
+        )}
+        <select onChange={onChangeRating} className={theme === 'light' ? style.select : style.select - dark}>
           <option hidden>Filtro Por raiting</option>
           {raiting.map((rant, index) => (
-          <option value={rant} key={index}>
-            {rant}
-          </option>
-        ))}
-      </select>
-      <select onChange={onChangeOrder} className={theme === 'light' ? 'select' : 'select-dark'}>
+            <option value={rant} key={index}>
+              {rant}
+            </option>
+          ))}
+        </select>
+        <select onChange={onChangeOrder} className={style.select}>
           <option hidden>Ordenar por</option>
           <option value="VALORATIONDESC">Mayor Valoracion</option>
           <option value="VALORATIONASC">Menor Valoracion</option>
@@ -340,53 +336,56 @@ const Filter = () => {
           <option value="RATINGDESC">Mas Estrellas</option>
           <option value="RATINGASC">Menos Estrellas</option>
         </select>
-        <label>CheckIn :</label>
-      <DatePicker
-        selected={stateCheckIn}
-        onChange={onChangeCheckIn}
-        locale="es"
-        className="pickers"
-        dateFormat="dd 'de' MMMM 'de' yyyy"
-      />
-      <label>CheckOut :</label>
-      <DatePicker
-        selected={stateCheckOut}
-        onChange={onChangeCheckOut}
-        locale="es"
-        className="pickers"
-        dateFormat="dd 'de' MMMM 'de' yyyy"
-      />
-          <table className={theme === 'light' ? 'filter-table' : 'filter-table-dark'}>
-            {Services.map((Ser) => (
-              <tbody key={Ser.id}>
-                <tr>
-                  <td>{Ser.name}</td>
-                  <td>
-                    <label className='checkbox_btn'>
-                      <label htmlFor="checkbox"></label>
-                      <input
-                        className='inputServices'
-                        onChange={() => onChangeServices(Ser.name)}
-                        value={Ser.name}
-                        type="checkbox"
-                        id="checkbox"></input>
-                      <span className='checkmark'></span>
-                    </label>
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-          </table>
+        <div className={style.Checks}>
+          <label>CheckIn :</label>
+          <DatePicker
+            selected={stateCheckIn}
+            onChange={onChangeCheckIn}
+            locale="es"
+            className={style.pickers}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+          />
+          <label>CheckOut :</label>
+          <DatePicker
+            selected={stateCheckOut}
+            onChange={onChangeCheckOut}
+            locale="es"
+            className={style.pickers}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+          />
+        </div>
 
-      <div>
-        <button onClick={FuncionFilter} className='filtrar-button'>
-          Filtrar
-        </button>
-        <button onClick={FuncionCleanFilter} className='filtrar-button'>
-          AllHotels
-        </button>
-      </div>
-    </form>
+        <table className={style.table}>
+          {Services.map((Ser) => (
+            <tbody key={Ser.id}>
+              <tr className={style.tr}>
+                <td className={style.td}>{Ser.name}</td>
+                <td className={style.td}>
+                  <label className={style.checkbox_btn}>
+                    <label htmlFor="checkbox"></label>
+                    <input
+                      className={style.inputServices}
+                      onChange={() => onChangeServices(Ser.name)}
+                      value={Ser.name}
+                      type="checkbox"
+                      id="checkbox"
+                    ></input>
+                    <span className={style.checkmark}></span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+        <div>
+          <button onClick={FuncionFilter} className={style.button}>
+            Filtrar
+          </button>
+          <button onClick={FuncionCleanFilter} className={style.button}>
+            Limpiar filtros
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
