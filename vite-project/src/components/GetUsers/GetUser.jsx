@@ -13,6 +13,21 @@ const GetUsers = () => {
   const [selectedUserRole, setSelectedUserRole] = useState("");
   const [showOptions, setShowOptions] = useState(false);
 
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    es: {
+      Usuario: "Usuario",
+      Partner: "Socio",
+      Confirmar: "Confirmar",
+    },
+    en: {
+      Usuario: "User",
+      Partner: "Partner",
+      Confirmar: "Confirm",
+    },
+  };
+
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
@@ -41,8 +56,8 @@ const GetUsers = () => {
           <img className={style.img} src={imagenUsuario} alt="Perfil" />
           <h3>{usuario.username}</h3>
           <p>{usuario.email}</p>
-          {usuario.rol === 1 && <p>rol: Usuario</p>}
-          {usuario.rol === 2 && <p>rol: Partner</p>}
+          {usuario.rol === 1 && <p>rol: {translations[idioma].Usuario}</p>}
+          {usuario.rol === 2 && <p>rol: {translations[idioma].Partner}</p>}
           {usuario.rol === 3 && <p>rol: superadmin</p>}
           <button onClick={() => handleSelectUser(usuario.id)}>
             Cambiar rol
@@ -54,12 +69,12 @@ const GetUsers = () => {
                 onChange={(e) => setSelectedUserRole(e.target.value)}
               >
                 <option hidden>seleccionar rol</option>
-                <option value={1}>Usuario</option>
-                <option value={2}>Partner</option>
+                <option value={1}>{translations[idioma].Usuario}</option>
+                <option value={2}>{translations[idioma].Partner}</option>
                 <option value={3}>superadmin</option>
               </select>
               <button className={style.confirm} onClick={handleRoleChange}>
-                Confirmar
+                {translations[idioma].Confirmar}
               </button>
             </>
           )}

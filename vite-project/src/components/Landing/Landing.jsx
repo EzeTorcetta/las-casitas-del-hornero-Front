@@ -8,16 +8,27 @@ import { FormularioIngresa, PedirLocalStorage } from "../Index";
 //image
 import hornero from "../../assets/horneroleft.jpg";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 //?----------------- COMPONENTE LANDING ------------------------------------
 const Landing = () => {
   const User = PedirLocalStorage();
   const navigate = useNavigate();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Registrate: "Sign in",
+    },
+    es: {
+      Registrate: "Registrate",
+    },
+  };
 
   useEffect(() => {
-  if (User) {
-    navigate("/Home");
-  }
+    if (User) {
+      navigate("/Home");
+    }
   }, [User, navigate]);
 
   if (User) {
@@ -33,7 +44,7 @@ const Landing = () => {
         <div className={styles.btnrg}>
           <Link to="/RegistroLocal">
             <button type="button" className="btn btn-warning btn-lg btn-block">
-              Registrate
+              {translations[idioma].Registrate}
             </button>
           </Link>
         </div>

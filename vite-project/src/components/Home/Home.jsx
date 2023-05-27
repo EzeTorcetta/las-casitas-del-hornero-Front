@@ -28,6 +28,7 @@ import {
   PedirLocalStorage,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
+import Chat from "../Chat/Chat";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = ({ countCarrito, setCountCarrito }) => {
@@ -56,20 +57,21 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     navigate("/Registrar");
   };
 
-  useEffect(() => {   
-    if(User)dispatch(GetTrolley(User.id));
+  useEffect(() => {
+    if (User) dispatch(GetTrolley(User.id));
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
     }
   }, []);
 
-  if(state === 0 && User?.id === 0){
-    return(
-      <AuthProvider 
+  if (state === 0 && User?.id === 0) {
+    return (
+      <AuthProvider
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleUserNotLoggedIn}
-        onUserNotRegistered={handleUserNotRegistered}>
-      </AuthProvider>)
+        onUserNotRegistered={handleUserNotRegistered}
+      ></AuthProvider>
+    );
   }
 
   return (
@@ -119,6 +121,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
         )}
 
         <Clima />
+        <Chat />
         <Paginado paginas={Hotels.numPages} />
         <section className={`${style.section} ${style.two}`}></section>
 

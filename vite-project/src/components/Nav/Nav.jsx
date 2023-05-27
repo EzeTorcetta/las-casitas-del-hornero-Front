@@ -34,6 +34,19 @@ const NavBar = ({ countCarrito }) => {
   const navigate = useNavigate();
   const idioma = useSelector((state) => state.idioma);
 
+  const translations = {
+    en: {
+      VerPerfil: "View profile",
+      Logout: "Logout",
+      IniciarSesion: "Login",
+    },
+    es: {
+      VerPerfil: " Ver Perfil",
+      Logout: "Cerrar Sesión",
+      IniciarSesion: "Iniciar Sesión",
+    },
+  };
+
   const toggleLang = (event) => {
     dispatch(updateLanguage(event.target.value));
   };
@@ -136,7 +149,7 @@ const NavBar = ({ countCarrito }) => {
                           onClick={handleVerPerfil}
                           className={style.menuOption}
                         >
-                          Ver Perfil
+                          {translations[idioma].VerPerfil}
                         </button>
                       </NavLink>
                     </li>
@@ -175,7 +188,7 @@ const NavBar = ({ countCarrito }) => {
                         onClick={handleLogout}
                         className={style.menuOption}
                       >
-                        Logout
+                        {translations[idioma].Logout}
                       </button>
                     </li>
                   </ul>
@@ -189,7 +202,7 @@ const NavBar = ({ countCarrito }) => {
               >
                 <button className={style.BotonUsuario}>
                   <img className={style.iconoCarrito} src={imagenSesion} />
-                  <p>Iniciar Sesion</p>
+                  <p>{translations[idioma].IniciarSesion}</p>
                 </button>
               </NavLink>
             )}

@@ -37,65 +37,6 @@ const reducer = (state, action) => {
   }
 };
 
-const idioma = useSelector((state) => state.idioma);
-
-const translations = {
-  en: {
-    CompletarTodos: "Please complete all fields",
-    Aceptar: "Accept",
-    ProblemaProvincias: "There was a problem loading the Provinces",
-    ErrorDepartamentos: "There was a problem loading the Departments",
-    ErrorLocalidad: "There was a problem loading the Locations",
-    ErrorServicios: "There was a problem loading services",
-    ErrorCampos: "You have errors in the fields",
-    HotelExito: "Your hotel was registered successfully!",
-    ErrorCarga: "Please try again, there was a problem loading your hotel",
-    RegistraTuHotel: "Register your hotel!",
-    NombreDelHotel: "Name of the hotel",
-    NotiMail: "Email notification",
-    NumeroTelefonico: "Phone Number",
-    DescripcionOpcional: "An optional Description",
-    Valoracion: "Hotel Valoration",
-    Clasificacion: "Hotel Rating",
-    SeleccionProvincia: "Select the Province where your hotel is located:",
-    SeleccionDepartamento: "Select the Department where your hotel is located:",
-    SeleccionLocalidad: "Select the City where your hotel is located:",
-    SeleccionServicios: "Select the services that your hotel has:",
-    CargaFoto: "Upload your hotel photo:",
-    URLFoto: "Photo url",
-    UbicacionHotel: "Change the location where your hotel is located:",
-    Registrar: "To register",
-  },
-  es: {
-    CompletarTodos: "Por favor completa todos los campos",
-    Aceptar: "Aceptar",
-    ProblemaProvincias: "Ocurrio un problema al cargar las Provincias",
-    ErrorDepartamentos: "Ocurrio un problema al cargar los Departamentos",
-    ErrorLocalidad: "Ocurrio un problema al cargar las Localidades",
-    ErrorServicios: "Ocurrio un problema al cargar los servicios",
-    ErrorCampos: "Tienes errores en los campos",
-    HotelExito: "Tu hotel se registro con éxito!",
-    ErrorCarga:
-      "Por favor vuelve a intentarlo, ocurrio un problema al cargar tu hotel",
-    RegistraTuHotel: "Registra tu hotel!",
-    NombreDelHotel: "Nombre del hotel",
-    NotiMail: "Email de notificación",
-    NumeroTelefonico: "Numero Telefonico",
-    DescripcionOpcional: "Una descriptión opcional.",
-    Valoracion: "Valoración del hotel",
-    Clasificacion: "Clasificación del hotel",
-    SeleccionProvincia: "Selecciona la Provincia donde se encuentra tu hotel:",
-    SeleccionDepartamento:
-      "Selecciona el Departamento donde se encuentra tu hotel:",
-    SeleccionLocalidad: "Selecciona la Localidad donde se encuentra tu hotel:",
-    SeleccionServicios: "Selecciona los servicios que tiene tu hotel:",
-    CargaFoto: "Carga la foto de tu hotel:",
-    URLFoto: "URL de la foto",
-    UbicacionHotel: "Cambia la ubicación donde se encuentra tu hotel:",
-    Registrar: "Registrar",
-  },
-};
-
 const FormularioHotel = () => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
@@ -104,6 +45,69 @@ const FormularioHotel = () => {
   const [location, dispatch] = useReducer(reducer, initialLocation);
   const [services, setServices] = useState([]);
   const [fotos, setFotos] = useState({});
+
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      CompletarTodos: "Please complete all fields",
+      Aceptar: "Accept",
+      ProblemaProvincias: "There was a problem loading the Provinces",
+      ErrorDepartamentos: "There was a problem loading the Departments",
+      ErrorLocalidad: "There was a problem loading the Locations",
+      ErrorServicios: "There was a problem loading services",
+      ErrorCampos: "You have errors in the fields",
+      HotelExito: "Your hotel was registered successfully!",
+      ErrorCarga: "Please try again, there was a problem loading your hotel",
+      RegistraTuHotel: "Register your hotel!",
+      NombreDelHotel: "Name of the hotel",
+      NotiMail: "Email notification",
+      NumeroTelefonico: "Phone Number",
+      DescripcionOpcional: "An optional Description",
+      Valoracion: "Hotel Valoration",
+      Clasificacion: "Hotel Rating",
+      SeleccionProvincia: "Select the Province where your hotel is located:",
+      SeleccionDepartamento:
+        "Select the Department where your hotel is located:",
+      SeleccionLocalidad: "Select the City where your hotel is located:",
+      SeleccionServicios: "Select the services that your hotel has:",
+      CargaFoto: "Upload your hotel photo:",
+      URLFoto: "Photo url",
+      UbicacionHotel: "Change the location where your hotel is located:",
+      Registrar: "To register",
+    },
+    es: {
+      CompletarTodos: "Por favor completa todos los campos",
+      Aceptar: "Aceptar",
+      ProblemaProvincias: "Ocurrio un problema al cargar las Provincias",
+      ErrorDepartamentos: "Ocurrio un problema al cargar los Departamentos",
+      ErrorLocalidad: "Ocurrio un problema al cargar las Localidades",
+      ErrorServicios: "Ocurrio un problema al cargar los servicios",
+      ErrorCampos: "Tienes errores en los campos",
+      HotelExito: "Tu hotel se registro con éxito!",
+      ErrorCarga:
+        "Por favor vuelve a intentarlo, ocurrio un problema al cargar tu hotel",
+      RegistraTuHotel: "Registra tu hotel!",
+      NombreDelHotel: "Nombre del hotel",
+      NotiMail: "Email de notificación",
+      NumeroTelefonico: "Numero Telefonico",
+      DescripcionOpcional: "Una descriptión opcional.",
+      Valoracion: "Valoración del hotel",
+      Clasificacion: "Clasificación del hotel",
+      SeleccionProvincia:
+        "Selecciona la Provincia donde se encuentra tu hotel:",
+      SeleccionDepartamento:
+        "Selecciona el Departamento donde se encuentra tu hotel:",
+      SeleccionLocalidad:
+        "Selecciona la Localidad donde se encuentra tu hotel:",
+      SeleccionServicios: "Selecciona los servicios que tiene tu hotel:",
+      CargaFoto: "Carga la foto de tu hotel:",
+      URLFoto: "URL de la foto",
+      UbicacionHotel: "Cambia la ubicación donde se encuentra tu hotel:",
+      Registrar: "Registrar",
+    },
+  };
+
   const [geoposition, setGeoposition] = useState({
     location: ["-34.603718", "-58.381639"],
     name: "Tu hotel",
