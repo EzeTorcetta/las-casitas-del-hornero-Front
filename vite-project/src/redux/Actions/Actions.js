@@ -26,6 +26,7 @@ import {
   ID_HOTEL_FORM,
   GET_CURRENCY_RATE,
   SET_CURRENCY_SYMBOL,
+  SET_THEME,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -454,3 +455,11 @@ export const setCurrencySymbol = (currencySymbol) => {
     dispatch({ type: SET_CURRENCY_SYMBOL, payload: currencySymbol });
   };
 };
+//-------------- SET THEME ---------------
+
+export const changeTheme = (theme) => {
+  return{
+    type: SET_THEME,
+    payload: theme,
+  }
+}

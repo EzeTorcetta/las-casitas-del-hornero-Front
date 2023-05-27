@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import AuthProvider from "../GoogleAuth/AuthProvider";
 import { auth } from "../../Firebase/Firebase";
 //css
-import style from "./Home.module.css";
+import "./Home.css";
 //actions
 import {
   FuncionSelectFilter,
@@ -29,6 +29,9 @@ import {
   PedirLocalStorage,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
+import SwitchButton from "../SwitchButton/SwitchButton";
+
+
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = ({ countCarrito, setCountCarrito }) => {
@@ -44,6 +47,8 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const currencyExchange = useSelector(
     (state) => state.currencyExchange
   );
+  const estado = useSelector((state) => state);
+  const theme = useSelector((state) => state.theme);
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -78,59 +83,74 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   }
 
   return (
-    <>
-      <NavBar countCarrito={countCarrito} />
-      <div className={style.container}>
+    
+    <div className={theme === 'light' ? 'fullcontainer-light' : 'fullcontainer-dark'}>
+
+      <div>
+        <NavBar countCarrito={countCarrito} />
+      </div>
+      
+      <div>
         <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
+      </div>
+      
+      <div className="mainsection">
+        
+        <div>
+          <Filter />
+        </div>
+
+        <div>
 
         {Hotels.allHotels?.length ? (
-          <>
-            <section className={`${style.section} ${style.one}`}>
-              <div className={style.filtroContainer}>
-                <Filter />
-              </div>
-              <div className={style.divCard}>
-                <Row xs={1} sm={2} lg={3} className="g-2">
-                  {Hotels.allHotels?.map(
-                    ({
-                      id,
-                      name,
-                      image,
-                      province,
-                      rating,
-                      description,
-                      valoration,
-                    }) => (
-                      <Cards
-                        key={id}
-                        id={id}
-                        name={name}
-                        image={image}
-                        province={province}
-                        rating={rating}
-                        description={description}
-                        valoration={valoration}
-                      />
-                    )
-                  )}
-                </Row>
-              </div>
-            </section>
-          </>
-        ) : (
-          <section className={`${style.section} ${style.one}`}>
-            <Loading />
-          </section>
-        )}
+            
+              <div>
+                {Hotels.allHotels?.map(
+                  ({
+                    id,
+                    name,
+                    image,
+                    province,
+                    rating,
+                    description,
+                    valoration,
+                  }) => (
+                    <Cards
+                      key={id}
+                      id={id}
+                      name={name}
+                      image={image}
+                      province={province}
+                      rating={rating}
+                      description={description}
+                      valoration={valoration}
+                    />
+                  )
+                )}
+           </div>
+  
+      ) : (
+          <Loading />
+      )
+      }
 
+        </div>
+
+      </div>
+
+      <div>
         <Clima />
-        <Paginado paginas={Hotels.numPages} />
-        <section
-          className={`${style.section} ${style.two}`}></section>
+      </div>
 
+      <div>
+        <Paginado paginas={Hotels.numPages} />
+      </div>
+        
+      <div>
         <Footer />
       </div>
-    </>
+        
+    </div>
   );
 };
 

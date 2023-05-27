@@ -26,6 +26,7 @@ import {
   ID_HOTEL_FORM,
   SET_CURRENCY_SYMBOL,
   GET_CURRENCY_RATE,
+  SET_THEME,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -61,6 +62,7 @@ const InicialState = {
   Reviews: 0,
   idHotelForm: "",
   currencyExchange: {},
+  theme: 'light',
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -207,6 +209,11 @@ export const rootReducer = (state = InicialState, actions) => {
           symbol: actions.payload,
         },
       };
+    case SET_THEME:
+      return {
+        ...state,
+        theme: actions.payload,
+      }
     default:
       return { ...state };
   }

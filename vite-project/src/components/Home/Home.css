@@ -1,0 +1,15 @@
+.fullcontainer-light{
+  background-color: whitesmoke;
+}
+
+.fullcontainer-dark{
+  background-color: rgb(18, 18, 41);
+}
+
+.mainsection{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 4rem;
+}
+

@@ -1,26 +1,65 @@
-.container {
-  display: flex;
-  border-radius: 0.5rem;
-  min-width: 85%;
-  /* margin: 10px 0 10px 40px; */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
-  height: fit-content;
-  margin-left: 8.5em;
+.cardcontainer{
+display: flex;
+flex-direction: row;
+width: 65rem;
+height: 15rem;
+padding: 2rem;
+padding-left: 4rem;
+border-radius: 0.5rem;
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+justify-content: space-between;
+margin-bottom: 1rem;
 }
 
-.title {
-  padding: 1em;
-  min-width: 300px;
-  max-width: 300px;
-  overflow-wrap: break-word;
+.cardcontainer-dark{
+  display: flex;
+  flex-direction: row;
+  width: 65rem;
+  height: 15rem;
+  padding: 2rem;
+  padding-left: 4rem;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  background-color: rgb(69, 71, 145);
+  }
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  width: 18rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgHotel {
+  height:100%;
+  object-fit: cover;
+  border-radius: .5rem;
+}
+
+.botonfavorito {
+  margin: 20px;
+  border-radius: 50%;
+  border: none;
+  width: 1.5rem;
+  background-color: #ccc;
 }
 
 .name {
-  overflow-wrap: break-word;
-  border-radius: 10px;
-  padding: 0.2em;
   font-weight: bold;
   color: black;
+}
+
+.rating {
+  height: 100%;
+  margin-bottom: .5rem;
+}
+
+.imgRating {
+  height: 20px;
+  width: auto;
 }
 
 .province {
@@ -33,37 +72,11 @@
   font-size: 20px;
 }
 
-.rating {
-  margin: 0.5em;
-  margin-bottom: 22px;
-}
 
-.imgRating {
-  height: 20px;
-  width: auto;
-  /* padding: 0.2em; */
-}
 
-.imgHotel {
-  width: 18em;
-  object-fit: cover;
-  border-radius: 0.5rem 0 0 0.5rem;
-  height: 100%;
-}
 
-.imgContainer {
-  position: relative;
-}
 
-.button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 7px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: none;
-}
+
 
 .description {
   max-height: 200px;
@@ -89,7 +102,7 @@
 }
 
 @media (max-width: 450px) {
-  .container {
+  .card {
     display: flex;
     flex-direction: column;
     max-width: 200px;
