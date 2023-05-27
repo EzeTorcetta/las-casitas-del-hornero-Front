@@ -23,7 +23,9 @@ import {
   CHANGE_ROL,
   UP_DATE_TROLLEY,
   PUT_AMOUNT_TROLLEY,
-  ID_HOTEL_FORM
+  ID_HOTEL_FORM,
+  GET_CURRENCY_RATE,
+  SET_CURRENCY_SYMBOL,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -31,10 +33,20 @@ import swal from "sweetalert";
 //?----------------- ACTIONS ------------------------------------
 
 //* ----------------- GET ALL HOTELS ------------------------------------
-const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+const URL_BASE =
+  "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 export const FuncionSelectFilter = (filters) => {
   let URL = `${URL_BASE}/hotels`;
-  const { provinces, services, rating, order, page, department, locality, name } = filters;
+  const {
+    provinces,
+    services,
+    rating,
+    order,
+    page,
+    department,
+    locality,
+    name,
+  } = filters;
 
   URL = URL + `?page=${page}`;
   return async (dispatch) => {
@@ -59,7 +71,8 @@ export const FuncionSelectFilter = (filters) => {
       }
       if (services.length) {
         services.map(
-          (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
+          (ser) =>
+            (URL = URL + `&services=${encodeURIComponent(ser)}`)
         );
       }
       const response = await axios.get(URL);
@@ -111,7 +124,9 @@ export const PostFilters = (filters) => {
 export const FuncionTypeRoomTypes = (idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}`);
+      const response = await axios.get(
+        `${URL_BASE}/roomTypes/${idHotel}`
+      );
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
@@ -145,8 +160,13 @@ export const FuncionSearch = (nameHotel, page) => {
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
-      dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
+      const response = await axios.get(
+        `${URL_BASE}/favorites/${idUser}`
+      );
+      dispatch({
+        type: ALL_FAVORITES_HOTELS,
+        payload: response.data,
+      });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -289,52 +309,56 @@ export const GetUser = (User) => {
 //* ----------------------- LOG OUT -----------------------------
 
 export const LogOut = () => {
-  return {type: USER_LOGOUT}
+  return { type: USER_LOGOUT };
 };
 
 //* ----------------------- GET PROVINCES -----------------------------
 
 export const getProvinces = () => {
-  return async function (dispatch){
-      const response = await axios.get(`${URL_BASE}/locations`);
-      dispatch({ type: GET_ALL_PROVINCES, payload: response.data});
-  }
+  return async function (dispatch) {
+    const response = await axios.get(`${URL_BASE}/locations`);
+    dispatch({ type: GET_ALL_PROVINCES, payload: response.data });
+  };
 };
 
 //* ----------------------- GET DEPARTMENT -----------------------------
 
 export const getDepartment = (id_province) => {
-  return async function (dispatch){
-      const response = await axios.get(`${URL_BASE}/locations?id_province=${id_province}`);
-      dispatch({ type: GET_DEPARTMENT, payload: response.data});
-  }
+  return async function (dispatch) {
+    const response = await axios.get(
+      `${URL_BASE}/locations?id_province=${id_province}`
+    );
+    dispatch({ type: GET_DEPARTMENT, payload: response.data });
+  };
 };
 
 //* ----------------------- GET LOCALITY -----------------------------
 
 export const getLocality = (id_departament) => {
-  return async function (dispatch){
-      const response = await axios.get(`${URL_BASE}/locations?id_department=${id_departament}`);
-      dispatch({ type: GET_LOCALITY, payload: response.data});
-  }
+  return async function (dispatch) {
+    const response = await axios.get(
+      `${URL_BASE}/locations?id_department=${id_departament}`
+    );
+    dispatch({ type: GET_LOCALITY, payload: response.data });
+  };
 };
-
 
 //* ----------------------- GET SERVICES -----------------------------
 
 export const getServices = () => {
-  return async function (dispatch){
-      const response = await axios.get(`${URL_BASE}/services`);
-      dispatch({ type: SERVICES, payload: response.data});
-  }
+  return async function (dispatch) {
+    const response = await axios.get(`${URL_BASE}/services`);
+    dispatch({ type: SERVICES, payload: response.data });
+  };
 };
-
 
 //* ----------------- ALL PARTNER HOTELS ------------------------------------
 export const FuncionAllPartnerHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/hotels?id_user=${idUser}`);
+      const response = await axios.get(
+        `${URL_BASE}/hotels?id_user=${idUser}`
+      );
       dispatch({ type: ALL_PARTNER_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -355,33 +379,62 @@ export const NewReview = () => {
 
 //* ----------------- GET BOOKYNG ------------------------------------
 export const getBooking = (id, rol) => {
-  return async function (dispatch){
-    const response = await axios.get(`${URL_BASE}/booking?id_user=${id}&rol=${rol}`);
-    dispatch({ type: GET_BOOKYNG, payload: response.data});
-}
+  return async function (dispatch) {
+    const response = await axios.get(
+      `${URL_BASE}/booking?id_user=${id}&rol=${rol}`
+    );
+    dispatch({ type: GET_BOOKYNG, payload: response.data });
+  };
 };
-
 
 //* ----------------- GET USERS ------------------------------------
 export const getUsers = (id) => {
-  return async function (dispatch){
+  return async function (dispatch) {
     const response = await axios.get(`${URL_BASE}/user/${id}`);
-    dispatch({ type: GET_USERS, payload: response.data});
-  }
+    dispatch({ type: GET_USERS, payload: response.data });
+  };
 };
 
 //* ----------------- CHANGE ROL ------------------------------------
 export const changeRol = (data) => {
-  return async function (dispatch){
-    const response = await axios.put(`${URL_BASE}/user`,data);
-    dispatch({ type: CHANGE_ROL, payload: response.data});
-}
+  return async function (dispatch) {
+    const response = await axios.put(`${URL_BASE}/user`, data);
+    dispatch({ type: CHANGE_ROL, payload: response.data });
+  };
 };
 
 //* ----------------- ID HOTEL FORM ------------------------------------
 export const idHotelForm = (id) => {
-  console.log(id)
-    return (dispatch) => {
-      dispatch({ type: ID_HOTEL_FORM, payload: id});
+  return async function (dispatch) {
+    dispatch({ type: ID_HOTEL_FORM, payload: id });
+  };
+};
+
+// //* ----------------- GET CURRENCY RATE API----------------------------------
+export const getCurrencyRateAPI = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.get(
+        `https://openexchangerates.org/api/latest.json?app_id=d7185c1a1d0d4580a879e291d173af8a`
+      );
+      dispatch({
+        type: GET_CURRENCY_RATE,
+        payload: response.data.rates,
+      });
     };
+    // eslint-disable-next-line no-unreachable
+  } catch (error) {
+    swal({
+      text: error.response.data.error,
+      icon: "warning",
+      buttons: "Aceptar",
+    });
+  }
+};
+
+// //* ----------------- SET CURRENCY SYMBOL----------------------------------
+export const setCurrencySymbol = (currencySymbol) => {
+  return async function (dispatch) {
+    dispatch({ type: SET_CURRENCY_SYMBOL, payload: currencySymbol });
+  };
 };

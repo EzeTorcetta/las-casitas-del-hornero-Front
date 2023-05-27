@@ -8,6 +8,7 @@ import { PedirLocalStorage, ClearLocalStorage } from "../Index";
 import { LogOut } from "../../redux/Actions/Actions";
 import { auth } from "../../Firebase/Firebase";
 import { signOut } from "firebase/auth";
+import SymbolsCurrency from "../CurrencyExchange/SymbolsCurrency";
 import style from "./Nav.module.css";
 
 // import "NavButon.css";
@@ -81,6 +82,8 @@ const NavBar = ({ countCarrito }) => {
             <div className={style.tituloLogo}>CasitasDelHornero</div>
           </div>
         </NavLink>
+
+        <SymbolsCurrency />
 
         <div
           className={

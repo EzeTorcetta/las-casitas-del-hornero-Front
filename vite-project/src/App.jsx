@@ -11,7 +11,10 @@ import {
   FormGoogle,
   LogOut,
   FormularioHotel,
-  FormularioTipoHab
+  FormularioTipoHab,
+  Error404,
+  OlvidasteLaPassword,
+  RestablecerContraseña,
 } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
 import UploadImage from "./components/Imagenes/cargarImagenes";
@@ -26,7 +29,11 @@ function App() {
         <Route path="/RegistroLocal" element={<FormLocal />} />
         <Route path="/RegistroGoogle" element={<FormGoogle />} />
         <Route path="/Logout" element={<LogOut />} />
-
+        <Route path="/OlvidasteLaPassword" element={<OlvidasteLaPassword />} />
+        <Route
+          path="/RestablecerContraseña"
+          element={<RestablecerContraseña />}
+        />
         <Route path="/FormHotel" element={<FormularioHotel />} />
         <Route path="/FormRoomType" element={<FormularioTipoHab />} />
         <Route path="/Imagenes" element={<UploadImage />} />
@@ -68,6 +75,7 @@ function App() {
             />
           }
         />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );

@@ -23,7 +23,9 @@ import {
   CHANGE_ROL,
   PUT_AMOUNT_TROLLEY,
   UP_DATE_TROLLEY,
-  ID_HOTEL_FORM
+  ID_HOTEL_FORM,
+  SET_CURRENCY_SYMBOL,
+  GET_CURRENCY_RATE,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -40,14 +42,14 @@ const InicialState = {
   Provinces: [],
   Department: [],
   Locality: [],
-  Services:[],
-  PartnerHotels:[],
-  Booking:[],
-  Users:[],
+  Services: [],
+  PartnerHotels: [],
+  Booking: [],
+  Users: [],
   Filters: {
     provinces: "",
-    department:"",
-    locality:"",
+    department: "",
+    locality: "",
     services: [],
     rating: "",
     order: "",
@@ -55,7 +57,8 @@ const InicialState = {
     name: "",
   },
   Reviews: 0,
-  idHotelForm:'',
+  idHotelForm: "",
+  currencyExchange: {},
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -121,7 +124,9 @@ export const rootReducer = (state = InicialState, actions) => {
     case DELETE_TROLLEY:
       return {
         ...state,
-        Trolley: state.Trolley.filter((tro) => tro.id !== actions.payload),
+        Trolley: state.Trolley.filter(
+          (tro) => tro.id !== actions.payload
+        ),
       };
     case DELETE_ALL_TROLLEY:
       return {
@@ -183,7 +188,23 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         idHotelForm: actions.payload,
-      }
+      };
+    case GET_CURRENCY_RATE:
+      return {
+        ...state,
+        currencyExchange: {
+          ...state.currencyExchange,
+          rate: actions.payload,
+        },
+      };
+    case SET_CURRENCY_SYMBOL:
+      return {
+        ...state,
+        currencyExchange: {
+          ...state.currencyExchange,
+          symbol: actions.payload,
+        },
+      };
     default:
       return { ...state };
   }

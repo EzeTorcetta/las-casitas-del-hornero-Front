@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import Maps from "../../MapForm/Map";
 import { PedirLocalStorage } from "../../Index";
 import { idHotelForm } from "../../../redux/Actions/Actions";
+import NavBar from "../../Nav/Nav";
 
 const initialLocation = {
   provinces: [],
@@ -38,7 +39,8 @@ const reducer = (state, action) => {
 };
 
 const FormularioHotel = () => {
-  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+  const URL_BASE =
+    "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
   let User = PedirLocalStorage();
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ const FormularioHotel = () => {
     rating: "",
     province: "",
     department: "",
-    locality:"",
+    locality: "",
     services: [],
     image: [],
     location: [],
@@ -265,7 +267,6 @@ const FormularioHotel = () => {
       image,
       location,
     } = hotel;
-
     try {
       const { data } = await axios.post(
         `${URL_BASE}/hotels/${User.id}`,
@@ -289,8 +290,7 @@ const FormularioHotel = () => {
         icon: "success",
         buttons: "Aceptar",
       });
-      console.log(data.id)
-      await dispatch(idHotelForm(data.id))
+      dispatch(idHotelForm(data.id));
       navigate("/FormRoomType", {
         state: { id_hotel: data.id },
         replace: true,
@@ -310,12 +310,14 @@ const FormularioHotel = () => {
   return (
     //
     // FORMULARIO HOTEL
+    <>
+      <NavBar />
 
-    <div className="container">
-      <form onSubmit={handleSubmit} className={style.form}>
-        <h1 className="h3 mb-3 fw-normal">Registra tu hotel!</h1>
+      <div className="container">
+        <form onSubmit={handleSubmit} className={style.form}>
+          <h1 className="h3 mb-3 fw-normal">Registra tu hotel!</h1>
 
-        {/* NOMBRE DEL HOTEL */}
+          {/* NOMBRE DEL HOTEL */}
 
         {error.name ? (
           <span className={style.error}>{error.name}</span>
@@ -479,40 +481,137 @@ const FormularioHotel = () => {
               ))}
             </select>
           </div>
-        ) : (
-          <></>
-        )}
+          ):(<></>)}
+          
+          {/* TELEFONO DE CONTACTO */}
 
-        {/* SERVICIOS QUE TENDRA EL HOTEL */}
+          {error.phoneNumber ? (
+            <span className={style.error}>{error.phoneNumber}</span>
+          ) : (
+            <span className={style.hidden}>hidden</span>
+          )}
+          <div className="form-floating">
+            <input
+              type="tel"
+              className="form-control"
+              id="phoneNumber"
+              placeholder="Número telefónico."
+              onChange={handleChange}
+              value={hotel.phoneNumber}
+              name="phoneNumber"
+            />
+            <label>Número telefónico.</label>
+          </div>
 
-        {error.services ? (
-          <span className={style.error}>{error.services}</span>
-        ) : (
+          {/* UNA DESCRIPCION OPCIONAL */}
+
           <span className={style.hidden}>hidden</span>
-        )}
-        <div>Selecciona los servicios que tiene tu hotel:</div>
-        <span
-          onChange={onChangeServices}
-          className={style.checkContainer}>
-          {services?.map((service) => (
-            <div key={service.id} className={style.checkbox}>
-              <label className={style.container}>
-                <input
-                  type="checkbox"
-                  id={service.id}
-                  value={service.name}
-                  onChange={onChangeServices}
-                />
-                <div className={style.checkmark}></div>
-              </label>
-              <span className={style.nameService}>
-                {service.name}
-              </span>
-            </div>
-          ))}
-        </span>
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              placeholder="Una descriptión opcional."
+              onChange={handleChange}
+              value={hotel.description}
+              name="description"
+            />
+            <label>Una descriptión opcional.</label>
+          </div>
 
-        {/* FOTOS DEL HOTEL */}
+          {/* VALORACION DEL HOTEL */}
+
+          {error.valoration ? (
+            <span className={style.error}>{error.valoration}</span>
+          ) : (
+            <span className={style.hidden}>hidden</span>
+          )}
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="valoration"
+              placeholder="Valoración del hotel."
+              onChange={handleChange}
+              value={hotel.valoration}
+              name="valoration"
+            />
+            <label>Valoración del hotel.</label>
+          </div>
+
+          {/* CLASIFICACION DEL HOTEL */}
+
+          {error.rating ? (
+            <span className={style.error}>{error.rating}</span>
+          ) : (
+            <span className={style.hidden}>hidden</span>
+          )}
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="rating"
+              placeholder="Clasificación del hotel."
+              onChange={handleChange}
+              value={hotel.rating}
+              name="rating"
+            />
+            <label>Clasificación del hotel.</label>
+          </div>
+
+          {/* LOCATION DONDE SE UBICA EL HOTEL*/}
+
+          <div>
+            Selecciona la Provincia donde se encuentra tu hotel:
+          </div>
+          <select
+            onChange={onChangeProvinces}
+            className={style.select}>
+            {location.provinces?.map(({ nombre, id }) => (
+              <option value={nombre} key={id} id={id}>
+                {nombre}
+              </option>
+            ))}
+          </select>
+          {location.departments.length ? (
+            <div>
+              <div>
+                Selecciona el Departamento donde se encuentra tu
+                hotel:
+              </div>
+              <select
+                onChange={onChangeDepartments}
+                className={style.select}>
+                {location.departments?.map(({ nombre, id }) => (
+                  <option value={nombre} key={id} id={id}>
+                    {nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
+          {location.localities.length ? (
+            <div>
+              <div>
+                Selecciona la Localidad donde se encuentra tu hotel:
+              </div>
+              <select
+                onChange={onChangeLocalities}
+                className={style.select}>
+                {location.localities?.map(({ nombre, id }) => (
+                  <option value={nombre} key={id} id={id}>
+                    {nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {/* SERVICIOS QUE TENDRA EL HOTEL */}
 
         {error.image ? (
           <span className={style.error}>{error.image}</span>
@@ -552,18 +651,41 @@ const FormularioHotel = () => {
           />
           <label>URL de la foto.</label> */}
 
-        {/* GEOLOCALIZACION DEL HOTEL */}
+          {/* FOTOS DEL HOTEL */}
 
-        <div>Cambia la ubicación donde se encuentra tu hotel:</div>
-        <Maps location={geoposition} setLocation={setGeoposition} />
+          {error.image ? (
+            <span className={style.error}>{error.image}</span>
+          ) : (
+            <span className={style.hidden}>hidden</span>
+          )}
+          <div>Carga la foto de tu hotel:</div>
+          {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="image"
+              placeholder="URL de la foto."
+              onChange={onChangeImage}
+              value={hotel.image}
+              name="image"
+            />
+            <label>URL de la foto.</label>
+          </div>
 
-        <button
-          className="w-100 btn btn-lg btn-warning"
-          type="submit">
-          Registrar
-        </button>
-      </form>
-    </div>
+          {/* GEOLOCALIZACION DEL HOTEL */}
+
+          <div>Cambia la ubicación donde se encuentra tu hotel:</div>
+          <Maps location={geoposition} setLocation={setGeoposition} />
+
+          <button
+            className="w-100 btn btn-lg btn-warning"
+            type="submit">
+            Registrar
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

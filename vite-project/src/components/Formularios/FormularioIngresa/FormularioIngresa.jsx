@@ -9,6 +9,7 @@ import axios from "axios";
 import { GuardarLocalStorage } from "../../Index";
 import { BotonAuthGoogle } from "../../Index";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const FormularioIngresa = () => {
   const navigate = useNavigate();
@@ -48,9 +49,9 @@ const FormularioIngresa = () => {
       });
     } else {
       try {
-          const response = await axios.post(
-            `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
-            usuario
+        const response = await axios.post(
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
+          usuario
         );
 
         GuardarLocalStorage(response.data);
@@ -105,6 +106,7 @@ const FormularioIngresa = () => {
             <button className={style.buton} type="submit">
               Ingresar
             </button>
+            <Link to={"/OlvidasteLaPassword"}>Olvidaste la contraseña?</Link>
           </form>
           <div className={style.butonGoogleDiv}>
             <BotonAuthGoogle />
