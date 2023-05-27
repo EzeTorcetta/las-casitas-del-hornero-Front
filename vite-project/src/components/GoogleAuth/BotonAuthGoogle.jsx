@@ -27,14 +27,10 @@ const BotonAuthGoogle = () => {
 
   const handleOnClick = async (user) => {
     const googleProvider = new GoogleAuthProvider();
-
     const signInWithGoogle = async (googleProvider) => {
       try {
         const res = await signInWithPopup(auth, googleProvider);
-        console.log(res.user.stsTokenManager);
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     };
     await signInWithGoogle(googleProvider);
   };
@@ -82,7 +78,7 @@ const BotonAuthGoogle = () => {
               className="red"
             ></path>
           </svg>
-          <span className="text">{translations[idioma].Continue}</span>
+          <span className="text">Ingresar con Google</span>
         </button>
       </div>
     );
@@ -94,7 +90,7 @@ const BotonAuthGoogle = () => {
       onUserNotLoggedIn={handleUserNotLoggedIn}
       onUserNotRegistered={handleUserNotRegistered}
     >
-      <div>{translations[idioma].Loading}...</div>
+      <div>Loading...</div>
     </AuthProvider>
   );
 };

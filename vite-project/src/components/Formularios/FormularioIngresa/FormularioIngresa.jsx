@@ -10,6 +10,7 @@ import { GuardarLocalStorage } from "../../Index";
 import { BotonAuthGoogle } from "../../Index";
 import swal from "sweetalert";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const FormularioIngresa = () => {
   const navigate = useNavigate();
@@ -96,12 +97,22 @@ const FormularioIngresa = () => {
   return (
     <>
       <div className="main">
+        {/* <h1 className={style.landing_title}>CASITAS DEL HORNERO</h1> */}
+        <div className={style.logo}>
+          <img
+            src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+            alt=""
+            className={style.logo_img}
+          />
+          <h1 className={style.title}>CASITAS DEL HORNERO</h1>
+        </div>
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="login">
           <form onSubmit={handleSubmit} className="form">
             <h1 className="h3 mb-3 fw-normal">
               {translations[idioma].Ingresa}
             </h1>
+            <h2 className="h3 mb-3 fw-normal">Ingresa</h2>
 
             <input
               type="email"
@@ -128,6 +139,9 @@ const FormularioIngresa = () => {
             <button className={style.buton} type="submit">
               {translations[idioma].Ingresar}
             </button>
+            <div className={style.password_forgot}>
+              <Link to={"/OlvidasteLaPassword"}>Olvidaste la contraseña?</Link>
+            </div>
           </form>
           <div className={style.butonGoogleDiv}>
             <BotonAuthGoogle />

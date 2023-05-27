@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
+import carritoblanco from "../../image/carrito-de-compras-blanco.png";
 import imagenSesion from "../../image/perfil.png";
 import imagenUsuario from "../../image/usuario (1).png";
 import { PedirLocalStorage, ClearLocalStorage } from "../Index";
 import { LogOut } from "../../redux/Actions/Actions";
 import { auth } from "../../Firebase/Firebase";
 import { signOut } from "firebase/auth";
-import style from "./Nav.module.css";
-import { useSelector } from "react-redux";
+import SymbolsCurrency from "../CurrencyExchange/SymbolsCurrency";
+import "./Nav.css";
+import SwitchButton from "../SwitchButton/SwitchButton";
 import { updateLanguage } from "../../redux/Actions/Actions";
 
 // import "NavButon.css";
@@ -31,6 +33,7 @@ const NavBar = ({ countCarrito }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const theme = useSelector((state) => state.theme);
   const navigate = useNavigate();
   const idioma = useSelector((state) => state.idioma);
 
@@ -50,7 +53,6 @@ const NavBar = ({ countCarrito }) => {
   const toggleLang = (event) => {
     dispatch(updateLanguage(event.target.value));
   };
-
   const handleLogout = () => {
     logout();
   };
@@ -90,133 +92,177 @@ const NavBar = ({ countCarrito }) => {
   };
 
   return (
-    <>
-      <div>
-        <div className={style.nav}>
-          <div className={style.home}>
-            <NavLink to={"/Home"} className={style.links}>
-              <div className={style.logo}>
+    <div>
+      <div className={theme === "light" ? "navlight" : "navdark"}>
+        <NavLink to={"/Home"} className="links">
+          <div className="logo">
+            <img
+              className="img"
+              src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+              alt="LaCasitaDelHornero"
+            />
+            <div className="tituloLogo">CasitasDelHornero</div>
+          </div>
+        </NavLink>
+        <SwitchButton />
+        <SymbolsCurrency />
+
+        <div
+          className={
+            showNavbar || windowWidth > 768 ? `${"links"} ${"show"}` : "links"
+          }
+        >
+          {rol === 1 ? (
+            <NavLink
+              to={"/Carrito"}
+              className="enlaces"
+              onClick={() => setShowNavbar(false)}
+            >
+              <div className="divCarritoCount">
+                <div className="countCarritoDiv">{countCarrito}</div>
+
                 <img
-                  className={style.img}
-                  src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
-                  alt="LaCasitaDelHornero"
+                  className="iconoCarrito"
+                  src={theme === "light" ? imageCarrito : carritoblanco}
                 />
-                <div className={style.tituloLogo}>CasitasDelHornero</div>
               </div>
             </NavLink>
-          </div>
+          ) : (
+            <></>
+          )}
 
-          <div
-            className={
-              showNavbar || windowWidth > 768
-                ? `${style.links} ${style.show}`
-                : style.links
-            }
-          >
-            {rol === 1 ? (
-              <NavLink
-                to={"/Carrito"}
-                className={style.link}
-                onClick={() => setShowNavbar(false)}
-              >
-                <div className={style.divCarritoCount}>
-                  <div className={style.countCarritoDiv}>{countCarrito}</div>
-                  <img className={style.iconoCarrito} src={imageCarrito} />
-                </div>
-              </NavLink>
-            ) : (
-              <></>
-            )}
+          {username ? (
+            <div>
+              {/* ------------- NUEVO MENU ------------ */}
 
-            {username ? (
-              <div className={style.perfil}>
-                <button
-                  onClick={() => setShowMenu(!showMenu)}
-                  className={style.profileButton}
-                >
-                  <img className={style.img} src={imagenUsuario} alt="Perfil" />
-                  <h6>{`${username}`}</h6>
-                  {/* <span className={style.NombreUsuario}>{`${username}`}</span> */}
-                </button>
-                {showMenu && (
-                  <ul className={style.menu}>
-                    <li>
-                      <NavLink
-                        to={"/Perfil"}
-                        onClick={() => setShowNavbar(false)}
-                      >
-                        <button
-                          onClick={handleVerPerfil}
-                          className={style.menuOption}
-                        >
-                          {translations[idioma].VerPerfil}
-                        </button>
-                      </NavLink>
-                    </li>
-                    <li>
-                      {/* {rol === 2 ? (
+              <nav>
+                <ul className="menu-horizontal">
+                  <li>
+                    <a>{`${username}`}</a>
+                    <ul className="menu-vertical">
+                      <li>
+                        <a href="/Perfil">Perfil</a>
+                      </li>
+                      {rol === 2 ? (
+                        <li>
+                          <a href="">Proveer Hotel</a>
+                        </li>
+                      ) : rol === 3 ? (
+                        <li>
+                          <a href="">Administrar Usuarios</a>
+                        </li>
+                      ) : (
+                        <li>
+                          <a href="">Quiero ser proveedor</a>
+                        </li>
+                      )}
+                      <li>
+                        <button onClick={handleLogout}>Salir</button>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          ) : (
+            <a href="/"> iniciar sesion</a>
+          )}
+
+          {/* --------------------------------------------------
+
+ {/* ------------- FOTO DE PERFIL Y NOMBRE ------------ */}
+          {/* <button
+                onClick={() => setShowMenu(!showMenu)}
+                className='profileButton'>
+                <img
+                  className='img'
+                  src={imagenUsuario}
+                  alt="Perfil"
+                />
+                <p className="username">{`${username}`}</p>
+              </button> */}
+          {/* ------------------------------------------------------- */}
+
+          {/* {showMenu && (
+                <nav>
+                <ul className='menu'>
+                  <li>
+                    <NavLink
+                      to={"/Perfil"}
+                      onClick={() => setShowNavbar(false)}>
+                      <button
+                        onClick={handleVerPerfil}
+                        className='menuOption'>
+                        Ver Perfil
+                      </button>
+                    </NavLink>
+                  </li>
+                  <li>
+                    {/* {rol === 2 ? (
                       <NavLink
                         to={""}
-                        className={style.link}
+                        className='link'
                         onClick={() => setShowNavbar(false)}>
-                        <button className={style.menuOption}>
+                        <button className='menuOption'>
                           Proveer Hotel
                         </button>
                       </NavLink>
                     ) : rol === 3 ? (
                       <NavLink
                         to={""}
-                        className={style.link}
+                        className='link'
                         onClick={() => setShowNavbar(false)}>
-                        <button className={style.menuOption}>
+                        <button className='menuOption'>
                           Administrar Usuarios
                         </button>
                       </NavLink>
                     ) : (
                       <NavLink
                         to={""}
-                        className={style.link}
+                     
                         onClick={() => setShowNavbar(false)}>
-                        <button className={style.menuOption}>
+                        <button className='menuOption'>
                           Quiero ser Proveedor
                         </button>
                       </NavLink>
                     )} */}
-                    </li>
-                    <li>
-                      <button
-                        onClick={handleLogout}
-                        className={style.menuOption}
-                      >
-                        {translations[idioma].Logout}
-                      </button>
-                    </li>
-                  </ul>
-                )}
-              </div>
-            ) : (
-              <NavLink
-                to={"/"}
-                className={style.link}
-                onClick={() => setShowNavbar(false)}
-              >
-                <button className={style.BotonUsuario}>
-                  <img className={style.iconoCarrito} src={imagenSesion} />
-                  <p>{translations[idioma].IniciarSesion}</p>
-                </button>
-              </NavLink>
-            )}
-          </div>
-          <div className={style.idioma}>
-            🌐
-            <select value={idioma} onChange={toggleLang}>
-              <option value="en">English</option>
-              <option value="es">Español</option>
-            </select>
-          </div>
+          {/* </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className='menuOption'>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+                </nav>
+              )}
+            </div>
+          ) : (
+            <NavLink
+              to={"/"}
+              className='link'
+              onClick={() => setShowNavbar(false)}>
+              <button className='BotonUsuario'>
+                <img
+                  className='iconoCarrito'
+                  src={imagenSesion}
+                />
+                <p>Iniciar Sesion</p>
+              </button>
+            </NavLink>
+          )}
+          */}
+        </div>
+        <div className="idioma">
+          🌐
+          <select value={idioma} onChange={toggleLang}>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

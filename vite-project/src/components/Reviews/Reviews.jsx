@@ -55,14 +55,13 @@ export default function Reviews() {
       })
       .catch(function (error) {
         swal({
-          text: "Ya realizó una reseña en este hotel",
+          text: error.response.data.error,
           icon: "warning",
           buttons: "Aceptar",
         });
       });
     dispatch(NewReview());
     dispatch(FuncionDetailHotel(Hotel.id));
-    setShouldReload(true);
   };
 
   return (

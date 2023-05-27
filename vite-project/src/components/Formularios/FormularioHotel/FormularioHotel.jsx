@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import Maps from "../../MapForm/Map";
 import { PedirLocalStorage } from "../../Index";
 import { idHotelForm } from "../../../redux/Actions/Actions";
+import NavBar from "../../Nav/Nav";
 
 const initialLocation = {
   provinces: [],
@@ -129,6 +130,9 @@ const FormularioHotel = () => {
   const [hotel, setHotel] = useState(resetHotel);
   const [error, setError] = useState({});
 
+  const [imagenes, setImagenes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   // ACTIONS
 
   const getProvinces = async () => {
@@ -228,10 +232,30 @@ const FormularioHotel = () => {
 
   // CHANGES IN IMAGE
 
-  const onChangeImage = (event) => {
-    const value = event.target.value;
-    setHotel({ ...hotel, image: [value] });
-    setError(validacion({ ...hotel, image: value }));
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "La_Casita_Del_Hornero");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    await hotel.image.push(file.secure_url);
+    setLoading(false);
+    setError(validacion({ ...hotel, image: hotel.image }));
+  };
+
+  const deleteImage = async (url) => {
+    setLoading(true);
+    hotel.image = await hotel.image.filter((imagen) => url !== imagen);
+    setLoading(false);
+    setError(validacion({ ...hotel, image: hotel.image }));
   };
 
   // CHANGES IN HOTEL
@@ -255,6 +279,8 @@ const FormularioHotel = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // resetHotel.image = imagenes;
 
     if (
       !hotel.name.length ||
@@ -296,7 +322,6 @@ const FormularioHotel = () => {
       image,
       location,
     } = hotel;
-    console.log(hotel);
     try {
       const { data } = await axios.post(`${URL_BASE}/hotels/${User.id}`, {
         name,
@@ -311,11 +336,6 @@ const FormularioHotel = () => {
         services,
         image,
         location,
-      });
-      swal({
-        text: translations[idioma].HotelExito,
-        icon: "success",
-        buttons: translations[idioma].Aceptar,
       });
       dispatch(idHotelForm(data.id));
       navigate("/FormRoomType", {
@@ -336,203 +356,350 @@ const FormularioHotel = () => {
   return (
     //
     // FORMULARIO HOTEL
+    <>
+      <NavBar />
 
-    <div className="container">
-      <form onSubmit={handleSubmit} className={style.form}>
-        <h1 className="h3 mb-3 fw-normal">
-          {translations[idioma].RegistraTuHotel}
-        </h1>
-
-        {/* NOMBRE DEL HOTEL */}
-
-        {error.name ? (
-          <span className={style.error}>{error.name}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            placeholder={translations[idioma].NombreDelHotel}
-            onChange={handleChange}
-            value={hotel.name}
-            name="name"
-          />
-          <label>{translations[idioma].NombreDelHotel}</label>
-        </div>
-
-        {/* EMAIL PARA LA GESTION DEL HOTEL */}
-
-        {error.email ? (
-          <span className={style.error}>{error.email}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div className="form-floating">
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            placeholder={translations[idioma].NotiMail}
-            onChange={handleChange}
-            value={hotel.email}
-            name="email"
-          />
-          <label>{translations[idioma].NotiMail}.</label>
-        </div>
-
-        {/* TELEFONO DE CONTACTO */}
-
-        {error.phoneNumber ? (
-          <span className={style.error}>{error.phoneNumber}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div className="form-floating">
-          <input
-            type="tel"
-            className="form-control"
-            id="phoneNumber"
-            placeholder={translations[idioma].NumeroTelefonico}
-            onChange={handleChange}
-            value={hotel.phoneNumber}
-            name="phoneNumber"
-          />
-          <label>{translations[idioma].NumeroTelefonico}.</label>
-        </div>
-
-        {/* UNA DESCRIPCION OPCIONAL */}
-
-        <span className={style.hidden}>hidden</span>
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            placeholder={translations[idioma].DescripcionOpcional}
-            onChange={handleChange}
-            value={hotel.description}
-            name="description"
-          />
-          <label>{translations[idioma].DescripcionOpcional}.</label>
-        </div>
-
-        {/* VALORACION DEL HOTEL */}
-
-        {error.valoration ? (
-          <span className={style.error}>{error.valoration}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="valoration"
-            placeholder={translations[idioma].Valoracion}
-            onChange={handleChange}
-            value={hotel.valoration}
-            name="valoration"
-          />
-          <label>{translations[idioma].Valoracion}.</label>
-        </div>
-
-        {/* CLASIFICACION DEL HOTEL */}
-
-        {error.rating ? (
-          <span className={style.error}>{error.rating}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="rating"
-            placeholder={translations[idioma].Clasificacion}
-            onChange={handleChange}
-            value={hotel.rating}
-            name="rating"
-          />
-          <label>{translations[idioma].Clasificacion}</label>
-        </div>
-
-        {/* LOCATION DONDE SE UBICA EL HOTEL*/}
-
-        <div>{translations[idioma].SeleccionProvincia}</div>
-        <select onChange={onChangeProvinces} className={style.select}>
-          {location.provinces?.map(({ nombre, id }) => (
-            <option value={nombre} key={id} id={id}>
-              {nombre}
-            </option>
-          ))}
-        </select>
-        {location.departments.length ? (
-          <div>
-            <div>{translations[idioma].SeleccionDepartamento}</div>
-            <select onChange={onChangeDepartments} className={style.select}>
-              {location.departments?.map(({ nombre, id }) => (
-                <option value={nombre} key={id} id={id}>
-                  {nombre}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-        {location.localities.length ? (
-          <div>
-            <div>{translations[idioma].SeleccionLocalidad} </div>
-            <select onChange={onChangeLocalities} className={style.select}>
-              {location.localities?.map(({ nombre, id }) => (
-                <option value={nombre} key={id} id={id}>
-                  {nombre}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-
-        {/* SERVICIOS QUE TENDRA EL HOTEL */}
-
-        {error.services ? (
-          <span className={style.error}>{error.services}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div>{translations[idioma].SeleccionServicios} </div>
-        <span onChange={onChangeServices} className={style.checkContainer}>
-          {services?.map((service) => (
-            <div key={service.id} className={style.checkbox}>
-              <label className={style.container}>
+      <div className="container">
+        <form onSubmit={handleSubmit} className={style.form}>
+          <h1 className="h3 mb-3 fw-normal">
+            {translations[idioma].RegistraTuHotel}
+          </h1>
+          <div className="container">
+            <form onSubmit={handleSubmit} className={style.form}>
+              <h1 className="h3 mb-3 fw-normal">Registra tu hotel!</h1>
+              {/* NOMBRE DEL HOTEL */}
+              {error.name ? (
+                <span className={style.error}>{error.name}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
                 <input
-                  type="checkbox"
-                  id={service.id}
-                  value={service.name}
-                  onChange={onChangeServices}
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  placeholder={translations[idioma].NombreDelHotel}
+                  onChange={handleChange}
+                  value={hotel.name}
+                  name="name"
                 />
-                <div className={style.checkmark}></div>
-              </label>
-              <span className={style.nameService}>{service.name}</span>
-            </div>
-          ))}
-        </span>
-
-        {/* FOTOS DEL HOTEL */}
-
-        {error.image ? (
-          <span className={style.error}>{error.image}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div>{translations[idioma].CargaFoto} </div>
-        {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
-        <div className="form-floating">
+                <label>{translations[idioma].NombreDelHotel}</label>
+              </div>
+              {/* EMAIL PARA LA GESTION DEL HOTEL */}
+              {error.email ? (
+                <span className={style.error}>{error.email}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder={translations[idioma].NotiMail}
+                  onChange={handleChange}
+                  value={hotel.email}
+                  name="email"
+                />
+                <label>{translations[idioma].NotiMail}.</label>
+              </div>
+              {/* TELEFONO DE CONTACTO */}
+              {error.phoneNumber ? (
+                <span className={style.error}>{error.phoneNumber}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="phoneNumber"
+                  placeholder={translations[idioma].NumeroTelefonico}
+                  onChange={handleChange}
+                  value={hotel.phoneNumber}
+                  name="phoneNumber"
+                />
+                <label>{translations[idioma].NumeroTelefonico}.</label>
+              </div>
+              {/* UNA DESCRIPCION OPCIONAL */}
+              <span className={style.hidden}>hidden</span>
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="description"
+                  placeholder={translations[idioma].DescripcionOpcional}
+                  onChange={handleChange}
+                  value={hotel.description}
+                  name="description"
+                />
+                <label>{translations[idioma].DescripcionOpcional}.</label>
+              </div>
+              {/* VALORACION DEL HOTEL */}
+              {error.valoration ? (
+                <span className={style.error}>{error.valoration}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="valoration"
+                  placeholder={translations[idioma].Valoracion}
+                  onChange={handleChange}
+                  value={hotel.valoration}
+                  name="valoration"
+                />
+                <label>{translations[idioma].Valoracion}.</label>
+              </div>
+              {/* CLASIFICACION DEL HOTEL */}
+              {error.rating ? (
+                <span className={style.error}>{error.rating}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="rating"
+                  placeholder={translations[idioma].Clasificacion}
+                  onChange={handleChange}
+                  value={hotel.rating}
+                  name="rating"
+                />
+                <label>{translations[idioma].Clasificacion}</label>
+              </div>
+              {/* LOCATION DONDE SE UBICA EL HOTEL*/}
+              <div>{translations[idioma].SeleccionProvincia}</div>
+              <div>Selecciona la Provincia donde se encuentra tu hotel:</div>
+              <option hidden>Selecciona el Provincia</option>
+              <select onChange={onChangeProvinces} className={style.select}>
+                {location.provinces?.map(({ nombre, id }) => (
+                  <option value={nombre} key={id} id={id}>
+                    {nombre}
+                  </option>
+                ))}
+              </select>
+              {location.departments.length ? (
+                <div>
+                  <div>{translations[idioma].SeleccionDepartamento}</div>
+                  <select
+                    onChange={onChangeDepartments}
+                    className={style.select}
+                  >
+                    <div>
+                      Selecciona el Departamento donde se encuentra tu hotel:
+                    </div>
+                  </select>
+                  <select
+                    onChange={onChangeDepartments}
+                    className={style.select}
+                  >
+                    <option hidden>Selecciona el Departamento</option>
+                    {location.departments?.map(({ nombre, id }) => (
+                      <option value={nombre} key={id} id={id}>
+                        {nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              {location.localities.length ? (
+                <div>
+                  <div>{translations[idioma].SeleccionLocalidad} </div>
+                  <select
+                    onChange={onChangeLocalities}
+                    className={style.select}
+                  >
+                    <div>
+                      Selecciona la Localidad donde se encuentra tu hotel:
+                    </div>
+                  </select>
+                  <select
+                    onChange={onChangeLocalities}
+                    className={style.select}
+                  >
+                    <option hidden>Selecciona el Localidad</option>
+                    {location.localities?.map(({ nombre, id }) => (
+                      <option value={nombre} key={id} id={id}>
+                        {nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              {/* TELEFONO DE CONTACTO */}
+              {error.phoneNumber ? (
+                <span className={style.error}>{error.phoneNumber}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="phoneNumber"
+                  placeholder="Número telefónico."
+                  onChange={handleChange}
+                  value={hotel.phoneNumber}
+                  name="phoneNumber"
+                />
+                <label>Número telefónico.</label>
+              </div>
+              {/* UNA DESCRIPCION OPCIONAL */}
+              <span className={style.hidden}>hidden</span>
+              )}
+              <div>{translations[idioma].SeleccionServicios} </div>
+              <span
+                onChange={onChangeServices}
+                className={style.checkContainer}
+              >
+                {services?.map((service) => (
+                  <div key={service.id} className={style.checkbox}>
+                    <label className={style.container}>
+                      <input
+                        type="checkbox"
+                        id={service.id}
+                        value={service.name}
+                        onChange={onChangeServices}
+                      />
+                      <div className={style.checkmark}></div>
+                    </label>
+                    <span className={style.nameService}>{service.name}</span>
+                  </div>
+                ))}
+              </span>
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="description"
+                  placeholder="Una descriptión opcional."
+                  onChange={handleChange}
+                  value={hotel.description}
+                  name="description"
+                />
+                <label>Una descriptión opcional.</label>
+              </div>
+              {/* VALORACION DEL HOTEL */}
+              {error.valoration ? (
+                <span className={style.error}>{error.valoration}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="valoration"
+                  placeholder="Valoración del hotel."
+                  onChange={handleChange}
+                  value={hotel.valoration}
+                  name="valoration"
+                />
+                <label>Valoración del hotel.</label>
+              </div>
+              {/* CLASIFICACION DEL HOTEL */}
+              {error.rating ? (
+                <span className={style.error}>{error.rating}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="rating"
+                  placeholder="Clasificación del hotel."
+                  onChange={handleChange}
+                  value={hotel.rating}
+                  name="rating"
+                />
+                <label>Clasificación del hotel.</label>
+              </div>
+              {/* LOCATION DONDE SE UBICA EL HOTEL*/}
+              <div>Selecciona la Provincia donde se encuentra tu hotel:</div>
+              <select onChange={onChangeProvinces} className={style.select}>
+                {location.provinces?.map(({ nombre, id }) => (
+                  <option value={nombre} key={id} id={id}>
+                    {nombre}
+                  </option>
+                ))}
+              </select>
+              {location.departments.length ? (
+                <div>
+                  <div>
+                    Selecciona el Departamento donde se encuentra tu hotel:
+                  </div>
+                  <select
+                    onChange={onChangeDepartments}
+                    className={style.select}
+                  >
+                    {location.departments?.map(({ nombre, id }) => (
+                      <option value={nombre} key={id} id={id}>
+                        {nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              {location.localities.length ? (
+                <div>
+                  <div>
+                    Selecciona la Localidad donde se encuentra tu hotel:
+                  </div>
+                  <select
+                    onChange={onChangeLocalities}
+                    className={style.select}
+                  >
+                    {location.localities?.map(({ nombre, id }) => (
+                      <option value={nombre} key={id} id={id}>
+                        {nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              {/* SERVICIOS QUE TENDRA EL HOTEL */}
+              {error.image ? (
+                <span className={style.error}>{error.image}</span>
+              ) : (
+                <span className={style.hidden}>hidden</span>
+              )}
+              <div>{translations[idioma].CargaFoto} </div>
+              <div>Carga la foto de tu hotel:</div>
+              <div>
+                <input
+                  type="file"
+                  name="image"
+                  placeholder="arrastra la imagen aquí"
+                  onChange={uploadImage}
+                />
+                {hotel.image.length ? (
+                  hotel.image.map((imagen) => {
+                    return (
+                      <>
+                        <img src={imagen} style={{ width: "300px" }} />
+                        <button onClick={() => deleteImage(imagen)}>X</button>
+                      </>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+              </div>
+              {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
+              {/* <div className="form-floating">
           <input
             type="text"
             className="form-control"
@@ -544,17 +711,46 @@ const FormularioHotel = () => {
           />
           <label>{translations[idioma].URLFoto}.</label>
         </div>
+          <label>URL de la foto.</label> */}
+              {/* FOTOS DEL HOTEL */}
+              <div>{translations[idioma].UbicacionHotel}</div>
+              <Maps location={geoposition} setLocation={setGeoposition} />
+              <button className="w-100 btn btn-lg btn-warning" type="submit">
+                {translations[idioma].Registrar}
+              </button>
+            </form>
+          </div>
+          {error.image ? (
+            <span className={style.error}>{error.image}</span>
+          ) : (
+            <span className={style.hidden}>hidden</span>
+          )}
+          <div>Carga la foto de tu hotel:</div>
+          {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="image"
+              placeholder="URL de la foto."
+              onChange={onChangeImage}
+              value={hotel.image}
+              name="image"
+            />
+            <label>URL de la foto.</label>
+          </div>
 
-        {/* GEOLOCALIZACION DEL HOTEL */}
+          {/* GEOLOCALIZACION DEL HOTEL */}
 
-        <div>{translations[idioma].UbicacionHotel}</div>
-        <Maps location={geoposition} setLocation={setGeoposition} />
+          <div>Cambia la ubicación donde se encuentra tu hotel:</div>
+          <Maps location={geoposition} setLocation={setGeoposition} />
 
-        <button className="w-100 btn btn-lg btn-warning" type="submit">
-          {translations[idioma].Registrar}
-        </button>
-      </form>
-    </div>
+          <button className="w-100 btn btn-lg btn-warning" type="submit">
+            Registrar
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

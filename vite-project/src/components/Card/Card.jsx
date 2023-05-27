@@ -10,10 +10,20 @@ import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
 //?----------------- COMPONENTE CARD ------------------------------------
-function Cards({ id, name, image, province, rating, description, valoration }) {
+function Cards({
+  id,
+  name,
+  image,
+  province,
+  department,
+  rating,
+  description,
+  valoration,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const FavHotels = useSelector((state) => state.FavHotels);
+  const theme = useSelector((state) => state.theme);
   const [isFav, setIsFav] = useState(false);
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   let ratingArray = Array(rating).fill(rating);
@@ -97,7 +107,10 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
             {translations[idioma].ValoracionDelHotel} :{valoration}
           </p>
         </div>
-        <h3 className={style.province}>{province}</h3>
+        <p className={style.punctuation}>Valoracion Del Hotel :{valoration}</p>
+        <p className={style.province}>
+          {department},{province}
+        </p>
         <button onClick={onClickDetail} className={style.botonDetail}>
           {translations[idioma].VerAlojamiento}
         </button>

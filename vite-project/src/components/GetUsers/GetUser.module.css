@@ -1,62 +1,70 @@
-/* GetUsers.module.css */
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 20px;
+.ContainerUser {
+  background-color: rgb(255, 255, 255);
+  width: 300px;
+  height: 250px;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  -webkit-box-shadow: 2px 3px 17px 0px rgba(0, 0, 0, 0.53);
+  -moz-box-shadow: 2px 3px 17px 0px rgba(0, 0, 0, 0.53);
+  box-shadow: 2px 3px 17px 0px rgba(0, 0, 0, 0.53);
 }
 
-.card {
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+.ContainerDeTodosLosUser {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  margin-bottom: 100px;
+  background-color: aquamarine;
 }
 
-.card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.card button {
-  background-color: orange;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.card select {
-  padding: 8px 16px;
-  margin-right: 10px;
-}
-
-.card button.confirm {
-  background-color: #ff6f00;
-}
-
-.card button,
-.card select {
-  margin-top: 10px;
-}
-
-.card button,
-.card select,
-.card option {
-  font-size: 12px;
-}
-
-.card option[hidden] {
-  display: none;
-}
-.img {
-  width: 40px;
+.BotonRol {
+  width: 160px;
   height: 40px;
-  margin-right: 10px;
-  border-radius: 30px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+
+  background-color: rgb(110, 146, 100);
+  margin-top: 40px;
+}
+
+.selectUserRole {
+  padding: 5px;
+  background-color: bisque;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.BotonConfirmar {
+  padding: 5px;
+  background-color: bisque;
+  border-radius: 10px;
+  font-size: 15px;
+  border: none;
+  margin-left: 10px;
+}
+
+.select {
+  background-color: antiquewhite;
+  padding: 5px;
+}
+
+.botonRol {
+  background-color: antiquewhite;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.botonGuardar {
+  background-color: antiquewhite;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }

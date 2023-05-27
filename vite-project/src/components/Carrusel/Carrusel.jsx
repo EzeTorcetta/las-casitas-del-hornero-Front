@@ -17,7 +17,7 @@ const Carrusel = ({ HotelsCarrusel }) => {
                 <Link to={`/detail/${id}`}>
                   <img className={style.img} src={image[0]} alt="loading" />
                   <Carousel.Caption>
-                    <h3>{name}</h3>
+                    <h3 className={style.carousel_h3}>{name}</h3>
                     <p>{decription}</p>
                   </Carousel.Caption>
                 </Link>
@@ -27,11 +27,10 @@ const Carrusel = ({ HotelsCarrusel }) => {
         ) : (
           <Carousel.Item className={style.item}>
             <img
-              className={style.img}
+              className={style.item}
               src="https://www.cronista.com/files/image/159/159758/5ff7d1a380650.jpg"
               alt="loading"
             />
-            <Carousel.Caption />
           </Carousel.Item>
         )}
       </Carousel>

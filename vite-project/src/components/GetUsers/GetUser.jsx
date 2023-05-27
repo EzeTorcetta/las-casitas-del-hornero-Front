@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { PedirLocalStorage } from "../Index";
 import { changeRol, getUsers } from "../../redux/Actions/Actions";
 import style from "./GetUser.module.css";
-import imagenUsuario from "../../image/usuario (1).png";
+import MUIDataTable from "mui-datatables";
+// import DataTable, { createTheme } from "react-data-table-component";
 
 const GetUsers = () => {
   const dispatch = useDispatch();
@@ -11,76 +12,90 @@ const GetUsers = () => {
   const users = useSelector((state) => state.Users);
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserRole, setSelectedUserRole] = useState("");
+  console.log(selectedUserRole);
   const [showOptions, setShowOptions] = useState(false);
 
-  const idioma = useSelector((state) => state.idioma);
-
-  const translations = {
-    es: {
-      Usuario: "Usuario",
-      Partner: "Socio",
-      Confirmar: "Confirmar",
-    },
-    en: {
-      Usuario: "User",
-      Partner: "Partner",
-      Confirmar: "Confirm",
-    },
-  };
+  console.log(selectedUserRole);
 
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
 
-  const handleRoleChange = () => {
+  const handleRoleChange = async () => {
     const data = {
       id_user: selectedUserId,
       rol: selectedUserRole,
     };
-    dispatch(changeRol(data));
+    await dispatch(changeRol(data));
     setShowOptions(false);
-    setTimeout(() => {
-      dispatch(getUsers(user.id));
-    }, 200);
+
+    await dispatch(getUsers(user.id));
   };
 
   const handleSelectUser = (userId) => {
+    console.log(userId);
     setSelectedUserId(userId);
     setShowOptions(true);
   };
 
-  return (
-    <div className={style.container}>
-      {users?.map((usuario) => (
-        <div key={usuario.id} className={style.card}>
-          <img className={style.img} src={imagenUsuario} alt="Perfil" />
-          <h3>{usuario.username}</h3>
-          <p>{usuario.email}</p>
-          {usuario.rol === 1 && <p>rol: {translations[idioma].Usuario}</p>}
-          {usuario.rol === 2 && <p>rol: {translations[idioma].Partner}</p>}
-          {usuario.rol === 3 && <p>rol: superadmin</p>}
-          <button onClick={() => handleSelectUser(usuario.id)}>
-            Cambiar rol
-          </button>
-          {showOptions && selectedUserId === usuario.id && (
-            <>
-              <select
-                value={selectedUserRole}
-                onChange={(e) => setSelectedUserRole(e.target.value)}
+  const columnas = [
+    "id",
+    "username",
+    "email",
+    {
+      name: "rol",
+      label: "Rol",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          //* customBodyRender sirve para modificar o actualizar un valor de la tabla
+          const userId = tableMeta.rowData[0]; // Obtén el ID del usuario desde los datos de la fila
+          return (
+            <div>
+              {showOptions && selectedUserId === userId ? (
+                <select
+                  className={style.select}
+                  value={selectedUserRole}
+                  onChange={(e) => setSelectedUserRole(e.target.value)}
+                >
+                  <option hidden>Seleccionar Rol</option>
+                  <option value="1">User</option>
+                  <option value="2">Admin</option>
+                  <option value="3">Superadmin</option>
+                </select>
+              ) : (
+                value
+              )}
+              <button
+                className={style.botonRol}
+                onClick={() => handleSelectUser(userId)}
               >
-                <option hidden>seleccionar rol</option>
-                <option value={1}>{translations[idioma].Usuario}</option>
-                <option value={2}>{translations[idioma].Partner}</option>
-                <option value={3}>superadmin</option>
-              </select>
-              <button className={style.confirm} onClick={handleRoleChange}>
-                {translations[idioma].Confirmar}
+                Editar Rol
               </button>
-            </>
-          )}
-        </div>
-      ))}
-    </div>
+              {showOptions && selectedUserId === userId && (
+                <button
+                  className={style.botonGuardar}
+                  onClick={handleRoleChange}
+                >
+                  Guardar
+                </button>
+              )}
+            </div>
+          );
+        },
+      },
+    },
+  ];
+  const options = {
+    selectableRows: false, // Desactivar checkboxes en cada fila
+  };
+
+  return (
+    <MUIDataTable
+      title="Lista De Usuarios"
+      data={users}
+      columns={columnas}
+      options={options}
+    />
   );
 };
 

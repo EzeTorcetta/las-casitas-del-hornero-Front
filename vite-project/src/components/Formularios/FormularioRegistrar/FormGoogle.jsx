@@ -36,7 +36,7 @@ const FormGoogle = () => {
   const [state, setState] = useState(0);
   const [currentUser, setCurrentUser] = useState({});
 
-  const handleUserLoggedIn = (user) => {
+  const handleUserLoggedIn = () => {
     navigate("/Home");
   };
 

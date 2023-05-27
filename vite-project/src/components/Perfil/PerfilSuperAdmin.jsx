@@ -1,5 +1,12 @@
 import { NavBar, Footer, PedirLocalStorage, GetUsers } from "../Index";
 import style from "./PerfilSuperAdmin.module.css";
+import {
+  EstadisticasLineal,
+  EstadisticasBarra,
+  EstadisticasDoughnut,
+} from "../../Estadisticas/Estadisticas";
+import "./PerfilSuperAdmin.css";
+
 const PerfilSuperAdmin = () => {
   let User = PedirLocalStorage();
 
@@ -7,20 +14,27 @@ const PerfilSuperAdmin = () => {
     <>
       <NavBar />
       <section>
-        <div>
+        <div className="divDeBienvenido">
           <h1>{`Bienvenido ${User.username}`}</h1>
-          <h5> {User.email}</h5>
+          <h3>{`Tu email es ${User.email}`}</h3>
         </div>
       </section>
       <section>
-        <div>
-          <h1>Usuarios:</h1>
+        <div className="DivGetUsers">
+          {/* <h1>Usuarios</h1> */}
           <GetUsers />
         </div>
       </section>
-      <div className={style.futer}>
+      <section>
+        <div className="DivEstadisticas">
+          <EstadisticasLineal />
+          <EstadisticasBarra />
+          <EstadisticasDoughnut />
+        </div>
+      </section>
+      <section className="Footer">
         <Footer />
-      </div>
+      </section>
     </>
   );
 };

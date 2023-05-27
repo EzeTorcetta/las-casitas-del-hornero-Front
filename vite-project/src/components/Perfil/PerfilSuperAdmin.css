@@ -1,0 +1,24 @@
+.divDeBienvenido {
+  text-align: center;
+  margin: 30px;
+}
+
+.DivEstadisticas {
+  max-width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+  margin: 40px;
+}
+
+.DivGetUsers {
+  max-width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+  margin: 40px;
+}

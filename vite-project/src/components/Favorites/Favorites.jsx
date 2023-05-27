@@ -11,6 +11,7 @@ import style from "./Favorites.module.css";
 import { Cards } from "../Index.js";
 
 //?----------------- COMPONENTE FAVORITES ------------------------------------
+
 const Favorites = () => {
   const dispatch = useDispatch();
   let User = PedirLocalStorage();
@@ -40,7 +41,15 @@ const Favorites = () => {
         <Row xs={1} sm={2} lg={3} className="g-2">
           {favorites.length ? (
             favorites.map(
-              ({ id, name, image, province, rating, valoration }) => (
+              ({
+                id,
+                name,
+                image,
+                province,
+                department,
+                rating,
+                valoration,
+              }) => (
                 <Cards
                   key={id}
                   id={id}
@@ -48,6 +57,7 @@ const Favorites = () => {
                   image={image}
                   rating={rating}
                   province={province}
+                  department={department}
                   valoration={valoration}
                 />
               )

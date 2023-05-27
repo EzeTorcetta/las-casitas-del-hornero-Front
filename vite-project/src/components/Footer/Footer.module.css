@@ -1,13 +1,14 @@
 .footer {
-  height: 5vh;
+  height: fit-content;
+  padding: 30px;
   width: 100%;
-  background-color: rgb(254, 255, 218);
+  background-color: rgb(254, 237, 203);
   color: orange;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.footer p{
+.footer p {
   margin-bottom: 90px;
 }

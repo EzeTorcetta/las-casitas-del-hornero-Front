@@ -24,6 +24,10 @@ import {
   UP_DATE_TROLLEY,
   PUT_AMOUNT_TROLLEY,
   ID_HOTEL_FORM,
+  GET_CURRENCY_RATE,
+  SET_CURRENCY_SYMBOL,
+  SET_THEME,
+  UPDATE_LANGUAGE,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -43,6 +47,8 @@ export const FuncionSelectFilter = (filters) => {
     department,
     locality,
     name,
+    checkIn,
+    checkOut,
   } = filters;
 
   URL = URL + `?page=${page}`;
@@ -66,6 +72,20 @@ export const FuncionSelectFilter = (filters) => {
       if (name.length) {
         URL = URL + `&name=${name}`;
       }
+
+      //*----------------------------------------Fechas:
+
+      //http://localhost:3001/hotels?page=1&services=Pileta&checkIn=2023-05-27&checkOut=2023-05-28
+
+      if (checkOut.length) {
+        URL = URL + `&checkIn=${checkIn}`;
+      }
+      if (checkIn.length) {
+        URL = URL + `&checkOut=${checkOut}`;
+      }
+
+      //*------------------------------------------------------*//
+
       if (services.length) {
         services.map(
           (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
@@ -155,7 +175,10 @@ export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
-      dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
+      dispatch({
+        type: ALL_FAVORITES_HOTELS,
+        payload: response.data,
+      });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -403,3 +426,39 @@ export const updateLanguage = (language) => ({
     language,
   },
 });
+//* ----------------- GET CURRENCY RATE API----------------------------------
+export const getCurrencyRateAPI = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.get(
+        `https://openexchangerates.org/api/latest.json?app_id=d7185c1a1d0d4580a879e291d173af8a`
+      );
+      dispatch({
+        type: GET_CURRENCY_RATE,
+        payload: response.data.rates,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (error) {
+    swal({
+      text: error.response.data.error,
+      icon: "warning",
+      buttons: "Aceptar",
+    });
+  }
+};
+
+// //* ----------------- SET CURRENCY SYMBOL----------------------------------
+export const setCurrencySymbol = (currencySymbol) => {
+  return async function (dispatch) {
+    dispatch({ type: SET_CURRENCY_SYMBOL, payload: currencySymbol });
+  };
+};
+//-------------- SET THEME ---------------
+
+export const changeTheme = (theme) => {
+  return {
+    type: SET_THEME,
+    payload: theme,
+  };
+};

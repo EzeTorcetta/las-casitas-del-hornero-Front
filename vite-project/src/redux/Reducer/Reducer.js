@@ -24,6 +24,9 @@ import {
   PUT_AMOUNT_TROLLEY,
   UP_DATE_TROLLEY,
   ID_HOTEL_FORM,
+  SET_CURRENCY_SYMBOL,
+  GET_CURRENCY_RATE,
+  SET_THEME,
   UPDATE_LANGUAGE,
 } from "../Actions";
 
@@ -55,9 +58,13 @@ const InicialState = {
     order: "",
     page: 1,
     name: "",
+    checkIn: "",
+    checkOut: "",
   },
   Reviews: 0,
   idHotelForm: "",
+  currencyExchange: {},
+  theme: "light",
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -181,6 +188,7 @@ export const rootReducer = (state = InicialState, actions) => {
         Trolley: actions.payload,
       };
     case ID_HOTEL_FORM:
+      console.log("hola");
       return {
         ...state,
         idHotelForm: actions.payload,
@@ -189,6 +197,27 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         idioma: actions.payload.language,
+      };
+    case GET_CURRENCY_RATE:
+      return {
+        ...state,
+        currencyExchange: {
+          ...state.currencyExchange,
+          rate: actions.payload,
+        },
+      };
+    case SET_CURRENCY_SYMBOL:
+      return {
+        ...state,
+        currencyExchange: {
+          ...state.currencyExchange,
+          symbol: actions.payload,
+        },
+      };
+    case SET_THEME:
+      return {
+        ...state,
+        theme: actions.payload,
       };
     default:
       return { ...state };

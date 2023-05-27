@@ -1,6 +1,8 @@
 //?---------------------------- IMPORTS --------------------------------
-// import axios from "axios";
-//react
+import "react-datepicker/dist/react-datepicker.css";
+import es from "date-fns/locale/es";
+import DatePicker, { registerLocale } from "react-datepicker";
+registerLocale("es", es);
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,9 +22,22 @@ const Filter = () => {
   const { Filters, Services, Provinces, Department, Locality } = useSelector(
     (state) => state
   );
+  //*-----------------------------------------------------Fechas:
+  const [stateCheckIn, setStateCheckIn] = useState(
+    new Date("2023", "01", "01")
+  );
+  const [stateCheckInString, setStateCheckInString] = useState("");
+  const [stateCheckOut, setStateCheckOut] = useState(
+    new Date("2023", "05", "09")
+  );
+  const [stateCheckOutString, setStateCheckOutString] = useState("");
+
+  //*-----------------------------------------------------------------*//
+
   const [stateFilter, setFilter] = useState(Filters);
   const [provinceId, setProvinceId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     dispatch(getProvinces());
@@ -62,6 +77,113 @@ const Filter = () => {
       MenosEstrellas: "Menos estrellas",
     },
   };
+
+  //?-----------------------------------------------CheckIn:
+
+  const onChangeCheckIn = (state) => {
+    //validar que el checkIn no sea mayor que la fecha checkout antes de setear el estado:
+    // validar que tanto el mes como el dia o año no sean mayores a los del checkOut
+
+    const checkInDate = new Date(state);
+    const checkOutDate = new Date(stateCheckOut);
+
+    if (checkInDate.getTime() <= checkOutDate.getTime()) {
+      const array = state.toString().split(" ");
+      console.log(array);
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      let acumulador = [];
+      for (let i = 0; i <= 3; i++) {
+        if (i === 3) {
+          acumulador.unshift(array[i]);
+        } else if (i === 2) {
+          acumulador.unshift(array[i]);
+        } else if (i === 1) {
+          let numero = monthNames.indexOf(array[i]) + 1;
+
+          if (numero >= 10) {
+            acumulador.push(numero.toString());
+          } else {
+            acumulador.push("0" + numero.toString());
+          }
+        }
+      }
+      let stateModificado = acumulador.join("-");
+      setStateCheckInString(stateModificado);
+      setStateCheckIn(state);
+
+      //*------------------------------------Set:
+      setFilter({ ...stateFilter, checkIn: stateModificado });
+    } else {
+      alert("no se puede reservar una fecha mayor que el checkOut");
+    }
+  };
+  console.log(stateCheckInString);
+
+  //?-----------------------------------------CheckOut :
+  const onChangeCheckOut = (state) => {
+    const checkOutDate = new Date(state);
+    const checkInDate = new Date(stateCheckIn);
+
+    if (checkOutDate.getTime() >= checkInDate.getTime()) {
+      const array = state.toString().split(" ");
+      console.log(array);
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      let acumulador = [];
+      for (let i = 0; i <= 3; i++) {
+        if (i === 3) {
+          acumulador.unshift(array[i]);
+        } else if (i === 2) {
+          acumulador.unshift(array[i]);
+        } else if (i === 1) {
+          let numero = monthNames.indexOf(array[i]) + 1;
+
+          if (numero >= 10) {
+            acumulador.push(numero.toString());
+          } else {
+            acumulador.push("0" + numero.toString());
+          }
+        }
+      }
+      let stateModificado = acumulador.join("-");
+      setStateCheckOutString(stateModificado);
+      setStateCheckOut(state);
+      //*------------------------------------Set:
+      setFilter({ ...stateFilter, checkOut: stateModificado });
+    } else {
+      alert("La Fecha CheckOut No debe ser menor al CheckIn");
+    }
+  };
+  console.log(stateCheckOutString);
+
+  //------------------------------------------------------//
 
   const onChangeProvinces = async (event) => {
     setFilter({
@@ -142,6 +264,8 @@ const Filter = () => {
       order: "",
       page: 1,
       name: "",
+      checkIn: "",
+      checkOut: "",
     });
 
     dispatch(
@@ -154,6 +278,8 @@ const Filter = () => {
         order: "",
         page: 1,
         name: "",
+        checkIn: "",
+        checkOut: "",
       })
     );
 
@@ -167,6 +293,8 @@ const Filter = () => {
         order: "",
         page: 1,
         name: "",
+        checkIn: "",
+        checkOut: "",
       })
     );
   };

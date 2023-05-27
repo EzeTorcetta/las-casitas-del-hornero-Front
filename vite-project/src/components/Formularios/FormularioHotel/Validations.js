@@ -114,12 +114,6 @@ const validacion = (hotel) => {
   
     if (!hotel.image.length) {
       error.image = "Por favor carga al menos una foto.";
-    } else if (
-      !/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(
-        hotel.image
-      )
-    ) {
-      error.image = "Por favor ingresa una URL válida.";
     } else {
       delete error.image;
     }
