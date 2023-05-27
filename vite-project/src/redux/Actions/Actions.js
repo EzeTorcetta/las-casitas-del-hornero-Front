@@ -380,7 +380,8 @@ export const changeRol = (data) => {
 
 //* ----------------- ID HOTEL FORM ------------------------------------
 export const idHotelForm = (id) => {
-  return async function (dispatch){
-    dispatch({ type: ID_HOTEL_FORM, payload: id });
-}
+  console.log(id)
+    return (dispatch) => {
+      dispatch({ type: ID_HOTEL_FORM, payload: id});
+    };
 };

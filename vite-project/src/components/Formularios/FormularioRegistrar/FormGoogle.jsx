@@ -21,7 +21,7 @@ const FormGoogle = () => {
 
   //-------------HANDLERS----------------
 
-  const handleUserLoggedIn = (user) => {
+  const handleUserLoggedIn = () => {
     navigate("/Home");
   };
 

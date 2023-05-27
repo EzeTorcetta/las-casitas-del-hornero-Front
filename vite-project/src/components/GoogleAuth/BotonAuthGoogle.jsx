@@ -14,15 +14,11 @@ const BotonAuthGoogle = () => {
   const [state, setCurrentState] = useState(0);
 
   const handleOnClick = async (user) => {
-
     const googleProvider = new GoogleAuthProvider();
-
     const signInWithGoogle = async (googleProvider) => {
       try {
         const res = await signInWithPopup(auth, googleProvider);
-        console.log(res.user.stsTokenManager)
       } catch (error) {
-        console.error(error);
       }
     }
     await signInWithGoogle(googleProvider);
@@ -71,16 +67,17 @@ const handleUserNotLoggedIn = () => {
             className="red"
           ></path>
         </svg>
-        <span className="text">Continue with Google</span>
+        <span className="text">Ingresar con Google</span>
       </button>
     </div>
     )
   }
 
   return (
-  <AuthProvider onUserLoggedIn={handleUserLoggedIn}
-  onUserNotLoggedIn={handleUserNotLoggedIn}
-  onUserNotRegistered={handleUserNotRegistered}
+  <AuthProvider 
+    onUserLoggedIn={handleUserLoggedIn}
+    onUserNotLoggedIn={handleUserNotLoggedIn}
+    onUserNotRegistered={handleUserNotRegistered}
   >
     <div>Loading...</div>
   </AuthProvider>

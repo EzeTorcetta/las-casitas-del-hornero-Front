@@ -12,55 +12,60 @@ const AuthProvider = ({
   onUserNotRegistered,
 }) => {
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const isRegistered = await userExists(user.uid);
         if (isRegistered) {
+          //Si el usuario exite (FireBase) entonces pide la informacion a google del usuario.
           const userInfo = await getUserInfo(user.uid);
-          if (userInfo.processCompleted) {
-            console.log(userInfo)
+
+          try {
+            //Encontro el usuario en le base de datos de firebase y lo intenta ingresar
             let userBack = {
               password: userInfo.uid,
               email: userInfo.correo,
             }
-            try{
-              const userActual = await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack);
-              console.log(userActual);
-              GuardarLocalStorage({
-                id:userActual.data.id,
-                email: userActual.data.email,
-                username: userActual.data.username,
-                rol: userActual.data.rol,
-              });
-            }catch(error){
-              console.log(2);
-              const userBack = {
-                password: userInfo.uid,
-                email: userInfo.correo,
-                username: userInfo.displayName
-              }
-              await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack);
+            //Una vez logueado en google, intenta realizar el logueo en la base de datos.
+            const userActual = await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack);
+            //Si lo realiza, se guarda la informacion en el local storage.
+            GuardarLocalStorage({
+              id: userActual.data.id,
+              email: userActual.data.email,
+              username: userActual.data.username,
+              rol: userActual.data.rol,
+            });
 
-              const userBack2 = {
-                password: userInfo.uid,
-                email: userInfo.correo,
-                username: userInfo.displayName
-              }
-              const userActual = await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack2);
-              GuardarLocalStorage({
-                id:userActual.id,
-                email: userActual.email,
-                username: userActual.username,
-                rol: userActual.rol,
-              });
+          } catch (error) {
+            //Si exite en la base de datos de firebase, pero no exite en la base de datos de la casita del horenro, crea el usuario
+  
+            const userBack = {
+              password: userInfo.uid,
+              email: userInfo.correo,
+              username: userInfo.displayName
             }
-            onUserLoggedIn(userInfo);
-          } else {
-            onUserNotRegistered(userInfo);
+            await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack);
+
+            //Una vez creado el usuario, se loguea en la pagina y se guarda su informacion en el Local Storage.
+            const userBackLogin = {
+              password: userInfo.uid,
+              email: userInfo.correo,
+            }
+            const userActual = await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBackLogin);
+
+            GuardarLocalStorage({
+              id: userActual.data.id,
+              email: userActual.data.email,
+              username: userActual.data.username,
+              rol: userActual.data.rol,
+            });
           }
-        } else {
+          onUserLoggedIn();
+        }
+        //cuando no se encuentra un usuario registrado (FireBase) entonces se crea una usuario newUser el cual se guarda en firebase y un userBack que es el que manda la info al Local Storage
+        else {
           const newUser = {
             uid: user.uid,
             displayName: user.displayName,
@@ -69,8 +74,9 @@ const AuthProvider = ({
             processCompleted: false,
             correo: user.email,
           };
+
+          //Creo el usuario en el back
           await registerNewUser(newUser);
-          // Enviar información al backend para crear el usuario
           const userBack = {
             password: newUser.uid,
             email: newUser.correo,
@@ -78,19 +84,19 @@ const AuthProvider = ({
           }
           await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack);
 
-          const userBack2 = {
+          //Logueo al usuario en el back
+          const userBackLogin = {
             password: newUser.uid,
             email: newUser.correo,
-            username: newUser.displayName
           }
-          const userActual = await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBack2);
+          const userActual = await axios.post('https://las-casitas-del-hornero-back-deploy.up.railway.app/user', userBackLogin);
           GuardarLocalStorage({
-            id:userActual.id,
-            email: userActual.email,
-            username: userActual.username,
-            rol: userActual.rol,
+            id: userActual.data.id,
+            email: userActual.data.email,
+            username: userActual.data.username,
+            rol: userActual.data.rol,
           });
-          onUserNotRegistered(newUser);
+          onUserLoggedIn();
         }
       } else {
         onUserNotLoggedIn();

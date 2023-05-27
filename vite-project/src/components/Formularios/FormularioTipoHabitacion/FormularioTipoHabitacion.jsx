@@ -7,6 +7,8 @@ import style from "./FormularioTipoHabitacion.module.css";
 import { useSelector } from "react-redux";
 
 const FormularioTipoHab = () => {
+  const location = useLocation();
+  console.log(location.state.id)
   const URL_BASE =
     "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const FormularioTipoHab = () => {
     people: "",
     price: "",
     name: "",
-    image: "",
+    image: [],
     stock: "",
   };
   const [tipoHab, setTipoHab] = useState(resetTipoHab);
@@ -26,6 +28,8 @@ const FormularioTipoHab = () => {
     2: "Doble",
     3: "Triple",
   };
+  const [imagenes, setImagenes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // CHANGES IN FORM TIPOHAB
 
@@ -62,7 +66,7 @@ const FormularioTipoHab = () => {
 
     const { people, price, name, image, stock } = tipoHab;
     try {
-      await axios.post(`${URL_BASE}/roomtypes/${id}`, {
+      const res = await axios.post(`${URL_BASE}/roomtypes/${id}`, {
         people: Number(people),
         price: Number.parseFloat(price).toFixed(2),
         name: tipo[people] || "Multiple",
@@ -79,6 +83,7 @@ const FormularioTipoHab = () => {
         replace: true,
       });
       setTipoHab(resetTipoHab);
+      console.log(res)
     } catch (error) {
       if (error.response.data.error === "Room type already exists.") {
         setTipoHab(resetTipoHab);
@@ -94,6 +99,35 @@ const FormularioTipoHab = () => {
         buttons: "Aceptar",
       });
     }
+  };
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "La_Casita_Del_Hornero");
+    setLoading(true)
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
+      {
+        method:"POST",
+        body:data,
+      }
+    )
+    const file = await res.json()
+    await tipoHab.image.push({
+      id: file.public_id,
+      url: file.secure_url
+    })
+    setLoading(false);
+    setError(validacion({ ...tipoHab, image: tipoHab.image }));
+  };
+
+  const deleteImage = async (url) => {
+    setLoading(true);
+    tipoHab.image = await tipoHab.image.filter((imagen)=>url!==imagen.url)
+    setLoading(false);
+    setError(validacion({ ...tipoHab, image: tipoHab.image }));
   };
 
   return (
@@ -170,26 +204,31 @@ const FormularioTipoHab = () => {
         </div>
 
         {/* FOTOS DE LA HABITACION */}
-
         {error.image ? (
           <span className={style.error}>{error.image}</span>
         ) : (
           <span className={style.hidden}>hidden</span>
         )}
-        <div>Carga la foto de tu habitación:</div>
-        {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
-        <div className="form-floating">
+        <div>Carga la foto de tu hotel:</div>
+        <div>
           <input
-            type="text"
-            className="form-control"
-            id="image"
-            placeholder="URL de la foto."
-            onChange={handleChange}
-            value={tipoHab.image}
+            type="file"
             name="image"
+            placeholder="arrastra la imagen aquí"
+            onChange={uploadImage}
           />
-          <label>URL de la foto.</label>
+              {tipoHab.image.length?(
+                tipoHab.image.map((imagen)=>{
+                  return (
+                  <>
+                    <img src={imagen.url} style={{width:"300px"}}/>
+                    <button onClick={()=>deleteImage(imagen.url)}>X</button>
+                  </>
+                  )
+                })
+              ):(<></>)}
         </div>
+
         <span className={style.hidden}>hidden</span>
         <button
           className="w-100 btn btn-lg btn-warning"

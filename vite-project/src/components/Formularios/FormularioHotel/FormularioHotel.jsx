@@ -45,6 +45,9 @@ const FormularioHotel = () => {
   const [location, dispatch] = useReducer(reducer, initialLocation);
   const [services, setServices] = useState([]);
   const [fotos, setFotos] = useState({});
+
+
+
   const [geoposition, setGeoposition] = useState({
     location: ["-34.603718", "-58.381639"],
     name: "Tu hotel",
@@ -65,6 +68,9 @@ const FormularioHotel = () => {
   };
   const [hotel, setHotel] = useState(resetHotel);
   const [error, setError] = useState({});
+  
+  const [imagenes, setImagenes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // ACTIONS
 
@@ -169,10 +175,30 @@ const FormularioHotel = () => {
 
   // CHANGES IN IMAGE
 
-  const onChangeImage = (event) => {
-    const value = event.target.value;
-    setHotel({ ...hotel, image: [value] });
-    setError(validacion({ ...hotel, image: value }));
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "La_Casita_Del_Hornero");
+    setLoading(true)
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
+      {
+        method:"POST",
+        body:data,
+      }
+    )
+    const file = await res.json()
+    await hotel.image.push(file.secure_url)
+    setLoading(false);
+    setError(validacion({ ...hotel, image: hotel.image }));
+  };
+
+  const deleteImage = async (url) => {
+    setLoading(true);
+    hotel.image = await hotel.image.filter((imagen)=>url!==imagen)
+    setLoading(false);
+    setError(validacion({ ...hotel, image: hotel.image }));
   };
 
   // CHANGES IN HOTEL
@@ -196,6 +222,8 @@ const FormularioHotel = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // resetHotel.image = imagenes;
 
     if (
       !hotel.name.length ||
@@ -237,7 +265,7 @@ const FormularioHotel = () => {
       image,
       location,
     } = hotel;
-    console.log(hotel)
+
     try {
       const { data } = await axios.post(
         `${URL_BASE}/hotels/${User.id}`,
@@ -261,7 +289,8 @@ const FormularioHotel = () => {
         icon: "success",
         buttons: "Aceptar",
       });
-      dispatch(idHotelForm(data.id))
+      console.log(data.id)
+      await dispatch(idHotelForm(data.id))
       navigate("/FormRoomType", {
         state: { id_hotel: data.id },
         replace: true,
@@ -274,6 +303,7 @@ const FormularioHotel = () => {
       });
     }
   };
+
 
   // RETURN COMPONENT FORMULARIO HOTEL
 
@@ -406,6 +436,7 @@ const FormularioHotel = () => {
         <div>
           Selecciona la Provincia donde se encuentra tu hotel:
         </div>
+        <option hidden>Selecciona el Provincia</option>
         <select onChange={onChangeProvinces} className={style.select}>
           {location.provinces?.map(({ nombre, id }) => (
             <option value={nombre} key={id} id={id}>
@@ -421,6 +452,7 @@ const FormularioHotel = () => {
             <select
               onChange={onChangeDepartments}
               className={style.select}>
+                <option hidden>Selecciona el Departamento</option>
               {location.departments?.map(({ nombre, id }) => (
                 <option value={nombre} key={id} id={id}>
                   {nombre}
@@ -439,6 +471,7 @@ const FormularioHotel = () => {
             <select
               onChange={onChangeLocalities}
               className={style.select}>
+                <option hidden>Selecciona el Localidad</option>
               {location.localities?.map(({ nombre, id }) => (
                 <option value={nombre} key={id} id={id}>
                   {nombre}
@@ -487,8 +520,27 @@ const FormularioHotel = () => {
           <span className={style.hidden}>hidden</span>
         )}
         <div>Carga la foto de tu hotel:</div>
+        <div>
+          <input
+            type="file"
+            name="image"
+            placeholder="arrastra la imagen aquí"
+            onChange={uploadImage}
+          />
+              {hotel.image.length?(
+                hotel.image.map((imagen)=>{
+                  return (
+                  <>
+                    <img src={imagen} style={{width:"300px"}}/>
+                    <button onClick={()=>deleteImage(imagen)}>X</button>
+                  </>
+                  )
+                })
+              ):(<></>)}
+        </div>
+
         {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
-        <div className="form-floating">
+        {/* <div className="form-floating">
           <input
             type="text"
             className="form-control"
@@ -498,8 +550,7 @@ const FormularioHotel = () => {
             value={hotel.image}
             name="image"
           />
-          <label>URL de la foto.</label>
-        </div>
+          <label>URL de la foto.</label> */}
 
         {/* GEOLOCALIZACION DEL HOTEL */}
 

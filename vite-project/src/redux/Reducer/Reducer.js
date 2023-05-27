@@ -108,11 +108,11 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         User: actions.payload,
       };
-      case USER_LOGOUT:
-        return {
-          ...state,
-          User: { email: "", id: 0, rol: 0, username: "" },
-        };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        User: { email: "", id: 0, rol: 0, username: "" },
+      };
     case GET_TROLLEY:
       return {
         ...state,
@@ -179,6 +179,7 @@ export const rootReducer = (state = InicialState, actions) => {
         Trolley: actions.payload,
       };
     case ID_HOTEL_FORM:
+      console.log("hola")
       return {
         ...state,
         idHotelForm: actions.payload,
