@@ -1,9 +1,8 @@
 
 
 .navlight {
-  width: 100vw;
+  width: 100%;
   height: 5rem;
-  padding: 0 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,9 +12,9 @@
 }
 
 .navdark {
-  width: 100vw;
+  width: 100%;
   height: 5rem;
-  padding: 0 7%;
+  padding: 0 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +26,7 @@
 .logo {
   display: flex;
   align-items: center;
+  padding-left: 4rem;
 }
 
 .img {
@@ -50,7 +50,56 @@
   display: flex;
   font-size: 13px;
   align-items: center;
+
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #c0392b;
+  padding-right: 4rem;
+}
+
+.menu-horizontal{
+  padding-top: 1rem;
+  display: flex;
+  height: 4rem;
+  background-color: blue;
+  list-style: none;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.menu-horizontal > li > a {
+  display: block;
+  text-decoration: none;
+}
+
+.menu-horizontal > li:hover{
+background-color: red;
+height: 2rem;
+}
+
+.menu-vertical{
+  position: absolute;
+  display: none;
+  list-style: none;
+}
+
+.menu-horizontal li:hover .menu-vertical{
+  display: block;
+  z-index: 2;
+}
+
+.menu-vertical li:hover{
+  background-color: black;
+  opacity: 50%;
+  
+}
+
+.menu-vertical li a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  height: 4rem;
+  width: 12rem;
+  padding-top: 1rem;
 }
 
 .menuButton {
@@ -74,11 +123,6 @@
 
 .tituloLogo {
   color: white;
-}
-
-
-.hola{
-
 }
 
 .username{

@@ -72,8 +72,6 @@ const NavBar = ({ countCarrito }) => {
   return (
     <div>
 
-        
-      
       <div className={theme === 'light' ? 'navlight' : 'navdark'}>
       
         <NavLink to={"/Home"} className='links'>
@@ -123,18 +121,35 @@ const NavBar = ({ countCarrito }) => {
             <></>
           )}
 
-          <NavLink
-            to={"/Home"}
-            
-            onClick={() => setShowNavbar(false)}>
-            
-              <div className='enlaces'>Home</div>
-            
-          </NavLink>
-
           {username ? (
-            <div className='perfil'>
-              <button
+            <div>
+
+{/* ------------- NUEVO MENU ------------ */}
+
+<nav>
+  <ul className="menu-horizontal">
+    <li>
+      <a>{`${username}`}</a>
+        <ul className="menu-vertical">
+          <li><a href="/admin">Perfil</a></li>
+          {rol === 2 ? <li><a href="">Proveer Hotel</a></li> : 
+          rol === 3 ? <li><a href="">Administrar Usuarios</a></li> : 
+          <li><a href="">Quiero ser proveedor</a></li>}
+          <li><button onClick={handleLogout}>Salir</button></li>
+        </ul>
+    </li>
+      
+  </ul>
+</nav>
+
+</div>
+
+): (<a href="/"> iniciar sesion</a>)}
+
+{/* --------------------------------------------------
+
+ {/* ------------- FOTO DE PERFIL Y NOMBRE ------------ */}
+              {/* <button
                 onClick={() => setShowMenu(!showMenu)}
                 className='profileButton'>
                 <img
@@ -143,9 +158,12 @@ const NavBar = ({ countCarrito }) => {
                   alt="Perfil"
                 />
                 <p className="username">{`${username}`}</p>
-                {/* <span className={style.NombreUsuario}>{`${username}`}</span> */}
-              </button>
-              {showMenu && (
+              </button> */}
+{/* ------------------------------------------------------- */}
+
+
+              {/* {showMenu && (
+                <nav>
                 <ul className='menu'>
                   <li>
                     <NavLink
@@ -196,6 +214,7 @@ const NavBar = ({ countCarrito }) => {
                     </button>
                   </li>
                 </ul>
+                </nav>
               )}
             </div>
           ) : (
@@ -212,9 +231,9 @@ const NavBar = ({ countCarrito }) => {
               </button>
             </NavLink>
           )}
-          
+          */} 
         </div>
-      </div>
+      </div> 
     </div>
   );
 };

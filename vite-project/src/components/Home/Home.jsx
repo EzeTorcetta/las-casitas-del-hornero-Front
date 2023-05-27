@@ -81,7 +81,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
         onUserNotRegistered={handleUserNotRegistered}></AuthProvider>
     );
   }
-console.log(theme)
+
   return (
     
     <div className={theme === 'light' ? 'fullcontainer-light' : 'fullcontainer-dark'}>
