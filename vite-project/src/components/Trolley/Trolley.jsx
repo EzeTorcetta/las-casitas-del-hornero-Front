@@ -59,21 +59,31 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
 
   const FuncionReservar = async (idUser, email) => {
     console.log(email);
-
-    try {
-      await axios.get(
-        `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Reserva/${email}`
-      );
-      await axios.put(`${URL_BASE}/booking/${idUser}`, ArrayCarritoModificado);
+    if (Trolley.length) {
+      try {
+        await axios.get(
+          `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Reserva/${email}`
+        );
+        await axios.put(
+          `${URL_BASE}/booking/${idUser}`,
+          ArrayCarritoModificado
+        );
+        swal({
+          text: "Habitacion/es reservadas con exito!!!",
+          icon: "success",
+          buttons: "Aceptar",
+        });
+        dispatch(DeleteAllTrolley(idUser));
+      } catch (error) {
+        swal({
+          text: error.response.data.error,
+          icon: "warning",
+          buttons: "Aceptar",
+        });
+      }
+    } else {
       swal({
-        text: "Habitacion/es reservadas con exito!!!",
-        icon: "success",
-        buttons: "Aceptar",
-      });
-      dispatch(DeleteAllTrolley(idUser));
-    } catch (error) {
-      swal({
-        text: error.response.data.error,
+        text: "No hay ningun Hotel Para reservar",
         icon: "warning",
         buttons: "Aceptar",
       });

@@ -1,8 +1,10 @@
 //?---------------------------- IMPORTS --------------------------------
 import "react-datepicker/dist/react-datepicker.css";
+// import { differenceInDays } from "date-fns";
 import es from "date-fns/locale/es";
 import DatePicker, { registerLocale } from "react-datepicker";
 registerLocale("es", es);
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,16 +21,17 @@ import style from "./Filters.module.css";
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
+  const [selectedDays, setSelectedDays] = useState(0);
   const { Filters, Services, Provinces, Department, Locality } = useSelector(
     (state) => state
   );
   //*-----------------------------------------------------Fechas:
   const [stateCheckIn, setStateCheckIn] = useState(
-    new Date("2023", "01", "01")
+    new Date("2023", "01", "00")
   );
   const [stateCheckInString, setStateCheckInString] = useState("");
   const [stateCheckOut, setStateCheckOut] = useState(
-    new Date("2023", "05", "09")
+    new Date("2023", "01", "00")
   );
   const [stateCheckOutString, setStateCheckOutString] = useState("");
 
@@ -55,6 +58,9 @@ const Filter = () => {
 
     const checkInDate = new Date(state);
     const checkOutDate = new Date(stateCheckOut);
+
+    const days = differenceInDays(stateCheckOut, state) + 1;
+    setSelectedDays(days);
 
     if (checkInDate.getTime() <= checkOutDate.getTime()) {
       const array = state.toString().split(" ");
@@ -97,7 +103,11 @@ const Filter = () => {
       //*------------------------------------Set:
       setFilter({ ...stateFilter, checkIn: stateModificado });
     } else {
-      alert("no se puede reservar una fecha mayor que el checkOut");
+      swal({
+        text: "no se puede reservar una fecha mayor que el checkOut",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     }
   };
   console.log(stateCheckInString);
@@ -106,6 +116,9 @@ const Filter = () => {
   const onChangeCheckOut = (state) => {
     const checkOutDate = new Date(state);
     const checkInDate = new Date(stateCheckIn);
+
+    const days = differenceInDays(state, stateCheckIn) + 1;
+    setSelectedDays(days);
 
     if (checkOutDate.getTime() >= checkInDate.getTime()) {
       const array = state.toString().split(" ");
@@ -147,7 +160,11 @@ const Filter = () => {
       //*------------------------------------Set:
       setFilter({ ...stateFilter, checkOut: stateModificado });
     } else {
-      alert("La Fecha CheckOut No debe ser menor al CheckIn");
+      swal({
+        text: "La Fecha CheckOut No debe ser menor al CheckIn",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     }
   };
   console.log(stateCheckOutString);
@@ -331,22 +348,23 @@ const Filter = () => {
         <option value="RATINGDESC">Mas Estrellas</option>
         <option value="RATINGASC">Menos Estrellas</option>
       </select>
-      <label>CheckIn :</label>
+      <label>Fecha de entrada : </label>
       <DatePicker
         selected={stateCheckIn}
         onChange={onChangeCheckIn}
         locale="es"
-        className="pickers"
+        className="custom-datepicker"
         dateFormat="dd 'de' MMMM 'de' yyyy"
       />
-      <label>CheckOut :</label>
+      <label>Fecha de salida :</label>
       <DatePicker
         selected={stateCheckOut}
         onChange={onChangeCheckOut}
         locale="es"
-        className="pickers"
         dateFormat="dd 'de' MMMM 'de' yyyy"
+        className="custom-datepicker"
       />
+      <h5>{`Cantidad de días seleccionados: ${selectedDays}`}</h5>
       <table className={style.table}>
         {Services.map((Ser) => (
           <tbody key={Ser.id}>

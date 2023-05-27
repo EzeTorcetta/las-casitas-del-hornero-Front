@@ -95,6 +95,12 @@ const RestablecerContraseña = () => {
             password,
           }
         );
+        navigate("/");
+        swal({
+          text: "Cambio de Contraseña Exitoso",
+          icon: "success",
+          buttons: "Aceptar",
+        });
       }
     } catch (error) {
       swal({

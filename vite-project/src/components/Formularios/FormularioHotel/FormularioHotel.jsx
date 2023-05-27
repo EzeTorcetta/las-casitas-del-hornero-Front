@@ -58,7 +58,7 @@ const FormularioHotel = () => {
     rating: "",
     province: "",
     department: "",
-    locality:"",
+    locality: "",
     services: [],
     image: [],
     location: [],
@@ -155,13 +155,9 @@ const FormularioHotel = () => {
     const id = Number(event.target.id);
     if (checked) {
       setHotel({ ...hotel, services: [...hotel.services, id] });
-      setError(
-        validacion({ ...hotel, services: [...hotel.services, id] })
-      );
+      setError(validacion({ ...hotel, services: [...hotel.services, id] }));
     } else {
-      const removed = hotel.services.filter(
-        (service) => service !== id
-      );
+      const removed = hotel.services.filter((service) => service !== id);
       setHotel({ ...hotel, services: [...removed] });
       setError(validacion({ ...hotel, services: [...removed] }));
     }
@@ -237,31 +233,33 @@ const FormularioHotel = () => {
       image,
       location,
     } = hotel;
-    console.log(hotel)
+    console.log(hotel);
     try {
-      const { data } = await axios.post(
-        `${URL_BASE}/hotels/${User.id}`,
-        {
-          name,
-          email,
-          phoneNumber,
-          description,
-          valoration: Number(valoration),
-          rating: Number(rating),
-          province,
-          department,
-          locality,
-          services,
-          image,
-          location,
-        }
+      const { data } = await axios.post(`${URL_BASE}/hotels/${User.id}`, {
+        name,
+        email,
+        phoneNumber,
+        description,
+        valoration: Number(valoration),
+        rating: Number(rating),
+        province,
+        department,
+        locality,
+        services,
+        image,
+        location,
+      });
+
+      await axios.get(
+        `http://localhost:3001/email/CreacionDeHotel/${User.gmail}?name=${User.name}`
       );
+
       swal({
         text: "Tu hotel se registro con éxito!",
         icon: "success",
         buttons: "Aceptar",
       });
-      dispatch(idHotelForm(data.id))
+      dispatch(idHotelForm(data.id));
       navigate("/FormRoomType", {
         state: { id_hotel: data.id },
         replace: true,
@@ -403,9 +401,7 @@ const FormularioHotel = () => {
 
         {/* LOCATION DONDE SE UBICA EL HOTEL*/}
 
-        <div>
-          Selecciona la Provincia donde se encuentra tu hotel:
-        </div>
+        <div>Selecciona la Provincia donde se encuentra tu hotel:</div>
         <select onChange={onChangeProvinces} className={style.select}>
           {location.provinces?.map(({ nombre, id }) => (
             <option value={nombre} key={id} id={id}>
@@ -415,12 +411,8 @@ const FormularioHotel = () => {
         </select>
         {location.departments.length ? (
           <div>
-            <div>
-              Selecciona el Departamento donde se encuentra tu hotel:
-            </div>
-            <select
-              onChange={onChangeDepartments}
-              className={style.select}>
+            <div>Selecciona el Departamento donde se encuentra tu hotel:</div>
+            <select onChange={onChangeDepartments} className={style.select}>
               {location.departments?.map(({ nombre, id }) => (
                 <option value={nombre} key={id} id={id}>
                   {nombre}
@@ -433,12 +425,8 @@ const FormularioHotel = () => {
         )}
         {location.localities.length ? (
           <div>
-            <div>
-              Selecciona la Localidad donde se encuentra tu hotel:
-            </div>
-            <select
-              onChange={onChangeLocalities}
-              className={style.select}>
+            <div>Selecciona la Localidad donde se encuentra tu hotel:</div>
+            <select onChange={onChangeLocalities} className={style.select}>
               {location.localities?.map(({ nombre, id }) => (
                 <option value={nombre} key={id} id={id}>
                   {nombre}
@@ -458,9 +446,7 @@ const FormularioHotel = () => {
           <span className={style.hidden}>hidden</span>
         )}
         <div>Selecciona los servicios que tiene tu hotel:</div>
-        <span
-          onChange={onChangeServices}
-          className={style.checkContainer}>
+        <span onChange={onChangeServices} className={style.checkContainer}>
           {services?.map((service) => (
             <div key={service.id} className={style.checkbox}>
               <label className={style.container}>
@@ -472,9 +458,7 @@ const FormularioHotel = () => {
                 />
                 <div className={style.checkmark}></div>
               </label>
-              <span className={style.nameService}>
-                {service.name}
-              </span>
+              <span className={style.nameService}>{service.name}</span>
             </div>
           ))}
         </span>
@@ -506,9 +490,7 @@ const FormularioHotel = () => {
         <div>Cambia la ubicación donde se encuentra tu hotel:</div>
         <Maps location={geoposition} setLocation={setGeoposition} />
 
-        <button
-          className="w-100 btn btn-lg btn-warning"
-          type="submit">
+        <button className="w-100 btn btn-lg btn-warning" type="submit">
           Registrar
         </button>
       </form>

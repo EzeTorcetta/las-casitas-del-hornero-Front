@@ -133,3 +133,39 @@
   color: white;
   opacity: 1;
 }
+
+/*--------------------------Calendario-------------------------*/
+/* Estilo personalizado para el datepicker */
+/* Estilos generales del DatePicker */
+.react-datepicker {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/* Estilos del contenedor del campo de entrada */
+.react-datepicker__input-container {
+  display: inline-block;
+  position: relative;
+}
+
+/* Estilos del campo de entrada */
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilos para el día seleccionado */
+.react-datepicker__day--selected {
+  background-color: #ffd500;
+  color: #fff;
+}
+
+/* Estilos para el día seleccionado mediante teclado */
+.react-datepicker__day--keyboard-selected {
+  background-color: #ffcf33;
+  color: #fff;
+}
