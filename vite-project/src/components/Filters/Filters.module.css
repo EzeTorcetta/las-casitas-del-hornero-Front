@@ -112,8 +112,21 @@
   }
 }
 
-.inputSearch::placeholder {
+.inputSearch{
+  width: 100%;
+  appearance: none;
   color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border: none;
+  margin: 5px;
+  padding: 0.5rem;
+}
+
+.inputSearch::placeholder {
+  color: black;
   opacity: 1;
 }
 

@@ -18,10 +18,6 @@ import {
 import styleLight from "./Filters.module.css"
 import styleDark from"./FiltersDark.module.css"
 
-
-
-
-
 // import style from theme === 'light'? "./Filters.module.css":"./FiltersDark.module.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
