@@ -1,6 +1,6 @@
 .footer {
   height: fit-content;
-  padding: 30px;
+  padding: 10px;
   width: 100%;
   background-color: rgb(254, 237, 203);
   color: orange;
@@ -9,6 +9,3 @@
   justify-content: center;
 }
 
-.footer p {
-  margin-bottom: 90px;
-}

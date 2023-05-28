@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
 import AuthProvider from "../GoogleAuth/AuthProvider";
 //css
-import "./Home.css";
-import style from "./Home.module.css";
+import styleLight from "./Home.module.css";
+import styleDark from "./HomeDark.module.css";
+
 //actions
 import {
   FuncionSelectFilter,
@@ -15,8 +16,6 @@ import {
   getCurrencyRateAPI,
 } from "../../redux/Actions/Actions";
 //components
-// import Cards from "../Cards/Cards";
-// import Search from "../Search/Search";
 import {
   Filter,
   NavBar,
@@ -45,6 +44,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const currencyExchange = useSelector((state) => state.currencyExchange);
   const estado = useSelector((state) => state);
   const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -62,7 +62,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   };
 
   useEffect(() => {
-    if (User) dispatch(GetTrolley(User.id));
+    if (User) dispatch(GetTrolley(User.id, undefined, undefined));
     if (!currencyExchange.rate) dispatch(getCurrencyRateAPI());
     if (!Hotels.allHotels?.length) {
       dispatch(FuncionSelectFilter(Filters));
@@ -127,7 +127,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
         )}
 
         <Paginado paginas={Hotels.numPages} />
-        <section className={`${style.section} ${style.two}`}></section>
+        {/* <section className={`${style.section} ${style.two}`}></section> */}
         <Footer />
       </div>
     </>

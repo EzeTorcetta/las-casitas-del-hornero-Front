@@ -16,19 +16,26 @@ import {
   getServices,
 } from "../../redux/Actions/Actions";
 //css
-import style from "./Filters.module.css";
+// import style from "./FiltersDark.module.css";
+import styleLight from "./Filters.module.css";
+import styleDark from "./FiltersDark.module.css";
+
+// import style from theme === 'light'? "./Filters.module.css":"./FiltersDark.module.css";
 
 //?----------------- COMPONENTE FILTER ------------------------------------
 const Filter = () => {
   const dispatch = useDispatch();
-  const [selectedDays, setSelectedDays] = useState(0);
   const { Filters, Services, Provinces, Department, Locality } = useSelector(
     (state) => state
   );
   //*-----------------------------------------------------Fechas:
-  const [stateCheckIn, setStateCheckIn] = useState(new Date());
+  const [stateCheckIn, setStateCheckIn] = useState(
+    new Date("2023", "01", "01")
+  );
   const [stateCheckInString, setStateCheckInString] = useState("");
-  const [stateCheckOut, setStateCheckOut] = useState(new Date());
+  const [stateCheckOut, setStateCheckOut] = useState(
+    new Date("2023", "05", "09")
+  );
   const [stateCheckOutString, setStateCheckOutString] = useState("");
 
   //*-----------------------------------------------------------------*//
@@ -37,6 +44,7 @@ const Filter = () => {
   const [provinceId, setProvinceId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
   const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
 
   useEffect(() => {
     dispatch(getProvinces());
@@ -50,50 +58,57 @@ const Filter = () => {
   //?-----------------------------------------------CheckIn:
 
   const onChangeCheckIn = (state) => {
-    //validar que el checkIn no sea mayor que la fecha checkout antes de setear el estado:
-    // validar que tanto el mes como el dia o año no sean mayores a los del checkOut
-
     const checkInDate = new Date(state);
     const checkOutDate = new Date(stateCheckOut);
-
     if (checkInDate.getTime() <= checkOutDate.getTime()) {
       const array = state.toString().split(" ");
-      console.log(array);
-      const monthNames = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-
-      let acumulador = [];
-      for (let i = 0; i <= 3; i++) {
-        if (i === 3) {
-          acumulador.unshift(array[i]);
-        } else if (i === 2) {
-          acumulador.unshift(array[i]);
-        } else if (i === 1) {
-          let numero = monthNames.indexOf(array[i]) + 1;
-
-          if (numero >= 10) {
-            acumulador.push(numero.toString());
-          } else {
-            acumulador.push("0" + numero.toString());
-          }
-        }
+      const fecha = [];
+      fecha.push(array[3]);
+      switch (array[1]) {
+        case "Jan":
+          fecha.push("1".padStart(2, "0"));
+          break;
+        case "Feb":
+          fecha.push("2".padStart(2, "0"));
+          break;
+        case "Mar":
+          fecha.push("3".padStart(2, "0"));
+          break;
+        case "Apr":
+          fecha.push("4".padStart(2, "0"));
+          break;
+        case "May":
+          fecha.push("5".padStart(2, "0"));
+          break;
+        case "Jun":
+          fecha.push("6".padStart(2, "0"));
+          break;
+        case "Jul":
+          fecha.push("7".padStart(2, "0"));
+          break;
+        case "Aug":
+          fecha.push("8".padStart(2, "0"));
+          break;
+        case "Sep":
+          fecha.push("9".padStart(2, "0"));
+          break;
+        case "Oct":
+          fecha.push("10");
+          break;
+        case "Nov":
+          fecha.push("11");
+          break;
+        case "Dec":
+          fecha.push("12");
+          break;
+        default:
+          fecha.push("9".padStart(2, "0"));
+          break;
       }
-      let stateModificado = acumulador.join("-");
+      fecha.push(array[2]);
+      let stateModificado = fecha.join("-");
       setStateCheckInString(stateModificado);
       setStateCheckIn(state);
-
       //*------------------------------------Set:
       setFilter({ ...stateFilter, checkIn: stateModificado });
     } else {
@@ -104,48 +119,58 @@ const Filter = () => {
       });
     }
   };
-  console.log(stateCheckInString);
 
   //?-----------------------------------------CheckOut :
   const onChangeCheckOut = (state) => {
     const checkOutDate = new Date(state);
     const checkInDate = new Date(stateCheckIn);
-
     if (checkOutDate.getTime() >= checkInDate.getTime()) {
       const array = state.toString().split(" ");
-      console.log(array);
-      const monthNames = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-
-      let acumulador = [];
-      for (let i = 0; i <= 3; i++) {
-        if (i === 3) {
-          acumulador.unshift(array[i]);
-        } else if (i === 2) {
-          acumulador.unshift(array[i]);
-        } else if (i === 1) {
-          let numero = monthNames.indexOf(array[i]) + 1;
-
-          if (numero >= 10) {
-            acumulador.push(numero.toString());
-          } else {
-            acumulador.push("0" + numero.toString());
-          }
-        }
+      const fecha = [];
+      fecha.push(array[3]);
+      switch (array[1]) {
+        case "Jan":
+          fecha.push("1".padStart(2, "0"));
+          break;
+        case "Feb":
+          fecha.push("2".padStart(2, "0"));
+          break;
+        case "Mar":
+          fecha.push("3".padStart(2, "0"));
+          break;
+        case "Apr":
+          fecha.push("4".padStart(2, "0"));
+          break;
+        case "May":
+          fecha.push("5".padStart(2, "0"));
+          break;
+        case "Jun":
+          fecha.push("6".padStart(2, "0"));
+          break;
+        case "Jul":
+          fecha.push("7".padStart(2, "0"));
+          break;
+        case "Aug":
+          fecha.push("8".padStart(2, "0"));
+          break;
+        case "Sep":
+          fecha.push("9".padStart(2, "0"));
+          break;
+        case "Oct":
+          fecha.push("10");
+          break;
+        case "Nov":
+          fecha.push("11");
+          break;
+        case "Dec":
+          fecha.push("12");
+          break;
+        default:
+          fecha.push("9".padStart(2, "0"));
+          break;
       }
-      let stateModificado = acumulador.join("-");
+      fecha.push(array[2]);
+      let stateModificado = fecha.join("-");
       setStateCheckOutString(stateModificado);
       setStateCheckOut(state);
       //*------------------------------------Set:
@@ -158,7 +183,6 @@ const Filter = () => {
       });
     }
   };
-  console.log(stateCheckOutString);
 
   //------------------------------------------------------//
 
@@ -229,6 +253,15 @@ const Filter = () => {
 
   // CLEAN FILTROS
   const FuncionCleanFilter = (event) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    setStateCheckIn(today);
+
+    const tomorrow = new Date();
+    tomorrow.setHours(0, 0, 0, 0);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setStateCheckOut(tomorrow);
+
     event.preventDefault();
     document.forms["filterForm"].reset();
     setProvinceId("");

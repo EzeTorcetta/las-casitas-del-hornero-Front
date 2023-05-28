@@ -13,6 +13,7 @@ import { PedirLocalStorage } from "../Index";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Calendario from "../Calendar/FullCalendar";
 
 const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
@@ -24,6 +25,7 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const [TotalPrecio, setTotalPrecio] = useState([]);
 
   const navigate = useNavigate();
+  console.log(Trolley);
 
   useEffect(() => {
     if (!User) {
@@ -58,7 +60,6 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
   }, [ObjetoTrolley, Trolley]);
 
   const FuncionReservar = async (idUser, email) => {
-    console.log(email);
     if (Trolley.length) {
       try {
         await axios.get(
@@ -127,6 +128,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
     <>
       <NavBar countCarrito={countCarrito} />
       <div className={style.divBotonEliminarTodo}>
+        <div className={style.divCalendario}>
+          <Calendario id={User.id} />
+        </div>
         <button
           className={style.botonEliminar}
           onClick={() => FuncionDeleteAllCarritos(User.id)}
