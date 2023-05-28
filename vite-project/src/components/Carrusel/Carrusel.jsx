@@ -3,10 +3,14 @@
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //css
-import style from "./Carrusel.module.css";
+import styleLight from "./Carrusel.module.css"
+import styleDark from"./CarruselDark.module.css"
+import { useSelector } from "react-redux";
 
 //?----------------- COMPONENTE CARRUSEL ------------------------------------
 const Carrusel = ({ HotelsCarrusel }) => {
+const theme = useSelector((state) => state.theme);
+const style = theme === "light"?styleLight:styleDark;
   return (
     <div>
       <Carousel className={style.carousel}>
