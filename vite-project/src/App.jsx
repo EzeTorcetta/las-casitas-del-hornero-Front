@@ -17,6 +17,7 @@ import {
   RestablecerContraseña,
 } from "./components/Index";
 import { Route, Routes } from "react-router-dom";
+import UploadImage from "./components/Imagenes/cargarImagenes";
 
 //?----------------- APP ------------------------------------
 function App() {
@@ -35,6 +36,7 @@ function App() {
         />
         <Route path="/FormHotel" element={<FormularioHotel />} />
         <Route path="/FormRoomType" element={<FormularioTipoHab />} />
+        <Route path="/Imagenes" element={<UploadImage />} />
 
         <Route path="/" element={<Landing />} />
         <Route

@@ -9,12 +9,21 @@ import style from "./Card.module.css";
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
 
-
 //?----------------- COMPONENTE CARD ------------------------------------
-function Cards({ id, name, image, province, rating, description, valoration }) {
+function Cards({
+  id,
+  name,
+  image,
+  province,
+  department,
+  rating,
+  description,
+  valoration,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const FavHotels = useSelector((state) => state.FavHotels);
+  const theme = useSelector((state) => state.theme);
   const [isFav, setIsFav] = useState(false);
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   let ratingArray = Array(rating).fill(rating);
@@ -45,47 +54,51 @@ function Cards({ id, name, image, province, rating, description, valoration }) {
     <div className={style.container}>
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
-        {!User || User?.rol === 1?isFav ? (
-          <button
-            onClick={() => handleFavorite(User?.id, id)}
-            className={style.button}
-          >
-            ❤️
-          </button>
+        {!User || User?.rol === 1 ? (
+          isFav ? (
+            <button
+              onClick={() => handleFavorite(User?.id, id)}
+              className={style.button}
+            >
+              ❤️
+            </button>
+          ) : (
+            <button
+              onClick={() => handleFavorite(User?.id, id)}
+              className={style.button}
+            >
+              🤍
+            </button>
+          )
         ) : (
-          <button
-            onClick={() => handleFavorite(User?.id, id)}
-            className={style.button}
-          >
-            🤍
-          </button>
-        ):(<></>)}
+          <></>
+        )}
       </div>
       <div className={style.title}>
-        <div className={style.divJose}>
-          <div className={style.divJose1}>
-            <h4 className={style.name}>{name}</h4>
-            <div className={style.rating}>
-              {ratingArray.map((_, index) => {
-                return (
-                  <img
-                    className={style.imgRating}
-                    src={imgFav}
-                    alt=""
-                    key={index}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <p>Valoracion Del Hotel :{valoration}</p>
+        <h4 className={style.name}>{name}</h4>
+        <div className={style.rating}>
+          {ratingArray.map((_, index) => {
+            return (
+              <img
+                className={style.imgRating}
+                src={imgFav}
+                alt=""
+                key={index}
+              />
+            );
+          })}
         </div>
-        <h3 className={style.province}>{province}</h3>
+        <p className={style.punctuation}>Valoracion Del Hotel :{valoration}</p>
+        <p className={style.province}>
+          {department},{province}
+        </p>
         <button onClick={onClickDetail} className={style.botonDetail}>
           VER ALOJAMIENTO
         </button>
       </div>
+    
     </div>
+    
   );
 }
 

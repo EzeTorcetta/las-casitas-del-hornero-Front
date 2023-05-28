@@ -26,13 +26,9 @@ const Filter = () => {
     (state) => state
   );
   //*-----------------------------------------------------Fechas:
-  const [stateCheckIn, setStateCheckIn] = useState(
-    new Date("2023", "01", "00")
-  );
+  const [stateCheckIn, setStateCheckIn] = useState(new Date());
   const [stateCheckInString, setStateCheckInString] = useState("");
-  const [stateCheckOut, setStateCheckOut] = useState(
-    new Date("2023", "01", "00")
-  );
+  const [stateCheckOut, setStateCheckOut] = useState(new Date());
   const [stateCheckOutString, setStateCheckOutString] = useState("");
 
   //*-----------------------------------------------------------------*//
@@ -40,6 +36,7 @@ const Filter = () => {
   const [stateFilter, setFilter] = useState(Filters);
   const [provinceId, setProvinceId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     dispatch(getProvinces());
@@ -58,9 +55,6 @@ const Filter = () => {
 
     const checkInDate = new Date(state);
     const checkOutDate = new Date(stateCheckOut);
-
-    const days = differenceInDays(stateCheckOut, state) + 1;
-    setSelectedDays(days);
 
     if (checkInDate.getTime() <= checkOutDate.getTime()) {
       const array = state.toString().split(" ");
@@ -116,9 +110,6 @@ const Filter = () => {
   const onChangeCheckOut = (state) => {
     const checkOutDate = new Date(state);
     const checkInDate = new Date(stateCheckIn);
-
-    const days = differenceInDays(state, stateCheckIn) + 1;
-    setSelectedDays(days);
 
     if (checkOutDate.getTime() >= checkInDate.getTime()) {
       const array = state.toString().split(" ");
@@ -287,115 +278,131 @@ const Filter = () => {
   };
 
   return (
-    <form name="filterForm" className={style.form}>
-      <input
-        className={style.inputSearch}
-        type="text"
-        name="text"
-        placeholder="Buscar un Hotel"
-        onChange={onChangeName}
-      />
-      <select onChange={onChangeProvinces} className={style.select}>
-        <option hidden>Filtro Por Provincia</option>
-        {Provinces.map((pro) => (
-          <option id={pro.id} value={pro.nombre} key={pro.id}>
-            {pro.nombre}
-          </option>
-        ))}
-      </select>
-      {provinceId.length ? (
-        <>
-          <select onChange={onChangeDeparment} className={style.select}>
-            <option hidden>Filtro Por Departamento</option>
-            {Department.map((dep) => (
-              <option id={dep.id} value={dep.nombre}>
-                {dep.nombre}
-              </option>
-            ))}
-          </select>
-        </>
-      ) : (
-        <></>
-      )}
-      {departmentId.length ? (
-        <>
-          <select onChange={onChangeLocality} className={style.select}>
-            <option hidden>Filtro Por Localidad</option>
-            {Locality.map((loc) => (
-              <option id={loc.id} value={loc.nombre}>
-                {loc.nombre}
-              </option>
-            ))}
-          </select>
-        </>
-      ) : (
-        <></>
-      )}
-      <select onChange={onChangeRating} className={style.select}>
-        <option hidden>Filtro Por raiting</option>
-        {raiting.map((rant, index) => (
-          <option value={rant} key={index}>
-            {rant}
-          </option>
-        ))}
-      </select>
-      <select onChange={onChangeOrder} className={style.select}>
-        <option hidden>Ordenar por</option>
-        <option value="VALORATIONDESC">Mayor Valoracion</option>
-        <option value="VALORATIONASC">Menor Valoracion</option>
-        <option value="NAMEASC">Nombre A-Z</option>
-        <option value="NAMEDESC">Nombre Z-A</option>
-        <option value="RATINGDESC">Mas Estrellas</option>
-        <option value="RATINGASC">Menos Estrellas</option>
-      </select>
-      <label>Fecha de entrada : </label>
-      <DatePicker
-        selected={stateCheckIn}
-        onChange={onChangeCheckIn}
-        locale="es"
-        className="custom-datepicker"
-        dateFormat="dd 'de' MMMM 'de' yyyy"
-      />
-      <label>Fecha de salida :</label>
-      <DatePicker
-        selected={stateCheckOut}
-        onChange={onChangeCheckOut}
-        locale="es"
-        dateFormat="dd 'de' MMMM 'de' yyyy"
-        className="custom-datepicker"
-      />
-      <h5>{`Cantidad de días seleccionados: ${selectedDays}`}</h5>
-      <table className={style.table}>
-        {Services.map((Ser) => (
-          <tbody key={Ser.id}>
-            <tr className={style.tr}>
-              <td className={style.td}>{Ser.name}</td>
-              <td className={style.td}>
-                <label className={style.checkbox_btn}>
-                  <label htmlFor="checkbox"></label>
-                  <input
-                    className={style.inputServices}
-                    onChange={() => onChangeServices(Ser.name)}
-                    value={Ser.name}
-                    type="checkbox"
-                    id="checkbox"
-                  ></input>
-                  <span className={style.checkmark}></span>
-                </label>
-              </td>
-            </tr>
-          </tbody>
-        ))}
-      </table>
-      <div>
-        <button onClick={FuncionFilter} className={style.button}>
-          Filtrar
-        </button>
-        <button onClick={FuncionCleanFilter} className={style.button}>
-          AllHotels
-        </button>
-      </div>
-    </form>
+    <div>
+      <form
+        name="filterForm"
+        className={theme === "light" ? style.form : style.formdark}
+      >
+        <input
+          type="text"
+          name="text"
+          className={
+            theme === "light" ? style.inputSearch : style.inputSearch - dark
+          }
+          placeholder="Buscar un Hotel . . ."
+          onChange={onChangeName}
+        />
+        <select
+          onChange={onChangeProvinces}
+          className={theme === "light" ? style.select : style.select - dark}
+        >
+          <option hidden>Filtro Por Provincia</option>
+          {Provinces.map((pro) => (
+            <option id={pro.id} value={pro.nombre} key={pro.id}>
+              {pro.nombre}
+            </option>
+          ))}
+        </select>
+
+        {provinceId.length ? (
+          <>
+            <select onChange={onChangeDeparment} className={style.select}>
+              <option hidden>Filtro Por Departamento</option>
+              {Department.map((dep) => (
+                <option id={dep.id} value={dep.nombre}>
+                  {dep.nombre}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <></>
+        )}
+        {departmentId.length ? (
+          <>
+            <select onChange={onChangeLocality} className={style.select}>
+              <option hidden>Filtro Por Localidad</option>
+              {Locality.map((loc) => (
+                <option id={loc.id} value={loc.nombre}>
+                  {loc.nombre}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <></>
+        )}
+        <select
+          onChange={onChangeRating}
+          className={theme === "light" ? style.select : style.select - dark}
+        >
+          <option hidden>Filtro Por raiting</option>
+          {raiting.map((rant, index) => (
+            <option value={rant} key={index}>
+              {rant}
+            </option>
+          ))}
+        </select>
+        <select onChange={onChangeOrder} className={style.select}>
+          <option hidden>Ordenar por</option>
+          <option value="VALORATIONDESC">Mayor Valoracion</option>
+          <option value="VALORATIONASC">Menor Valoracion</option>
+          <option value="NAMEASC">Nombre A-Z</option>
+          <option value="NAMEDESC">Nombre Z-A</option>
+          <option value="RATINGDESC">Mas Estrellas</option>
+          <option value="RATINGASC">Menos Estrellas</option>
+        </select>
+        <div className={style.Checks}>
+          <label>CheckIn :</label>
+          <DatePicker
+            selected={stateCheckIn}
+            onChange={onChangeCheckIn}
+            locale="es"
+            className={style.pickers}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+          />
+          <label>CheckOut :</label>
+          <DatePicker
+            selected={stateCheckOut}
+            onChange={onChangeCheckOut}
+            locale="es"
+            className={style.pickers}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+          />
+        </div>
+
+        <table className={style.table}>
+          {Services.map((Ser) => (
+            <tbody key={Ser.id}>
+              <tr className={style.tr}>
+                <td className={style.td}>{Ser.name}</td>
+                <td className={style.td}>
+                  <label className={style.checkbox_btn}>
+                    <label htmlFor="checkbox"></label>
+                    <input
+                      className={style.inputServices}
+                      onChange={() => onChangeServices(Ser.name)}
+                      value={Ser.name}
+                      type="checkbox"
+                      id="checkbox"
+                    ></input>
+                    <span className={style.checkmark}></span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+        <div>
+          <button onClick={FuncionFilter} className={style.button}>
+            Filtrar
+          </button>
+          <button onClick={FuncionCleanFilter} className={style.button}>
+            Limpiar filtros
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

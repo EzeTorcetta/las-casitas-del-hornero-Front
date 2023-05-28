@@ -24,6 +24,9 @@ import {
   UP_DATE_TROLLEY,
   PUT_AMOUNT_TROLLEY,
   ID_HOTEL_FORM,
+  GET_CURRENCY_RATE,
+  SET_CURRENCY_SYMBOL,
+  SET_THEME,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -31,7 +34,8 @@ import swal from "sweetalert";
 //?----------------- ACTIONS ------------------------------------
 
 //* ----------------- GET ALL HOTELS ------------------------------------
-const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+const URL_BASE =
+  "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 export const FuncionSelectFilter = (filters) => {
   let URL = `${URL_BASE}/hotels`;
   const {
@@ -84,7 +88,8 @@ export const FuncionSelectFilter = (filters) => {
 
       if (services.length) {
         services.map(
-          (ser) => (URL = URL + `&services=${encodeURIComponent(ser)}`)
+          (ser) =>
+            (URL = URL + `&services=${encodeURIComponent(ser)}`)
         );
       }
       const response = await axios.get(URL);
@@ -136,7 +141,9 @@ export const PostFilters = (filters) => {
 export const FuncionTypeRoomTypes = (idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}`);
+      const response = await axios.get(
+        `${URL_BASE}/roomTypes/${idHotel}`
+      );
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
@@ -170,8 +177,13 @@ export const FuncionSearch = (nameHotel, page) => {
 export const FuncionAllFavoritesHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/favorites/${idUser}`);
-      dispatch({ type: ALL_FAVORITES_HOTELS, payload: response.data });
+      const response = await axios.get(
+        `${URL_BASE}/favorites/${idUser}`
+      );
+      dispatch({
+        type: ALL_FAVORITES_HOTELS,
+        payload: response.data,
+      });
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -361,7 +373,9 @@ export const getServices = () => {
 export const FuncionAllPartnerHotel = (idUser) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/hotels?id_user=${idUser}`);
+      const response = await axios.get(
+        `${URL_BASE}/hotels?id_user=${idUser}`
+      );
       dispatch({ type: ALL_PARTNER_HOTELS, payload: response.data });
     } catch (error) {
       swal({
@@ -412,3 +426,40 @@ export const idHotelForm = (id) => {
     dispatch({ type: ID_HOTEL_FORM, payload: id });
   };
 };
+
+//* ----------------- GET CURRENCY RATE API----------------------------------
+export const getCurrencyRateAPI = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.get(
+        `https://openexchangerates.org/api/latest.json?app_id=d7185c1a1d0d4580a879e291d173af8a`
+      );
+      dispatch({
+        type: GET_CURRENCY_RATE,
+        payload: response.data.rates,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (error) {
+    swal({
+      text: error.response.data.error,
+      icon: "warning",
+      buttons: "Aceptar",
+    });
+  }
+};
+
+// //* ----------------- SET CURRENCY SYMBOL----------------------------------
+export const setCurrencySymbol = (currencySymbol) => {
+  return async function (dispatch) {
+    dispatch({ type: SET_CURRENCY_SYMBOL, payload: currencySymbol });
+  };
+};
+//-------------- SET THEME ---------------
+
+export const changeTheme = (theme) => {
+  return{
+    type: SET_THEME,
+    payload: theme,
+  }
+}

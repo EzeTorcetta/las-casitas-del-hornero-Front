@@ -65,13 +65,18 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
         <div>
           <NavBar countCarrito={countCarrito} />
           <div className={style.div}>
-            <div className={`${style.divImg} ${style.carouselContainer}`}>
+            <div
+              className={`${style.divImg} ${style.carouselContainer}`}>
               <div className={style.divDescription}>
                 <h3>{DetailHotel.name}</h3>
                 <p className={style.p}>
                   Rating :
                   {array.map((ranting, index) => (
-                    <img className={style.img} src={imagen} key={index} />
+                    <img
+                      className={style.img}
+                      src={imagen}
+                      key={index}
+                    />
                   ))}
                 </p>
                 <h3>
@@ -103,7 +108,10 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
           </section>
 
           {DetailHotel.location && DetailHotel.name && (
-            <Maps location={DetailHotel.location} name={DetailHotel.name} />
+            <Maps
+              location={DetailHotel.location}
+              name={DetailHotel.name}
+            />
           )}
           <section className={`${style.section} ${style.two}`}>
             <TypeRoom
