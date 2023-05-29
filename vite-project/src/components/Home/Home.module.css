@@ -23,12 +23,12 @@ body {
   flex-basis: 20%;
   justify-content: center;
   padding: 1em;
-  background-color: lightcoral;
 }
 
 .divCard {
   flex-basis: 60%;
   display: flex;
+  justify-content:space-around;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: start;

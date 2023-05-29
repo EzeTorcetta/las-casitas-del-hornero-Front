@@ -8,8 +8,8 @@ import { FuncionAllFavoritesHotel } from "../../redux/Actions/Actions.js";
 
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
-import styleLight from "./Card.module.css"
-import styleDark from"./CardDark.module.css"
+import styleLight from "./Card.module.css";
+import styleDark from "./CardDark.module.css";
 
 //?----------------- COMPONENTE CARD ------------------------------------
 function Cards({
@@ -26,7 +26,7 @@ function Cards({
   const navigate = useNavigate();
   const FavHotels = useSelector((state) => state.FavHotels);
   const theme = useSelector((state) => state.theme);
-  const style = theme === "light"?styleLight:styleDark;
+  const style = theme === "light" ? styleLight : styleDark;
   const [isFav, setIsFav] = useState(false);
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   let ratingArray = Array(rating).fill(rating);
@@ -53,7 +53,7 @@ function Cards({
     navigate(`/detail/${id}`);
   };
   return (
-    <Link to={`/detail/${id}`} className={style.container}>
+    <div className={style.container}>
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
         {!User || User?.rol === 1 ? (
@@ -76,31 +76,31 @@ function Cards({
           <></>
         )}
       </div>
-      <div className={style.title}>
-        <h4 className={style.name}>{name}</h4>
-        <div className={style.rating}>
-          {ratingArray.map((_, index) => {
-            return (
-              <img
-                className={style.imgRating}
-                src={imgFav}
-                alt=""
-                key={index}
-              />
-            );
-          })}
-        </div>
-        <p className={style.punctuation}>Valoracion Del Hotel :{valoration}</p>
-        <p className={style.province}>
-          {department},{province}
-        </p>
-        {/* <button onClick={onClickDetail} className={style.botonDetail}>
+      <Link to={`/detail/${id}`} className={style.links}>
+        <div className={style.title}>
+          <h4 className={style.name}>{name}</h4>
+          <div className={style.rating}>
+            {ratingArray.map((_, index) => {
+              return (
+                <img
+                  className={style.imgRating}
+                  src={imgFav}
+                  alt=""
+                  key={index}
+                />
+              );
+            })}
+          </div>
+          <p className={style.punctuation}>Valoración:{valoration}</p>
+          <p className={style.province}>
+            {department},{province}
+          </p>
+          {/* <button onClick={onClickDetail} className={style.botonDetail}>
           VER ALOJAMIENTO
         </button> */}
-      </div>
-    
-    </Link>
-    
+        </div>
+      </Link>
+    </div>
   );
 }
 
