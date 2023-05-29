@@ -65,7 +65,7 @@ function Cards({
     navigate(`/detail/${id}`);
   };
   return (
-    <Link to={`/detail/${id}`} className={style.container}>
+    <div className={style.container}>
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
         {!User || User?.rol === 1 ? (
@@ -88,36 +88,40 @@ function Cards({
           <></>
         )}
       </div>
-      <div className={style.title}>
-        <div className={style.divJose}>
-          <div className={style.divJose1}>
-            <h4 className={style.name}>{name}</h4>
-            <div className={style.rating}>
-              {ratingArray.map((_, index) => {
-                return (
-                  <img
-                    className={style.imgRating}
-                    src={imgFav}
-                    alt=""
-                    key={index}
-                  />
-                );
-              })}
+      <Link to={`/detail/${id}`} className={style.links}>
+        <div className={style.title}>
+          <div className={style.divJose}>
+            <div className={style.divJose1}>
+              <h4 className={style.name}>{name}</h4>
+              <div className={style.rating}>
+                {ratingArray.map((_, index) => {
+                  return (
+                    <img
+                      className={style.imgRating}
+                      src={imgFav}
+                      alt=""
+                      key={index}
+                    />
+                  );
+                })}
+              </div>
             </div>
+            <p>
+              {translations[idioma].ValoracionDelHotel} :{valoration}
+            </p>
           </div>
-          <p>
-            {translations[idioma].ValoracionDelHotel} :{valoration}
+          <p className={style.punctuation}>
+            Valoracion Del Hotel :{valoration}
           </p>
+          <p className={style.province}>
+            {department},{province}
+          </p>
+          <button onClick={onClickDetail} className={style.botonDetail}>
+            {translations[idioma].VerAlojamiento}
+          </button>
         </div>
-        <p className={style.punctuation}>Valoracion Del Hotel :{valoration}</p>
-        <p className={style.province}>
-          {department},{province}
-        </p>
-        <button onClick={onClickDetail} className={style.botonDetail}>
-          {translations[idioma].VerAlojamiento}
-        </button>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

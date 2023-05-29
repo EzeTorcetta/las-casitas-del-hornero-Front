@@ -7,6 +7,7 @@
   z-index: 3;
   /*encima de to */
   background-color: orange;
+  background-color: #E56910;
   color: white;
 }
 
@@ -119,10 +120,12 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  text-decoration: none;
 }
 
 .tituloLogo {
   color: white;
+  text-decoration: none;
 }
 
 .username {

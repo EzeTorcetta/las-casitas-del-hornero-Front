@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./redux/Store/Store.js";
 //archivos
 import App from "./App.jsx";
+
 //css
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";

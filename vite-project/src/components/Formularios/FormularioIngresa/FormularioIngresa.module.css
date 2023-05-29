@@ -15,14 +15,14 @@
 }
 
 .title {
-  color: rgb(255, 132, 0);
+  color: #E56910;
 }
 
 .divErrores {
   border: 0, 5px solid;
   width: 250px;
   display: flex;
-  background-color: #ffca2c;
+  background-color: #E56910;
   flex-direction: column;
   border-radius: 5px;
   padding: 5px;
@@ -47,18 +47,20 @@
 .buton {
   overflow: hidden;
   border-radius: 10px;
-  background-color: #ffc107;
+  background-color: #E56910;
+  opacity: 0.8;
   width: 200px;
   text-align: center;
   margin: 10px;
   height: 60px;
   border: none;
   font-size: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
-.buton:hover {
-  background-color: #ffca2c;
-}
 
 .butonGoogleDiv {
   display: flex;
@@ -87,7 +89,7 @@
     flex-direction: row;
     height: 20%;
     word-wrap: normal;
-    border-bottom: 4px solid #ff6f00;
+    border-bottom: 4px solid #E56910;
 
   }
 

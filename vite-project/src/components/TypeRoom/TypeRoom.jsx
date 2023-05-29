@@ -57,7 +57,12 @@ const TypeRoom = ({ id, Trolleys }) => {
           buttons: translations[idioma].Aceptar,
         });
       }
-      dispatch(GetTrolley(User.id));
+    } else {
+      swal({
+        text: "No hay Disponibilidad",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     }
   };
 
@@ -82,6 +87,7 @@ const TypeRoom = ({ id, Trolleys }) => {
           <Card.Text>stock : {room.stock}</Card.Text>
           {User?.rol !== 2 && User?.rol !== 3 ? (
             <button
+              disabled={room.stock === 0}
               className={style.BotonCarrito}
               onClick={() =>
                 FuncionPostCarrito(User.id, room.id, room.name, Trolleys)

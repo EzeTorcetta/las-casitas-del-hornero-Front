@@ -225,11 +225,14 @@ export const FuncionDetailHotel = (id) => {
 //*------------------------------TROLLEY------------------------------*//
 // trolley es ===> carrito manga de giles!!😐
 
-export const GetTrolley = (idUser) => {
+export const GetTrolley = (idUser, checkIn, checkOut) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/cart/${idUser}`);
+      const response = await axios.get(
+        `${URL_BASE}/cart/${idUser}?checkIn=${checkIn}&checkOut=${checkOut}`
+      );
 
+      console.log(response.data);
       dispatch({ type: GET_TROLLEY, payload: response.data });
     } catch (error) {
       // swal({

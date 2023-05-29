@@ -1,8 +1,12 @@
 //?---------------------------- IMPORTS --------------------------------
-import "react-datepicker/dist/react-datepicker.css";
+import { addMonths } from "date-fns";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+// import { differenceInDays } from "date-fns";
 import es from "date-fns/locale/es";
 import DatePicker, { registerLocale } from "react-datepicker";
 registerLocale("es", es);
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,6 +19,8 @@ import {
 } from "../../redux/Actions/Actions";
 //css
 // import style from "./FiltersDark.module.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
 import styleDark from "./FiltersDark.module.css";
 
@@ -27,17 +33,12 @@ const Filter = () => {
     (state) => state
   );
   //*-----------------------------------------------------Fechas:
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const [stateCheckIn, setStateCheckIn] = useState(today);
-  const [stateCheckInString, setStateCheckInString] = useState("");
-
-  const tomorrow = new Date();
-  tomorrow.setHours(0, 0, 0, 0);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const [stateCheckOut, setStateCheckOut] = useState(tomorrow);
-
-  const [stateCheckOutString, setStateCheckOutString] = useState("");
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const [stateFecha, setStateFecha] = useState({
+    checkIn: "",
+    checkOut: "",
+  });
+  const [startDate, endDate] = dateRange;
 
   //*-----------------------------------------------------------------*//
 
@@ -70,6 +71,9 @@ const Filter = () => {
       NombreZA: "Name Z-A",
       MasEstrellas: "More Stars",
       MenosEstrellas: "Less stars",
+      Estrellas: "Number of stars",
+      Filtrar: "Filter",
+      LimpiarFiltros: "Clean Filters",
     },
     es: {
       FiltroPorProvincia: "Filtro Por Provincia",
@@ -83,131 +87,39 @@ const Filter = () => {
       NombreZA: "Nombre Z-A",
       MasEstrellas: "Mas Estrellas",
       MenosEstrellas: "Menos estrellas",
+      Estrellas: "N° de estrellas",
+      Filtrar: "Filtrar",
+      LimpiarFiltros: "Limpiar Filtros",
     },
   };
 
-  //?-----------------------------------------------CheckIn:
+  const onChange = (update) => {
+    setDateRange(update);
 
-  const onChangeCheckIn = (state) => {
-    const checkInDate = new Date(state);
-    const checkOutDate = new Date(stateCheckOut);
-    if (checkInDate.getTime() <= checkOutDate.getTime()) {
-      const array = state.toString().split(" ");
-      const fecha = [];
-      fecha.push(array[3]);
-      switch (array[1]) {
-        case "Jan":
-          fecha.push("1".padStart(2, "0"));
-          break;
-        case "Feb":
-          fecha.push("2".padStart(2, "0"));
-          break;
-        case "Mar":
-          fecha.push("3".padStart(2, "0"));
-          break;
-        case "Apr":
-          fecha.push("4".padStart(2, "0"));
-          break;
-        case "May":
-          fecha.push("5".padStart(2, "0"));
-          break;
-        case "Jun":
-          fecha.push("6".padStart(2, "0"));
-          break;
-        case "Jul":
-          fecha.push("7".padStart(2, "0"));
-          break;
-        case "Aug":
-          fecha.push("8".padStart(2, "0"));
-          break;
-        case "Sep":
-          fecha.push("9".padStart(2, "0"));
-          break;
-        case "Oct":
-          fecha.push("10");
-          break;
-        case "Nov":
-          fecha.push("11");
-          break;
-        case "Dec":
-          fecha.push("12");
-          break;
-        default:
-          fecha.push("9".padStart(2, "0"));
-          break;
-      }
-      fecha.push(array[2]);
-      let stateModificado = fecha.join("-");
-      setStateCheckInString(stateModificado);
-      setStateCheckIn(state);
-      //*------------------------------------Set:
-      setFilter({ ...stateFilter, checkIn: stateModificado });
-    } else {
-      alert("no se puede reservar una fecha mayor que el checkOut");
-    }
+    const formatDate = (date) => {
+      const year = date.getFullYear().toString();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0"); //? Se asegura de obtener el mes correcto sumando 1 al mes devuelto por  (ya que los meses en JavaScript van de 0 a 11).
+      const day = date.getDate().toString().padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    };
+
+    const checkInDate = update[0];
+    const checkOutDate = update[1];
+
+    const checkIn = formatDate(checkInDate); //?invocamos la funcion de arriba pasandole el date para transformarlo.
+    const checkOut = formatDate(checkOutDate); //?invocamos la funcion de arriba pasandole el date para transformarlo.
+
+    setStateFecha({ checkIn, checkOut });
+
+    setFilter({
+      ...stateFilter,
+      checkIn: stateFecha.checkIn,
+      checkOut: stateFecha.checkOut,
+    });
   };
 
-  //?-----------------------------------------CheckOut :
-  const onChangeCheckOut = (state) => {
-    const checkOutDate = new Date(state);
-    const checkInDate = new Date(stateCheckIn);
-    if (checkOutDate.getTime() >= checkInDate.getTime()) {
-      const array = state.toString().split(" ");
-      const fecha = [];
-      fecha.push(array[3]);
-      switch (array[1]) {
-        case "Jan":
-          fecha.push("1".padStart(2, "0"));
-          break;
-        case "Feb":
-          fecha.push("2".padStart(2, "0"));
-          break;
-        case "Mar":
-          fecha.push("3".padStart(2, "0"));
-          break;
-        case "Apr":
-          fecha.push("4".padStart(2, "0"));
-          break;
-        case "May":
-          fecha.push("5".padStart(2, "0"));
-          break;
-        case "Jun":
-          fecha.push("6".padStart(2, "0"));
-          break;
-        case "Jul":
-          fecha.push("7".padStart(2, "0"));
-          break;
-        case "Aug":
-          fecha.push("8".padStart(2, "0"));
-          break;
-        case "Sep":
-          fecha.push("9".padStart(2, "0"));
-          break;
-        case "Oct":
-          fecha.push("10");
-          break;
-        case "Nov":
-          fecha.push("11");
-          break;
-        case "Dec":
-          fecha.push("12");
-          break;
-        default:
-          fecha.push("9".padStart(2, "0"));
-          break;
-      }
-      fecha.push(array[2]);
-      let stateModificado = fecha.join("-");
-      setStateCheckOutString(stateModificado);
-      setStateCheckOut(state);
-      //*------------------------------------Set:
-      setFilter({ ...stateFilter, checkOut: stateModificado });
-    } else {
-      alert("La Fecha CheckOut No debe ser menor al CheckIn");
-    }
-  };
-
-  //------------------------------------------------------//
+  //*----------------------------------------------------------*//
 
   const onChangeProvinces = async (event) => {
     setFilter({
@@ -268,6 +180,7 @@ const Filter = () => {
 
   // FILTRAR
   const FuncionFilter = (event) => {
+    console.log(stateFecha);
     event.preventDefault();
     dispatch(PostFilters(stateFilter)); // Para modificar el estado global
     dispatch(FuncionSelectFilter(stateFilter, 1)); // Para el get a la DB
@@ -333,104 +246,154 @@ const Filter = () => {
   };
 
   return (
-    <form name="filterForm" className={style.form}>
-      <input
-        className={style.inputSearch}
-        type="text"
-        name="text"
-        placeholder="Buscar un Hotel"
-        onChange={onChangeName}
-      />
-      <select onChange={onChangeProvinces} className={style.select}>
-        <option hidden>{translations[idioma].FiltroPorProvincia}</option>
-        {Provinces.map((pro) => (
-          <option id={pro.id} value={pro.nombre} key={pro.id}>
-            {pro.nombre}
-          </option>
-        ))}
-      </select>
-      {provinceId.length ? (
-        <>
-          <select onChange={onChangeDeparment} className={style.select}>
-            <option hidden>{translations[idioma].FiltroPorDepartamento}</option>
-            {Department.map((dep) => (
-              <option id={dep.id} value={dep.nombre}>
-                {dep.nombre}
-              </option>
-            ))}
-          </select>
-        </>
-      ) : (
-        <></>
-      )}
+    <div>
+      <form
+        name="filterForm"
+        className={theme === "light" ? style.form : style.formdark}
+      >
+        <input
+          type="text"
+          name="text"
+          className={
+            theme === "light" ? style.inputSearch : style.inputSearch - dark
+          }
+          placeholder="Buscar un Hotel . . ."
+          onChange={onChangeName}
+        />
+        <select
+          onChange={onChangeProvinces}
+          className={theme === "light" ? style.select : style.select - dark}
+        >
+          <option hidden>{translations[idioma].FiltroPorProvincia}</option>
+          {Provinces.map((pro) => (
+            <option id={pro.id} value={pro.nombre} key={pro.id}>
+              {pro.nombre}
+            </option>
+          ))}
+        </select>
 
-      {departmentId.length ? (
-        <>
-          <select onChange={onChangeLocality} className={style.select}>
-            <option hidden>{translations[idioma].FiltroPorLocalidad}</option>
-            {Locality.map((loc) => (
-              <option id={loc.id} value={loc.nombre}>
-                {loc.nombre}
+        {provinceId.length ? (
+          <>
+            <select onChange={onChangeDeparment} className={style.select}>
+              <option hidden>
+                {translations[idioma].FiltroPorDepartamento}
               </option>
-            ))}
-          </select>
-        </>
-      ) : (
-        <></>
-      )}
-
-      <select onChange={onChangeRating} className={style.select}>
-        <option hidden>{translations[idioma].FiltroPorRating}</option>
-        {raiting.map((rant, index) => (
-          <option value={rant} key={index}>
-            {rant}
+              {Department.map((dep) => (
+                <option id={dep.id} value={dep.nombre}>
+                  {dep.nombre}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <></>
+        )}
+        {departmentId.length ? (
+          <>
+            <select onChange={onChangeLocality} className={style.select}>
+              <option hidden>{translations[idioma].FiltroPorLocalidad}</option>
+              {Locality.map((loc) => (
+                <option id={loc.id} value={loc.nombre}>
+                  {loc.nombre}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <></>
+        )}
+        <select
+          onChange={onChangeRating}
+          className={theme === "light" ? style.select : style.select - dark}
+        >
+          <option hidden>{translations[idioma].Estrellas}</option>
+          {raiting.map((rant, index) => (
+            <option value={rant} key={index}>
+              {rant}
+            </option>
+          ))}
+        </select>
+        <select onChange={onChangeOrder} className={style.select}>
+          <option hidden>{translations[idioma].OrdenarPor}</option>
+          <option value="VALORATIONDESC">
+            {translations[idioma].MayorValoracion}
           </option>
-        ))}
-      </select>
-      <select onChange={onChangeOrder} className={style.select}>
-        <option hidden>{translations[idioma].OrdenarPor}</option>
-        <option value="VALORATIONDESC">
-          {translations[idioma].MayorValoracion}
-        </option>
-        <option value="VALORATIONASC">
-          {translations[idioma].MenorValoracion}
-        </option>
-        <option value="NAMEASC">{translations[idioma].NombreAZ}</option>
-        <option value="NAMEDESC">{translations[idioma].NombreZA}</option>
-        <option value="RATINGDESC">{translations[idioma].MasEstrellas}</option>
-        <option value="RATINGASC">{translations[idioma].MenosEstrellas}</option>
-      </select>
-      <table className={style.table}>
-        {Services.map((Ser) => (
-          <tbody key={Ser.id}>
-            <tr className={style.tr}>
-              <td className={style.td}>{Ser.name}</td>
-              <td className={style.td}>
-                <label className={style.checkbox_btn}>
-                  <label htmlFor="checkbox"></label>
-                  <input
-                    className={style.inputServices}
-                    onChange={() => onChangeServices(Ser.name)}
-                    value={Ser.name}
-                    type="checkbox"
-                    id="checkbox"
-                  ></input>
-                  <span className={style.checkmark}></span>
-                </label>
-              </td>
-            </tr>
-          </tbody>
-        ))}
-      </table>
-      <div>
-        <button onClick={FuncionFilter} className={style.button}>
-          Filtrar
-        </button>
-        <button onClick={FuncionCleanFilter} className={style.button}>
-          AllHotels
-        </button>
-      </div>
-    </form>
+          <option value="VALORATIONASC">
+            {translations[idioma].MenorValoracion}
+          </option>
+          <option value="NAMEASC">{translations[idioma].NombreAZ}</option>
+          <option value="NAMEDESC">{translations[idioma].NombreZA}</option>
+          <option value="RATINGDESC">
+            {translations[idioma].MasEstrellas}
+          </option>
+          <option value="RATINGASC">
+            {translations[idioma].MenosEstrellas}
+          </option>
+        </select>
+        <div className={style.Checks}>
+          <DatePicker
+            showIcon
+            className="customDatepicker"
+            selectsRange={true}
+            startDate={startDate}
+            endDate={endDate}
+            onChange={(update) => onChange(update)}
+            withPortal
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+            minDate={new Date()}
+            maxDate={addMonths(new Date(), 12)} // La función addMonths es una función proporcionada por la biblioteca date-fns, que se utiliza para agregar un número específico de meses a una fecha determinada. Toma dos argumentos: la fecha inicial y la cantidad de meses que deseas agregar. se utiliza para realizar cálculos de fechas, como agregar o restar meses, de una manera sencilla y eficiente utilizando la biblioteca date-fns.
+            showDisabledMonthNavigation
+            customInput={
+              <div className="datepicker-custom-input">
+                <FontAwesomeIcon icon={faCalendarAlt} />
+                {!stateFecha.checkIn && !stateFecha.checkOut ? (
+                  <span className="span">
+                    <br />
+                    {`CheckIn-CheckOut`}
+                  </span>
+                ) : (
+                  <span className="span">
+                    <br />
+                    {`${stateFecha.checkIn}`} <br /> {`${stateFecha.checkOut}`}
+                  </span>
+                )}
+              </div>
+            }
+          />
+        </div>
+
+        <table className={style.table}>
+          {Services.map((Ser) => (
+            <tbody key={Ser.id}>
+              <tr className={style.tr}>
+                <td className={style.td}>{Ser.name}</td>
+                <td className={style.td}>
+                  <label className={style.checkbox_btn}>
+                    <label htmlFor="checkbox"></label>
+                    <input
+                      className={style.inputServices}
+                      onChange={() => onChangeServices(Ser.name)}
+                      value={Ser.name}
+                      type="checkbox"
+                      id="checkbox"
+                    ></input>
+                    <span className={style.checkmark}></span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+        <div>
+          <button onClick={FuncionFilter} className={style.button}>
+            {translations[idioma].Filtrar}
+          </button>
+          <button onClick={FuncionCleanFilter} className={style.button}>
+            {translations[idioma].LimpiarFiltros}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

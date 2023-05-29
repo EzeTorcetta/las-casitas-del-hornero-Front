@@ -37,12 +37,10 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   const DetailHotel = useSelector((state) => state.DetailHotel);
   const Trolleys = useSelector((state) => state.Trolley);
 
-  console.log(User);
-
   useEffect(() => {
     if (User?.id) {
       dispatch(FuncionDetailHotel(id));
-      dispatch(GetTrolley(User.id));
+      dispatch(GetTrolley(User.id, undefined, undefined));
     }
     return () => {
       dispatch(FuncionClearDetail());
