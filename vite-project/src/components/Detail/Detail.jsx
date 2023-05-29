@@ -63,46 +63,71 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
         <div>
           <NavBar countCarrito={countCarrito} />
           <div className={style.div}>
-            <div className={`${style.divImg} ${style.carouselContainer}`}>
-              <div className={style.divDescription}>
-                <h3>{DetailHotel.name}</h3>
-                <p className={style.p}>
-                  Rating :
-                  {array.map((ranting, index) => (
-                    <img className={style.img} src={imagen} key={index} />
-                  ))}
-                </p>
-                <h3>
-                  <img className={style.img} src={imagenTelefono} />
-                  {DetailHotel.phoneNumber}
-                </h3>
-                <p>
-                  <img className={style.img} src={imagenCorreo} />
-                  {DetailHotel.email}
-                </p>
-                <p>Province: {DetailHotel.province}</p>
-                <p>{DetailHotel.direccion}</p>
-              </div>
-              <div className={style.DivCarrusel}>
-                <CarruselDetail image={DetailHotel.image} />
-              </div>
+            <div className={style.divDescription}>
+              <h3>{DetailHotel.name}</h3>
+              <p className={style.p}>
+                Rating :
+                {array.map((rating, index) => (
+                  <img className={style.img} src={imagen} key={index} />
+                ))}
+              </p>
+              <h3>
+                <img className={style.img} src={imagenTelefono} />
+                {DetailHotel.phoneNumber}
+              </h3>
+              <p>
+                <img className={style.img} src={imagenCorreo} />
+                {DetailHotel.email}
+              </p>
+              <p>Province: {DetailHotel.province}</p>
+              <p>{DetailHotel.direccion}</p>
+            </div>
+            <div className={style.divCarrusel}>
+              <CarruselDetail image={DetailHotel.image} />
             </div>
           </div>
           <section className={style.sectionDescription}>
-            <h1>Servicios del alojamiento </h1>
-            <br />
-            <div className={style.divContenedorServicio}>
-              <FuncionServices Services={DetailHotel.Services} />
-            </div>
-          </section>
-          <section className={style.sectionDescription}>
-            <h1>Descripción</h1>
-            <p>{DetailHotel.description}</p>
+            <h1>INFORMACIÓN </h1>
+            <section>
+              <div className={style.sectionDescription_left}>
+                <div className={style.reviewContainer}>
+                  <h2>Puntuación de la review</h2>
+                </div>
+                <div>
+                  <h2>Descripcion</h2>
+                  {/* <p>{DetailHotel.description}</p> */}
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Architecto alias eligendi sequi non ipsum corporis, aliquam
+                    aperiam sunt a excepturi sint sapiente ducimus unde aliquid
+                    quos dolorum iusto, impedit in! Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Architecto alias eligendi
+                    sequi non ipsum corporis, aliquam aperiam sunt a excepturi
+                    sint sapiente ducimus unde aliquid quos dolorum iusto,
+                    impedit in! Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Architecto alias eligendi sequi non ipsum
+                    corporis, aliquam aperiam sunt a excepturi sint sapiente
+                    ducimus unde aliquid quos dolorum iusto, impedit in!
+                  </p>
+                </div>
+              </div>
+              <div className={style.sectionDescription_right}>
+                <div className={style.servicesContainer}>
+                  <FuncionServices Services={DetailHotel.Services} />
+                </div>
+                <div className={style.mapContainer}>
+                  <h2>Ubicación</h2>
+                  {DetailHotel.location && DetailHotel.name && (
+                    <Maps
+                      location={DetailHotel.location}
+                      name={DetailHotel.name}
+                    />
+                  )}
+                </div>
+              </div>
+            </section>
           </section>
 
-          {DetailHotel.location && DetailHotel.name && (
-            <Maps location={DetailHotel.location} name={DetailHotel.name} />
-          )}
           <section className={`${style.section} ${style.two}`}>
             <TypeRoom
               Trolleys={Trolleys}

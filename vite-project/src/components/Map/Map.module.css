@@ -17,12 +17,6 @@
   border-radius: 10px;
 }
 
-.divMapPadre {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 @media (max-width: 500px) {
   .divMap {
     display: flex;
