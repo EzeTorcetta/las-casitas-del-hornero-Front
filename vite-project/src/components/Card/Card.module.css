@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
 .container {
   text-decoration: none;
   background-color: white;
@@ -26,7 +28,8 @@
 .title {
   display: flex;
   flex-direction: column;
-  padding-left: .5em;
+  padding-top: 1em;
+  padding-left: 1.5em;
   padding-bottom: .8em;
   color: black;
   text-decoration: none;
@@ -37,7 +40,7 @@
   border: 0;
   padding: 0.2em;
   text-align: left;
-  font-family: ;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .imgRating {

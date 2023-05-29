@@ -220,14 +220,14 @@ const Filter = () => {
           type="text"
           name="text"
           className={
-            theme === "light" ? style.inputSearch : style.inputSearch - dark
+            style.inputSearch
           }
           placeholder="Buscar un Hotel . . ."
           onChange={onChangeName}
         />
         <select
           onChange={onChangeProvinces}
-          className={theme === "light" ? style.select : style.select - dark}
+          className={style.select}
         >
           <option hidden>Seleccione una provincia</option>
           {Provinces.map((pro) => (
@@ -267,7 +267,7 @@ const Filter = () => {
         )}
         <select
           onChange={onChangeRating}
-          className={theme === "light" ? style.select : style.select - dark}
+          className={style.select}
         >
           <option hidden>N° de estrellas</option>
           {raiting.map((rant, index) => (

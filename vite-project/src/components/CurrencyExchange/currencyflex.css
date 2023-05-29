@@ -1,0 +1,29 @@
+.select-barr{
+    display: none;
+    border-radius: 1rem;
+    border: none;
+    height: 3rem;
+    width: 15rem;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: orange;
+    font-size: .9rem;
+    color: white;
+
+    margin-left: 18rem;
+}
+
+.currency-containerr:hover .select-barr{
+    display: block;
+}
+
+.logocurrency{
+    height: 3rem;
+}
+
+.currency-containerr{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 6rem;
+}

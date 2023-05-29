@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
 import carritoblanco from "../../image/carrito-de-compras-blanco.png";
@@ -12,6 +12,8 @@ import { signOut } from "firebase/auth";
 import SymbolsCurrency from "../CurrencyExchange/SymbolsCurrency";
 import "./Nav.css";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import SwitchButtonFlex from "../SwitchButton/SwitchButtonFlex";
+import SymbolsCurrencyFlex from "../CurrencyExchange/SymbolsCurrencyFlex";
 
 // import "NavButon.css";
 
@@ -71,7 +73,9 @@ const NavBar = ({ countCarrito }) => {
     location.reload();
   };
 
-  return (
+ if(windowWidth > 500){
+
+  return(
     <div>
       <div className={theme === "light" ? "navlight" : "navdark"}>
         <NavLink to={"/Home"} className="links">
@@ -81,36 +85,31 @@ const NavBar = ({ countCarrito }) => {
               src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
               alt="LaCasitaDelHornero"
             />
-            <div className="tituloLogo">CasitasDelHornero</div>
+          <div className="tituloLogo">CasitasDelHornero</div>
           </div>
         </NavLink>
         <SwitchButton />
         <SymbolsCurrency />
 
-        <div
-          className={
-            showNavbar || windowWidth > 768 ? `${"links"} ${"show"}` : "links"
-          }
-        >
-          {rol === 1 ? (
-            <NavLink
-              to={"/Carrito"}
-              className="enlaces"
-              onClick={() => setShowNavbar(false)}
-            >
+        {rol === 1 ? 
+          (
+            <Link to={"/Carrito"}>
               <div className="divCarritoCount">
-                <div className="countCarritoDiv">{countCarrito}</div>
-
-                <img
-                  className="iconoCarrito"
-                  src={theme === "light" ? imageCarrito : carritoblanco}
-                />
+              <div className="countCarritoDiv">{countCarrito}</div>
+              <img
+                className="iconoCarrito"
+                src={theme === "light" ? imageCarrito : carritoblanco}
+              />
               </div>
-            </NavLink>
-          ) : (
+            </Link>
+        ) : (
             <></>
-          )}
+          )
+        }
 
+
+        <div>
+      
           {username ? (
             <div>
               {/* ------------- NUEVO MENU ------------ */}
@@ -147,96 +146,87 @@ const NavBar = ({ countCarrito }) => {
           ) : (
             <a href="/"> iniciar sesion</a>
           )}
-
-          {/* --------------------------------------------------
-
- {/* ------------- FOTO DE PERFIL Y NOMBRE ------------ */}
-          {/* <button
-                onClick={() => setShowMenu(!showMenu)}
-                className='profileButton'>
-                <img
-                  className='img'
-                  src={imagenUsuario}
-                  alt="Perfil"
-                />
-                <p className="username">{`${username}`}</p>
-              </button> */}
-          {/* ------------------------------------------------------- */}
-
-          {/* {showMenu && (
-                <nav>
-                <ul className='menu'>
-                  <li>
-                    <NavLink
-                      to={"/Perfil"}
-                      onClick={() => setShowNavbar(false)}>
-                      <button
-                        onClick={handleVerPerfil}
-                        className='menuOption'>
-                        Ver Perfil
-                      </button>
-                    </NavLink>
-                  </li>
-                  <li>
-                    {/* {rol === 2 ? (
-                      <NavLink
-                        to={""}
-                        className='link'
-                        onClick={() => setShowNavbar(false)}>
-                        <button className='menuOption'>
-                          Proveer Hotel
-                        </button>
-                      </NavLink>
-                    ) : rol === 3 ? (
-                      <NavLink
-                        to={""}
-                        className='link'
-                        onClick={() => setShowNavbar(false)}>
-                        <button className='menuOption'>
-                          Administrar Usuarios
-                        </button>
-                      </NavLink>
-                    ) : (
-                      <NavLink
-                        to={""}
-                     
-                        onClick={() => setShowNavbar(false)}>
-                        <button className='menuOption'>
-                          Quiero ser Proveedor
-                        </button>
-                      </NavLink>
-                    )} */}
-          {/* </li>
-                  <li>
-                    <button
-                      onClick={handleLogout}
-                      className='menuOption'>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-                </nav>
-              )}
-            </div>
-          ) : (
-            <NavLink
-              to={"/"}
-              className='link'
-              onClick={() => setShowNavbar(false)}>
-              <button className='BotonUsuario'>
-                <img
-                  className='iconoCarrito'
-                  src={imagenSesion}
-                />
-                <p>Iniciar Sesion</p>
-              </button>
-            </NavLink>
-          )}
-          */}
         </div>
       </div>
     </div>
   );
+}
+  else{
+    return(
+      <div>
+        <div className={theme === "light" ? "navlight" : "navdark"}>
+          <NavLink to={"/Home"} className="links">
+            <div className="logo">
+              <img
+                className="img"
+                src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+                alt="LaCasitaDelHornero"
+              />
+            </div>
+          </NavLink>
+          <SwitchButtonFlex />
+          <SymbolsCurrencyFlex />
+  
+          {rol === 1 ? 
+            (
+              <Link to={"/Carrito"}>
+                <div className="divCarritoCount">
+                <div className="countCarritoDiv">{countCarrito}</div>
+                <img
+                  className="iconoCarrito"
+                  src={theme === "light" ? imageCarrito : carritoblanco}
+                />
+                </div>
+              </Link>
+          ) : (
+              <></>
+            )
+          }
+  
+  
+          <div>
+        
+            {username ? (
+              <div>
+                {/* ------------- NUEVO MENU ------------ */}
+  
+                <nav>
+                  <ul className="menu-horizontal">
+                    <li>
+                      <a>{`${username}`}</a>
+                      <ul className="menu-vertical">
+                        <li>
+                          <a href="/Perfil">Perfil</a>
+                        </li>
+                        {rol === 2 ? (
+                          <li>
+                            <a href="">Proveer Hotel</a>
+                          </li>
+                        ) : rol === 3 ? (
+                          <li>
+                            <a href="">Administrar Usuarios</a>
+                          </li>
+                        ) : (
+                          <li>
+                            <a href="">Quiero ser proveedor</a>
+                          </li>
+                        )}
+                        <li>
+                          <button onClick={handleLogout}>Salir</button>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            ) : (
+              <a href="/"> iniciar sesion</a>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
 };
 
 export default NavBar;

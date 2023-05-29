@@ -2,15 +2,25 @@
 
 .navlight {
   width: 100%;
-  height: 5rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 3;
   /*encima de to */
-  background-color: orange;
   background-color: #E56910;
   color: white;
+}
+
+@media (max-width: 500px){
+  .navlight{
+  flex-direction: column;
+   height: 100%;
+   width: 5rem;
+   position: absolute;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+  }
 }
 
 .navdark{
@@ -26,11 +36,10 @@
 
 .logo {
   display: flex;
-
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  padding-left: 4rem;
+  padding-left: .6rem;
 }
 
 .img {
@@ -67,6 +76,8 @@
   background-color: #c0392b;
   padding-right: 4rem;
 }
+
+{/*-----CSS DE MENU DISPLAY ---*/}
 
 .menu-horizontal{
   padding-top: 1rem;
@@ -118,7 +129,7 @@ background-color: rgb(253, 198, 95);
 
 }
 
-
+{/*-----------------------*/}
 
 
 .links {
@@ -146,22 +157,6 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
 }
 
-/* @media (min-width: 769px) {
-  .menuButton {
-    display: none;
-  }
-
-  .links {
-    flex-direction: row;
-    text-align: center;
-  }
-
-  .link {
-    margin-bottom: 0;
-    margin-right: 10px;
-    text-align: center;
-  }
-} */
 .username {
   margin: 0;
 }
@@ -233,16 +228,17 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 25px;
   text-align: center;
   margin-top: 10px;
-  
+  text-decoration: none;
 }
 
 .divCarritoCount {
-  padding-top: 1rem;
+ 
   display: flex;
   flex-direction: row;
   height: 100%;
   align-items: center;
-  
+  padding-bottom: 0.5rem;
+ 
 }
 
 .divHome {
@@ -304,3 +300,4 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 .menuOption:last-child {
   margin-bottom: 0;
 }
+

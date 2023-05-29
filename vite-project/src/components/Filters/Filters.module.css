@@ -9,7 +9,7 @@
   /* background-color: lightpink; */
 }
 .select {
-  background-color: #E56910;;
+  background-color: #E56910;
   appearance: none;
   color: white;
   border-radius: 0.5rem;
@@ -125,7 +125,7 @@
   appearance: none;
   color: white;
   border-radius: 0.5rem;
- background-color: #E56910;
+
  opacity: 0.8;
   width: 100%;
   border: none;
