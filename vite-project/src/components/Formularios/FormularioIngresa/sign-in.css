@@ -118,7 +118,7 @@
   height: 40px;
   margin: 12px auto 10%;
   color: #fff;
-  background: #ffc107;
+  background-color: #E56910;
   font-size: 1rem;
   font-weight: bold;
   border: none;
@@ -132,7 +132,13 @@
 }
 
 .form button:hover {
-  background-color: #ffca2c;
+  color: white;
+  background-color: #E56910;
+  opacity: 1;
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
 }
 
 @media (max-width: 1200px) {

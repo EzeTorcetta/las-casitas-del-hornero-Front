@@ -18,7 +18,7 @@
   border-radius: 0.5rem;
   border: none;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #f7931e;
+  background-color: #E56910;
   color: #fff;
   cursor: pointer;
   margin: 0.6em 0;
@@ -26,7 +26,7 @@
 
 .divTheTrolley button {
   padding: 10px 20px;
-  color: #f7931e;
+  color: #E56910;
   border: none;
   border-radius: 10px;
   background-color: #6c6c6c;
@@ -35,10 +35,15 @@
 /* Estilos personalizados para el DatePicker */
 .customDatepicker {
   /* Agrega tus estilos personalizados aquí */
-  background-color: #f7931e;
+  background-color: #E56910;
   padding: 10px 20px;
   border-radius: 10px;
   margin: 20px;
+  cursor: pointer;
+  color:rgba(236, 227, 227, 0.982);
+}
+.customDatepicker:hover {
+  color: white;
 }
 
 /* Cambiar color de fondo */
@@ -58,13 +63,13 @@
 
 /* Cambiar color de fondo del día seleccionado */
 .react-datepicker__day--selected {
-  background-color: #ffcc00;
+  background-color: #E56910;
   color: #fff;
 }
 
 /* Cambiar color de fondo del rango seleccionado */
 .react-datepicker__day--in-range {
-  background-color: #ffcc00;
+  background-color: #E56910;
   color: #fff;
 }
 
@@ -82,7 +87,7 @@
 /* Es el estylo de los dias que va seleccionando el usuario en el momento*/
 .react-datepicker__day--keyboard-selected,
 .react-datepicker__day--hovered {
-  background-color: #ffc107;
+  background-color: #E56910;
   color: #333;
 }
 

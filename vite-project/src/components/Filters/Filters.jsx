@@ -229,7 +229,7 @@ const Filter = () => {
           onChange={onChangeProvinces}
           className={theme === "light" ? style.select : style.select - dark}
         >
-          <option hidden>Filtro Por Provincia</option>
+          <option hidden>Seleccione una provincia</option>
           {Provinces.map((pro) => (
             <option id={pro.id} value={pro.nombre} key={pro.id}>
               {pro.nombre}
@@ -240,7 +240,7 @@ const Filter = () => {
         {provinceId.length ? (
           <>
             <select onChange={onChangeDeparment} className={style.select}>
-              <option hidden>Filtro Por Departamento</option>
+              <option hidden>Seleccione un departamento</option>
               {Department.map((dep) => (
                 <option id={dep.id} value={dep.nombre}>
                   {dep.nombre}
@@ -254,7 +254,7 @@ const Filter = () => {
         {departmentId.length ? (
           <>
             <select onChange={onChangeLocality} className={style.select}>
-              <option hidden>Filtro Por Localidad</option>
+              <option hidden>Seleccione una localidad</option>
               {Locality.map((loc) => (
                 <option id={loc.id} value={loc.nombre}>
                   {loc.nombre}
@@ -269,7 +269,7 @@ const Filter = () => {
           onChange={onChangeRating}
           className={theme === "light" ? style.select : style.select - dark}
         >
-          <option hidden>Filtro Por raiting</option>
+          <option hidden>N° de estrellas</option>
           {raiting.map((rant, index) => (
             <option value={rant} key={index}>
               {rant}
@@ -304,7 +304,7 @@ const Filter = () => {
                 {!stateFecha.checkIn && !stateFecha.checkOut ? (
                   <span className="span">
                     <br />
-                    {`Fecha De Inicio / Fecha Final`}
+                    {`CheckIn-CheckOut`}
                   </span>
                 ) : (
                   <span className="span">

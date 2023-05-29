@@ -31,7 +31,7 @@ const Landing = () => {
       <div className={style.container}>
         <div className={style.btnrg}>
           <Link to="/RegistroLocal">
-            <button type="button" className="btn btn-warning btn-lg btn-block">
+            <button type="button" className="btn btn-lg btn-block">
               Registrate
             </button>
           </Link>

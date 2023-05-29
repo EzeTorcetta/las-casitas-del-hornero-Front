@@ -31,7 +31,7 @@ const NavBar = ({ countCarrito }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const theme = useSelector((state) => state.theme)
+  const theme = useSelector((state) => state.theme);
 
   const handleLogout = () => {
     logout();
@@ -73,51 +73,39 @@ const NavBar = ({ countCarrito }) => {
 
   return (
     <div>
-
-      <div className={theme === 'light' ? 'navlight' : 'navdark'}>
-      
-        <NavLink to={"/Home"} className='links'>
-          
-          <div className='logo'>
-            
+      <div className={theme === "light" ? "navlight" : "navdark"}>
+        <NavLink to={"/Home"} className="links">
+          <div className="logo">
             <img
-              className='img'
+              className="img"
               src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
               alt="LaCasitaDelHornero"
             />
-            <div className='tituloLogo'>CasitasDelHornero</div>
-            
+            <div className="tituloLogo">CasitasDelHornero</div>
           </div>
-          
         </NavLink>
-        <SwitchButton/>
+        <SwitchButton />
         <SymbolsCurrency />
-        
-        
+
         <div
           className={
-            showNavbar || windowWidth > 768
-              ? `${'links'} ${'show'}`
-              : 'links'
-          }>
+            showNavbar || windowWidth > 768 ? `${"links"} ${"show"}` : "links"
+          }
+        >
           {rol === 1 ? (
             <NavLink
               to={"/Carrito"}
-              className='enlaces'
-              onClick={() => setShowNavbar(false)}>
-                
-              <div className='divCarritoCount'>
-                <div className='countCarritoDiv'>
-                  {countCarrito}
-                </div>
-                
+              className="enlaces"
+              onClick={() => setShowNavbar(false)}
+            >
+              <div className="divCarritoCount">
+                <div className="countCarritoDiv">{countCarrito}</div>
+
                 <img
-                  className='iconoCarrito'
-                  src={theme === 'light' ? imageCarrito :carritoblanco}
+                  className="iconoCarrito"
+                  src={theme === "light" ? imageCarrito : carritoblanco}
                 />
-                
               </div>
-              
             </NavLink>
           ) : (
             <></>
@@ -125,33 +113,45 @@ const NavBar = ({ countCarrito }) => {
 
           {username ? (
             <div>
+              {/* ------------- NUEVO MENU ------------ */}
 
-{/* ------------- NUEVO MENU ------------ */}
+              <nav>
+                <ul className="menu-horizontal">
+                  <li>
+                    <a>{`${username}`}</a>
+                    <ul className="menu-vertical">
+                      <li>
+                        <a href="/Perfil">Perfil</a>
+                      </li>
+                      {rol === 2 ? (
+                        <li>
+                          <a href="">Proveer Hotel</a>
+                        </li>
+                      ) : rol === 3 ? (
+                        <li>
+                          <a href="">Administrar Usuarios</a>
+                        </li>
+                      ) : (
+                        <li>
+                          <a href="">Quiero ser proveedor</a>
+                        </li>
+                      )}
+                      <li>
+                        <button onClick={handleLogout}>Salir</button>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          ) : (
+            <a href="/"> iniciar sesion</a>
+          )}
 
-<nav>
-  <ul className="menu-horizontal">
-    <li>
-      <a>{`${username}`}</a>
-        <ul className="menu-vertical">
-          <li><a href="/Perfil">Perfil</a></li>
-          {rol === 2 ? <li><a href="">Proveer Hotel</a></li> : 
-          rol === 3 ? <li><a href="">Administrar Usuarios</a></li> : 
-          <li><a href="">Quiero ser proveedor</a></li>}
-          <li><button onClick={handleLogout}>Salir</button></li>
-        </ul>
-    </li>
-      
-  </ul>
-</nav>
-
-</div>
-
-): (<a href="/"> iniciar sesion</a>)}
-
-{/* --------------------------------------------------
+          {/* --------------------------------------------------
 
  {/* ------------- FOTO DE PERFIL Y NOMBRE ------------ */}
-              {/* <button
+          {/* <button
                 onClick={() => setShowMenu(!showMenu)}
                 className='profileButton'>
                 <img
@@ -161,10 +161,9 @@ const NavBar = ({ countCarrito }) => {
                 />
                 <p className="username">{`${username}`}</p>
               </button> */}
-{/* ------------------------------------------------------- */}
+          {/* ------------------------------------------------------- */}
 
-
-              {/* {showMenu && (
+          {/* {showMenu && (
                 <nav>
                 <ul className='menu'>
                   <li>
@@ -207,7 +206,7 @@ const NavBar = ({ countCarrito }) => {
                         </button>
                       </NavLink>
                     )} */}
-                  {/* </li>
+          {/* </li>
                   <li>
                     <button
                       onClick={handleLogout}
@@ -233,9 +232,9 @@ const NavBar = ({ countCarrito }) => {
               </button>
             </NavLink>
           )}
-          */} 
+          */}
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

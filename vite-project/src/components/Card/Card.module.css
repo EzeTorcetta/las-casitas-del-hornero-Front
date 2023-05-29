@@ -1,6 +1,7 @@
 .container {
   text-decoration: none;
   background-color: rgba(249, 151, 32, 0.838);
+  background-color: white;
   display: flex;
   padding: 0;
   margin-left: .2em;
@@ -27,7 +28,7 @@
   flex-direction: column;
   padding-left: .5em;
   padding-bottom: .8em;
-  color: white;
+  color: black;
 }
 
 .name {
@@ -35,6 +36,7 @@
   border: 0;
   padding: 0.2em;
   text-align: left;
+  font-family: ;
 }
 
 .imgRating {
