@@ -9,10 +9,7 @@ import GetCurrencyExchange from "../CurrencyExchange/GetCurrencyExchange";
 import swal from "sweetalert";
 import style from "./TypeRoom.module.css";
 //action
-import {
-  FuncionTypeRoomTypes,
-  GetTrolley,
-} from "../../redux/Actions/Actions";
+import { FuncionTypeRoomTypes, GetTrolley } from "../../redux/Actions/Actions";
 import { v4 as uuidv4 } from "uuid";
 
 //?----------------- COMPONENTE ROOM TYPE  ------------------------------------
@@ -23,28 +20,31 @@ const TypeRoom = ({ id, Trolleys }) => {
   const [State, setState] = useState([]);
   const { TypeRoom } = useSelector((state) => state);
 
-  const FuncionPostCarrito = async (
-    idUser,
-    idTypeRoom,
-    nameRoomType,
-    Trolleys
-  ) => {
-    if (User) {
-      try {
-        await axios.post(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
-        swal({
-          text: "Agregado con exito!!",
-          icon: "success",
-          buttons: "Aceptar",
-        });
-      } catch (error) {
-        swal({
-          text: error.response.data.error,
-          icon: "warning",
-          buttons: "Aceptar",
-        });
+  const FuncionPostCarrito = async (idUser, idTypeRoom, stock) => {
+    if (stock !== 0) {
+      if (User) {
+        try {
+          await axios.post(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
+          swal({
+            text: "Agregado con exito!!",
+            icon: "success",
+            buttons: "Aceptar",
+          });
+        } catch (error) {
+          swal({
+            text: error.response.data.error,
+            icon: "warning",
+            buttons: "Aceptar",
+          });
+        }
+        dispatch(GetTrolley(User.id));
       }
-      dispatch(GetTrolley(User.id));
+    } else {
+      swal({
+        text: "No hay Disponibilidad",
+        icon: "warning",
+        buttons: "Aceptar",
+      });
     }
   };
 
@@ -67,15 +67,18 @@ const TypeRoom = ({ id, Trolleys }) => {
           <Card.Text>stock : {room.stock}</Card.Text>
           {User?.rol !== 2 && User?.rol !== 3 ? (
             <button
+              disabled={room.stock === 0}
               className={style.BotonCarrito}
               onClick={() =>
                 FuncionPostCarrito(
                   User.id,
                   room.id,
                   room.name,
-                  Trolleys
+                  Trolleys,
+                  room.stock
                 )
-              }>
+              }
+            >
               + Agregar al Carrito
             </button>
           ) : (

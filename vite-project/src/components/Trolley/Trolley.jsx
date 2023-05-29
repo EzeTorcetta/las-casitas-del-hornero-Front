@@ -135,7 +135,7 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
           className={style.botonEliminar}
           onClick={() => FuncionDeleteAllCarritos(User.id)}
         >
-          Delete All Trolleys
+          Vaciar Carrito
         </button>
         <button
           onClick={() => FuncionReservar(User.id, User.email)}

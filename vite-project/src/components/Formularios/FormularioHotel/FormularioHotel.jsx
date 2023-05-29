@@ -277,7 +277,7 @@ const FormularioHotel = () => {
       });
 
       await axios.get(
-        `http://localhost:3001/email/CreacionDeHotel/${User.gmail}?name=${User.name}`
+        `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/CreacionDeHotel/${User.gmail}?name=${User.name}`
       );
 
       swal({
