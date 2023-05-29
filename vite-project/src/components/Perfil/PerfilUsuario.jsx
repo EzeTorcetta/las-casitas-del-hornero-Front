@@ -14,6 +14,18 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   const Trolleys = useSelector((state) => state.Trolley);
   const dispatch = useDispatch();
   let User = PedirLocalStorage();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Favoritos: "Favorites",
+      Booking: "Booking",
+    },
+    es: {
+      Favoritos: "Favoritos",
+      Booking: "Reservas",
+    },
+  };
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -33,13 +45,13 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
         </section>
         <section className={style.section}>
           <div className={style.divFavorites}>
-            <h2>favoritos</h2>
+            <h2>{translations[idioma].Favoritos}</h2>
             <Favoritos />
           </div>
         </section>
         <section className={style.section}>
           <div className={style.divRewies}>
-            <h2>Booking</h2>
+            <h2>{translations[idioma].Booking}</h2>
             <Booking />
           </div>
         </section>

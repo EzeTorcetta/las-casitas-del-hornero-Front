@@ -11,6 +11,20 @@ const PerfilColaborador = () => {
   const dispatch = useDispatch();
   const hotels = useSelector((state) => state.PartnerHotels);
   const [isLoading, setIsLoading] = useState(true);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      TusHoteles: "Your Hotels",
+      AgregarHotel: "Add Hotel",
+      Reviews: "Reviews",
+    },
+    es: {
+      TusHoteles: "Tus Hoteles",
+      AgregarHotel: "Agregar Hotel",
+      Reviews: "Reseñas",
+    },
+  };
 
   useEffect(() => {
     if (isLoading) {
@@ -30,19 +44,19 @@ const PerfilColaborador = () => {
       </section>
       <section className={style.section}>
         <div className={style.divConteiner}>
-          <h1>Tus Hoteles</h1>
+          <h1>{translations[idioma].TusHoteles}</h1>
           <div className={style.divHotels}>
             <br />
             <PartnerHotels hotels={hotels} />
             <NavLink to={"/FormHotel"}>
-              <p>Agregar Hotel</p>
+              <p>{translations[idioma].AgregarHotel}</p>
             </NavLink>
           </div>
         </div>
       </section>
       <section className={style.section}>
         <div className={style.divConteiner}>
-          <h1>Reviews</h1>
+          <h1>{translations[idioma].Reviews}</h1>
           <ReviewPartner hotels={hotels} />
         </div>
       </section>

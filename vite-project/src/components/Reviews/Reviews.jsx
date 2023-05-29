@@ -19,6 +19,25 @@ export default function Reviews() {
 
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      ReseñaCorrecta: "The review of this hotel was successful",
+      Aceptar: "Accept",
+      Placeholder: "Leave your review...",
+      Puntuacion: "Punctuation",
+      Enviar: "Send",
+    },
+    es: {
+      ReseñaCorrecta: "Se realizó correctamente la reseña de este hotel",
+      Aceptar: "Aceptar",
+      Placeholder: "Deja tu reseña...",
+      Puntuacion: "Puntuación",
+      Enviar: "Enviar",
+    },
+  };
+
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
   };
@@ -48,16 +67,16 @@ export default function Reviews() {
       .post(`${URL_BASE}/review/${Hotel.id}`, datos)
       .then(function (response) {
         swal({
-          text: "Se realizó correctamente la reseña de este hotel",
+          text: translations[idioma].ReseñaCorrecta,
           icon: "success",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       })
       .catch(function (error) {
         swal({
           text: error.response.data.error,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       });
     dispatch(NewReview());
@@ -72,7 +91,7 @@ export default function Reviews() {
           type="text"
           value={newComment}
           onChange={handleCommentChange}
-          placeholder="Deja tu review..."
+          placeholder={translations[idioma].Placeholder}
         />
         <input
           type="number"
@@ -80,9 +99,9 @@ export default function Reviews() {
           max="10"
           value={rating}
           onChange={handleRatingChange}
-          placeholder="Puntuación"
+          placeholder={translations[idioma].Puntuacion}
         />
-        <button type="submit">Enviar</button>
+        <button type="submit">{translations[idioma].Enviar}</button>
       </form>
       <div className={style.comment}>
         {Hotel.Reviews?.map((review, index) => (

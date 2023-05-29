@@ -9,10 +9,7 @@ import GetCurrencyExchange from "../CurrencyExchange/GetCurrencyExchange";
 import swal from "sweetalert";
 import style from "./TypeRoom.module.css";
 //action
-import {
-  FuncionTypeRoomTypes,
-  GetTrolley,
-} from "../../redux/Actions/Actions";
+import { FuncionTypeRoomTypes, GetTrolley } from "../../redux/Actions/Actions";
 import { v4 as uuidv4 } from "uuid";
 
 //?----------------- COMPONENTE ROOM TYPE  ------------------------------------
@@ -21,6 +18,22 @@ const TypeRoom = ({ id, Trolleys }) => {
   const User = PedirLocalStorage();
   const dispatch = useDispatch();
   const [State, setState] = useState([]);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      AgregadoCorrectamente: "Added successfully!!",
+      Aceptar: "Accept",
+      Personas: "People",
+      AgregarAlCarrito: "Add to cart",
+    },
+    es: {
+      AgregadoCorrectamente: "Agregado con exito!!",
+      Aceptar: "Aceptar",
+      Personas: "Personas",
+      AgregarAlCarrito: "Agregar al Carrito",
+    },
+  };
   const { TypeRoom } = useSelector((state) => state);
 
   const FuncionPostCarrito = async (
@@ -33,15 +46,15 @@ const TypeRoom = ({ id, Trolleys }) => {
       try {
         await axios.post(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
         swal({
-          text: "Agregado con exito!!",
+          text: translations[idioma].AgregadoCorrectamente,
           icon: "success",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       } catch (error) {
         swal({
           text: error.response.data.error,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       }
       dispatch(GetTrolley(User.id));
@@ -62,21 +75,19 @@ const TypeRoom = ({ id, Trolleys }) => {
           <Card.Subtitle className="mb-2 text-muted">
             <GetCurrencyExchange value={room.price} />
           </Card.Subtitle>
-          <Card.Text>People: {room.people}</Card.Text>
+          <Card.Text>
+            {translations[idioma].Personas}: {room.people}
+          </Card.Text>
           <img className={style.img} src={room.image} />
           <Card.Text>stock : {room.stock}</Card.Text>
           {User?.rol !== 2 && User?.rol !== 3 ? (
             <button
               className={style.BotonCarrito}
               onClick={() =>
-                FuncionPostCarrito(
-                  User.id,
-                  room.id,
-                  room.name,
-                  Trolleys
-                )
-              }>
-              + Agregar al Carrito
+                FuncionPostCarrito(User.id, room.id, room.name, Trolleys)
+              }
+            >
+              + {translations[idioma].AgregarAlCarrito}
             </button>
           ) : (
             <></>

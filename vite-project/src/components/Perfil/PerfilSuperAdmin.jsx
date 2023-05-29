@@ -6,17 +6,30 @@ import {
   EstadisticasDoughnut,
 } from "../../Estadisticas/Estadisticas";
 import "./PerfilSuperAdmin.css";
+import { useSelector } from "react-redux";
 
 const PerfilSuperAdmin = () => {
   let User = PedirLocalStorage();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Bienvenido: "Welcome",
+      Email: "Your email is",
+    },
+    es: {
+      Bienvenido: "Bienvenido",
+      Email: "Tu email es",
+    },
+  };
 
   return (
     <>
       <NavBar />
       <section>
         <div className="divDeBienvenido">
-          <h1>{`Bienvenido ${User.username}`}</h1>
-          <h3>{`Tu email es ${User.email}`}</h3>
+          <h1>{translations[idioma].Bienvenido + `${User.username}`}</h1>
+          <h3>{translations[idioma].Email + `${User.email}`}</h3>
         </div>
       </section>
       <section>

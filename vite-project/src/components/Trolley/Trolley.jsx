@@ -24,6 +24,28 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const [TotalPrecio, setTotalPrecio] = useState([]);
 
   const navigate = useNavigate();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      ReservaExitosa: "Room(s) reserved successfully!!!",
+      Aceptar: "Accept",
+      BorrarCarrito: "Delete all carts",
+      Reservar: "Reserve",
+      Precio: "Price",
+      Personas: "People",
+      PrecioTotal: "Total price",
+    },
+    es: {
+      ReservaExitosa: "Habitacion/es reservadas con exito!!!",
+      Aceptar: "Aceptar",
+      BorrarCarrito: "Borrar Carrito",
+      Reservar: "Reservar",
+      Precio: "Precio",
+      Personas: "Personas",
+      PrecioTotal: "Precio Total",
+    },
+  };
 
   useEffect(() => {
     if (!User) {
@@ -66,16 +88,16 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
       );
       await axios.put(`${URL_BASE}/booking/${idUser}`, ArrayCarritoModificado);
       swal({
-        text: "Habitacion/es reservadas con exito!!!",
+        text: translations[idioma].ReservaExitosa,
         icon: "success",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
       dispatch(DeleteAllTrolley(idUser));
     } catch (error) {
       swal({
         text: error.response.data.error,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -121,13 +143,13 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
           className={style.botonEliminar}
           onClick={() => FuncionDeleteAllCarritos(User.id)}
         >
-          Delete All Trolleys
+          {translations[idioma].BorrarCarrito}
         </button>
         <button
           onClick={() => FuncionReservar(User.id, User.email)}
           className={style.button}
         >
-          <span>Reservar</span>
+          <span>{translations[idioma].Reservar}</span>
         </button>
       </div>
       <section className={style.section}>
@@ -143,10 +165,11 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
                 </button>
                 <Card.Title>{name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  Precio:
-                  {`$  ${price}`}
+                  {translations[idioma].Precio}:{`$  ${price}`}
                 </Card.Subtitle>
-                <Card.Text>People: {people}</Card.Text>
+                <Card.Text>
+                  {translations[idioma].Personas}: {people}
+                </Card.Text>
                 <img className={style.img} src={image} />
                 <Card.Text>stock :{stock}</Card.Text>
                 <div className={style.divCount}>
@@ -179,7 +202,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
       </section>
 
       <div className={style.divTotalPrecio}>
-        <h1 className={style.h1}>Precio Total : ${totalPrecio}</h1>
+        <h1 className={style.h1}>
+          {translations[idioma].PrecioTotal} : ${totalPrecio}
+        </h1>
       </div>
 
       <Footer />

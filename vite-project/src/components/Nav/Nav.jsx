@@ -42,11 +42,19 @@ const NavBar = ({ countCarrito }) => {
       VerPerfil: "View profile",
       Logout: "Logout",
       IniciarSesion: "Login",
+      ProveerHotel: "Provide Hotel",
+      AdministrarUsuarios: "Manage Users",
+      QuieroSerProveedor: "I want to be a supplier",
+      Salir: "Go out",
     },
     es: {
       VerPerfil: " Ver Perfil",
       Logout: "Cerrar Sesión",
       IniciarSesion: "Iniciar Sesión",
+      ProveerHotel: "Proveer Hotel",
+      AdministrarUsuarios: "Administrar Usuarios",
+      QuieroSerProveedor: "Quiero ser proveedor",
+      Salir: "Salir",
     },
   };
 
@@ -141,23 +149,29 @@ const NavBar = ({ countCarrito }) => {
                     <a>{`${username}`}</a>
                     <ul className="menu-vertical">
                       <li>
-                        <a href="/Perfil">Perfil</a>
+                        <a href="/Perfil">{translations[idioma].VerPerfil}</a>
                       </li>
                       {rol === 2 ? (
                         <li>
-                          <a href="">Proveer Hotel</a>
+                          <a href="">{translations[idioma].ProveerHotel}</a>
                         </li>
                       ) : rol === 3 ? (
                         <li>
-                          <a href="">Administrar Usuarios</a>
+                          <a href="">
+                            {translations[idioma].AdministrarUsuarios}
+                          </a>
                         </li>
                       ) : (
                         <li>
-                          <a href="">Quiero ser proveedor</a>
+                          <a href="">
+                            {translations[idioma].QuieroSerProveedor}
+                          </a>
                         </li>
                       )}
                       <li>
-                        <button onClick={handleLogout}>Salir</button>
+                        <button onClick={handleLogout}>
+                          {translations[idioma].Salir}
+                        </button>
                       </li>
                     </ul>
                   </li>
@@ -165,7 +179,7 @@ const NavBar = ({ countCarrito }) => {
               </nav>
             </div>
           ) : (
-            <a href="/"> iniciar sesion</a>
+            <a href="/">{translations[idioma].IniciarSesion}</a>
           )}
 
           {/* --------------------------------------------------

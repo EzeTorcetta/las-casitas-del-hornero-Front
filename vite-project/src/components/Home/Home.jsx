@@ -6,8 +6,11 @@ import Row from "react-bootstrap/Row";
 import AuthProvider from "../GoogleAuth/AuthProvider";
 import { auth } from "../../Firebase/Firebase";
 //css
-import "./Home.css";
-import style from "./Home.module.css";
+import styleLight from "./Home.module.css"
+import styleDark from"./HomeDark.module.css"
+
+
+
 //actions
 import {
   FuncionSelectFilter,
@@ -16,8 +19,6 @@ import {
   getCurrencyRateAPI,
 } from "../../redux/Actions/Actions";
 //components
-// import Cards from "../Cards/Cards";
-// import Search from "../Search/Search";
 import {
   Filter,
   NavBar,
@@ -46,6 +47,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const currencyExchange = useSelector((state) => state.currencyExchange);
   const estado = useSelector((state) => state);
   const theme = useSelector((state) => state.theme);
+  const style = theme === "light"?styleLight:styleDark;
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -128,8 +130,6 @@ const Home = ({ countCarrito, setCountCarrito }) => {
         )}
 
         <Paginado paginas={Hotels.numPages} />
-        <section className={`${style.section} ${style.two}`}></section>
-
         <Footer />
       </div>
     </>

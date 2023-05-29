@@ -1,13 +1,15 @@
 //?---------------------------- IMPORTS --------------------------------
 //react
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PedirLocalStorage } from "../Index";
 import { useSelector, useDispatch } from "react-redux";
 import { FuncionAllFavoritesHotel } from "../../redux/Actions/Actions.js";
-import style from "./Card.module.css";
+
 import axios from "axios";
 import imgFav from "../../image/favorito.png";
+import styleLight from "./Card.module.css";
+import styleDark from "./CardDark.module.css";
 
 //?----------------- COMPONENTE CARD ------------------------------------
 function Cards({
@@ -24,6 +26,7 @@ function Cards({
   const navigate = useNavigate();
   const FavHotels = useSelector((state) => state.FavHotels);
   const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
   const [isFav, setIsFav] = useState(false);
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   let ratingArray = Array(rating).fill(rating);
@@ -61,9 +64,8 @@ function Cards({
   const onClickDetail = () => {
     navigate(`/detail/${id}`);
   };
-
   return (
-    <div className={style.container}>
+    <Link to={`/detail/${id}`} className={style.container}>
       <div className={style.imgContainer}>
         <img src={image[0]} alt="" className={style.imgHotel} />
         {!User || User?.rol === 1 ? (
@@ -115,7 +117,7 @@ function Cards({
           {translations[idioma].VerAlojamiento}
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
 

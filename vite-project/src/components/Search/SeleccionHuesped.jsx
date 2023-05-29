@@ -1,10 +1,26 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import style from "./SeleccionHuesped.module.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function SeleccionHuespedes({ setSearchAll, SearchAll }) {
   const [statePerson, setStatePerson] = useState(0);
   const [stateHabitacion, setStateHabitacion] = useState(0);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Personas: "Persons",
+      Placeholder: "Find an Hotel",
+      CantidadDeHabitaciones: "Number of rooms",
+      SeleccionDeHuespedes: "Guest Selection",
+    },
+    es: {
+      Personas: "Personas",
+      CantidadDeHabitaciones: "Cantidad De Habitaciones",
+      SeleccionDeHuespedes: "Seleccion De Huespedes",
+    },
+  };
 
   const FuncionIncrementPerson = () => {
     setSearchAll({ ...SearchAll, Huespedes: statePerson });
@@ -40,7 +56,7 @@ function SeleccionHuespedes({ setSearchAll, SearchAll }) {
         <div className={style.div}>
           <div className={style.divInput}>
             <label className={style.label}>
-              Personas :
+              {translations[idioma].Personas} :
               <button onClick={FuncionDecrementPerson} className={style.boton}>
                 -
               </button>
@@ -58,7 +74,7 @@ function SeleccionHuespedes({ setSearchAll, SearchAll }) {
 
           <div className={style.divInput}>
             <label className={style.label}>
-              Cantidad De Habitaciones :
+              {translations[idioma].CantidadDeHabitaciones} :
               <button
                 onClick={FuncionDecrementHabitaciones}
                 className={style.boton}

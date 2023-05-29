@@ -105,17 +105,6 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
           <div className={style.DivCarrusel}>
             <CarruselDetail image={DetailHotel.image} />
           </div>
-          <section className={style.sectionDescription}>
-            <h1>Servicios del alojamiento </h1>
-            <br />
-            <div className={style.divContenedorServicio}>
-              <FuncionServices Services={DetailHotel.Services} />
-            </div>
-          </section>
-          <section className={style.sectionDescription}>
-            <h1>Descripción</h1>
-            <p>{DetailHotel.description}</p>
-          </section>
 
           {DetailHotel.location && DetailHotel.name && (
             <Maps location={DetailHotel.location} name={DetailHotel.name} />
@@ -136,8 +125,6 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               ""
             )}
           </section>
-          <Reviews />
-          <Footer />
         </div>
       </div>
       <section className={style.sectionDescription}>
