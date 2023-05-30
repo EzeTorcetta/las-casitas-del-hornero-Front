@@ -86,7 +86,7 @@ const FormularioTipoHab = (props) => {
         replace: true,
       });
       setTipoHab(resetTipoHab);
-      console.log(res)
+
     } catch (error) {
       if (error.response.data.error === "Room type already exists.") {
         setTipoHab(resetTipoHab);

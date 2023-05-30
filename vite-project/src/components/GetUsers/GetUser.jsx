@@ -13,9 +13,16 @@ const GetUsers = () => {
   const users = useSelector((state) => state.Users);
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserRole, setSelectedUserRole] = useState("");
-  console.log(selectedUserRole);
+
   const [showOptions, setShowOptions] = useState(false);
-  console.log(selectedUserRole);
+
+  const roles = {
+    1: "Usuario",
+    2: "Proveedor",
+    3: "Administrador"
+  };
+
+
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
@@ -29,17 +36,20 @@ const GetUsers = () => {
     await dispatch(getUsers(user.id));
   };
   const handleSelectUser = (userId) => {
-    console.log(userId);
+
     setSelectedUserId(userId);
     setShowOptions(true);
   };
 
   //*---------------------------------FuncionBloque:
-  const FuncioBloquear = async (idUser) => {
-    console.log(idUser);
+  const FuncioBloquear = async (idUser,userEmail) => {
+
+    
     await axios.put(
       `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/status/${idUser}`
     );
+    await axios.get(
+      `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Baneo/${userEmail}`)
     await dispatch(getUsers(user.id));
   };
 
@@ -49,16 +59,17 @@ const GetUsers = () => {
     "email",
     {
       name: "status",
-      label: "status",
+      label: "Status",  
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const userId = tableMeta.rowData[0];
+          const userEmail = tableMeta.rowData[2]
           return (
             <div>
               <h1>{value}</h1>
               <button
                 className={style.BotonBloqueo}
-                onClick={() => FuncioBloquear(userId)}
+                onClick={() => FuncioBloquear(userId,userEmail)}
               >
                 {value ? "Bloquear" : "Desbloquear"}
               </button>
@@ -84,18 +95,18 @@ const GetUsers = () => {
                   onChange={(e) => setSelectedUserRole(e.target.value)}
                 >
                   <option hidden>Seleccionar Rol</option>
-                  <option value="1">User</option>
-                  <option value="2">Admin</option>
-                  <option value="3">Superadmin</option>
+                  <option value="1">Usuario</option>
+                  <option value="2">Proveedor</option>
+                  <option value="3">Administrador</option>
                 </select>
               ) : (
-                value
+                roles[value]
               )}
               <button
                 className={style.botonRol}
                 onClick={() => handleSelectUser(userId)}
               >
-                Editar Rol
+                Cambiar
               </button>
               {showOptions && selectedUserId === userId && (
                 <button
@@ -116,7 +127,7 @@ const GetUsers = () => {
   };
   return (
     <MUIDataTable
-      title="Lista De Usuarios"
+      title="Lista de Usuarios"
       data={users}
       columns={columnas}
       options={options}

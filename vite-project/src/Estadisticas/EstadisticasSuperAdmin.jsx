@@ -86,7 +86,7 @@ const EstadisticasLinealTodosLosBookings = ({ TodosLosBookings }) => {
 const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
   //*---------------------------------Data Del Grafico:
   //? Data es la informacion referente en la que se va a ver en el grafico. ejemplo(precios , ventas , fechas , lo que sea).
-  console.log(ValoracionHoteles);
+
   const valoracion = [];
   const Hoteles = [];
 
@@ -156,7 +156,7 @@ const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
 //Bar
 
 const EstadisticasBarraHotelMasReservado = ({ HotelMasReservado }) => {
-  console.log(HotelMasReservado);
+
 
   const reservas = [];
   const NameHotel = [];
@@ -209,7 +209,7 @@ const EstadisticasBarraHotelMasReservado = ({ HotelMasReservado }) => {
 };
 //--------------------------------------------------------------------------------//
 const EstadisticasBarraMesMasReservado = ({ MesMasReservado }) => {
-  console.log(MesMasReservado);
+
 
   const Cantidad = [];
   const Meses = [];
@@ -266,7 +266,7 @@ const EstadisticasBarraMesMasReservado = ({ MesMasReservado }) => {
 //Doughnut
 
 const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
-  console.log(UsuarioQueMasReservo);
+
   const Reserva = [];
   const Usuario = [];
 
@@ -319,7 +319,7 @@ const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
 const EstadisticasLinealProvinciasMasReservada = ({
   ProvinciasMasReservada,
 }) => {
-  console.log(ProvinciasMasReservada);
+
   const Provincias = [];
   const Reservas = [];
 

@@ -40,13 +40,14 @@ const PerfilSuperAdmin = () => {
     dispatch(FuncionTodosLosBookingsEstadistica(User.id, User.rol));
   }, []);
 
+
   return (
     <>
       <NavBar />
       <section>
         <div className="divDeBienvenido">
           <h1>{`Bienvenido ${User.username}`}</h1>
-          <h3>{`Tu email es ${User.email}`}</h3>
+          <h3>{`Tu email es : ${User.email}`}</h3>
         </div>
       </section>
       <section>

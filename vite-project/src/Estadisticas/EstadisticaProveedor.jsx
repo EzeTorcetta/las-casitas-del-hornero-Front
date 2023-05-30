@@ -88,7 +88,7 @@ const EstadisticasLinealPartner = ({ MesDondeMasSeReservoPartner }) => {
 //Bar
 
 const EstadisticasBarraPartner = ({ HotelesMasReservadosPartner }) => {
-  console.log(HotelesMasReservadosPartner);
+
 
   const NameHotel = [];
   const Reserva = [];
