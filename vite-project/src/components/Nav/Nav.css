@@ -11,6 +11,7 @@
   color: white;
   padding-left: 2rem;
   position: fixed;
+  top:0;
 }
 
 .navdark{
@@ -23,6 +24,7 @@
   color: white;
   padding-left: 2rem;
   position: fixed;
+  top: 0;
 }
 
 

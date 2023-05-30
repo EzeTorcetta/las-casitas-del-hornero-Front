@@ -61,13 +61,13 @@ const TypeRoom = ({ id, Trolleys }) => {
 
   return TypeRoom?.map((room, index) => (
     <div key={index}>
-      <Card style={{ width: "18rem", margin: "10px" }}>
+      <Card className={style.cardContainer}>
         <Card.Body>
           <Card.Title>{room.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             <GetCurrencyExchange value={room.price} />
           </Card.Subtitle>
-          <Card.Text>People: {room.people}</Card.Text>
+          <Card.Text>Capacidad: {room.people}</Card.Text>
           <img className={style.img} src={room.image} />
           {room.stock === 0 ? (
             <Card.Text>No disponible</Card.Text>

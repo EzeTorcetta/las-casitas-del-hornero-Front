@@ -1,3 +1,7 @@
+.cardContainer {
+  width: 18rem;
+  margin :10px;
+}
 .img {
   width: 150px;
   height: 150px;
@@ -9,8 +13,8 @@
 
 .BotonCarrito {
   overflow: hidden;
-  border-radius: 10px;
-  background-color: #ffc107;
+  background-color: #E56910;
+  color: white;
   text-align: center;
   margin: 10px;
   height: 40px;
@@ -18,4 +22,17 @@
   font-size: 15px;
   width: fit-content;
   padding: 10px;
+  opacity: 0.9;
+}
+.BotonCarrito:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+  opacity: 1;
+}
+.BotonCarrito:active {
+background-color: #bd560c;
 }
