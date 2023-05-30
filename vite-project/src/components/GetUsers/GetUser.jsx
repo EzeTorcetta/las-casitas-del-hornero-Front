@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { changeRol, getUsers } from "../../redux/Actions/Actions";
 import style from "./GetUser.module.css";
 import MUIDataTable from "mui-datatables";
+import axios from "axios";
 // import DataTable, { createTheme } from "react-data-table-component";
 
 const GetUsers = () => {
@@ -32,10 +33,41 @@ const GetUsers = () => {
     setSelectedUserId(userId);
     setShowOptions(true);
   };
+
+  //*---------------------------------FuncionBloque:
+  const FuncioBloquear = async (idUser) => {
+    console.log(idUser);
+    await axios.put(
+      `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/status/${idUser}`
+    );
+    await dispatch(getUsers(user.id));
+  };
+
   const columnas = [
     "id",
     "username",
     "email",
+    {
+      name: "status",
+      label: "status",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          const userId = tableMeta.rowData[0];
+          return (
+            <div>
+              <h1>{value}</h1>
+              <button
+                className={style.BotonBloqueo}
+                onClick={() => FuncioBloquear(userId)}
+              >
+                {value ? "Bloquear" : "Desbloquear"}
+              </button>
+            </div>
+          );
+        },
+      },
+    },
+
     {
       name: "rol",
       label: "Rol",
