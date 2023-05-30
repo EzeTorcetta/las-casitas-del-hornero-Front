@@ -39,7 +39,7 @@ const handleUserNotLoggedIn = () => {
   if(state === 4 || state === 5){
   return (
     <div>
-      <button onClick={handleOnClick} className="button">
+      <button onClick={handleOnClick} className="buttonn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="xMidYMid"

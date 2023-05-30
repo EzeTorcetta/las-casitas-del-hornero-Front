@@ -35,9 +35,12 @@ const Landing = () => {
               Registrate
             </button>
           </Link>
+          
         </div>
         <FormularioIngresa />
+        
       </div>
+      
     </div>
   );
 };

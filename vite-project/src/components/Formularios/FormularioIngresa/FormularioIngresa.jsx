@@ -121,7 +121,9 @@ const FormularioIngresa = () => {
           </form>
           <div className={style.butonGoogleDiv}>
             <BotonAuthGoogle />
+         
           </div>
+          <button className="btn btn-secondary">Ingresar sin registrar</button>
         </div>
       </div>
     </>
