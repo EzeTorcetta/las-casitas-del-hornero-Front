@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 .item {
   height: 60vh;
 }
@@ -16,17 +17,14 @@
   margin-right: auto;
   color: white;
   /* background-color: rgba(249, 119, 32, 0.838); */
-  background-color: rgba(249, 151, 32, 0.838);
+
   background-color: #E56910;
   
-
+font-family: Georgia, 'Times New Roman', Times, serif;
   width: fit-content;
   padding: .3em;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  border-radius: .3rem;
+
 }
 .carousel {
   margin-top: -90;

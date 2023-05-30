@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
 .item {
   height: 60vh;
 }
@@ -15,15 +17,11 @@
   margin-left: auto;
   margin-right: auto;
   color: white;
-  background-color: rgb(33, 33, 87);
-
+  background-color: #f7931e;
   width: fit-content;
   padding: .3em;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  border-radius: .3rem;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .carousel {
   margin-top: -90;

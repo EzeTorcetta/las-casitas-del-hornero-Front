@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   z-index: 3;
-  background-color: rgb(69, 71, 145);
+  background-color: #1E1E1E;
   color: white;
   padding-left: 2rem;
   position: fixed;
@@ -42,7 +42,7 @@
     height: 100%;
     width: 5rem;
     position: fixed;
-    background-color: rgb(69, 71, 145);
+    background-color: #1E1E1E;;
     padding-top: 2rem;
     padding-bottom: 2rem;
     color: white;
@@ -51,6 +51,118 @@
 }
 
 
+{/*-----BARRA DE OPCIONES DARK----*/}
+
+
+.contenedor-elementos-dark{
+
+ background-color: aqua;
+ height: 4rem;
+ width: 20rem;
+}
+
+.nombre-usuario-dark{
+  display: flex;
+  background-color: #f7931e;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-opciones-dark{
+  display: none;
+  background-color: blue;
+}
+
+.opciones-dark{
+  display: flex;
+background-color: #929292;
+height: 4rem;
+align-items: center;
+justify-content: center;
+}
+
+.opciones-dark:hover{
+  background-color: #dcdcdc;
+}
+
+.botoncito-dark{
+height: 4rem;
+width: 20rem;
+border: none;
+background-color: #929292;
+color: white;
+}
+
+.botoncito-dark:hover{
+background-color: #dcdcdc;
+}
+
+.contenedor-elementos-dark:hover .contenedor-opciones-dark{
+  display:block;
+}
+
+
+{/*-----BARRA DE OPCIONES LIGHT----*/}
+
+
+.contenedor-elementos{
+
+  background-color: aqua;
+  height: 4rem;
+  width: 20rem;
+ }
+ 
+ .nombre-usuario{
+   display: flex;
+background-color: #E56910;
+   height: 4rem;
+   align-items: center;
+   justify-content: center;
+ }
+ 
+ .contenedor-opciones{
+   display: none;
+   background-color: blue;
+ }
+ 
+ .opciones{
+   display: flex;
+ background-color: whitesmoke;
+ height: 4rem;
+ align-items: center;
+ justify-content: center;
+ color: black;
+ }
+ 
+ .opciones:hover{
+   background-color: #dcdcdc;
+ }
+ 
+ .botoncito{
+ height: 4rem;
+ width: 20rem;
+ border: none;
+ background-color: whitesmoke;
+ color: black;
+ }
+ 
+ .botoncito:hover{
+ background-color: #dcdcdc;
+ }
+ 
+ .contenedor-elementos:hover .contenedor-opciones{
+   display:block;
+ }
+
+
+
+ .boton-inicia-sesion{
+  height: 4rem;
+  width: 20rem;
+  border: none;
+  background-color: white;
+ }
 
 .logo {
   display: flex;

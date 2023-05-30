@@ -73,9 +73,11 @@
   max-height: 200px;
   overflow: hidden;
 }
+
 .links {
   text-decoration: none;
 }
+
 .link {
   text-decoration: none;
 }
@@ -123,8 +125,6 @@
   opacity: 1;
 }
 
-
-
 @media (max-width:1080px) {
   .container {
     flex-direction: column;
@@ -132,7 +132,6 @@
     border-top: 2px solid white;
     overflow: hidden;
     width: 15rem;
-    margin-left: 5rem;
   }
 
   .imgContainer {

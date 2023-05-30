@@ -6,16 +6,18 @@
   margin-left: auto;
   margin-right: auto;
   width: 240px;
-  background-color: rgb(18, 18, 41);
+  background-color: #2d2d2d;
 }
 
 .table{
   color:white;
   border-color: white;
+  width: 100%;
+  margin: 5px 0;
 }
 
 .select {
-  background-color: rgb(69, 71, 145);
+  background-color: #454545;
   appearance: none;
   color: white;
   border-radius: 0.5rem;
@@ -25,6 +27,11 @@
   border: none;
   margin: 5px;
   padding: 0.5rem;
+}
+
+.td {
+  padding: 2px 0;
+  width: 12px;
 }
 
 .checkbox_btn {
@@ -37,14 +44,13 @@
   user-select: none;
 }
 
-
 .button {
   width: 100px;
   height: 55px;
   border-radius: 0.5rem;
   border: none;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: rgb(69, 71, 145);
+  background-color: #f7931e;
   color: #fff;
   cursor: pointer;
   margin: 10px;
@@ -73,7 +79,7 @@
   transition: 0.2s linear;
 }
 
-.checkbox_btn .inputServices:checked~.checkmark {
+.checkbox_btn .inputServices:checked ~ .checkmark {
   background-color: transparent;
 }
 
@@ -94,14 +100,14 @@
   -webkit-filter: drop-shadow(0px 0px 10px #E56910);
 }
 
-.checkbox_btn .inputServices:checked~.checkmark:after {
+.checkbox_btn .inputServices:checked ~ .checkmark:after {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, -50%) rotate(0deg) scale(1);
   animation: pulse 1s ease-in;
 }
 
-.checkbox_btn .inputServices:checked~.checkmark {
+.checkbox_btn .inputServices:checked ~ .checkmark {
   transform: rotate(45deg);
   border: none;
 }
@@ -117,9 +123,126 @@
   }
 }
 
+.inputSearch{
+  width: 100%;
+  appearance: none;
+  color: rgb(0, 0, 0);
+  border-radius: 0.5rem;
+
+ opacity: 0.8;
+  width: 100%;
+  border: none;
+  margin: 5px;
+  padding: 0.5rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+}
+
 .inputSearch::placeholder {
-  color: white;
+  color: rgb(0, 0, 0);
   opacity: 1;
+}
+
+.custom-datepicker {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-datepicker input {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.custom-datepicker .react-datepicker__input-container {
+  position: relative;
+}
+
+.custom-datepicker .react-datepicker__input-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url("calendar-icon.png"); /* Reemplaza con la ruta de tu ícono de calendario */
+  background-size: cover;
+}
+
+/* Estilos para el calendario emergente */
+.custom-datepicker .react-datepicker {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  
+}
+
+.custom-datepicker .react-datepicker__header {
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  
+}
+
+.custom-datepicker .react-datepicker__month-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.custom-datepicker .react-datepicker__day-names {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.custom-datepicker .react-datepicker__day-names div {
+  width: 30px;
+  text-align: center;
+}
+
+.custom-datepicker .react-datepicker__month {
+  margin: 0 10px;
+}
+
+.custom-datepicker .react-datepicker__day {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.custom-datepicker .react-datepicker__day--selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.custom-datepicker .react-datepicker__day--keyboard-selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.custom-datepicker .react-datepicker__day--today {
+  font-weight: bold;
+}
+
+.custom-datepicker .react-datepicker__day:hover {
+  background-color: #f2f2f2;
 }
 
 .Checks {

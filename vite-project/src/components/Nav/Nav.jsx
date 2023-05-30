@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import imageCarrito from "../../image/carrito-de-compras.png";
 import carritoblanco from "../../image/carrito-de-compras-blanco.png";
@@ -21,6 +21,7 @@ import SymbolsCurrencyFlex from "../CurrencyExchange/SymbolsCurrencyFlex";
 const NavBar = ({ countCarrito }) => {
   // const User = useSelector((state) => state.User);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let User = PedirLocalStorage();
   // let { username, rol } = User;
 
@@ -47,6 +48,10 @@ const NavBar = ({ countCarrito }) => {
   };
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
+  };
+
+  const handleGoHome = () => {
+    navigate("/");
   };
 
   useEffect(() => {
@@ -109,43 +114,33 @@ const NavBar = ({ countCarrito }) => {
 
 
         <div>
-      
-          {username ? (
-            <div>
-              {/* ------------- NUEVO MENU ------------ */}
-
-              <nav>
-                <ul className="menu-horizontal">
-                  <li>
-                    <a>{`${username}`}</a>
-                    <ul className="menu-vertical">
-                      <li>
-                        <a href="/Perfil">Perfil</a>
-                      </li>
-                      {rol === 2 ? (
-                        <li>
-                          <a href="">Proveer Hotel</a>
-                        </li>
-                      ) : rol === 3 ? (
-                        <li>
-                          <a href="">Administrar Usuarios</a>
-                        </li>
-                      ) : (
-                        <li>
-                          <a href="">Quiero ser proveedor</a>
-                        </li>
-                      )}
-                      <li>
-                        <button onClick={handleLogout}>Salir</button>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
+          {username ? (theme === 'dark' ? (
+            <div className="contenedor-elementos-dark">
+                <div className="nombre-usuario-dark">{`${username}`}</div>
+                <div className="contenedor-opciones-dark">
+                  <div className="opciones-dark">Perfil</div>
+                  {rol === 2 ? <div className="opciones-dark">Proveer Hotel</div> : 
+                  rol === 3 ? <div className="opciones-dark">Administrar Usuarios</div> : 
+                  <div className="opciones-dark">Quiero ser proveedor</div>}
+                  <button onClick={handleLogout} className="botoncito-dark">LogOut</button>
+                </div>
             </div>
           ) : (
-            <a href="/"> iniciar sesion</a>
-          )}
+            <div className="contenedor-elementos">
+                <div className="nombre-usuario">{`${username}`}</div>
+                <div className="contenedor-opciones">
+                  <div className="opciones">Perfil</div>
+                  {rol === 2 ? <div className="opciones">Proveer Hotel</div> : 
+                  rol === 3 ? <div className="opciones">Administrar Usuarios</div> : 
+                  <div className="opciones">Quiero ser proveedor</div>}
+                  <button onClick={handleLogout} className="botoncito">LogOut</button>
+                </div>
+            </div>
+          )): (
+            <button onClick={handleGoHome} className="boton-inicia-sesion"> Iniciar sesion</button>
+          )
+        }
+         
         </div>
       </div>
     </div>

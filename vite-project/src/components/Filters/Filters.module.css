@@ -8,6 +8,12 @@
   width: 240px;
   /* background-color: lightpink; */
 }
+
+.table {
+  width: 100%;
+  margin: 5px 0;
+}
+
 .select {
   background-color: #E56910;
   appearance: none;
@@ -20,15 +26,13 @@
   margin: 5px;
   padding: 0.5rem;
 }
-.table {
-  width: 100%;
-  margin: 5px 0;
-}
+
 
 .td {
   padding: 2px 0;
   width: 12px;
 }
+
 .checkbox_btn {
   display: block;
   position: relative;
@@ -94,7 +98,6 @@
   transition: 0.2s linear;
   transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
   -webkit-filter: drop-shadow(0px 0px 10px #E56910);
-
 }
 
 .checkbox_btn .inputServices:checked ~ .checkmark:after {
@@ -117,12 +120,6 @@
 
   50% {
     transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
-  }
-}
-
-@media (max-width: 1080px){
-  .form{
-    margin-left: 5.7rem;
   }
 }
 
@@ -163,7 +160,6 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-
 }
 
 /* Estilos para el ícono del DatePicker */
@@ -253,9 +249,12 @@
 }
 
 .Checks {
+  text-align: center;
   display: flex;
   flex-direction: column;
   margin: 1em 0;
   width: 100%;
   margin-bottom: 1.5em 0;
+  color: white;
 }
+

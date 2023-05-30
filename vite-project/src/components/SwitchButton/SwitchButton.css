@@ -46,7 +46,7 @@ background-color:white;;
 
 input:checked + .slider:before{
     transform: translate(26px);
-    background-color: rgb(83, 65, 128);
+    background-color:#ddb900;
 }
 
 .caja{

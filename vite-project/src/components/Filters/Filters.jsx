@@ -214,7 +214,7 @@ const Filter = () => {
     <div>
       <form
         name="filterForm"
-        className={theme === "light" ? style.form : style.formdark}
+        className={style.form}
       >
         <input
           type="text"
