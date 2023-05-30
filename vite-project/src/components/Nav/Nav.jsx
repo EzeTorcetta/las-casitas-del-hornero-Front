@@ -118,10 +118,10 @@ const NavBar = ({ countCarrito }) => {
             <div className="contenedor-elementos-dark">
                 <div className="nombre-usuario-dark">{`${username}`}</div>
                 <div className="contenedor-opciones-dark">
-                  <div className="opciones-dark">Perfil</div>
+                  <button onClick={handleVerPerfil} className="botoncito-dark">Perfil</button>
                   {rol === 2 ? <div className="opciones-dark">Proveer Hotel</div> : 
                   rol === 3 ? <div className="opciones-dark">Administrar Usuarios</div> : 
-                  <div className="opciones-dark">Quiero ser proveedor</div>}
+                  <button onClick={handleChangeTipoCuenta} className="botoncito-dark">Quiero ser proveedor</button>}
                   <button onClick={handleLogout} className="botoncito-dark">LogOut</button>
                 </div>
             </div>
@@ -129,7 +129,7 @@ const NavBar = ({ countCarrito }) => {
             <div className="contenedor-elementos">
                 <div className="nombre-usuario">{`${username}`}</div>
                 <div className="contenedor-opciones">
-                  <div className="opciones">Perfil</div>
+                  <button onClick={handleVerPerfil} className="botoncito">Perfil</button>
                   {rol === 2 ? <div className="opciones">Proveer Hotel</div> : 
                   rol === 3 ? <div className="opciones">Administrar Usuarios</div> : 
                   <div className="opciones">Quiero ser proveedor</div>}
