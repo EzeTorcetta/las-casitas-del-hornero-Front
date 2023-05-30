@@ -1,5 +1,5 @@
 .container {
-  width: fit-content;
+  width: 100%;
   height: fit-content;
   scroll-snap-type: y mandatory;
   display: flex;
@@ -7,30 +7,15 @@
 }
 
 .item {
-  height: fit-content;
+  height: 550px;
 }
 
 .carousel {
-  width: 500px;
-  height: 350px;
-  border-radius: 10px;
+  width: 100%;
 }
 
 .img {
-  width: 500px;
-  height: 350px;
-  border-radius: 15px;
+  width: 100%;
 }
 
-@media (max-width: 1080px) {
-  .carousel {
-    width: 280px;
-    height: 300px;
-  
-  }
-  .img {
-    width: 280px;
-    height: 300px;
-  
-  }
-}
+

@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import style from "./FormularioTipoHabitacion.module.css";
 import { useSelector } from "react-redux";
 import NavBar from "../../Nav/Nav";
+import { PedirLocalStorage } from "../../Index";
 
 const FormularioTipoHab = (props) => {
   const URL_BASE =
@@ -15,13 +16,17 @@ const FormularioTipoHab = (props) => {
   const { state } = useLocation();
   const idHotelForm = useSelector((state) => state.idHotelForm);
   const id = state?.id_hotel || idHotelForm;
+
+  console.log(id)
+
   const resetTipoHab = {
     people: "",
     price: "",
     name: "",
-    image: [],
+    image: "",
     stock: "",
     id_user: User.id,
+    id_hotel: id,
   };
   const [tipoHab, setTipoHab] = useState(resetTipoHab);
   const [error, setError] = useState({});
@@ -76,6 +81,7 @@ const FormularioTipoHab = (props) => {
         stock,
         id_user,
       });
+      
       swal({
         text: "Tus habitaciones se registraron con éxito! ",
         icon: "success",
@@ -86,8 +92,9 @@ const FormularioTipoHab = (props) => {
         replace: true,
       });
       setTipoHab(resetTipoHab);
-      console.log(res)
+
     } catch (error) {
+      console.log(error)
       if (error.response.data.error === "Room type already exists.") {
         setTipoHab(resetTipoHab);
         return swal({
@@ -113,22 +120,19 @@ const FormularioTipoHab = (props) => {
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
       {
-        method:"POST",
-        body:data,
+        method: "POST",
+        body: data,
       }
     )
     const file = await res.json()
-    await tipoHab.image.push({
-      id: file.public_id,
-      url: file.secure_url
-    })
+    tipoHab.image = file.secure_url;
     setLoading(false);
     setError(validacion({ ...tipoHab, image: tipoHab.image }));
   };
 
   const deleteImage = async (url) => {
     setLoading(true);
-    tipoHab.image = await tipoHab.image.filter((imagen)=>url!==imagen.url)
+    tipoHab.image = ""
     setLoading(false);
     setError(validacion({ ...tipoHab, image: tipoHab.image }));
   };
@@ -209,104 +213,36 @@ const FormularioTipoHab = (props) => {
           </div>
 
           {/* FOTOS DE LA HABITACION */}
-
           {error.image ? (
             <span className={style.error}>{error.image}</span>
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div>Carga la foto de tu habitación:</div>
-          {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
-          <div className="form-floating">
+          <div>Carga la foto de tu hotel:</div>
+          <div>
             <input
-              type="text"
-              className="form-control"
-              id="image"
-              placeholder="URL de la foto."
-              onChange={handleChange}
-              value={tipoHab.image}
+              type="file"
               name="image"
+              placeholder="arrastra la imagen aquí"
+              onChange={uploadImage}
             />
-            <label>URL de la foto.</label>
-          </div>
-          <span className={style.hidden}>hidden</span>
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="price"
-            placeholder="Precio por noche."
-            onChange={handleChange}
-            value={tipoHab.price}
-            name="price"
-          />
-          <label>Precio por noche.</label>
-        </div>
-
-        {/* CANTIDAD DE HABITACIONES POR TIPO */}
-
-        {error.stock ? (
-          <span className={style.error}>{error.stock}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="stock"
-            placeholder="Cantidad de habitaciones."
-            onChange={handleChange}
-            value={tipoHab.stock}
-            name="stock"
-          />
-          <label>Cantidad de habitaciones.</label>
-        </div>
-
-        {/* FOTOS DE LA HABITACION */}
-        {error.image ? (
-          <span className={style.error}>{error.image}</span>
-        ) : (
-          <span className={style.hidden}>hidden</span>
-        )}
-        <div>Carga la foto de tu hotel:</div>
-        <div>
-          <input
-            type="file"
-            name="image"
-            placeholder="arrastra la imagen aquí"
-            onChange={uploadImage}
-          />
-              {tipoHab.image.length?(
-                tipoHab.image.map((imagen)=>{
-                  return (
+            {tipoHab.image.length ? (
                   <>
-                    <img src={imagen.url} style={{width:"300px"}}/>
-                    <button onClick={()=>deleteImage(imagen.url)}>X</button>
-                  </>
-                  )
-                })
-              ):(<></>)}
-        </div>
+                    <img src={tipoHab.image} style={{ width: "300px" }} />
+                    <button onClick={() => deleteImage(tipoHab.image)}>X</button>
+                  </>):
+                  (<></>)}
+          </div>
 
-        <span className={style.hidden}>hidden</span>
-        <button className="w-100 btn btn-lg btn-warning" type="submit">
-          Registrar
-        </button>
-        <span className={style.hidden}>hidden</span>
-        <NavLink to={"/Home"}>
-          <button
-            className="w-100 btn btn-lg btn-warning"
-            type="submit">
+          <button className="w-100 btn btn-lg btn-warning" type="submit">
             Registrar
           </button>
-          </NavLink>
-          <span className={style.hidden}>hidden</span>
+
           <NavLink to={"/Home"}>
             <button
               className="w-100 btn btn-lg btn-warning"
               type="button">
-              Finalizar
+              Volver al inicio
             </button>
           </NavLink>
         </form>

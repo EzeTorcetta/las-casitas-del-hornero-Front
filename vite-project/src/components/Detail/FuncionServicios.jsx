@@ -38,12 +38,12 @@ const FuncionServices = ({ Services }) => {
 
   return (
     <>
-      <h2>Servicios del alojamiento</h2>
+      <h3>Servicios del alojamiento</h3>
       <div className={style.services}>
         {Services?.map((Ser) => (
           <div className={style.divServicios} key={Ser.name}>
             <img className={style.img} src={image[Ser.name]} />
-            <h2 className={style.h2}>{Ser.name}</h2>
+            <p className={style.h2}>{Ser.name}</p>
           </div>
         ))}
       </div>
