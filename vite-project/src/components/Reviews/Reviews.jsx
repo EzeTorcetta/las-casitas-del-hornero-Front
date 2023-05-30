@@ -60,24 +60,7 @@ export default function Reviews() {
 
   return (
     <div className={style.container}>
-      <h2>Reviews:</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newComment}
-          onChange={handleCommentChange}
-          placeholder="Deja tu review..."
-        />
-        <input
-          type="number"
-          min="1"
-          max="10"
-          value={rating}
-          onChange={handleRatingChange}
-          placeholder="Puntuación"
-        />
-        <button type="submit">Enviar</button>
-      </form>
+      <h2>REVIEWS</h2>
       <div className={style.comment}>
         {Hotel.Reviews?.map((review, index) => (
           <div className={style.caja} key={index}>
@@ -92,6 +75,28 @@ export default function Reviews() {
             </div>
           </div>
         ))}
+      </div>
+      <div className={style.reviewForm}>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={newComment}
+            onChange={handleCommentChange}
+            placeholder="Deja tu review..."
+          />
+          <div>
+            <label>Puntaje:</label>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              value={rating}
+              onChange={handleRatingChange}
+              placeholder="Puntuación"
+            />
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
       </div>
     </div>
   );

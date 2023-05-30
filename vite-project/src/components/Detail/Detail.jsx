@@ -57,44 +57,71 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
 
   return (
     <>
+      <NavBar countCarrito={countCarrito} />
       {!User ? (
         <Error404 />
       ) : (
-        <div>
-          <NavBar countCarrito={countCarrito} />
+        <div className={style.detailContainer}>
+          {/* ---CONTENEDOR INFO HOTEL E IMAGE -------*/}
           <div className={style.div}>
             <div className={style.divDescription}>
-              <h3>{DetailHotel.name}</h3>
-              <p className={style.p}>
-                Rating :
-                {array.map((rating, index) => (
+              <h1>{DetailHotel.name}</h1>
+              <div className={style.infoContainerEstrellas}>
+                {array.map((ranting, index) => (
                   <img className={style.img} src={imagen} key={index} />
                 ))}
-              </p>
-              <h3>
+              </div>
+              <div className={style.infoContainer}>
                 <img className={style.img} src={imagenTelefono} />
-                {DetailHotel.phoneNumber}
-              </h3>
-              <p>
+                <span>{DetailHotel.phoneNumber}</span>
+              </div>
+              <div className={style.infoContainer}>
                 <img className={style.img} src={imagenCorreo} />
-                {DetailHotel.email}
-              </p>
-              <p>Province: {DetailHotel.province}</p>
-              <p>{DetailHotel.direccion}</p>
+                <span>{DetailHotel.email}</span>
+              </div>
+              <div className={style.namesPlaces}>
+                <span>{DetailHotel.locality}, </span>
+                <span>{DetailHotel.department}, </span>
+                <span>{DetailHotel.province}</span>
+              </div>
             </div>
             <div className={style.divCarrusel}>
               <CarruselDetail image={DetailHotel.image} />
             </div>
           </div>
+          {/* ----CONTENEDOR DE TIPOS DE HABITACIONES---- */}
+          <section className={style.sectionTypeRoom}>
+            <h2>HABITACIONES</h2>
+            <div className={style.roomContainer}>
+              {" "}
+              <TypeRoom
+                Trolleys={Trolleys}
+                name={DetailHotel.name}
+                setCountCarrito={setCountCarrito}
+                countCarrito={countCarrito}
+                id={id}
+              />
+            </div>
+
+            {User.rol === 2 ? (
+              <NavLink to="/FormRoomType">
+                <p onClick={setHotel}>Agregar Room Type</p>
+              </NavLink>
+            ) : (
+              ""
+            )}
+          </section>
+          {/* ----CONTENEDOR -VALORACION, DESCRIPCION,SERVICIOS UBICACION------ */}
           <section className={style.sectionDescription}>
-            <h1>INFORMACIÓN </h1>
+            <h2>INFORMACIÓN </h2>
             <section>
               <div className={style.sectionDescription_left}>
                 <div className={style.reviewContainer}>
-                  <h2>Puntuación de la review</h2>
+                  <h3>Puntuación de la review</h3>
+                  <p className={style.valoration}>{DetailHotel.valoration}</p>
                 </div>
-                <div>
-                  <h2>Descripcion</h2>
+                <div className={style.descriptionHotelCont}>
+                  <h3>Descripción</h3>
                   {/* <p>{DetailHotel.description}</p> */}
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -116,7 +143,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
                   <FuncionServices Services={DetailHotel.Services} />
                 </div>
                 <div className={style.mapContainer}>
-                  <h2>Ubicación</h2>
+                  <h3>Ubicación</h3>
                   {DetailHotel.location && DetailHotel.name && (
                     <Maps
                       location={DetailHotel.location}
@@ -127,27 +154,12 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               </div>
             </section>
           </section>
-
-          <section className={`${style.section} ${style.two}`}>
-            <TypeRoom
-              Trolleys={Trolleys}
-              name={DetailHotel.name}
-              setCountCarrito={setCountCarrito}
-              countCarrito={countCarrito}
-              id={id}
-            />
-            {User.rol === 2 ? (
-              <NavLink to="/FormRoomType">
-                <p onClick={setHotel}>Agregar Room Type</p>
-              </NavLink>
-            ) : (
-              ""
-            )}
-          </section>
-          <Reviews />
-          <Footer />
+          <div className={style.sectionReviews}>
+            <Reviews />
+          </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };
