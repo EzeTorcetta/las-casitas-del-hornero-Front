@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -6,6 +7,18 @@ const Chat = () => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+  };
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Enviar: "Send",
+      Placeholder: "Send a message...",
+    },
+    es: {
+      Enviar: "Enviar",
+      Placeholder: "Escribe un mensaje...",
+    },
   };
 
   const handleSendMessage = () => {
@@ -33,9 +46,11 @@ const Chat = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Escribe un mensaje..."
+          placeholder={translations[idioma].Placeholder}
         />
-        <button onClick={handleSendMessage}>Enviar</button>
+        <button onClick={handleSendMessage}>
+          {translations[idioma].Enviar}
+        </button>
       </div>
     </div>
   );

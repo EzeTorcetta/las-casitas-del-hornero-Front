@@ -23,6 +23,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
 import styleDark from "./FiltersDark.module.css";
+import traductor from "../Traductor/Traductor";
 
 // import style from theme === 'light'? "./Filters.module.css":"./FiltersDark.module.css";
 
@@ -254,16 +255,11 @@ const Filter = () => {
         <input
           type="text"
           name="text"
-          className={
-            theme === "light" ? style.inputSearch : style.inputSearch - dark
-          }
+          className={style.inputSearch}
           placeholder="Buscar un Hotel . . ."
           onChange={onChangeName}
         />
-        <select
-          onChange={onChangeProvinces}
-          className={theme === "light" ? style.select : style.select - dark}
-        >
+        <select onChange={onChangeProvinces} className={style.select}>
           <option hidden>{translations[idioma].FiltroPorProvincia}</option>
           {Provinces.map((pro) => (
             <option id={pro.id} value={pro.nombre} key={pro.id}>
@@ -302,10 +298,7 @@ const Filter = () => {
         ) : (
           <></>
         )}
-        <select
-          onChange={onChangeRating}
-          className={theme === "light" ? style.select : style.select - dark}
-        >
+        <select onChange={onChangeRating} className={style.select}>
           <option hidden>{translations[idioma].Estrellas}</option>
           {raiting.map((rant, index) => (
             <option value={rant} key={index}>
@@ -366,7 +359,9 @@ const Filter = () => {
           {Services.map((Ser) => (
             <tbody key={Ser.id}>
               <tr className={style.tr}>
-                <td className={style.td}>{Ser.name}</td>
+                <td className={style.td}>
+                  {idioma === "en" ? traductor(Ser.name) : Ser.name}
+                </td>
                 <td className={style.td}>
                   <label className={style.checkbox_btn}>
                     <label htmlFor="checkbox"></label>

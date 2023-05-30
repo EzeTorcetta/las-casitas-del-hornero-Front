@@ -111,7 +111,7 @@ function Cards({
             </p>
           </div>
           <p className={style.punctuation}>
-            Valoracion Del Hotel :{valoration}
+            {translations[idioma].ValoracionDelHotel} :{valoration}
           </p>
           <p className={style.province}>
             {department},{province}

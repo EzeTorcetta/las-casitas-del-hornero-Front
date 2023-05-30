@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GetTrolley } from "../../redux/Actions/Actions";
 
 //-------------------Styles-----------------------//
@@ -25,6 +25,18 @@ function Calendario({ id }) {
   });
   const [startDate, endDate] = dateRange;
   //*--------------------------------------------------------------------*//
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      VerDisponibilidad: "See availability",
+      Fechas: `Start Date / End Date`,
+    },
+    es: {
+      VerDisponibilidad: "Ver Disponibilidad",
+      Fechas: `Fecha De Inicio / Fecha Final`,
+    },
+  };
 
   const SubirDisponibilidad = (idUser) => {
     console.log(idUser, stateFecha.checkIn, stateFecha.checkOut);
@@ -68,7 +80,7 @@ function Calendario({ id }) {
             endDate={endDate}
             onChange={(update) => onChange(update)}
             withPortal
-            dateFormat="dd 'de' MMMM 'de' yyyy"
+            dateFormat="dd '/' MMMM '/' yyyy"
             minDate={new Date()}
             maxDate={addMonths(new Date(), 12)} // La función addMonths es una función proporcionada por la biblioteca date-fns, que se utiliza para agregar un número específico de meses a una fecha determinada. Toma dos argumentos: la fecha inicial y la cantidad de meses que deseas agregar. se utiliza para realizar cálculos de fechas, como agregar o restar meses, de una manera sencilla y eficiente utilizando la biblioteca date-fns.
             showDisabledMonthNavigation
@@ -78,7 +90,7 @@ function Calendario({ id }) {
                 {!stateFecha.checkIn && !stateFecha.checkOut ? (
                   <span className="span">
                     <br />
-                    {`Fecha De Inicio / Fecha Final`}
+                    {translations[idioma].Fechas}
                   </span>
                 ) : (
                   <span className="span">
@@ -90,7 +102,7 @@ function Calendario({ id }) {
             }
           />
           <button onClick={() => SubirDisponibilidad(id)}>
-            Ver Disponibilidad
+            {translations[idioma].VerDisponibilidad}
           </button>
         </div>
       </div>
