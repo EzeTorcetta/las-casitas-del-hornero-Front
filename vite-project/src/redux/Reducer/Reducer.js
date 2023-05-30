@@ -27,6 +27,15 @@ import {
   SET_CURRENCY_SYMBOL,
   GET_CURRENCY_RATE,
   SET_THEME,
+  VALORACION_HOTELES,
+  HOTELES_MAS_RESERVADOS,
+  USER_QUE_MAS_RESERVO,
+  PROVINCIAS_MAS_RESERVADAS,
+  MES_MAS_RESERVADO,
+  TODOS_LOS_BOOKINGS,
+  HOTELES_MAS_RESERVADOS_PARTNER,
+  MES_MAS_RESERVA_PARTNER,
+  MODIFICAR_HOTEL_PARTNER,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -62,7 +71,20 @@ const InicialState = {
   Reviews: 0,
   idHotelForm: "",
   currencyExchange: {},
-  theme: 'light',
+  theme: "light",
+
+  Estadisticas: {
+    HotelMasReservado: [],
+    MesMasReservado: [],
+    ProvinciasMasReservada: [],
+    TodosLosBookings: [],
+    UsuarioQueMasReservo: [],
+    ValoracionHoteles: [],
+  },
+  EstadisticasPartner: {
+    HotelesMasReservadosPartner: [],
+    MesDondeMasSeReservoPartner: [],
+  },
 };
 
 export const rootReducer = (state = InicialState, actions) => {
@@ -128,9 +150,7 @@ export const rootReducer = (state = InicialState, actions) => {
     case DELETE_TROLLEY:
       return {
         ...state,
-        Trolley: state.Trolley.filter(
-          (tro) => tro.id !== actions.payload
-        ),
+        Trolley: state.Trolley.filter((tro) => tro.id !== actions.payload),
       };
     case DELETE_ALL_TROLLEY:
       return {
@@ -188,7 +208,7 @@ export const rootReducer = (state = InicialState, actions) => {
         Trolley: actions.payload,
       };
     case ID_HOTEL_FORM:
-      console.log("hola")
+      console.log("hola");
       return {
         ...state,
         idHotelForm: actions.payload,
@@ -213,8 +233,102 @@ export const rootReducer = (state = InicialState, actions) => {
       return {
         ...state,
         theme: actions.payload,
-      }
+      };
+
+    //*------------------------Estadisticas----------------------------*//
+
+    case VALORACION_HOTELES:
+      return {
+        ...state,
+        Estadisticas: {
+          ...state.Estadisticas,
+          ValoracionHoteles: actions.payload,
+        },
+      };
+
+    case HOTELES_MAS_RESERVADOS:
+      return {
+        ...state,
+        Estadisticas: {
+          ...state.Estadisticas,
+          HotelMasReservado: actions.payload,
+        },
+      };
+
+    case USER_QUE_MAS_RESERVO:
+      return {
+        ...state,
+        Estadisticas: {
+          ...state,
+          ...state.Estadisticas,
+          UsuarioQueMasReservo: actions.payload,
+        },
+      };
+
+    case PROVINCIAS_MAS_RESERVADAS:
+      return {
+        ...state,
+        Estadisticas: {
+          ...state,
+          ...state.Estadisticas,
+          ProvinciasMasReservada: actions.payload,
+        },
+      };
+
+    case MES_MAS_RESERVADO:
+      return {
+        ...state,
+        Estadisticas: {
+          ...state,
+          ...state.Estadisticas,
+          MesMasReservado: actions.payload,
+        },
+      };
+
+    case TODOS_LOS_BOOKINGS:
+      return {
+        ...state,
+        Estadisticas: {
+          ...state,
+          ...state.Estadisticas,
+          TodosLosBookings: actions.payload,
+        },
+      };
+
+    case HOTELES_MAS_RESERVADOS_PARTNER:
+      return {
+        ...state,
+        EstadisticasPartner: {
+          ...state.EstadisticasPartner,
+          HotelesMasReservadosPartner: actions.payload,
+        },
+      };
+
+    case MES_MAS_RESERVA_PARTNER:
+      return {
+        ...state,
+        EstadisticasPartner: {
+          ...state.EstadisticasPartner,
+          MesDondeMasSeReservoPartner: actions.payload,
+        },
+      };
+
     default:
       return { ...state };
   }
 };
+
+/*
+  EstadisticasPartner: {
+    HotelesMasReservadosPartner: [],
+    MesDondeMasSeReservoPartner: [],
+  },
+
+
+
+-----------------
+  HOTELES_MAS_RESERVADOS_PARTNER,
+  MES_MAS_RESERVA_PARTNER,
+  MODIFICAR_HOTEL_PARTNER,
+
+*/

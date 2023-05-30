@@ -27,6 +27,15 @@ import {
   GET_CURRENCY_RATE,
   SET_CURRENCY_SYMBOL,
   SET_THEME,
+  VALORACION_HOTELES,
+  HOTELES_MAS_RESERVADOS,
+  USER_QUE_MAS_RESERVO,
+  PROVINCIAS_MAS_RESERVADAS,
+  MES_MAS_RESERVADO,
+  TODOS_LOS_BOOKINGS,
+  HOTELES_MAS_RESERVADOS_PARTNER,
+  MES_MAS_RESERVA_PARTNER,
+  MODIFICAR_HOTEL_PARTNER,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -91,19 +100,6 @@ export const FuncionSelectFilter = (filters) => {
         );
       }
       const response = await axios.get(URL);
-
-      /*  swal({
-        text: "Card eliminada con exito!!.",
-        icon: "success",
-        buttons: "Aceptar",
-      });
-    } catch (error) {
-      swal({
-        title: "Alert",
-        text: error.response.data.error,
-        icon: "warning",
-        buttons: "Aceptar",
-      });*/
 
       dispatch({ type: GET_ALL_HOTELS, payload: response.data });
     } catch (error) {
@@ -221,7 +217,6 @@ export const GetTrolley = (idUser, checkIn, checkOut) => {
         `${URL_BASE}/cart/${idUser}?checkIn=${checkIn}&checkOut=${checkOut}`
       );
 
-      console.log(response.data);
       dispatch({ type: GET_TROLLEY, payload: response.data });
     } catch (error) {
       // swal({
@@ -280,7 +275,6 @@ export const putAmountTrolley = (value, idUser, id_Roomtype) => {
         type: PUT_AMOUNT_TROLLEY,
         payload: { id: id_Roomtype, amount: response.data },
       });
-      console.log(response.data);
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -446,5 +440,194 @@ export const changeTheme = (theme) => {
   return {
     type: SET_THEME,
     payload: theme,
+  };
+};
+
+//*---------------------------ACTIONS ESTADISTICAS--------------------------//
+
+export const FuncionValoracionHotelEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/hotels/stats/${idUser}/rated`
+      );
+
+      dispatch({ type: VALORACION_HOTELES, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*--------------------------------------Hoteles mas reservados------------------------------------*//
+
+export const FuncionHotelesMasReservadosEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/hotels/stats/${idUser}/booking`
+      );
+
+      dispatch({ type: HOTELES_MAS_RESERVADOS, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+//*-----------------------------------------Usuarios que mas reservaron---------------------------------------------------*//
+
+export const FuncionUsuariosQueMasReservaronEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/booking/mostBookingUser/${idUser}`
+      );
+
+      dispatch({ type: USER_QUE_MAS_RESERVO, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*----------Provincias en donde mas se reservaron----------------*//
+export const FuncionProvinciasMasReservaronEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/booking/province/${idUser}`
+      );
+
+      dispatch({ type: PROVINCIAS_MAS_RESERVADAS, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*---------------------------Mes donde mas se reservo----------------------------*//
+
+export const FuncionMesMasReservadoEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/booking/month/${idUser}`);
+
+      dispatch({ type: MES_MAS_RESERVADO, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*--------------------------------Todos los bookings---------------------------------*//
+
+export const FuncionTodosLosBookingsEstadistica = (idUser, rol) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/booking?id_superadmin=${idUser}&rol=${rol}`
+      );
+
+      dispatch({ type: TODOS_LOS_BOOKINGS, payload: response.data });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+//*----------------------------------------------------------------------------*//
+/*
+Partner:
+	- Hoteles mas reservados:  .../booking/mostBooking/:id_admin
+	- Traer mes donde mas se reservo:  .../booking/monthPartner/:id_admin
+	- Modificar el Hotel:  hotel/update/:id_hotel
+*/
+
+//*-------------------------------Estadisticas Partner---------------------------------*//
+export const FuncionHotelesMasReservadosPartnerEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/booking/mostBooking/${idUser}`
+      );
+      console.log(response.data, idUser);
+      dispatch({
+        type: HOTELES_MAS_RESERVADOS_PARTNER,
+        payload: response.data,
+      });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*----------------------------------------------------------------------------------------*//
+
+export const FuncionMesDondeMasSeReservaPartnerEstadistica = (idUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL_BASE}/booking/monthPartner/${idUser}`
+      );
+
+      dispatch({
+        type: MES_MAS_RESERVA_PARTNER,
+        payload: response.data,
+      });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  };
+};
+
+//*--------------------------------------Modificar el Hotel--------------------------------------------------*//
+
+export const FuncionModificarHotel = (idHotel) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`${URL_BASE}hotel/update/${idHotel}`); // body mandar lo que se pinte
+
+      dispatch({
+        type: MODIFICAR_HOTEL_PARTNER,
+        payload: response.data,
+      });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
   };
 };

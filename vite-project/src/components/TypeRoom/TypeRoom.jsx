@@ -69,7 +69,12 @@ const TypeRoom = ({ id, Trolleys }) => {
           </Card.Subtitle>
           <Card.Text>People: {room.people}</Card.Text>
           <img className={style.img} src={room.image} />
-          <Card.Text>stock : {room.stock}</Card.Text>
+          {room.stock === 0 ? (
+            <Card.Text>No disponible</Card.Text>
+          ) : (
+            <Card.Text>stock : {room.stock}</Card.Text>
+          )}
+
           {User?.rol !== 2 && User?.rol !== 3 ? (
             <button
               disabled={room.stock === 0}
