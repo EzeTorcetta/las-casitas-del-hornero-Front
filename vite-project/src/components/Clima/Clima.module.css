@@ -1,5 +1,5 @@
 /* Estilos para el componente Clima */
-.container {
+.contenedor {
   background-color: rgb(255, 255, 255);
   height: fit-content;
   padding: 1em;
@@ -8,6 +8,11 @@
   box-shadow: 7px 7px 15px 10px #3e291028;
 }
 
+@media(max-width: 1080px){
+  .contenedor{
+    margin-left: 7rem;
+  }
+}
 .container:hover {
   transform: scale(1.02);
   -webkit-transform: scale(1.02);

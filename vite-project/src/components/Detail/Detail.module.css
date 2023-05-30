@@ -77,9 +77,7 @@
     text-align: left;
   /* background-color: lightpink; */
 }
-.sectionDescription h1 {
 
-}
 .sectionDescription section {
   display: flex;
   flex-direction: row;

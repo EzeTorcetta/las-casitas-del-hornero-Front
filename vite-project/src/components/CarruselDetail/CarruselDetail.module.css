@@ -22,13 +22,15 @@
   border-radius: 15px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1080px) {
   .carousel {
     width: 280px;
     height: 300px;
+  
   }
   .img {
     width: 280px;
     height: 300px;
+  
   }
 }

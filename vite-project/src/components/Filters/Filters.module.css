@@ -120,9 +120,9 @@
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 1080px){
   .form{
-    margin-left: 5rem;
+    margin-left: 5.7rem;
   }
 }
 

@@ -73,7 +73,7 @@ const NavBar = ({ countCarrito }) => {
     location.reload();
   };
 
- if(windowWidth > 500){
+ if(windowWidth > 1080){
 
   return(
     <div>

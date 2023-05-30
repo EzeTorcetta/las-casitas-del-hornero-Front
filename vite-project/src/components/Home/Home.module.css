@@ -1,6 +1,5 @@
 body {
   overflow-x: hidden;
-
 }
 .home_container {
   display: flex;
@@ -33,16 +32,19 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: start;
+
 }
 
-@media (max-width:576px) {
+@media (max-width:1080px) {
   .section {
-    flex-direction: column;
-    width: 100%;
+    width: 100%; 
   }
-
   .filtroContainer {
-    width: 100%;
+    width:100%;
+    margin-left: 3rem;
+    margin-bottom: 4rem;
   }
-
+  .divCard{
+    margin-left: 3rem;
+  }
 }
