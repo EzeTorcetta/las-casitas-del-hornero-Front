@@ -19,11 +19,17 @@ import Clima from "./Clima/Clima";
 import Paginado from "./Paginado/Paginado";
 import { LogOut } from "./GoogleAuth/LogOut";
 import Trolley from "./Trolley/Trolley";
+import TrolleyCard from "./TrolleyCard/TrolleyCard";
+
 //*------------------LoclaStorage-----------------------------------*//
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
 import GuardarDatosParaCambiarPassword from "./LocalStorage/PutPasswordLocalStorage/GuardarDatosParaCambiarPassword";
 import PedirEmailLocalStorage from "./LocalStorage/PutPasswordLocalStorage/PedirEmailLocalStorage";
+import GuardarCheckInCheckOut from './LocalStorage/Check/GuardarCheckInCheckOut';
+import PedirCheckInCheckOut from './LocalStorage/Check/PedirCheckInCheckOut';
+import CleanCheckinCheckout from './LocalStorage/Check/CleanCheckinCheckout';
+
 //*----------------------------------------------------------------*//
 import FormLocal from "./Formularios/FormularioRegistrar/FormLocal";
 import FormGoogle from "./Formularios/FormularioRegistrar/FormGoogle";
@@ -43,6 +49,10 @@ import OlvidasteLaPassword from "./OlvidasteLaPassword/OlvidasteLaPassword";
 import RestablecerContraseña from "./OlvidasteLaPassword/RestablecerContraseña";
 
 export {
+  TrolleyCard,
+  GuardarCheckInCheckOut,
+  PedirCheckInCheckOut,
+  CleanCheckinCheckout,
   OlvidasteLaPassword,
   RestablecerContraseña,
   Error404,

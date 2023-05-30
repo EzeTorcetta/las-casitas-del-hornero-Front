@@ -44,21 +44,6 @@ const validacion = (hotel) => {
       delete error.phoneNumber;
     }
   
-    // VALIDACION DE LA VALORACION
-  
-    if (!hotel.valoration) {
-      error.valoration =
-        "Por favor ingresa algun número que indique tu valoración del hotel.";
-    } else if (isNaN(hotel.valoration)) {
-      error.valoration = "Por favor ingresa un número.";
-    } else if (hotel.valoration % 1 !== 0) {
-      error.valoration = "Por favor ingresa un número entero.";
-    } else if (hotel.valoration > 9 || hotel.valoration < 1) {
-      error.valoration = "Por favor ingresa una valoración del 1 al 9.";
-    } else {
-      delete error.valoration;
-    }
-  
     // VALIDACION DE LA CLASIFICACION
   
     if (!hotel.rating) {

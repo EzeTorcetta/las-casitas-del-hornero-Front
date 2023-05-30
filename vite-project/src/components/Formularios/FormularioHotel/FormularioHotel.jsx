@@ -56,7 +56,6 @@ const FormularioHotel = () => {
     email: "",
     phoneNumber: "",
     description: "",
-    valoration: "",
     rating: "",
     province: "",
     department: "",
@@ -175,23 +174,23 @@ const FormularioHotel = () => {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "La_Casita_Del_Hornero");
-    setLoading(true);
+    setLoading(true)
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
       {
         method: "POST",
         body: data,
       }
-    );
-    const file = await res.json();
-    await hotel.image.push(file.secure_url);
+    )
+    const file = await res.json()
+    await hotel.image.push(file.secure_url)
     setLoading(false);
     setError(validacion({ ...hotel, image: hotel.image }));
   };
 
   const deleteImage = async (url) => {
     setLoading(true);
-    hotel.image = await hotel.image.filter((imagen) => url !== imagen);
+    hotel.image = await hotel.image.filter((imagen) => url !== imagen)
     setLoading(false);
     setError(validacion({ ...hotel, image: hotel.image }));
   };
@@ -224,7 +223,6 @@ const FormularioHotel = () => {
       !hotel.name.length ||
       !hotel.email.length ||
       !hotel.phoneNumber.length ||
-      !hotel.valoration.length ||
       !hotel.rating.length ||
       !hotel.province.length ||
       !hotel.department.length ||
@@ -251,7 +249,6 @@ const FormularioHotel = () => {
       email,
       phoneNumber,
       description,
-      valoration,
       rating,
       province,
       department,
@@ -266,7 +263,6 @@ const FormularioHotel = () => {
         email,
         phoneNumber,
         description,
-        valoration: Number(valoration),
         rating: Number(rating),
         province,
         department,
@@ -276,9 +272,9 @@ const FormularioHotel = () => {
         location,
       });
 
-      await axios.get(
-        `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/CreacionDeHotel/${User.gmail}?name=${User.name}`
-      );
+      // await axios.get(
+      //   `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/CreacionDeHotel/${User.gmail}?name=${User.name}`
+      // );
 
       swal({
         text: "Tu hotel se registro con éxito!",
@@ -292,10 +288,11 @@ const FormularioHotel = () => {
       });
     } catch (error) {
       swal({
-        text: "Por favor vuelve a intentarlo, ocurrio un problema al cargar tu hotel.",
+        text: error.response.data.error,
         icon: "warning",
         buttons: "Aceptar",
       });
+      
     }
   };
 
@@ -387,25 +384,34 @@ const FormularioHotel = () => {
             <label>Una descriptión opcional.</label>
           </div>
 
-          {/* VALORACION DEL HOTEL */}
+          {/* SERVICIOS QUE TENDRA EL HOTEL */}
 
-          {error.valoration ? (
-            <span className={style.error}>{error.valoration}</span>
+          {error.services ? (
+            <span className={style.error}>{error.services}</span>
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="valoration"
-              placeholder="Valoración del hotel."
-              onChange={handleChange}
-              value={hotel.valoration}
-              name="valoration"
-            />
-            <label>Valoración del hotel.</label>
-          </div>
+          <div>Selecciona los servicios que tiene tu hotel:</div>
+          <span
+            onChange={onChangeServices}
+            className={style.checkContainer}>
+            {services?.map((service) => (
+              <div key={service.id} className={style.checkbox}>
+                <label className={style.container}>
+                  <input
+                    type="checkbox"
+                    id={service.id}
+                    value={service.name}
+                    onChange={onChangeServices}
+                  />
+                  <div className={style.checkmark}></div>
+                </label>
+                <span className={style.nameService}>
+                  {service.name}
+                </span>
+              </div>
+            ))}
+          </span>
 
           {/* CLASIFICACION DEL HOTEL */}
 
@@ -425,6 +431,33 @@ const FormularioHotel = () => {
               name="rating"
             />
             <label>Clasificación del hotel.</label>
+          </div>
+
+          {/* CARGAR IMAGEN */}
+
+          {error.image ? (
+            <span className={style.error}>{error.image}</span>
+          ) : (
+            <span className={style.hidden}>hidden</span>
+          )}
+          <div>Carga la foto de tu hotel:</div>
+          <div>
+            <input
+              type="file"
+              name="image"
+              placeholder="arrastra la imagen aquí"
+              onChange={uploadImage}
+            />
+            {hotel.image.length ? (
+              hotel.image.map((imagen) => {
+                return (
+                  <>
+                    <img src={imagen} style={{ width: "300px" }} />
+                    <button onClick={() => deleteImage(imagen)}>X</button>
+                  </>
+                )
+              })
+            ) : (<></>)}
           </div>
 
           {/* LOCATION DONDE SE UBICA EL HOTEL*/}
@@ -468,185 +501,6 @@ const FormularioHotel = () => {
           ) : (
             <></>
           )}
-
-          {/* TELEFONO DE CONTACTO */}
-
-          {error.phoneNumber ? (
-            <span className={style.error}>{error.phoneNumber}</span>
-          ) : (
-            <span className={style.hidden}>hidden</span>
-          )}
-          <div className="form-floating">
-            <input
-              type="tel"
-              className="form-control"
-              id="phoneNumber"
-              placeholder="Número telefónico."
-              onChange={handleChange}
-              value={hotel.phoneNumber}
-              name="phoneNumber"
-            />
-            <label>Número telefónico.</label>
-          </div>
-
-          {/* UNA DESCRIPCION OPCIONAL */}
-
-          <span className={style.hidden}>hidden</span>
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="description"
-              placeholder="Una descriptión opcional."
-              onChange={handleChange}
-              value={hotel.description}
-              name="description"
-            />
-            <label>Una descriptión opcional.</label>
-          </div>
-
-          {/* VALORACION DEL HOTEL */}
-
-          {error.valoration ? (
-            <span className={style.error}>{error.valoration}</span>
-          ) : (
-            <span className={style.hidden}>hidden</span>
-          )}
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="valoration"
-              placeholder="Valoración del hotel."
-              onChange={handleChange}
-              value={hotel.valoration}
-              name="valoration"
-            />
-            <label>Valoración del hotel.</label>
-          </div>
-
-          {/* CLASIFICACION DEL HOTEL */}
-
-          {error.rating ? (
-            <span className={style.error}>{error.rating}</span>
-          ) : (
-            <span className={style.hidden}>hidden</span>
-          )}
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="rating"
-              placeholder="Clasificación del hotel."
-              onChange={handleChange}
-              value={hotel.rating}
-              name="rating"
-            />
-            <label>Clasificación del hotel.</label>
-          </div>
-
-          {/* LOCATION DONDE SE UBICA EL HOTEL*/}
-
-          <div>Selecciona la Provincia donde se encuentra tu hotel:</div>
-          <select onChange={onChangeProvinces} className={style.select}>
-            {location.provinces?.map(({ nombre, id }) => (
-              <option value={nombre} key={id} id={id}>
-                {nombre}
-              </option>
-            ))}
-          </select>
-          {location.departments.length ? (
-            <div>
-              <div>Selecciona el Departamento donde se encuentra tu hotel:</div>
-              <select onChange={onChangeDepartments} className={style.select}>
-                {location.departments?.map(({ nombre, id }) => (
-                  <option value={nombre} key={id} id={id}>
-                    {nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : (
-            <></>
-          )}
-          {location.localities.length ? (
-            <div>
-              <div>Selecciona la Localidad donde se encuentra tu hotel:</div>
-              <select onChange={onChangeLocalities} className={style.select}>
-                {location.localities?.map(({ nombre, id }) => (
-                  <option value={nombre} key={id} id={id}>
-                    {nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : (
-            <></>
-          )}
-
-          {/* SERVICIOS QUE TENDRA EL HOTEL */}
-
-          {error.image ? (
-            <span className={style.error}>{error.image}</span>
-          ) : (
-            <span className={style.hidden}>hidden</span>
-          )}
-          <div>Carga la foto de tu hotel:</div>
-          <div>
-            <input
-              type="file"
-              name="image"
-              placeholder="arrastra la imagen aquí"
-              onChange={uploadImage}
-            />
-            {hotel.image.length ? (
-              hotel.image.map((imagen) => {
-                return (
-                  <>
-                    <img src={imagen} style={{ width: "300px" }} />
-                    <button onClick={() => deleteImage(imagen)}>X</button>
-                  </>
-                );
-              })
-            ) : (
-              <></>
-            )}
-          </div>
-
-          {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
-          {/* <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="image"
-            placeholder="URL de la foto."
-            onChange={onChangeImage}
-            value={hotel.image}
-            name="image"
-          />
-          <label>URL de la foto.</label> */}
-
-          {/* FOTOS DEL HOTEL */}
-
-          {error.image ? (
-            <span className={style.error}>{error.image}</span>
-          ) : (
-            <span className={style.hidden}>hidden</span>
-          )}
-          <div>Carga la foto de tu hotel:</div>
-          {/* <Cloudinary setImage={setFotos} path="hotels" /> */}
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="image"
-              placeholder="URL de la foto."
-              onChange={onChangeImage}
-              value={hotel.image}
-              name="image"
-            />
-            <label>URL de la foto.</label>
-          </div>
 
           {/* GEOLOCALIZACION DEL HOTEL */}
 

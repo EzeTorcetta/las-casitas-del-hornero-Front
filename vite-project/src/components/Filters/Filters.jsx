@@ -23,6 +23,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
 import styleDark from "./FiltersDark.module.css";
+import { GuardarCheckInCheckOut } from "../Index";
 
 // import style from theme === 'light'? "./Filters.module.css":"./FiltersDark.module.css";
 
@@ -145,10 +146,13 @@ const Filter = () => {
 
   // FILTRAR
   const FuncionFilter = (event) => {
-    console.log(stateFecha);
     event.preventDefault();
     dispatch(PostFilters(stateFilter)); // Para modificar el estado global
     dispatch(FuncionSelectFilter(stateFilter, 1)); // Para el get a la DB
+    GuardarCheckInCheckOut({
+      CheckIn: stateFecha.checkIn,
+      CheckOut: stateFecha.checkOut,
+    })
   };
 
   // CLEAN FILTROS

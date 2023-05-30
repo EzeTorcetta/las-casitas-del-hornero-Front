@@ -123,24 +123,14 @@ export const PostFilters = (filters) => {
   };
 };
 
-// export const FuncionAllHotel = (page = 1) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.get(`https://las-casitas-del-hornero-back.up.railway.app/hotels?page=${page}`);
-//
-//       dispatch({ type: ALL_HOTELS, payload: response.data });
-//     } catch (error) {
-//       alert(error.response.data.error);
-//     }
-//   };
-// };
-
 //* ----------------- TYPE ROOMS ------------------------------------
-export const FuncionTypeRoomTypes = (idHotel) => {
+export const FuncionTypeRoomTypes = (idHotel,checkIn,checkOut) => {
+ 
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}`);
+      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`);
       dispatch({ type: TYPE_ROOM, payload: response.data });
+      console.log(response.data)
     } catch (error) {
       swal({
         text: error.response.data.error,

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "react-bootstrap/Card";
-import { PedirLocalStorage } from "../Index";
+import { PedirCheckInCheckOut, PedirLocalStorage } from "../Index";
 import GetCurrencyExchange from "../CurrencyExchange/GetCurrencyExchange";
 import swal from "sweetalert";
 import style from "./TypeRoom.module.css";
@@ -16,9 +16,12 @@ import { v4 as uuidv4 } from "uuid";
 const TypeRoom = ({ id, Trolleys }) => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const User = PedirLocalStorage();
+  const check = PedirCheckInCheckOut();
   const dispatch = useDispatch();
   const [State, setState] = useState([]);
   const { TypeRoom } = useSelector((state) => state);
+
+  
 
   const FuncionPostCarrito = async (idUser, idTypeRoom, stock) => {
     if (stock !== 0) {
@@ -48,8 +51,10 @@ const TypeRoom = ({ id, Trolleys }) => {
     }
   };
 
-  useEffect(() => {
-    dispatch(FuncionTypeRoomTypes(id));
+  useEffect( ()  => {
+    const checkIn = check.CheckIn;
+    const checkOut = check.CheckOut;
+    dispatch(FuncionTypeRoomTypes(id,checkIn,checkOut));
   }, []);
 
   //{ id, name, image, price, stock, people }
@@ -84,32 +89,6 @@ const TypeRoom = ({ id, Trolleys }) => {
           ) : (
             <></>
           )}
-
-          {/* {room.name === "Individual" ? (
-            <button
-              className={style.BotonCarrito}
-              onClick={() => FuncionPostCarrito(User.id, room.id, room.name)}
-              disabled={Trolleys?.filter((tro) => tro.name === room.name)}
-            >
-              + Agregar al Carrito
-            </button>
-          ) : room.name === "Familiar" ? (
-            <button
-              className={style.BotonCarrito}
-              onClick={() => FuncionPostCarrito(User.id, room.id, room.name)}
-              disabled={Trolleys?.filter((tro) => tro.name === room.name)}
-            >
-              + Agregar al Carrito
-            </button>
-          ) : (
-            <button
-              className={style.BotonCarrito}
-              onClick={() => FuncionPostCarrito(User.id, room.id, room.name)}
-              disabled={Trolleys?.filter((tro) => tro.name === room.name)}
-            >
-              + Agregar al Carrito
-            </button>
-          )} */}
         </Card.Body>
       </Card>
     </div>
