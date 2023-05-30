@@ -120,6 +120,12 @@
   }
 }
 
+@media (max-width: 500px){
+  .form{
+    margin-left: 5rem;
+  }
+}
+
 .inputSearch{
   width: 100%;
   appearance: none;

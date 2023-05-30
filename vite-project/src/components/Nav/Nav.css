@@ -2,7 +2,6 @@
 
 .navlight {
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,29 +9,48 @@
   /*encima de to */
   background-color: #E56910;
   color: white;
+  padding-left: 2rem;
+  position: fixed;
 }
+
+.navdark{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+  background-color: rgb(69, 71, 145);
+  color: white;
+  padding-left: 2rem;
+  position: fixed;
+}
+
 
 @media (max-width: 500px){
   .navlight{
   flex-direction: column;
    height: 100%;
    width: 5rem;
-   position: absolute;
+   position: fixed;
    padding-top: 2rem;
    padding-bottom: 2rem;
+   padding-left: 0;
+  }
+
+  .navdark{
+    flex-direction: column;
+    height: 100%;
+    width: 5rem;
+    position: fixed;
+    background-color: rgb(69, 71, 145);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: white;
+    padding-left: 0;
   }
 }
 
-.navdark{
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(69, 71, 145);
-  z-index: 3; /* encima de todo */
-  color: white;
-}
+
 
 .logo {
   display: flex;
