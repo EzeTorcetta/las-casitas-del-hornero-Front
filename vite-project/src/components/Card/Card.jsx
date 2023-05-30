@@ -10,6 +10,7 @@ import axios from "axios";
 import imgFav from "../../image/favorito.png";
 import styleLight from "./Card.module.css";
 import styleDark from "./CardDark.module.css";
+import swal from "sweetalert";
 
 //?----------------- COMPONENTE CARD ------------------------------------
 function Cards({
@@ -46,6 +47,13 @@ function Cards({
         ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`)
         : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
       dispatch(FuncionAllFavoritesHotel(User.id));
+    }
+    else{
+      swal({
+        text: "Debes iniciar sesion ",
+        icon: "warning",
+        buttons: "Aceptar",
+    });
     }
   };
 

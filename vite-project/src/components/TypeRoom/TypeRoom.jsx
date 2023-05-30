@@ -75,7 +75,7 @@ const TypeRoom = ({ id, Trolleys }) => {
             <Card.Text>stock : {room.stock}</Card.Text>
           )}
 
-          {User?.rol !== 2 && User?.rol !== 3 ? (
+          {User?.rol === 1 ? (
             <button
               disabled={room.stock === 0}
               className={style.BotonCarrito}

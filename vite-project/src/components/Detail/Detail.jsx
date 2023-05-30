@@ -38,8 +38,8 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   const Trolleys = useSelector((state) => state.Trolley);
 
   useEffect(() => {
+    dispatch(FuncionDetailHotel(id));
     if (User?.id) {
-      dispatch(FuncionDetailHotel(id));
       dispatch(GetTrolley(User.id, undefined, undefined));
     }
     return () => {
@@ -58,9 +58,6 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      {!User ? (
-        <Error404 />
-      ) : (
         <div className={style.detailContainer}>
           {/* ---CONTENEDOR INFO HOTEL E IMAGE -------*/}
           <div className={style.div}>
@@ -103,7 +100,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               />
             </div>
 
-            {User.rol === 2 ? (
+            {User?.rol === 2 ? (
               <NavLink to="/FormRoomType">
                 <p onClick={setHotel}>Agregar Room Type</p>
               </NavLink>
@@ -158,7 +155,6 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
             <Reviews />
           </div>
         </div>
-      )}
       <Footer />
     </>
   );

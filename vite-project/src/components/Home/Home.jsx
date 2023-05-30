@@ -26,6 +26,8 @@ import {
   Loading,
   Paginado,
   PedirLocalStorage,
+  PedirCheckInCheckOut,
+  GuardarCheckInCheckOut,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 import SwitchButton from "../SwitchButton/SwitchButton";
@@ -45,6 +47,18 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const estado = useSelector((state) => state);
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
+
+  if(!PedirCheckInCheckOut()){
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const checkIn = today;
+    const checkOut = tomorrow;
+    GuardarCheckInCheckOut({
+      CheckIn: checkIn,
+      CheckOut: checkOut,
+    })
+  }
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -83,8 +97,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     <>
       <NavBar countCarrito={countCarrito} />
       <div className={style.home_container}>
-        <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
-
+        <Carrusel HotelsCarrusel={Hotels?.allHotels} />
         {Hotels.allHotels?.length ? (
           <>
             <section className={`${style.section} ${style.one}`}>
