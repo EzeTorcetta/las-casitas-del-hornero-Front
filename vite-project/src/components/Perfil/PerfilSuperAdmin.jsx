@@ -1,13 +1,44 @@
+import { useEffect } from "react";
 import {
-  EstadisticasLineal,
-  EstadisticasBarra,
-  EstadisticasDoughnut,
-} from "../../Estadisticas/Estadisticas";
+  FuncionHotelesMasReservadosEstadistica,
+  FuncionProvinciasMasReservaronEstadistica,
+  FuncionTodosLosBookingsEstadistica,
+  FuncionMesMasReservadoEstadistica,
+  FuncionValoracionHotelEstadistica,
+  FuncionUsuariosQueMasReservaronEstadistica,
+} from "../../redux/Actions/Actions";
+import {
+  EstadisticasLinealValoracionHoteles,
+  EstadisticasLinealTodosLosBookings,
+  EstadisticasBarraMesMasReservado,
+  EstadisticasBarraHotelMasReservado,
+  EstadisticasLinealUsuarioQueMasReservo,
+  EstadisticasLinealProvinciasMasReservada,
+} from "../../Estadisticas/EstadisticasSuperAdmin";
 import { NavBar, Footer, PedirLocalStorage, GetUsers } from "../Index";
 import "./PerfilSuperAdmin.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const PerfilSuperAdmin = () => {
+  const dispatch = useDispatch();
+  const {
+    ValoracionHoteles,
+    TodosLosBookings,
+    MesMasReservado,
+    HotelMasReservado,
+    UsuarioQueMasReservo,
+    ProvinciasMasReservada,
+  } = useSelector((state) => state.Estadisticas);
   let User = PedirLocalStorage();
+
+  useEffect(() => {
+    dispatch(FuncionHotelesMasReservadosEstadistica(User.id));
+    dispatch(FuncionProvinciasMasReservaronEstadistica(User.id));
+    dispatch(FuncionMesMasReservadoEstadistica(User.id));
+    dispatch(FuncionValoracionHotelEstadistica(User.id));
+    dispatch(FuncionUsuariosQueMasReservaronEstadistica(User.id));
+    dispatch(FuncionTodosLosBookingsEstadistica(User.id, User.rol));
+  }, []);
 
   return (
     <>
@@ -26,9 +57,24 @@ const PerfilSuperAdmin = () => {
       </section>
       <section>
         <div className="DivEstadisticas">
-          <EstadisticasLineal />
-          <EstadisticasBarra />
-          <EstadisticasDoughnut />
+          <EstadisticasLinealValoracionHoteles
+            ValoracionHoteles={ValoracionHoteles}
+          />
+          <EstadisticasLinealTodosLosBookings
+            TodosLosBookings={TodosLosBookings}
+          />
+          <EstadisticasBarraMesMasReservado MesMasReservado={MesMasReservado} />
+          <EstadisticasBarraHotelMasReservado
+            HotelMasReservado={HotelMasReservado}
+          />
+
+          <EstadisticasLinealUsuarioQueMasReservo
+            UsuarioQueMasReservo={UsuarioQueMasReservo}
+          />
+
+          <EstadisticasLinealProvinciasMasReservada
+            ProvinciasMasReservada={ProvinciasMasReservada}
+          />
         </div>
       </section>
       <section className="Footer">

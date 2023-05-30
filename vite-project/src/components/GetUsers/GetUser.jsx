@@ -14,13 +14,10 @@ const GetUsers = () => {
   const [selectedUserRole, setSelectedUserRole] = useState("");
   console.log(selectedUserRole);
   const [showOptions, setShowOptions] = useState(false);
-
   console.log(selectedUserRole);
-
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
-
   const handleRoleChange = async () => {
     const data = {
       id_user: selectedUserId,
@@ -28,16 +25,13 @@ const GetUsers = () => {
     };
     await dispatch(changeRol(data));
     setShowOptions(false);
-
     await dispatch(getUsers(user.id));
   };
-
   const handleSelectUser = (userId) => {
     console.log(userId);
     setSelectedUserId(userId);
     setShowOptions(true);
   };
-
   const columnas = [
     "id",
     "username",
@@ -88,7 +82,6 @@ const GetUsers = () => {
   const options = {
     selectableRows: false, // Desactivar checkboxes en cada fila
   };
-
   return (
     <MUIDataTable
       title="Lista De Usuarios"

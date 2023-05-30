@@ -83,10 +83,9 @@ const RestablecerContraseña = () => {
       } else {
         // Aca voy hacer el axios.put(para actualizar las contraseñas)
         const email = PedirEmailLocalStorage();
-
-        console.log(email);
-
         const { password } = statePassword;
+
+        console.log(email, password);
 
         await axios.put(
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/password`,
