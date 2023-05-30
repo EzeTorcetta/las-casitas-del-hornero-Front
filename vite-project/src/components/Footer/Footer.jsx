@@ -4,9 +4,9 @@ import style from "./Footer.module.css";
 //?----------------- COMPONENTE FOOTER ------------------------------------
 const Footer = () => {
   return (
-    <footer className={style.footer}>
-      <p>&copy; 2023 CasitasDelHornero </p>
-    </footer>
+    <div className={style.footer}>
+      <p> 2023 CasitasDelHornero </p>
+    </div>
   );
 };
 
