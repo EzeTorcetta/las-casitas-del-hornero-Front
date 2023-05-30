@@ -105,7 +105,7 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
             }
         } else {
             swal({
-                text: "No hay ningun Hotel Para reservar",
+                text: error.response.data.error,
                 icon: "warning",
                 buttons: "Aceptar",
             });
