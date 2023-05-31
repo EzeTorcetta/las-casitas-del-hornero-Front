@@ -1,51 +1,32 @@
+
 .perfil_container {
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
-  padding: 0 2em;
+  margin-top: 4rem;
 }
-.saludo {
-  justify-content: center;
-  text-align: center;
+
+.QuieroProveedor {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-}
-.saludo h2 {
-  background-color: orange;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: #ddb900;
+  border: none;
+  font-size: 20px;
   color: white;
-  padding: 0.5em;
-  width: fit-content;
 }
-.divFavorites,
-.divRewies {
+
+.divFavorites {
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
-  padding: 2em;
-  margin-top: 4em;
+  padding-left: 30rem;
   border-radius: 0.5rem;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-}
-.divFavorites h2,
-.divRewies h2 {
-  text-align: center;
-  text-transform: uppercase;
-  width: 500px;
-  background-color: orange;
   color: white;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  padding: 0.2em 2em;
-
-  margin-bottom: 0.3em;
+  background-color: #929292;
 }
 
 .divRewies {
@@ -53,12 +34,12 @@
   flex-direction: column;
   text-align: center;
   padding: 20px;
+  color: white;
 }
 
-.QuieroProveedor {
-  padding: 10px 20px;
-  background-color: blanchedalmond;
-  border-radius: 10px;
-  border: none;
-  font-size: 20px;
+h2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }

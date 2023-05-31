@@ -120,8 +120,7 @@ const NavBar = ({ countCarrito }) => {
                 <div className="contenedor-opciones-dark">
                   <button onClick={handleVerPerfil} className="botoncito-dark">Perfil</button>
                   {rol === 2 ? <div className="opciones-dark">Proveer Hotel</div> : 
-                  rol === 3 ? <div className="opciones-dark">Administrar Usuarios</div> : 
-                  <button onClick={handleChangeTipoCuenta} className="botoncito-dark">Quiero ser proveedor</button>}
+                  rol === 3 ? <div className="opciones-dark">Administrar Usuarios</div> : <></>}
                   <button onClick={handleLogout} className="botoncito-dark">LogOut</button>
                 </div>
             </div>
@@ -132,7 +131,7 @@ const NavBar = ({ countCarrito }) => {
                   <button onClick={handleVerPerfil} className="botoncito">Perfil</button>
                   {rol === 2 ? <div className="opciones">Proveer Hotel</div> : 
                   rol === 3 ? <div className="opciones">Administrar Usuarios</div> : 
-                  <div className="opciones">Quiero ser proveedor</div>}
+                  <></>}
                   <button onClick={handleLogout} className="botoncito">LogOut</button>
                 </div>
             </div>
@@ -147,10 +146,12 @@ const NavBar = ({ countCarrito }) => {
   );
 }
   else{
+
     return(
-      <div>
+
         <div className={theme === "light" ? "navlight" : "navdark"}>
-          <NavLink to={"/Home"} className="links">
+
+          <NavLink to={"/Home"}>
             <div className="logo">
               <img
                 className="img"
@@ -159,6 +160,8 @@ const NavBar = ({ countCarrito }) => {
               />
             </div>
           </NavLink>
+ 
+          
           <SwitchButtonFlex />
           <SymbolsCurrencyFlex />
   
@@ -177,49 +180,43 @@ const NavBar = ({ countCarrito }) => {
               <></>
             )
           }
-  
-  
-          <div>
-        
-            {username ? (
-              <div>
-                {/* ------------- NUEVO MENU ------------ */}
-  
-                <nav>
-                  <ul className="menu-horizontal">
-                    <li>
-                      <a>{`${username}`}</a>
-                      <ul className="menu-vertical">
-                        <li>
-                          <a href="/Perfil">Perfil</a>
-                        </li>
-                        {rol === 2 ? (
-                          <li>
-                            <a href="">Proveer Hotel</a>
-                          </li>
-                        ) : rol === 3 ? (
-                          <li>
-                            <a href="">Administrar Usuarios</a>
-                          </li>
-                        ) : (
-                          <li>
-                            <a href="">Quiero ser proveedor</a>
-                          </li>
-                        )}
-                        <li>
-                          <button onClick={handleLogout}>Salir</button>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            ) : (
-              <a href="/"> iniciar sesion</a>
-            )}
-          </div>
+
+
+        <div>
+          {username ? (theme === 'dark' ? (
+            <div className="contenedor-elementos-dark-flex">
+                <div className="nombre-usuario-dark-flex">{`${username}`}</div>
+                <div className="contenedor-opciones-dark-flex">
+                  <button onClick={handleVerPerfil} className="botoncito-dark-flex">Perfil</button>
+                  {rol === 2 ? <div className="opciones-dark-flex">Proveer Hotel</div> : 
+                  rol === 3 ? <div className="opciones-dark-flex">Administrar Usuarios</div> : <></>}
+                  <button onClick={handleLogout} className="botoncito-dark-flex">LogOut</button>
+                </div>
+            </div>
+          ) : (
+            <div className="contenedor-elementos-flex">
+                <div className="nombre-usuario-flex">{`${username}`}</div>
+                <div className="contenedor-opciones-flex">
+                  <button onClick={handleVerPerfil} className="botoncito-flex">Perfil</button>
+                  {rol === 2 ? <div className="opciones-flex">Proveer Hotel</div> : 
+                  rol === 3 ? <div className="opciones-flex">Administrar Usuarios</div> : 
+                  <></>}
+                  <button onClick={handleLogout} className="botoncito-flex">LogOut</button>
+                </div>
+            </div>
+          )): (
+            <button onClick={handleGoHome} className="boton-inicia-sesion-flex"> Iniciar sesion</button>
+          )
+        }
+
         </div>
+
+
+
       </div>
+  
+  
+         
     )
   }
 };

@@ -46,36 +46,31 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   };
 
   return (
-    <>
+    <div className={style.perfil_container}>
       <NavBar countCarrito={countCarrito} />
-      <div className={style.perfil_container}>
-        <section>
-          <div className={style.saludo}>
-            <h2>{`${User.username}`}</h2>
-            <p>{`${User.email}`}</p>
-          </div>
-          <button
+      
+            <button
             className={style.QuieroProveedor}
             onClick={() => FuncionQuieroSerProveedor(User.id)}
-          >
-            Quiero ser Proveedor!
-          </button>
-        </section>
-        <section className={style.section}>
-          <div className={style.divFavorites}>
+            >
+            ¡Quiero ser Proveedor!
+            </button>
+
             <h2>favoritos</h2>
-            <Favoritos />
-          </div>
-        </section>
-        <section className={style.section}>
-          <div className={style.divRewies}>
+            <div className={style.divFavorites}>
+              
+              <Favoritos />
+            </div>
+    
             <h2>Booking</h2>
-            <Booking />
-          </div>
-        </section>
-        <Footer />
+            <div className={style.divRewies}>
+              
+              <Booking />
+            </div>
+
+        <Footer/>
       </div>
-    </>
+
   );
 };
 

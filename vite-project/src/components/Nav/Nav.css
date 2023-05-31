@@ -30,6 +30,7 @@
 
 @media (max-width: 1080px){
   .navlight{
+
   flex-direction: column;
    height: 100%;
    width: 5rem;
@@ -51,6 +52,14 @@
     padding-left: 0;
   }
 }
+
+
+
+
+.perros:hover .navlight{
+display: flex;
+}
+
 
 
 {/*-----BARRA DE OPCIONES DARK----*/}
@@ -156,6 +165,74 @@ background-color: #E56910;
  .contenedor-elementos:hover .contenedor-opciones{
    display:block;
  }
+
+{/*---------OPCIONES FLEX----------*/}
+
+.contenedor-elementos-flex{
+display: flex;
+flex-direction: row;
+  height: 4rem;
+  width: 20rem;
+ }
+ 
+ .nombre-usuario-flex{
+   display: flex;
+background-color: #E56910;
+   height: 4rem;
+   align-items: center;
+   justify-content: center;
+ }
+ 
+ .contenedor-opciones-flex{
+   display: none;
+   background-color: blue;
+ }
+ 
+ .opciones-flex{
+   display: flex;
+ background-color: whitesmoke;
+ height: 4rem;
+ align-items: center;
+ justify-content: center;
+ color: black;
+ }
+ 
+ .opciones-flex:hover{
+   background-color: #dcdcdc;
+ }
+ 
+ .botoncito-flex{
+ height: 4rem;
+ width: 20rem;
+ border: none;
+ background-color: whitesmoke;
+ color: black;
+ }
+ 
+ .botoncito-flex:hover{
+ background-color: #dcdcdc;
+ }
+ 
+ .contenedor-elementos-flex:hover .contenedor-opciones-flex{
+   display:flex;
+   margin-left: 9rem;
+ }
+
+
+ .logo-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-left: .6rem;
+  background-color: red;
+}
+
+.logo-flex:hover.navlight{
+  display: flex;
+}
+
+
 
 
 

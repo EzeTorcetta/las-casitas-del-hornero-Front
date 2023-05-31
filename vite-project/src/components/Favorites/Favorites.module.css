@@ -1,1 +1,12 @@
 
+.nohay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.full{
+    display: flex;
+    flex-direction: column;
+}

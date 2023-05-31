@@ -16,6 +16,7 @@ const Favorites = () => {
   const dispatch = useDispatch();
   let User = PedirLocalStorage();
   const favorites = useSelector((state) => state.FavHotels);
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,8 +27,7 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div>
-      <section className={style.section}>
+    <div className={style.full}>
         <Row xs={1} sm={2} lg={3} className="g-2">
           {favorites.length ? (
             favorites.map(
@@ -53,10 +53,9 @@ const Favorites = () => {
               )
             )
           ) : (
-            <h3>No hay favoritos</h3>
+            <h3 className={style.nohay}>No hay favoritos</h3>
           )}
         </Row>
-      </section>
     </div>
   );
 };
