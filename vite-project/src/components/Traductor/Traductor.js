@@ -13,6 +13,8 @@ function traductor(palabra) {
   if (palabra === "Spa") palabra = "Spa";
   if (palabra === "Acceso silla de ruedas") palabra = "Wheelchair accessible";
   if (palabra === "Ascensor") palabra = "Elevator";
+  if (palabra === "Servicios del alojamiento")
+    palabra = "Accommodation Services";
 
   return palabra;
 }

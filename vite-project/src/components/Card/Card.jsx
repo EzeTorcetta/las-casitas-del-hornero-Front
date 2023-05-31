@@ -39,6 +39,22 @@ function Cards({
       if (fav.id === id) setIsFav(true);
     });
   }, [FavHotels]);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      ValoracionDelHotel: "Hotel Rating",
+      VerAlojamiento: "See Accommodation",
+      IniciarSesion: "You must log in",
+      Aceptar: "Accept",
+    },
+    es: {
+      ValoracionDelHotel: "Valoracion Del Hotel",
+      VerAlojamiento: "Ver Alojamiento",
+      IniciarSesion: "Debes iniciar sesion",
+      Aceptar: "Aceptar",
+    },
+  };
 
   const handleFavorite = async (idUser, id) => {
     if (idUser) {
@@ -47,26 +63,13 @@ function Cards({
         ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`)
         : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
       dispatch(FuncionAllFavoritesHotel(User.id));
-    }
-    else{
+    } else {
       swal({
-        text: "Debes iniciar sesion ",
+        text: translations[idioma].IniciarSesion,
         icon: "warning",
-        buttons: "Aceptar",
-    });
+        buttons: translations[idioma].Aceptar,
+      });
     }
-  };
-  const idioma = useSelector((state) => state.idioma);
-
-  const translations = {
-    en: {
-      ValoracionDelHotel: "Hotel Rating",
-      VerAlojamiento: "See Accommodation",
-    },
-    es: {
-      ValoracionDelHotel: "Valoracion Del Hotel",
-      VerAlojamiento: "Ver Alojamiento",
-    },
   };
 
   const onClickDetail = () => {

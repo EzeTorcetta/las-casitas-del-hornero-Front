@@ -9,6 +9,7 @@ import Maps from "../../MapForm/Map";
 import { PedirLocalStorage } from "../../Index";
 import { idHotelForm } from "../../../redux/Actions/Actions";
 import NavBar from "../../Nav/Nav";
+import traductor from "../../Traductor/Traductor";
 
 const initialLocation = {
   provinces: [],
@@ -76,6 +77,10 @@ const FormularioHotel = () => {
       URLFoto: "Photo url",
       UbicacionHotel: "Change the location where your hotel is located:",
       Registrar: "To register",
+      SeleccionaLaProvincia: "Select the Province",
+      SeleccionaElDepartamento: "Select the Department",
+      SeleccionaLaLocalidad: "Select the locality",
+      Arrastre: "Drag the picture here",
     },
     es: {
       CompletarTodos: "Por favor completa todos los campos",
@@ -106,6 +111,10 @@ const FormularioHotel = () => {
       URLFoto: "URL de la foto",
       UbicacionHotel: "Cambia la ubicación donde se encuentra tu hotel:",
       Registrar: "Registrar",
+      SeleccionaLaProvincia: "Selecciona la Provincia",
+      SeleccionaElDepartamento: "Selecciona el Departamento",
+      SeleccionaLaLocalidad: "Selecciona la Localidad",
+      Arrastre: "Arrastre la foto aqui",
     },
   };
 
@@ -236,23 +245,23 @@ const FormularioHotel = () => {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "La_Casita_Del_Hornero");
-    setLoading(true)
+    setLoading(true);
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
       {
         method: "POST",
         body: data,
       }
-    )
-    const file = await res.json()
-    await hotel.image.push(file.secure_url)
+    );
+    const file = await res.json();
+    await hotel.image.push(file.secure_url);
     setLoading(false);
     setError(validacion({ ...hotel, image: hotel.image }));
   };
 
   const deleteImage = async (url) => {
     setLoading(true);
-    hotel.image = await hotel.image.filter((imagen) => url !== imagen)
+    hotel.image = await hotel.image.filter((imagen) => url !== imagen);
     setLoading(false);
     setError(validacion({ ...hotel, image: hotel.image }));
   };
@@ -335,9 +344,9 @@ const FormularioHotel = () => {
       });
 
       swal({
-        text: "Tu hotel se registro con éxito!",
+        text: translations[idioma].HotelExito,
         icon: "success",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
       dispatch(idHotelForm(data.id));
       navigate("/FormRoomType", {
@@ -350,10 +359,8 @@ const FormularioHotel = () => {
         icon: "warning",
         buttons: translations[idioma].Aceptar,
       });
-
     }
   };
-
 
   return (
     <>
@@ -361,7 +368,9 @@ const FormularioHotel = () => {
 
       <div className="container">
         <form onSubmit={handleSubmit} className={style.form}>
-          <h1 className="h3 mb-3 fw-normal">{translations[idioma].RegistraTuHotel}!</h1>
+          <h1 className="h3 mb-3 fw-normal">
+            {translations[idioma].RegistraTuHotel}!
+          </h1>
 
           {/* NOMBRE DEL HOTEL */}
 
@@ -447,9 +456,7 @@ const FormularioHotel = () => {
             <span className={style.hidden}>hidden</span>
           )}
           <div>{translations[idioma].SeleccionServicios}</div>
-          <span
-            onChange={onChangeServices}
-            className={style.checkContainer}>
+          <span onChange={onChangeServices} className={style.checkContainer}>
             {services?.map((service) => (
               <div key={service.id} className={style.checkbox}>
                 <label className={style.container}>
@@ -462,7 +469,7 @@ const FormularioHotel = () => {
                   <div className={style.checkmark}></div>
                 </label>
                 <span className={style.nameService}>
-                  {service.name}
+                  {idioma === "en" ? traductor(service.name) : service.name}
                 </span>
               </div>
             ))}
@@ -495,12 +502,12 @@ const FormularioHotel = () => {
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div>Carga la foto de tu hotel:</div>
+          <div>{translations[idioma].CargaFoto}:</div>
           <div>
             <input
               type="file"
               name="image"
-              placeholder="arrastra la imagen aquí"
+              placeholder={translations[idioma].Arrastre}
               onChange={uploadImage}
             />
             {hotel.image.length ? (
@@ -510,15 +517,17 @@ const FormularioHotel = () => {
                     <img src={imagen} style={{ width: "300px" }} />
                     <button onClick={() => deleteImage(imagen)}>X</button>
                   </>
-                )
+                );
               })
-            ) : (<></>)}
+            ) : (
+              <></>
+            )}
           </div>
 
           {/* LOCATION DONDE SE UBICA EL HOTEL*/}
 
-          <div>Selecciona la Provincia donde se encuentra tu hotel:</div>
-          <option hidden>Selecciona el Provincia</option>
+          <div>{translations[idioma].SeleccionProvincia}</div>
+          <option hidden>{translations[idioma].SeleccionaLaProvincia}</option>
           <select onChange={onChangeProvinces} className={style.select}>
             {location.provinces?.map(({ nombre, id }) => (
               <option value={nombre} key={id} id={id}>
@@ -528,9 +537,11 @@ const FormularioHotel = () => {
           </select>
           {location.departments.length ? (
             <div>
-              <div>Selecciona el Departamento donde se encuentra tu hotel:</div>
+              <div>{translations[idioma].SeleccionDepartamento}</div>
               <select onChange={onChangeDepartments} className={style.select}>
-                <option hidden>Selecciona el Departamento</option>
+                <option hidden>
+                  {translations[idioma].SeleccionaElDepartamento}
+                </option>
                 {location.departments?.map(({ nombre, id }) => (
                   <option value={nombre} key={id} id={id}>
                     {nombre}
@@ -543,9 +554,11 @@ const FormularioHotel = () => {
           )}
           {location.localities.length ? (
             <div>
-              <div>Selecciona la Localidad donde se encuentra tu hotel:</div>
+              <div>{translations[idioma].SeleccionLocalidad}</div>
               <select onChange={onChangeLocalities} className={style.select}>
-                <option hidden>Selecciona el Localidad</option>
+                <option hidden>
+                  {translations[idioma].SeleccionaLaLocalidad}
+                </option>
                 {location.localities?.map(({ nombre, id }) => (
                   <option value={nombre} key={id} id={id}>
                     {nombre}
@@ -559,14 +572,14 @@ const FormularioHotel = () => {
 
           {/* GEOLOCALIZACION DEL HOTEL */}
 
-          <div>Cambia la ubicación donde se encuentra tu hotel:</div>
+          <div>{translations[idioma].UbicacionHotel}</div>
           <Maps location={geoposition} setLocation={setGeoposition} />
 
           <button className="w-100 btn btn-lg btn-warning" type="submit">
             {translations[idioma].Registrar}
           </button>
-        </form >
-      </div >
+        </form>
+      </div>
     </>
   );
 };

@@ -21,7 +21,7 @@ import traductor from "../Traductor/Traductor";
 
 //?----------------- COMPONENTE FUNCION SERVICES ------------------------------------
 
-const FuncionServices = ({ Services}) => {
+const FuncionServices = ({ Services }) => {
   const idioma = useSelector((state) => state.idioma);
   const image = {
     "Desayuno gratis": imagenDesayuno,
@@ -42,12 +42,18 @@ const FuncionServices = ({ Services}) => {
 
   return (
     <>
-      <h3>Servicios del alojamiento</h3>
+      <h3>
+        {idioma === "en"
+          ? traductor("Servicios del alojamiento")
+          : "Servicios del alojamiento"}
+      </h3>
       <div className={style.services}>
         {Services?.map((Ser) => (
           <div className={style.divServicios} key={Ser.name}>
             <img className={style.img} src={image[Ser.name]} />
-            <p className={style.h2}>{idioma === "en" ? traductor(Ser.name) : Ser.name}</p>
+            <p className={style.h2}>
+              {idioma === "en" ? traductor(Ser.name) : Ser.name}
+            </p>
           </div>
         ))}
       </div>

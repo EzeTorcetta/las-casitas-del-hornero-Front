@@ -1,8 +1,29 @@
 import { Link } from "react-router-dom";
 import { Footer, NavBar } from "../Index";
 import "./Error.css";
+import { useSelector } from "react-redux";
 
 const Error404 = () => {
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      PáginaNoEncontrada: "Page not found",
+      LoSentimos: "Sorry, we couldn't find the page you were looking for.",
+      EnCaso: "In case of not being logged in",
+      VuelveInicio: "Go back to the home page",
+      IrInicio: "Go home",
+    },
+    es: {
+      PáginaNoEncontrada: "Página no encontrada",
+      LoSentimos:
+        "Lo sentimos, no hemos podido encontrar la página que buscabas.",
+      EnCaso: "En caso de no haber iniciado sesión",
+      VuelveInicio: "Vuelve a la página de inicio",
+      IrInicio: "Ir a inicio",
+    },
+  };
+
   return (
     <>
       <NavBar />
@@ -17,16 +38,16 @@ const Error404 = () => {
               />
             </div>
             <h1>404</h1>
-            <h2>Página no encontrada</h2>
+            <h2>{translations[idioma].PáginaNoEncontrada}</h2>
             <div className="divDelContenido">
-              <p className="p">
-                Lo sentimos, no hemos podido encontrar la página que buscabas.
-              </p>
-              <p className="p">En caso de no haber iniciado sesión</p>
-              <p className="p">Vuelve a la página de inicio</p>
+              <p className="p">{translations[idioma].LoSentimos}</p>
+              <p className="p">{translations[idioma].EnCaso}</p>
+              <p className="p">{translations[idioma].VuelveInicio}</p>
               <div className="divDelBotonInicio">
                 <Link to={"/Home"}>
-                  <button className="botonInicio">Ir a inicio</button>
+                  <button className="botonInicio">
+                    {translations[idioma].IrInicio}
+                  </button>
                 </Link>
               </div>
             </div>

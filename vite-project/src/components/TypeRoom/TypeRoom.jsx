@@ -27,12 +27,14 @@ const TypeRoom = ({ id, Trolleys }) => {
       Aceptar: "Accept",
       Personas: "People",
       AgregarAlCarrito: "Add to cart",
+      NoDisponibilidad: "No Availability",
     },
     es: {
       AgregadoCorrectamente: "Agregado con exito!!",
       Aceptar: "Aceptar",
       Personas: "Personas",
       AgregarAlCarrito: "Agregar al Carrito",
+      NoDisponibilidad: "No hay Disponibilidad",
     },
   };
   const { TypeRoom } = useSelector((state) => state);
@@ -58,17 +60,17 @@ const TypeRoom = ({ id, Trolleys }) => {
       }
     } else {
       swal({
-        text: "No hay Disponibilidad",
+        text: translations[idioma].NoDisponibilidad,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
 
-  useEffect( ()  => {
+  useEffect(() => {
     const checkIn = check.CheckIn;
     const checkOut = check.CheckOut;
-    dispatch(FuncionTypeRoomTypes(id,checkIn,checkOut));
+    dispatch(FuncionTypeRoomTypes(id, checkIn, checkOut));
   }, []);
 
   //{ id, name, image, price, stock, people }
@@ -86,7 +88,7 @@ const TypeRoom = ({ id, Trolleys }) => {
           </Card.Text>
           <img className={style.img} src={room.image} />
           {room.stock === 0 ? (
-            <Card.Text>No disponible</Card.Text>
+            <Card.Text>{translations[idioma].NoDisponibilidad}</Card.Text>
           ) : (
             <Card.Text>stock : {room.stock}</Card.Text>
           )}

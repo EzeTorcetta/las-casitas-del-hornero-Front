@@ -25,6 +25,8 @@ const FormularioIngresa = () => {
       SessionExito: " Successful login!!",
       Ingresa: "Enter",
       Ingresar: "Get into",
+      OlvidasteContraseña: "Forgot the password?",
+      IngresarSinRegistrar: "Enter without registering",
     },
     es: {
       CompletarCampos: "Debes completar todos los campos",
@@ -33,6 +35,8 @@ const FormularioIngresa = () => {
       SessionExito: " Inicio de sesion con exito!!",
       Ingresa: "Ingresa",
       Ingresar: " Ingresar",
+      OlvidasteContraseña: "Olvidaste la contraseña?",
+      IngresarSinRegistrar: "Ingresar sin registrar",
     },
   };
 
@@ -137,14 +141,17 @@ const FormularioIngresa = () => {
               {translations[idioma].Ingresar}
             </button>
             <div className={style.password_forgot}>
-              <Link to={"/OlvidasteLaPassword"}>Olvidaste la contraseña?</Link>
+              <Link to={"/OlvidasteLaPassword"}>
+                {translations[idioma].OlvidasteContraseña}
+              </Link>
             </div>
           </form>
           <div className={style.butonGoogleDiv}>
             <BotonAuthGoogle />
-         
           </div>
-          <button className="btn btn-secondary">Ingresar sin registrar</button>
+          <button className="btn btn-secondary">
+            {translations[idioma].IngresarSinRegistrar}
+          </button>
         </div>
       </div>
     </>

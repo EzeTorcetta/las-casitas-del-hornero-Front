@@ -5,6 +5,7 @@ import { changeRol, getUsers } from "../../redux/Actions/Actions";
 import style from "./GetUser.module.css";
 import MUIDataTable from "mui-datatables";
 import axios from "axios";
+
 // import DataTable, { createTheme } from "react-data-table-component";
 
 const GetUsers = () => {
@@ -15,13 +16,34 @@ const GetUsers = () => {
   const [selectedUserRole, setSelectedUserRole] = useState("");
 
   const [showOptions, setShowOptions] = useState(false);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      SeleccionarRol: "Select Role",
+      Usuario: "User",
+      Proveedor: "Provider",
+      Administrador: "Administrator",
+      Cambiar: "Change",
+      Guardar: "Save",
+      ListaUsuarios: "User List",
+    },
+    es: {
+      SeleccionarRol: "Seleccionar Rol",
+      Usuario: "Usuario",
+      Proveedor: "Proveedor",
+      Administrador: "Administrador",
+      Cambiar: "Cambiar",
+      Guardar: "Guardar",
+      ListaUsuarios: "Lista de Usuarios",
+    },
+  };
 
   const roles = {
     1: "Usuario",
     2: "Proveedor",
-    3: "Administrador"
+    3: "Administrador",
   };
-
 
   useEffect(() => {
     dispatch(getUsers(user.id));
@@ -36,20 +58,18 @@ const GetUsers = () => {
     await dispatch(getUsers(user.id));
   };
   const handleSelectUser = (userId) => {
-
     setSelectedUserId(userId);
     setShowOptions(true);
   };
 
   //*---------------------------------FuncionBloque:
-  const FuncioBloquear = async (idUser,userEmail) => {
-
-    
+  const FuncioBloquear = async (idUser, userEmail) => {
     await axios.put(
       `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/status/${idUser}`
     );
     await axios.get(
-      `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Baneo/${userEmail}`)
+      `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Baneo/${userEmail}`
+    );
     await dispatch(getUsers(user.id));
   };
 
@@ -59,17 +79,17 @@ const GetUsers = () => {
     "email",
     {
       name: "status",
-      label: "Status",  
+      label: "Status",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const userId = tableMeta.rowData[0];
-          const userEmail = tableMeta.rowData[2]
+          const userEmail = tableMeta.rowData[2];
           return (
             <div>
               <h1>{value}</h1>
               <button
                 className={style.BotonBloqueo}
-                onClick={() => FuncioBloquear(userId,userEmail)}
+                onClick={() => FuncioBloquear(userId, userEmail)}
               >
                 {value ? "Bloquear" : "Desbloquear"}
               </button>
@@ -94,10 +114,12 @@ const GetUsers = () => {
                   value={selectedUserRole}
                   onChange={(e) => setSelectedUserRole(e.target.value)}
                 >
-                  <option hidden>Seleccionar Rol</option>
-                  <option value="1">Usuario</option>
-                  <option value="2">Proveedor</option>
-                  <option value="3">Administrador</option>
+                  <option hidden>{translations[idioma].SeleccionarRol}</option>
+                  <option value="1">{translations[idioma].Usuario}</option>
+                  <option value="2">{translations[idioma].Proveedor}</option>
+                  <option value="3">
+                    {translations[idioma].Administrador}
+                  </option>
                 </select>
               ) : (
                 roles[value]
@@ -106,14 +128,14 @@ const GetUsers = () => {
                 className={style.botonRol}
                 onClick={() => handleSelectUser(userId)}
               >
-                Cambiar
+                {translations[idioma].Cambiar}
               </button>
               {showOptions && selectedUserId === userId && (
                 <button
                   className={style.botonGuardar}
                   onClick={handleRoleChange}
                 >
-                  Guardar
+                  {translations[idioma].Guardar}
                 </button>
               )}
             </div>

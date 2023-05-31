@@ -28,6 +28,7 @@ export default function Reviews() {
       Placeholder: "Leave your review...",
       Puntuacion: "Punctuation",
       Enviar: "Send",
+      Reviews: "REVIEWS",
     },
     es: {
       ReseñaCorrecta: "Se realizó correctamente la reseña de este hotel",
@@ -35,6 +36,7 @@ export default function Reviews() {
       Placeholder: "Deja tu reseña...",
       Puntuacion: "Puntuación",
       Enviar: "Enviar",
+      Reviews: "RESEÑAS",
     },
   };
 
@@ -85,7 +87,7 @@ export default function Reviews() {
 
   return (
     <div className={style.container}>
-      <h2>REVIEWS</h2>
+      <h2>{translations[idioma].Reviews}</h2>
       <div className={style.comment}>
         {Hotel.Reviews?.map((review, index) => (
           <div className={style.caja} key={index}>
@@ -103,25 +105,25 @@ export default function Reviews() {
       </div>
       <div className={style.reviewForm}>
         <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newComment}
-          onChange={handleCommentChange}
-          placeholder={translations[idioma].Placeholder}
-        />
-        <div>
-        <label>{translations[idioma].Puntuacion}:</label>
-        <input
-          type="number"
-          min="1"
-          max="10"
-          value={rating}
-          onChange={handleRatingChange}
-          placeholder={translations[idioma].Puntuacion}
-        />
-        </div>
-        <button type="submit">{translations[idioma].Enviar}</button>
-      </form>
+          <input
+            type="text"
+            value={newComment}
+            onChange={handleCommentChange}
+            placeholder={translations[idioma].Placeholder}
+          />
+          <div>
+            <label>{translations[idioma].Puntuacion}:</label>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              value={rating}
+              onChange={handleRatingChange}
+              placeholder={translations[idioma].Puntuacion}
+            />
+          </div>
+          <button type="submit">{translations[idioma].Enviar}</button>
+        </form>
       </div>
     </div>
   );
