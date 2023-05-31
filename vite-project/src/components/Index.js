@@ -22,6 +22,7 @@ import Trolley from "./Trolley/Trolley";
 import TrolleyCard from "./TrolleyCard/TrolleyCard";
 import GetRequests from "./GetRequests/GetRequests";
 import GetHotels from "./GetHotels/GetHotels"
+import GetBookings from "./GetBookings/GetBookings"
 //*------------------LoclaStorage-----------------------------------*//
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
@@ -101,5 +102,6 @@ export {
   GuardarDatosParaCambiarPassword,
   PedirEmailLocalStorage,
   GetRequests,
-  GetHotels
+  GetHotels,
+  GetBookings
 };

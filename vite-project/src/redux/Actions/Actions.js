@@ -38,7 +38,8 @@ import {
   MODIFICAR_HOTEL_PARTNER,
   UPDATE_LANGUAGE,
   GET_REQUESTS,
-  GET_HOTELS_ADMIN
+  GET_HOTELS_ADMIN,
+  GET_ALL_BOOKINGS
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -665,6 +666,27 @@ export const getHotelsAdmin = (id_user) => {
 
       dispatch({
         type: GET_HOTELS_ADMIN,
+        payload: response.data
+      })
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  }
+}
+
+export const getAllBookings = (id, rol) => {
+
+  return async (dispatch) => {
+
+    try {
+      const response = await axios.get(`${URL_BASE}/booking/?id_superadmin=${id}&rol=${rol}`)
+
+      dispatch({
+        type: GET_ALL_BOOKINGS,
         payload: response.data
       })
     } catch (error) {

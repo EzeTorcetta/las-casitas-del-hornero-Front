@@ -39,7 +39,8 @@ import {
   MODIFICAR_HOTEL_PARTNER,
   UPDATE_LANGUAGE,
   GET_REQUESTS,
-  GET_HOTELS_ADMIN
+  GET_HOTELS_ADMIN,
+  GET_ALL_BOOKINGS
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -63,6 +64,7 @@ const InicialState = {
   idioma: "en",
   Requests: [],
   HotelsAdmin: [],
+  BookingsAdmin: [],
   Filters: {
     provinces: "",
     department: "",
@@ -339,7 +341,11 @@ export const rootReducer = (state = InicialState, actions) => {
         ...state,
         HotelsAdmin: actions.payload
       }
-
+    case GET_ALL_BOOKINGS:
+      return {
+        ...state,
+        BookingsAdmin: actions.payload
+      }
     default:
       return { ...state };
   }
