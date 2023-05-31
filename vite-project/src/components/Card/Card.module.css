@@ -22,7 +22,6 @@
 .imgContainer {
   position: relative;
   flex-basis: 40%;
-  background-color: yellow;
   min-width: 200px;
 }
 

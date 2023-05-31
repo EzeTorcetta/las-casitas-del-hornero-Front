@@ -55,7 +55,6 @@
 }
 
 .contenedor-elementos-dark {
-  background-color: aqua;
   height: 4rem;
   width: 20rem;
 }
@@ -351,15 +350,21 @@
 }
 
 .countCarritoDiv {
-  background-color: #ff1900;
+  background-color: #ff0000;
   border-radius: 50%;
-  color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 15px;
   width: 30px;
-  height: 25px;
-  text-align: center;
+  height: 30px;
   margin-top: 10px;
   text-decoration: none;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .divCarritoCount {
@@ -409,6 +414,10 @@
   border: none;
   cursor: pointer;
   padding: 5px 0;
+}
+.idioma {
+  display: flex;
+  margin-right: 2em;
 }
 
 /* Estilos adicionales según tu necesidad */
