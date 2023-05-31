@@ -38,6 +38,8 @@ import {
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
   UPDATE_LANGUAGE,
+  GET_REQUESTS,
+
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -59,6 +61,7 @@ const InicialState = {
   Booking: [],
   Users: [],
   idioma: "en",
+  Requests: [],
   Filters: {
     provinces: "",
     department: "",
@@ -322,6 +325,12 @@ export const rootReducer = (state = InicialState, actions) => {
           ...state.EstadisticasPartner,
           MesDondeMasSeReservoPartner: actions.payload,
         },
+      };
+
+    case GET_REQUESTS:
+      return {
+        ...state,
+        Requests: actions.payload
       };
 
     default:

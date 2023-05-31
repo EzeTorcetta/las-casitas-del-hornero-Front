@@ -45,24 +45,42 @@ const PerfilColaborador = () => {
     }
   }, []);
 
+  let date = new Date()
+ const horas = date.getHours()
+  
+
+  
   return (
     <>
-      <NavBar />
+    <NavBar />
+      <div className={style.x}>
       <section>
-        <div>
-          <h1>{`${User.username}`}</h1>
-          <h3>{`${User.email}`}</h3>
-        </div>
-      </section>
+  <div className={style.saludo}>
+  
+    {horas <= 12 && horas > 5 && (
+      <h1>Buenos días {User.username}</h1>
+    )}
+    {horas > 12 && horas < 19 && (
+      <h1>Buenas tardes {User.username}</h1>
+    )}
+    {(horas >= 19 || horas <= 5) && (
+      <h1>Buenas noches {User.username}</h1>
+    )}
+  
+  </div>
+</section>
+
       <section className={style.section}>
         <div className={style.divConteiner}>
           <h1>{translations[idioma].TusHoteles}</h1>
+          <div className={style.LinkFormHotel}>
+             <NavLink  to="/FormHotel">
+            <h4>Agregar Hotel</h4>
+            </NavLink>
+          </div>
           <div className={style.divHotels}>
             <br />
             <PartnerHotels hotels={hotels} />
-            <NavLink to={"/FormHotel"}>
-              <p>Agregar Hotel</p>
-            </NavLink>
           </div>
         </div>
       </section>
@@ -82,6 +100,7 @@ const PerfilColaborador = () => {
         </div>
 
       </section>
+      </div>
       <Footer />
     </>
   );

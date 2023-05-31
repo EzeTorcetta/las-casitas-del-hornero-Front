@@ -1,0 +1,18 @@
+MUIDataTable root {
+    background-color: red;
+  }
+  
+MUIDataTable table {
+    background-color: red;
+  }
+  
+MUIDataTable head th {
+    background-color: red;
+  }
+  
+MUIDataTable body td {
+    background-color: red;
+  }
+  
+  /* Y así sucesivamente */
+  
