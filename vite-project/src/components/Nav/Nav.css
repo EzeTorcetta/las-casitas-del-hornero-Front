@@ -5,11 +5,11 @@
   align-items: center;
   z-index: 3;
   /*encima de to */
-  background-color: #E56910;
+  background-color: #e56910;
   color: white;
   padding-left: 2rem;
   position: fixed;
-  top:0;
+  top: 0;
 }
 
 .navdark {
@@ -18,31 +18,30 @@
   justify-content: space-between;
   align-items: center;
   z-index: 3;
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
   color: white;
   padding-left: 2rem;
   position: fixed;
   top: 0;
 }
 
-
-@media (max-width: 1080px){
-  .navlight{
-  flex-direction: column;
-   height: 100%;
-   width: 5rem;
-   position: fixed;
-   padding-top: 2rem;
-   padding-bottom: 2rem;
-   padding-left: 0;
-  }
-
-  .navdark{
+@media (max-width: 1080px) {
+  .navlight {
     flex-direction: column;
     height: 100%;
     width: 5rem;
     position: fixed;
-    background-color: #1E1E1E;;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 0;
+  }
+
+  .navdark {
+    flex-direction: column;
+    height: 100%;
+    width: 5rem;
+    position: fixed;
+    background-color: #1e1e1e;
     padding-top: 2rem;
     padding-bottom: 2rem;
     color: white;
@@ -50,128 +49,127 @@
   }
 }
 
-
-{/*-----BARRA DE OPCIONES DARK----*/}
-
-
-.contenedor-elementos-dark{
-
- background-color: aqua;
- height: 4rem;
- width: 20rem;
+ {
+  /*-----BARRA DE OPCIONES DARK----*/
 }
 
-.nombre-usuario-dark{
+.contenedor-elementos-dark {
+  background-color: aqua;
+  height: 4rem;
+  width: 20rem;
+}
+
+.nombre-usuario-dark {
   display: flex;
-  background-color: #f7931e;
+  background-color: #1e1e1e;
   height: 4rem;
   align-items: center;
   justify-content: center;
 }
 
-.contenedor-opciones-dark{
+.contenedor-opciones-dark {
   display: none;
   background-color: blue;
 }
 
-.opciones-dark{
+.opciones-dark {
   display: flex;
-background-color: #929292;
-height: 4rem;
-align-items: center;
-justify-content: center;
+  background-color: #929292;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.opciones-dark:hover{
+.opciones-dark:hover {
   background-color: #dcdcdc;
 }
 
-.botoncito-dark{
-height: 4rem;
-width: 20rem;
-border: none;
-background-color: #929292;
-color: white;
-}
-
-.botoncito-dark:hover{
-background-color: #dcdcdc;
-}
-
-.contenedor-elementos-dark:hover .contenedor-opciones-dark{
-  display:block;
-}
-
-
-{/*-----BARRA DE OPCIONES LIGHT----*/}
-
-
-.contenedor-elementos{
-
-  background-color: aqua;
-  height: 4rem;
-  width: 20rem;
- }
- 
- .nombre-usuario{
-   display: flex;
-background-color: #E56910;
-   height: 4rem;
-   align-items: center;
-   justify-content: center;
- }
- 
- .contenedor-opciones{
-   display: none;
-   background-color: blue;
- }
- 
- .opciones{
-   display: flex;
- background-color: whitesmoke;
- height: 4rem;
- align-items: center;
- justify-content: center;
- color: black;
- }
- 
- .opciones:hover{
-   background-color: #dcdcdc;
- }
- 
- .botoncito{
- height: 4rem;
- width: 20rem;
- border: none;
- background-color: whitesmoke;
- color: black;
- }
- 
- .botoncito:hover{
- background-color: #dcdcdc;
- }
- 
- .contenedor-elementos:hover .contenedor-opciones{
-   display:block;
- }
-
-
-
- .boton-inicia-sesion{
+.botoncito-dark {
   height: 4rem;
   width: 20rem;
   border: none;
-background-color: transparent;
-color: white;
-font-size: 1.5rem;
- }
+  background-color: #929292;
+  color: white;
+}
+
+.botoncito-dark:hover {
+  background-color: #dcdcdc;
+  color: #000;
+}
+
+.contenedor-elementos-dark:hover .contenedor-opciones-dark {
+  display: block;
+  box-shadow: #000 10px 10px 10px;
+}
+
+ {
+  /*-----BARRA DE OPCIONES LIGHT----*/
+}
+
+.contenedor-elementos {
+  background-color: aqua;
+  height: 4rem;
+  width: 20rem;
+}
+
+.nombre-usuario {
+  display: flex;
+  background-color: #e56910;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-opciones {
+  display: none;
+  background-color: blue;
+}
+
+.opciones {
+  display: flex;
+  background-color: whitesmoke;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.opciones:hover {
+  background-color: #dcdcdc;
+}
+
+.botoncito {
+  height: 4rem;
+  width: 20rem;
+  border: none;
+  background-color: whitesmoke;
+  color: black;
+}
+
+.botoncito:hover {
+  background-color: #dcdcdc;
+}
+
+.contenedor-elementos:hover .contenedor-opciones {
+  display: block;
+  box-shadow: #000 10px 10px 10px;
+}
+
+.boton-inicia-sesion {
+  height: 4rem;
+  width: 20rem;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+}
 
 .logo {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  padding-left: .6rem;
+  padding-left: 0.6rem;
 }
 
 .img {
@@ -209,9 +207,11 @@ font-size: 1.5rem;
   padding-right: 4rem;
 }
 
-{/*-----CSS DE MENU DISPLAY ---*/}
+ {
+  /*-----CSS DE MENU DISPLAY ---*/
+}
 
-.menu-horizontal{
+.menu-horizontal {
   padding-top: 1rem;
   padding-right: 3rem;
   display: flex;
@@ -259,8 +259,9 @@ font-size: 1.5rem;
   padding-top: 1rem;
 }
 
-{/*-----------------------*/}
-
+ {
+  /*-----------------------*/
+}
 
 .links {
   display: flex;
@@ -361,13 +362,11 @@ font-size: 1.5rem;
 }
 
 .divCarritoCount {
- 
   display: flex;
   flex-direction: row;
   height: 100%;
   align-items: center;
   padding-bottom: 0.5rem;
- 
 }
 
 .divHome {
