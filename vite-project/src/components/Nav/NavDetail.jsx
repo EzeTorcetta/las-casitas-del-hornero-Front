@@ -13,6 +13,17 @@ const NavDetail = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showNavbar, setShowNavbar] = useState(false);
 
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      IniciarSesion: "Login",
+    },
+    es: {
+      IniciarSesion: "Iniciar Sesion",
+    },
+  };
+
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
   };
@@ -68,7 +79,7 @@ const NavDetail = () => {
               className={style.link}
               onClick={() => setShowNavbar(false)}
             >
-              <p>Iniciar Sesion</p>
+              <p>{translations[idioma].IniciarSesion}</p>
             </NavLink>
           )}
           <NavLink

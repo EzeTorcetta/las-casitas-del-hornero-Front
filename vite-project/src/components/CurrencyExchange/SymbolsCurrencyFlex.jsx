@@ -13,7 +13,7 @@ const SymbolsCurrency = () => {
   return (
     <div className="currency-containerr">
     <img src={logocurrency} alt='logocurrency' className="logocurrency"/>
-    <select name="select" onChange={onChangeCurrency} className='select-barr'>
+    <select name="select" onChange={onChangeCurrency} className="select-bar" defaultValue="ARS">
       <option value="AED">
         Dírham de los Emiratos Árabes Unidos
       </option>
@@ -22,7 +22,7 @@ const SymbolsCurrency = () => {
       <option value="AMD">Drama armenio</option>
       <option value="ANG">Florín antillano holandés</option>
       <option value="AOA">Kwanza angoleño</option>
-      <option value="ARS" selected>
+      <option value="ARS">
         Peso argentino
       </option>
       <option value="AUD">Dólar australiano</option>

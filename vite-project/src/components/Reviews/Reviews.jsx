@@ -12,11 +12,31 @@ export default function Reviews() {
   const [newComment, setNewComment] = useState("");
   const [rating, setRating] = useState(0);
   const dispatch = useDispatch();
+  const [shouldReload, setShouldReload] = useState(false);
 
   let User = PedirLocalStorage();
   const Hotel = useSelector((state) => state.DetailHotel);
 
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      ReseñaCorrecta: "The review of this hotel was successful",
+      Aceptar: "Accept",
+      Placeholder: "Leave your review...",
+      Puntuacion: "Punctuation",
+      Enviar: "Send",
+    },
+    es: {
+      ReseñaCorrecta: "Se realizó correctamente la reseña de este hotel",
+      Aceptar: "Aceptar",
+      Placeholder: "Deja tu reseña...",
+      Puntuacion: "Puntuación",
+      Enviar: "Enviar",
+    },
+  };
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -25,6 +45,11 @@ export default function Reviews() {
   const handleRatingChange = (event) => {
     setRating(parseInt(event.target.value));
   };
+  useEffect(() => {
+    if (shouldReload) {
+      window.location.reload();
+    }
+  }, [shouldReload]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,16 +67,16 @@ export default function Reviews() {
       .post(`${URL_BASE}/review/${Hotel.id}`, datos)
       .then(function (response) {
         swal({
-          text: "Se realizó correctamente la reseña de este hotel",
+          text: translations[idioma].ReseñaCorrecta,
           icon: "success",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       })
       .catch(function (error) {
         swal({
           text: error.response.data.error,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       });
     dispatch(NewReview());
@@ -78,25 +103,25 @@ export default function Reviews() {
       </div>
       <div className={style.reviewForm}>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={newComment}
-            onChange={handleCommentChange}
-            placeholder="Deja tu review..."
-          />
-          <div>
-            <label>Puntaje:</label>
-            <input
-              type="number"
-              min="1"
-              max="10"
-              value={rating}
-              onChange={handleRatingChange}
-              placeholder="Puntuación"
-            />
-          </div>
-          <button type="submit">Enviar</button>
-        </form>
+        <input
+          type="text"
+          value={newComment}
+          onChange={handleCommentChange}
+          placeholder={translations[idioma].Placeholder}
+        />
+        <div>
+        <label>{translations[idioma].Puntuacion}:</label>
+        <input
+          type="number"
+          min="1"
+          max="10"
+          value={rating}
+          onChange={handleRatingChange}
+          placeholder={translations[idioma].Puntuacion}
+        />
+        </div>
+        <button type="submit">{translations[idioma].Enviar}</button>
+      </form>
       </div>
     </div>
   );

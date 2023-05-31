@@ -18,6 +18,16 @@ const Favorites = () => {
   const favorites = useSelector((state) => state.FavHotels);
 
   const [isLoading, setIsLoading] = useState(true);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      No: "No favorites",
+    },
+    es: {
+      No: "No hay favoritos",
+    },
+  };
 
   useEffect(() => {
     if (isLoading) {
@@ -53,7 +63,7 @@ const Favorites = () => {
               )
             )
           ) : (
-            <h3 className={style.nohay}>No hay favoritos</h3>
+            <h3>{translations[idioma].No}</h3>
           )}
         </Row>
     </div>

@@ -14,6 +14,18 @@ const Search = () => {
   // const [state, setState] = useState("");
   const { Filters } = useSelector((state) => state);
   const [stateFilter, setFilter] = useState(Filters);
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Buscar: "Search",
+      Placeholder: "Find an Hotel",
+    },
+    es: {
+      Buscar: "Buscar",
+      Placeholder: "Buscar un Hotel",
+    },
+  };
 
   // const [state, setState] = useState(new Date("2023", "05", "09"));
   // const [SearchAll, setSearchAll] = useState({
@@ -54,11 +66,11 @@ const Search = () => {
           className={styles.input}
           type="text"
           name="text"
-          placeholder="Buscar un Hotel"
+          placeholder={translations[idioma].Placeholder}
           onChange={onChangeText}
         />
         <button className={styles.fancy} onClick={() => FuncionSearchAll()}>
-          Buscar
+          {translations[idioma].Buscar}
         </button>
       </div>
       {/* </div> */}

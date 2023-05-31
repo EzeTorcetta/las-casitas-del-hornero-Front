@@ -20,6 +20,7 @@ import Paginado from "./Paginado/Paginado";
 import { LogOut } from "./GoogleAuth/LogOut";
 import Trolley from "./Trolley/Trolley";
 import TrolleyCard from "./TrolleyCard/TrolleyCard";
+import GetRequests from "./GetRequests/GetRequests";
 
 //*------------------LoclaStorage-----------------------------------*//
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
@@ -29,6 +30,10 @@ import PedirEmailLocalStorage from "./LocalStorage/PutPasswordLocalStorage/Pedir
 import GuardarCheckInCheckOut from './LocalStorage/Check/GuardarCheckInCheckOut';
 import PedirCheckInCheckOut from './LocalStorage/Check/PedirCheckInCheckOut';
 import CleanCheckinCheckout from './LocalStorage/Check/CleanCheckinCheckout';
+import GuardarMonedaLocalStorage from './LocalStorage/moneda/GuardarMonedaLocalStorage'
+import PedirMonedaLocalStorage from './LocalStorage/moneda/PedirMonedaLocalStorage'
+
+
 
 //*----------------------------------------------------------------*//
 import FormLocal from "./Formularios/FormularioRegistrar/FormLocal";
@@ -49,6 +54,8 @@ import OlvidasteLaPassword from "./OlvidasteLaPassword/OlvidasteLaPassword";
 import RestablecerContraseña from "./OlvidasteLaPassword/RestablecerContraseña";
 
 export {
+  GuardarMonedaLocalStorage,
+  PedirMonedaLocalStorage,
   TrolleyCard,
   GuardarCheckInCheckOut,
   PedirCheckInCheckOut,
@@ -93,4 +100,5 @@ export {
   PedirLocalStorage,
   GuardarDatosParaCambiarPassword,
   PedirEmailLocalStorage,
+  GetRequests
 };

@@ -16,6 +16,20 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   const Trolleys = useSelector((state) => state.Trolley);
   const dispatch = useDispatch();
   let User = PedirLocalStorage();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Favoritos: "Favorites",
+      Booking: "Booking",
+      QuieroSerProveedor: "I want to be a supplier",
+    },
+    es: {
+      Favoritos: "Favoritos",
+      Booking: "Reservas",
+      QuieroSerProveedor: "Quiero ser proveedor",
+    },
+  };
 
   setCountCarrito((countCarrito = Trolleys.length));
 

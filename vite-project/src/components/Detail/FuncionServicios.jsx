@@ -16,9 +16,13 @@ import imagenBañeraDeHidromasaje from "../../image/banera-de-hidromasaje.png";
 import imagenSpa from "../../image/spa.png";
 import imagenAccesoSillaDeRuedas from "../../image/senal-de-acceso-para-sillas-de-ruedas.png";
 import imagenAscensor from "../../image/ascensor.png";
+import { useSelector } from "react-redux";
+import traductor from "../Traductor/Traductor";
 
 //?----------------- COMPONENTE FUNCION SERVICES ------------------------------------
-const FuncionServices = ({ Services }) => {
+
+const FuncionServices = ({ Services}) => {
+  const idioma = useSelector((state) => state.idioma);
   const image = {
     "Desayuno gratis": imagenDesayuno,
     Pileta: imagenPileta,
@@ -43,7 +47,7 @@ const FuncionServices = ({ Services }) => {
         {Services?.map((Ser) => (
           <div className={style.divServicios} key={Ser.name}>
             <img className={style.img} src={image[Ser.name]} />
-            <p className={style.h2}>{Ser.name}</p>
+            <p className={style.h2}>{idioma === "en" ? traductor(Ser.name) : Ser.name}</p>
           </div>
         ))}
       </div>

@@ -1,16 +1,28 @@
-import { auth  } from "../../Firebase/Firebase";
+import { auth } from "../../Firebase/Firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import "./BotonGogle.css";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import AuthProvider from "./AuthProvider";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const BotonAuthGoogle = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Continue: "Continue with Google",
+      Loading: "Loading",
+    },
+    es: {
+      Continue: "Continuar con Google",
+      Loading: "Cargando",
+    },
+  };
+
   const [state, setCurrentState] = useState(0);
 
   const handleOnClick = async (user) => {
@@ -18,23 +30,22 @@ const BotonAuthGoogle = () => {
     const signInWithGoogle = async (googleProvider) => {
       try {
         const res = await signInWithPopup(auth, googleProvider);
-      } catch (error) {
-      }
-    }
+      } catch (error) {}
+    };
     await signInWithGoogle(googleProvider);
-  }
+  };
 
-const handleUserLoggedIn = (user) => {
-  navigate('/Home');
-}
+  const handleUserLoggedIn = (user) => {
+    navigate("/Home");
+  };
 
-const handleUserNotRegistered = (user) => {
-  navigate('/RegistroGoogle');
-}
+  const handleUserNotRegistered = (user) => {
+    navigate("/RegistroGoogle");
+  };
 
-const handleUserNotLoggedIn = () => {
-  setCurrentState(4);
-}
+  const handleUserNotLoggedIn = () => {
+    setCurrentState(4);
+  };
 
   if(state === 4 || state === 5){
   return (
@@ -70,18 +81,18 @@ const handleUserNotLoggedIn = () => {
         <span className="text">Ingresar con Google</span>
       </button>
     </div>
-    )
-  }
+    );
+  };
 
   return (
-  <AuthProvider 
-    onUserLoggedIn={handleUserLoggedIn}
-    onUserNotLoggedIn={handleUserNotLoggedIn}
-    onUserNotRegistered={handleUserNotRegistered}
-  >
-    <div>Loading...</div>
-  </AuthProvider>
+    <AuthProvider
+      onUserLoggedIn={handleUserLoggedIn}
+      onUserNotLoggedIn={handleUserNotLoggedIn}
+      onUserNotRegistered={handleUserNotRegistered}
+    >
+      <div>Loading...</div>
+    </AuthProvider>
   );
-}
+};
 
 export default BotonAuthGoogle;

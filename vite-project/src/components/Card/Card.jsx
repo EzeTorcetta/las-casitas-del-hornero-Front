@@ -10,6 +10,7 @@ import axios from "axios";
 import imgFav from "../../image/favorito.png";
 import styleLight from "./Card.module.css";
 import styleDark from "./CardDark.module.css";
+import swal from "sweetalert";
 
 //?----------------- COMPONENTE CARD ------------------------------------
 function Cards({
@@ -47,6 +48,25 @@ function Cards({
         : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
       dispatch(FuncionAllFavoritesHotel(User.id));
     }
+    else{
+      swal({
+        text: "Debes iniciar sesion ",
+        icon: "warning",
+        buttons: "Aceptar",
+    });
+    }
+  };
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      ValoracionDelHotel: "Hotel Rating",
+      VerAlojamiento: "See Accommodation",
+    },
+    es: {
+      ValoracionDelHotel: "Valoracion Del Hotel",
+      VerAlojamiento: "Ver Alojamiento",
+    },
   };
 
   const onClickDetail = () => {
@@ -78,26 +98,29 @@ function Cards({
       </div>
       <Link to={`/detail/${id}`} className={style.links}>
         <div className={style.title}>
-          <h4 className={style.name}>{name}</h4>
-          <div className={style.rating}>
-            {ratingArray.map((_, index) => {
-              return (
-                <img
-                  className={style.imgRating}
-                  src={imgFav}
-                  alt=""
-                  key={index}
-                />
-              );
-            })}
+          <div className={style.divJose}>
+            <div className={style.divJose1}>
+              <h4 className={style.name}>{name}</h4>
+              <div className={style.rating}>
+                {ratingArray.map((_, index) => {
+                  return (
+                    <img
+                      className={style.imgRating}
+                      src={imgFav}
+                      alt=""
+                      key={index}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <p>
+              {translations[idioma].ValoracionDelHotel} :{valoration}
+            </p>
           </div>
-          <p className={style.punctuation}>Valoración:{valoration}</p>
           <p className={style.province}>
             {department},{province}
           </p>
-          {/* <button onClick={onClickDetail} className={style.botonDetail}>
-          VER ALOJAMIENTO
-        </button> */}
         </div>
       </Link>
     </div>

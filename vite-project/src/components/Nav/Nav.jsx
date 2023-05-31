@@ -14,6 +14,7 @@ import "./Nav.css";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import SwitchButtonFlex from "../SwitchButton/SwitchButtonFlex";
 import SymbolsCurrencyFlex from "../CurrencyExchange/SymbolsCurrencyFlex";
+import { updateLanguage } from "../../redux/Actions/Actions";
 
 // import "NavButon.css";
 
@@ -23,6 +24,7 @@ const NavBar = ({ countCarrito }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let User = PedirLocalStorage();
+
   // let { username, rol } = User;
 
   let username, rol;
@@ -35,7 +37,33 @@ const NavBar = ({ countCarrito }) => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const theme = useSelector((state) => state.theme);
+  const idioma = useSelector((state) => state.idioma);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const translations = {
+    en: {
+      VerPerfil: "View profile",
+      Logout: "Logout",
+      IniciarSesion: "Login",
+      ProveerHotel: "Provide Hotel",
+      AdministrarUsuarios: "Manage Users",
+      QuieroSerProveedor: "I want to be a supplier",
+      Salir: "Go out",
+    },
+    es: {
+      VerPerfil: " Ver Perfil",
+      Logout: "Cerrar Sesión",
+      IniciarSesion: "Iniciar Sesión",
+      ProveerHotel: "Proveer Hotel",
+      AdministrarUsuarios: "Administrar Usuarios",
+      QuieroSerProveedor: "Quiero ser proveedor",
+      Salir: "Salir",
+    },
+  };
+
+  const toggleLang = (event) => {
+    dispatch(updateLanguage(event.target.value));
+  };
   const handleLogout = () => {
     logout();
   };
@@ -78,144 +106,128 @@ const NavBar = ({ countCarrito }) => {
     location.reload();
   };
 
- if(windowWidth > 1080){
+  if (windowWidth > 1080) {
 
-  return(
-    <div>
-      <div className={theme === "light" ? "navlight" : "navdark"}>
-        <NavLink to={"/Home"} className="links">
-          <div className="logo">
-            <img
-              className="img"
-              src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
-              alt="LaCasitaDelHornero"
-            />
-          <div className="tituloLogo">CasitasDelHornero</div>
-          </div>
-        </NavLink>
-        <SwitchButton />
-        <SymbolsCurrency />
-
-        {rol === 1 ? 
-          (
-            <Link to={"/Carrito"}>
-              <div className="divCarritoCount">
-              <div className="countCarritoDiv">{countCarrito}</div>
-              <img
-                className="iconoCarrito"
-                src={theme === "light" ? imageCarrito : carritoblanco}
-              />
-              </div>
-            </Link>
-        ) : (
-            <></>
-          )
-        }
-
-
-        <div>
-          {username ? (theme === 'dark' ? (
-            <div className="contenedor-elementos-dark">
-                <div className="nombre-usuario-dark">{`${username}`}</div>
-                <div className="contenedor-opciones-dark">
-                  <button onClick={handleVerPerfil} className="botoncito-dark">Perfil</button>
-                  {rol === 2 ? <div className="opciones-dark">Proveer Hotel</div> : 
-                  rol === 3 ? <div className="opciones-dark">Administrar Usuarios</div> : <></>}
-                  <button onClick={handleLogout} className="botoncito-dark">LogOut</button>
-                </div>
-            </div>
-          ) : (
-            <div className="contenedor-elementos">
-                <div className="nombre-usuario">{`${username}`}</div>
-                <div className="contenedor-opciones">
-                  <button onClick={handleVerPerfil} className="botoncito">Perfil</button>
-                  {rol === 2 ? <div className="opciones">Proveer Hotel</div> : 
-                  rol === 3 ? <div className="opciones">Administrar Usuarios</div> : 
-                  <></>}
-                  <button onClick={handleLogout} className="botoncito">LogOut</button>
-                </div>
-            </div>
-          )): (
-            <button onClick={handleGoHome} className="boton-inicia-sesion"> Iniciar sesion</button>
-          )
-        }
-         
-        </div>
-      </div>
-    </div>
-  );
-}
-  else{
-
-    return(
-
+    return (
+      <div>
         <div className={theme === "light" ? "navlight" : "navdark"}>
-
-          <NavLink to={"/Home"}>
+          <NavLink to={"/Home"} className="links">
             <div className="logo">
               <img
                 className="img"
                 src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
                 alt="LaCasitaDelHornero"
               />
+              <div className="tituloLogo">CasitasDelHornero</div>
             </div>
           </NavLink>
- 
-          
-          <SwitchButtonFlex />
-          <SymbolsCurrencyFlex />
-  
-          {rol === 1 ? 
+          <SwitchButton />
+          <SymbolsCurrency />
+
+          {rol === 1 ?
             (
               <Link to={"/Carrito"}>
                 <div className="divCarritoCount">
-                <div className="countCarritoDiv">{countCarrito}</div>
-                <img
-                  className="iconoCarrito"
-                  src={theme === "light" ? imageCarrito : carritoblanco}
-                />
+                  <div className="countCarritoDiv">{countCarrito}</div>
+                  <img
+                    className="iconoCarrito"
+                    src={theme === "light" ? imageCarrito : carritoblanco}
+                  />
                 </div>
               </Link>
-          ) : (
+            ) : (
               <></>
             )
           }
 
 
-        <div>
-          {username ? (theme === 'dark' ? (
-            <div className="contenedor-elementos-dark-flex">
-                <div className="nombre-usuario-dark-flex">{`${username}`}</div>
-                <div className="contenedor-opciones-dark-flex">
-                  <button onClick={handleVerPerfil} className="botoncito-dark-flex">Perfil</button>
-                  {rol === 2 ? <div className="opciones-dark-flex">Proveer Hotel</div> : 
-                  rol === 3 ? <div className="opciones-dark-flex">Administrar Usuarios</div> : <></>}
-                  <button onClick={handleLogout} className="botoncito-dark-flex">LogOut</button>
+          <div>
+            {username ? (theme === 'dark' ? (
+              <div className="contenedor-elementos-dark">
+                <div className="nombre-usuario-dark">{`${username}`}</div>
+                <div className="contenedor-opciones-dark">
+                  <button onClick={handleVerPerfil} className="botoncito-dark">{translations[idioma].VerPerfil}</button>
+                  {rol === 2 ? <div className="opciones-dark">{translations[idioma].ProveerHotel}</div> :
+                    rol === 3 ? <div className="opciones-dark">{translations[idioma].AdministrarUsuarios}</div> :
+                      <button onClick={handleChangeTipoCuenta} className="botoncito-dark">{translations[idioma].QuieroSerProveedor}</button>}
+                  <button onClick={handleLogout} className="botoncito-dark">{translations[idioma].Salir}</button>
                 </div>
-            </div>
-          ) : (
-            <div className="contenedor-elementos-flex">
-                <div className="nombre-usuario-flex">{`${username}`}</div>
-                <div className="contenedor-opciones-flex">
-                  <button onClick={handleVerPerfil} className="botoncito-flex">Perfil</button>
-                  {rol === 2 ? <div className="opciones-flex">Proveer Hotel</div> : 
-                  rol === 3 ? <div className="opciones-flex">Administrar Usuarios</div> : 
-                  <></>}
-                  <button onClick={handleLogout} className="botoncito-flex">LogOut</button>
+              </div>
+            ) : (
+              <div className="contenedor-elementos">
+                <div className="nombre-usuario">{`${username}`}</div>
+                <div className="contenedor-opciones">
+                  <button onClick={handleVerPerfil} className="botoncito">{translations[idioma].VerPerfil}</button>
+                  {rol === 2 ? <div className="opciones">{translations[idioma].ProveerHotel}</div> :
+                    rol === 3 ? <div className="opciones">{translations[idioma].AdministrarUsuarios}</div> :
+                      <div className="opciones">{translations[idioma].QuieroSerProveedor}</div>}
+                  <button onClick={handleLogout} className="botoncito">{translations[idioma].Salir}</button>
                 </div>
-            </div>
-          )): (
-            <button onClick={handleGoHome} className="boton-inicia-sesion-flex"> Iniciar sesion</button>
-          )
-        }
+              </div>
+            )) : (
+              <button onClick={handleGoHome} className="boton-inicia-sesion"> {translations[idioma].IniciarSesion} </button>
+            )
+            }
 
+          </div>
+          <div className="idioma">
+            🌐
+            <select value={idioma} onChange={toggleLang}>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
         </div>
-
-
-
       </div>
-  
-  
+    );
+  }
+  else {
+    return (
+      
+      <div className="navflex">
+        <div>
+          <NavLink to={"/Home"}>
+              <div>
+                <img
+                  className="img"
+                  src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+                  alt="LaCasitaDelHornero"
+                />
+              </div>
+            </NavLink>
+        </div>
+        <div className={`navitems ${isOpen && "open"}`}>
+          <div>
+            <SwitchButton/>
+          </div>
+          <div>
+            <SymbolsCurrency />
+          </div>
+          <div>
+            {rol === 1 ?
+              (
+                <Link to={"/Carrito"}>
+                  <div className="divCarritoCount">
+                    <div className="countCarritoDiv">{countCarrito}</div>
+                    <img
+                      className="iconoCarrito"
+                      src={theme === "light" ? imageCarrito : carritoblanco}
+                    />
+                  </div>
+                </Link>
+              ) : (
+                <></>
+              )
+            }
+          </div>
+          <a>portafolio</a>
+        </div>
+        <div className={`navtoggle ${isOpen && "open"}`} onClick={() => setIsOpen(!isOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
          
     )
   }

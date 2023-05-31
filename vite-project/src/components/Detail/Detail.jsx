@@ -38,8 +38,8 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   const Trolleys = useSelector((state) => state.Trolley);
 
   useEffect(() => {
+    dispatch(FuncionDetailHotel(id));
     if (User?.id) {
-      dispatch(FuncionDetailHotel(id));
       dispatch(GetTrolley(User.id, undefined, undefined));
     }
     return () => {
@@ -52,15 +52,30 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   const setHotel = async () => {
     await dispatch(idHotelForm(id));
   };
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Rating: "Rating :",
+      Province: "Province",
+      ServiciosDelAlojamiento: "Accommodation Services",
+      Descripción: "Description",
+      AgregarRoomType: "Add Room Type",
+    },
+    es: {
+      Rating: "Valoracion Del Hotel :",
+      Province: "Provincia",
+      ServiciosDelAlojamiento: "Servicios del alojamiento",
+      Descripción: "Descripción",
+      AgregarRoomType: "Agregar tipo de habitacion",
+    },
+  };
 
   let array = Array(DetailHotel.rating).fill(DetailHotel.rating); // fill agrega al array un elemento x. Array() da la longitud que quiero de un determinado array.
 
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      {!User ? (
-        <Error404 />
-      ) : (
         <div className={style.detailContainer}>
           {/* ---CONTENEDOR INFO HOTEL E IMAGE -------*/}
           <div className={style.div}>
@@ -103,9 +118,9 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               />
             </div>
 
-            {User.rol === 2 ? (
+            {User?.rol === 2 ? (
               <NavLink to="/FormRoomType">
-                <p onClick={setHotel}>Agregar Room Type</p>
+                <p onClick={setHotel}>{translations[idioma].AgregarRoomType}</p>
               </NavLink>
             ) : (
               ""
@@ -121,8 +136,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
                   <p className={style.valoration}>{DetailHotel.valoration}</p>
                 </div>
                 <div className={style.descriptionHotelCont}>
-                  <h3>Descripción</h3>
-                  {/* <p>{DetailHotel.description}</p> */}
+                  <h3>{translations[idioma].Descripción}</h3>
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Architecto alias eligendi sequi non ipsum corporis, aliquam
@@ -140,7 +154,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               </div>
               <div className={style.sectionDescription_right}>
                 <div className={style.servicesContainer}>
-                  <FuncionServices Services={DetailHotel.Services} />
+                  <FuncionServices Services={DetailHotel.Services}/>
                 </div>
                 <div className={style.mapContainer}>
                   <h3>Ubicación</h3>
@@ -158,7 +172,6 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
             <Reviews />
           </div>
         </div>
-      )}
       <Footer />
     </>
   );

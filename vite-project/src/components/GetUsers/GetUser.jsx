@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PedirLocalStorage } from "../Index";
-import { useEffect, useState } from "react";
 import { changeRol, getUsers } from "../../redux/Actions/Actions";
 import style from "./GetUser.module.css";
 import MUIDataTable from "mui-datatables";
@@ -26,6 +26,7 @@ const GetUsers = () => {
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
+
   const handleRoleChange = async () => {
     const data = {
       id_user: selectedUserId,
@@ -35,6 +36,7 @@ const GetUsers = () => {
     setShowOptions(false);
     await dispatch(getUsers(user.id));
   };
+
   const handleSelectUser = (userId) => {
 
     setSelectedUserId(userId);

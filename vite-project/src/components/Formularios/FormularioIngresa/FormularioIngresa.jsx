@@ -9,11 +9,32 @@ import axios from "axios";
 import { GuardarLocalStorage } from "../../Index";
 import { BotonAuthGoogle } from "../../Index";
 import swal from "sweetalert";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const FormularioIngresa = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      CompletarCampos: "You must complete all fields",
+      Aceptar: "Accept",
+      ErroresCampos: "You have errors in the fields",
+      SessionExito: " Successful login!!",
+      Ingresa: "Enter",
+      Ingresar: "Get into",
+    },
+    es: {
+      CompletarCampos: "Debes completar todos los campos",
+      Aceptar: "Aceptar",
+      ErroresCampos: "Tienes errores en los campos",
+      SessionExito: " Inicio de sesion con exito!!",
+      Ingresa: "Ingresa",
+      Ingresar: " Ingresar",
+    },
+  };
 
   const handleHome = () => {
     navigate("/Home");
@@ -41,15 +62,15 @@ const FormularioIngresa = () => {
 
     if (usuario.email === "" || usuario.password === "") {
       swal({
-        text: "Debes completar todos los campos",
+        text: translations[idioma].CompletarCampos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     } else if (Error.password.length > 0 || Error.email.length > 0) {
       swal({
-        text: "Tienes errores en los campos",
+        text: translations[idioma].ErroresCampos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     } else {
       try {
@@ -62,16 +83,16 @@ const FormularioIngresa = () => {
         dispatch(GetUser(response.data));
 
         swal({
-          text: " Inicio de sesion con exito!!",
+          text: translations[idioma].SessionExito,
           icon: "success",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
         navigate("/Home");
       } catch (error) {
         swal({
           text: error.response.data.error,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       }
     }
@@ -80,7 +101,6 @@ const FormularioIngresa = () => {
   return (
     <>
       <div className="main">
-        {/* <h1 className={style.landing_title}>CASITAS DEL HORNERO</h1> */}
         <div className={style.logo}>
           <img
             src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
@@ -92,8 +112,9 @@ const FormularioIngresa = () => {
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="login">
           <form onSubmit={handleSubmit} className="form">
-            <h2 className="h3 mb-3 fw-normal">Ingresa</h2>
-
+            <h1 className="h3 mb-3 fw-normal">
+              {translations[idioma].Ingresa}
+            </h1>
             <input
               type="email"
               className="form-control"
@@ -117,7 +138,7 @@ const FormularioIngresa = () => {
               <span className={style.span}>{Error.password}</span>
             </div>
             <button className={style.buton} type="submit">
-              Ingresar
+              {translations[idioma].Ingresar}
             </button>
             <div className={style.password_forgot}>
               <Link to={"/OlvidasteLaPassword"}>Olvidaste la contraseña?</Link>

@@ -26,9 +26,13 @@ import {
   Loading,
   Paginado,
   PedirLocalStorage,
+  PedirCheckInCheckOut,
+  GuardarCheckInCheckOut,
+  PedirMonedaLocalStorage,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import cargarDivisas from "./cargarDivisas";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = ({ countCarrito, setCountCarrito }) => {
@@ -46,6 +50,20 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
 
+  if(!PedirCheckInCheckOut()){
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const checkIn = today;
+    const checkOut = tomorrow;
+    GuardarCheckInCheckOut({
+      CheckIn: checkIn,
+      CheckOut: checkOut,
+    })
+  }
+
+  if(!PedirMonedaLocalStorage())cargarDivisas()
+  
   setCountCarrito((countCarrito = Trolleys.length));
 
   const handleUserLoggedIn = (user) => {
@@ -83,8 +101,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     <>
       <NavBar countCarrito={countCarrito} />
       <div className={style.home_container}>
-        <Carrusel HotelsCarrusel={HotelsCopi?.allHotels} />
-
+        <Carrusel HotelsCarrusel={Hotels?.allHotels} />
         {Hotels.allHotels?.length ? (
           <>
             <section className={`${style.section} ${style.one}`}>
