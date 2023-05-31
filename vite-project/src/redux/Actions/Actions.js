@@ -37,6 +37,8 @@ import {
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
   UPDATE_LANGUAGE,
+  GET_REQUESTS,
+  GET_HOTELS_ADMIN
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -83,13 +85,11 @@ export const FuncionSelectFilter = (filters) => {
       }
 
       //*----------------------------------------Fechas:
-
-      //http://localhost:3001/hotels?page=1&services=Pileta&checkIn=2023-05-27&checkOut=2023-05-28
-
-      if (checkOut.length) {
+      console.log(checkIn, checkOut);
+      if (checkIn.length) {
         URL = URL + `&checkIn=${checkIn}`;
       }
-      if (checkIn.length) {
+      if (checkOut.length) {
         URL = URL + `&checkOut=${checkOut}`;
       }
 
@@ -104,6 +104,7 @@ export const FuncionSelectFilter = (filters) => {
 
       dispatch({ type: GET_ALL_HOTELS, payload: response.data });
     } catch (error) {
+      console.log(error)
       swal({
         text: error.response.data.error,
         icon: "warning",
@@ -121,11 +122,12 @@ export const PostFilters = (filters) => {
 };
 
 //* ----------------- TYPE ROOMS ------------------------------------
-export const FuncionTypeRoomTypes = (idHotel,checkIn,checkOut) => {
- 
+export const FuncionTypeRoomTypes = (idHotel, checkIn, checkOut) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`);
+      const response = await axios.get(
+        `${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`
+      );
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
@@ -567,9 +569,9 @@ export const FuncionTodosLosBookingsEstadistica = (idUser, rol) => {
 //*----------------------------------------------------------------------------*//
 /*
 Partner:
-	- Hoteles mas reservados:  .../booking/mostBooking/:id_admin
-	- Traer mes donde mas se reservo:  .../booking/monthPartner/:id_admin
-	- Modificar el Hotel:  hotel/update/:id_hotel
+  - Hoteles mas reservados:  .../booking/mostBooking/:id_admin
+  - Traer mes donde mas se reservo:  .../booking/monthPartner/:id_admin
+  - Modificar el Hotel:  hotel/update/:id_hotel
 */
 
 //*-------------------------------Estadisticas Partner---------------------------------*//
@@ -621,7 +623,7 @@ export const FuncionMesDondeMasSeReservaPartnerEstadistica = (idUser) => {
 export const FuncionModificarHotel = (idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`${URL_BASE}hotel/update/${idHotel}`); // body mandar lo que se pinte
+      const response = await axios.put(`${URL_BASE}/hotels/update/${idHotel}`); // body mandar lo que se pinte
 
       dispatch({
         type: MODIFICAR_HOTEL_PARTNER,
@@ -636,3 +638,41 @@ export const FuncionModificarHotel = (idHotel) => {
     }
   };
 };
+
+export const getRequests = (id_user) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/request/${id_user}`);
+
+      dispatch({
+        type: GET_REQUESTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  }
+}
+
+export const getHotelsAdmin = (id_user) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/hotels/allHotels/${id_user}`)
+
+      dispatch({
+        type: GET_HOTELS_ADMIN,
+        payload: response.data
+      })
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  }
+}

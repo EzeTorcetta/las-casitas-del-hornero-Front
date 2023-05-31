@@ -20,7 +20,8 @@ import Paginado from "./Paginado/Paginado";
 import { LogOut } from "./GoogleAuth/LogOut";
 import Trolley from "./Trolley/Trolley";
 import TrolleyCard from "./TrolleyCard/TrolleyCard";
-
+import GetRequests from "./GetRequests/GetRequests";
+import GetHotels from "./GetHotels/GetHotels"
 //*------------------LoclaStorage-----------------------------------*//
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
@@ -99,4 +100,6 @@ export {
   PedirLocalStorage,
   GuardarDatosParaCambiarPassword,
   PedirEmailLocalStorage,
+  GetRequests,
+  GetHotels
 };

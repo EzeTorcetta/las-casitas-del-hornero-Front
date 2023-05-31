@@ -46,7 +46,6 @@ const UploadImage = () => {
   const deleteImage = async (id) => {
     const idString = id.split("/");
     const ID = idString[idString.length - 1];
-    // console.log(ID)
     const res = await fetch(
       `https://api.cloudinary.com/v1_1/dhe1t8gs0/image/destroy/${id}`,
       {

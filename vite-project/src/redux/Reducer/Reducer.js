@@ -1,4 +1,5 @@
 //?---------------------------- IMPORTS --------------------------------
+import GuardarMonedaLocalStorage from "../../components/LocalStorage/moneda/GuardarMonedaLocalStorage";
 import {
   GET_ALL_HOTELS,
   POST_FILTERS,
@@ -37,6 +38,8 @@ import {
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
   UPDATE_LANGUAGE,
+  GET_REQUESTS,
+  GET_HOTELS_ADMIN
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -58,6 +61,8 @@ const InicialState = {
   Booking: [],
   Users: [],
   idioma: "en",
+  Requests: [],
+  HotelsAdmin: [],
   Filters: {
     provinces: "",
     department: "",
@@ -72,7 +77,7 @@ const InicialState = {
   },
   Reviews: 0,
   idHotelForm: "",
-  currencyExchange: {symbol:"ARS"},
+  currencyExchange: { symbol: "ARS" },
   theme: "light",
   Estadisticas: {
     HotelMasReservado: [],
@@ -227,6 +232,11 @@ export const rootReducer = (state = InicialState, actions) => {
         },
       };
     case SET_CURRENCY_SYMBOL:
+      GuardarMonedaLocalStorage({
+        ...state.currencyExchange,
+        symbol: actions.payload,
+      }
+      );
       return {
         ...state,
         currencyExchange: {
@@ -317,6 +327,18 @@ export const rootReducer = (state = InicialState, actions) => {
           MesDondeMasSeReservoPartner: actions.payload,
         },
       };
+
+    case GET_REQUESTS:
+      return {
+        ...state,
+        Requests: actions.payload
+      };
+
+    case GET_HOTELS_ADMIN:
+      return {
+        ...state,
+        HotelsAdmin: actions.payload
+      }
 
     default:
       return { ...state };

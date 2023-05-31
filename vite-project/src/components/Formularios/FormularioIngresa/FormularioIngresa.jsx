@@ -89,6 +89,7 @@ const FormularioIngresa = () => {
         });
         navigate("/Home");
       } catch (error) {
+        console.log(error.response.data.error);
         swal({
           text: error.response.data.error,
           icon: "warning",

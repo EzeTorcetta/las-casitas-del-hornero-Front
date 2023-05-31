@@ -52,7 +52,7 @@
 }
 
 .button span:after {
-  content: "Ahora!!";
+  content: "!!";
   position: absolute;
   opacity: 0;
   top: 0;
@@ -62,7 +62,7 @@
 }
 
 .button:hover span {
-  padding-right: 3.55em;
+  padding-right: 0.55em;
 }
 
 .button:hover span:after {
@@ -115,6 +115,7 @@
   width: fit-content;
   display: flex;
   flex-direction: column;
+  margin-top: 10vh;
   justify-content: center;
 }
 

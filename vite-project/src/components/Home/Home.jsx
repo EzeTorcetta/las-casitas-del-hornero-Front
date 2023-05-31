@@ -28,9 +28,11 @@ import {
   PedirLocalStorage,
   PedirCheckInCheckOut,
   GuardarCheckInCheckOut,
+  PedirMonedaLocalStorage,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import cargarDivisas from "./cargarDivisas";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = ({ countCarrito, setCountCarrito }) => {
@@ -48,7 +50,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
 
-  if(!PedirCheckInCheckOut()){
+  if (!PedirCheckInCheckOut()) {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -57,8 +59,10 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     GuardarCheckInCheckOut({
       CheckIn: checkIn,
       CheckOut: checkOut,
-    })
+    });
   }
+
+  if (!PedirMonedaLocalStorage()) cargarDivisas();
 
   setCountCarrito((countCarrito = Trolleys.length));
 
@@ -96,10 +100,10 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      <div className={style.home_container}>
-        <Carrusel HotelsCarrusel={Hotels?.allHotels} />
-        {Hotels.allHotels?.length ? (
-          <>
+      {Hotels.allHotels?.length ? (
+        <>
+          <div className={style.home_container}>
+            <Carrusel HotelsCarrusel={Hotels?.allHotels} />
             <section className={`${style.section} ${style.one}`}>
               <div className={style.filtroContainer}>
                 <Filter />
@@ -132,17 +136,20 @@ const Home = ({ countCarrito, setCountCarrito }) => {
               </div>
               <Clima />
             </section>
-          </>
-        ) : (
-          <section className={`${style.section} ${style.one}`}>
-            <Loading />
-          </section>
-        )}
-
-        <Paginado paginas={Hotels.numPages} />
-        {/* <section className={`${style.section} ${style.two}`}></section> */}
-        <Footer />
-      </div>
+          </div>
+          <Paginado paginas={Hotels.numPages} />
+        </>
+      ) : (
+        <div className={style.DivContainerLoading}>
+          <div className={style.DivContainerLoadingHijo}>
+            <div className={style.LoadingDiv}>
+              <Loading />
+            </div>
+          </div>
+        </div>
+      )}
+      {/* <section className={`${style.section} ${style.two}`}></section> */}
+      <Footer />
     </>
   );
 };

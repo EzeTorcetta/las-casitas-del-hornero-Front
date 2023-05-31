@@ -17,15 +17,18 @@
 }
 
 @media (max-width: 550px) {
+  .ContainerGraficoLinea {
+    width: 250px;
+    height: fit-content;
+  }
+}
+
+@media (max-width: 550px) {
   .ContainerGraficoDona {
     width: 250px;
     height: fit-content;
   }
   .ContainerGraficoBar {
-    width: 250px;
-    height: fit-content;
-  }
-  .ContainerGraficoLinea {
     width: 250px;
     height: fit-content;
   }

@@ -15,7 +15,7 @@ import {
   EstadisticasLinealUsuarioQueMasReservo,
   EstadisticasLinealProvinciasMasReservada,
 } from "../../Estadisticas/EstadisticasSuperAdmin";
-import { NavBar, Footer, PedirLocalStorage, GetUsers } from "../Index";
+import { NavBar, Footer, PedirLocalStorage, GetUsers,GetRequests,GetHotels } from "../Index";
 import "./PerfilSuperAdmin.css";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./PerfilSuperAdmin.module.css";
@@ -54,43 +54,81 @@ const PerfilSuperAdmin = () => {
   }, []);
 
 
+  let date = new Date()
+  const horas = date.getHours()
+
+
+
   return (
     <>
       <NavBar />
+      <div className={style.divContainerGigaChad}>
+      <div className={style.divEmail}>
+
+          <p>{`Email: ${User.email}`}</p>
+      </div>
       <section>
         <div className="divDeBienvenido">
-          <h1>{`Bienvenido ${User.username}`}</h1>
-          <h3>{`Tu email es : ${User.email}`}</h3>
+        {horas <= 12 && horas > 5 && (
+      <h1>Buenos días {User.username}</h1>
+    )}
+    {horas > 12 && horas < 19 && (
+      <h1>Buenas tardes {User.username}</h1>
+    )}
+    {(horas >= 19 || horas <= 5) && (
+      <h1>Buenas noches {User.username}</h1>
+    )}
         </div>
       </section>
       <section>
-        <div className="DivGetUsers">
+        <div className="DivTables">
           {/* <h1>Usuarios</h1> */}
           <GetUsers />
+          <GetRequests/>
+          <GetHotels/>
         </div>
       </section>
-      <section>
+      <section className="ContainerEst">
         <div className="DivEstadisticas">
-          <EstadisticasLinealValoracionHoteles
-            ValoracionHoteles={ValoracionHoteles}
-          />
-          <EstadisticasLinealTodosLosBookings
-            TodosLosBookings={TodosLosBookings}
-          />
-          <EstadisticasBarraMesMasReservado MesMasReservado={MesMasReservado} />
-          <EstadisticasBarraHotelMasReservado
-            HotelMasReservado={HotelMasReservado}
-          />
-
-          <EstadisticasLinealUsuarioQueMasReservo
-            UsuarioQueMasReservo={UsuarioQueMasReservo}
-          />
-
-          <EstadisticasLinealProvinciasMasReservada
-            ProvinciasMasReservada={ProvinciasMasReservada}
-          />
+          <section>
+            <h3>Estadistica 1</h3>
+            <EstadisticasLinealValoracionHoteles
+              ValoracionHoteles={ValoracionHoteles}
+            />
+          </section>
+          <section>
+            <h3>Estadistica 2</h3>
+            <EstadisticasLinealTodosLosBookings
+              TodosLosBookings={TodosLosBookings}
+            />
+          </section>
+          <section>
+            <h3>Estadistica 3</h3>
+            <EstadisticasBarraMesMasReservado
+              MesMasReservado={MesMasReservado}
+            />
+          </section>
+          <section>
+            <h3>Estadistica 4</h3>
+            <EstadisticasBarraHotelMasReservado
+              HotelMasReservado={HotelMasReservado}
+            />
+          </section>
+          <section>
+            <h3>Estadistica 5</h3>
+            <EstadisticasLinealUsuarioQueMasReservo
+              UsuarioQueMasReservo={UsuarioQueMasReservo}
+            />
+          </section>
+          <section>
+            <h3>Estadistica 6</h3>
+            <EstadisticasLinealProvinciasMasReservada
+              ProvinciasMasReservada={ProvinciasMasReservada}
+            />
+          </section>
         </div>
       </section>
+      </div>
       <section className="Footer">
         <Footer />
       </section>

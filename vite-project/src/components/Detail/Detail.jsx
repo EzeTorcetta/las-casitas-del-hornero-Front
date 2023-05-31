@@ -12,6 +12,7 @@ import {
   TypeRoom,
   Footer,
   Error404,
+  Loading,
 } from "../Index";
 //actions
 import {
@@ -26,8 +27,9 @@ import imagenCorreo from "../../image/correo-electronico-vacio.png";
 import imagenTelefono from "../../image/llamada-telefonica.png";
 import { PedirLocalStorage } from "../Index";
 //css
-import style from "./Detail.module.css";
 import Reviews from "../Reviews/Reviews";
+import styleLight from "./Detail.module.css";
+import styleDark from "./DetailDark.module.css";
 
 //?----------------- COMPONENTE DETAIL ------------------------------------
 const Detail = ({ setCountCarrito, countCarrito }) => {
@@ -36,6 +38,8 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   const dispatch = useDispatch();
   const DetailHotel = useSelector((state) => state.DetailHotel);
   const Trolleys = useSelector((state) => state.Trolley);
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
 
   useEffect(() => {
     dispatch(FuncionDetailHotel(id));
