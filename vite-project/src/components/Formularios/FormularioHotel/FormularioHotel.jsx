@@ -236,23 +236,23 @@ const FormularioHotel = () => {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "La_Casita_Del_Hornero");
-    setLoading(true)
+    setLoading(true);
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
       {
         method: "POST",
         body: data,
       }
-    )
-    const file = await res.json()
-    await hotel.image.push(file.secure_url)
+    );
+    const file = await res.json();
+    await hotel.image.push(file.secure_url);
     setLoading(false);
     setError(validacion({ ...hotel, image: hotel.image }));
   };
 
   const deleteImage = async (url) => {
     setLoading(true);
-    hotel.image = await hotel.image.filter((imagen) => url !== imagen)
+    hotel.image = await hotel.image.filter((imagen) => url !== imagen);
     setLoading(false);
     setError(validacion({ ...hotel, image: hotel.image }));
   };
@@ -345,15 +345,14 @@ const FormularioHotel = () => {
         replace: true,
       });
     } catch (error) {
+      console.log(error);
       swal({
         text: translations[idioma].ErrorCarga,
         icon: "warning",
         buttons: translations[idioma].Aceptar,
       });
-
     }
   };
-
 
   return (
     <>
@@ -361,7 +360,9 @@ const FormularioHotel = () => {
 
       <div className="container">
         <form onSubmit={handleSubmit} className={style.form}>
-          <h1 className="h3 mb-3 fw-normal">{translations[idioma].RegistraTuHotel}!</h1>
+          <h1 className="h3 mb-3 fw-normal">
+            {translations[idioma].RegistraTuHotel}!
+          </h1>
 
           {/* NOMBRE DEL HOTEL */}
 
@@ -447,9 +448,7 @@ const FormularioHotel = () => {
             <span className={style.hidden}>hidden</span>
           )}
           <div>{translations[idioma].SeleccionServicios}</div>
-          <span
-            onChange={onChangeServices}
-            className={style.checkContainer}>
+          <span onChange={onChangeServices} className={style.checkContainer}>
             {services?.map((service) => (
               <div key={service.id} className={style.checkbox}>
                 <label className={style.container}>
@@ -461,9 +460,7 @@ const FormularioHotel = () => {
                   />
                   <div className={style.checkmark}></div>
                 </label>
-                <span className={style.nameService}>
-                  {service.name}
-                </span>
+                <span className={style.nameService}>{service.name}</span>
               </div>
             ))}
           </span>
@@ -510,9 +507,11 @@ const FormularioHotel = () => {
                     <img src={imagen} style={{ width: "300px" }} />
                     <button onClick={() => deleteImage(imagen)}>X</button>
                   </>
-                )
+                );
               })
-            ) : (<></>)}
+            ) : (
+              <></>
+            )}
           </div>
 
           {/* LOCATION DONDE SE UBICA EL HOTEL*/}
@@ -565,8 +564,8 @@ const FormularioHotel = () => {
           <button className="w-100 btn btn-lg btn-warning" type="submit">
             {translations[idioma].Registrar}
           </button>
-        </form >
-      </div >
+        </form>
+      </div>
     </>
   );
 };

@@ -115,6 +115,7 @@
   width: fit-content;
   display: flex;
   flex-direction: column;
+  margin-top: 10vh;
   justify-content: center;
 }
 

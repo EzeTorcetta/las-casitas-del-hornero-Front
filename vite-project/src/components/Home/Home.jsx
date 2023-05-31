@@ -50,7 +50,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
 
-  if(!PedirCheckInCheckOut()){
+  if (!PedirCheckInCheckOut()) {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -59,11 +59,11 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     GuardarCheckInCheckOut({
       CheckIn: checkIn,
       CheckOut: checkOut,
-    })
+    });
   }
 
-  if(!PedirMonedaLocalStorage())cargarDivisas()
-  
+  if (!PedirMonedaLocalStorage()) cargarDivisas();
+
   setCountCarrito((countCarrito = Trolleys.length));
 
   const handleUserLoggedIn = (user) => {
@@ -100,53 +100,63 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      <div className={style.home_container}>
-        <Carrusel HotelsCarrusel={Hotels?.allHotels} />
-        {Hotels.allHotels?.length ? (
-          <>
-            <section className={`${style.section} ${style.one}`}>
-              <div className={style.filtroContainer}>
-                <Filter />
-              </div>
-              <div className={style.divCard}>
-                {Hotels.allHotels?.map(
-                  ({
-                    id,
-                    name,
-                    image,
-                    province,
-                    department,
-                    rating,
-                    description,
-                    valoration,
-                  }) => (
-                    <Cards
-                      key={id}
-                      id={id}
-                      name={name}
-                      image={image}
-                      province={province}
-                      department={department}
-                      rating={rating}
-                      description={description}
-                      valoration={valoration}
-                    />
-                  )
-                )}
-              </div>
-              <Clima />
-            </section>
-          </>
-        ) : (
-          <section className={`${style.section} ${style.one}`}>
-            <Loading />
-          </section>
-        )}
 
-        <Paginado paginas={Hotels.numPages} />
-        {/* <section className={`${style.section} ${style.two}`}></section> */}
-        <Footer />
+      {Hotels.allHotels?.length ? (
+        <div className={style.home_container}>
+          <Carrusel HotelsCarrusel={Hotels?.allHotels} />
+          <section className={`${style.section} ${style.one}`}>
+            <div className={style.filtroContainer}>
+              <Filter />
+            </div>
+            <div className={style.divCard}>
+              {Hotels.allHotels?.map(
+                ({
+                  id,
+                  name,
+                  image,
+                  province,
+                  department,
+                  rating,
+                  description,
+                  valoration,
+                }) => (
+                  <Cards
+                    key={id}
+                    id={id}
+                    name={name}
+                    image={image}
+                    province={province}
+                    department={department}
+                    rating={rating}
+                    description={description}
+                    valoration={valoration}
+                  />
+                )
+              )}
+            </div>
+            <Clima />
+          </section>
+        </div>
+      ) : (
+        <div className={style.DivContainerLoading}>
+          <div className={style.DivContainerLoadingHijo}>
+            <div className={style.LoadingDiv}>
+              <Loading />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className={style.DivContainerLoading}>
+        <div className={style.DivContainerLoadingHijo}>
+          <div className={style.LoadingDiv}>
+            <Loading />
+          </div>
+        </div>
       </div>
+      <Paginado paginas={Hotels.numPages} />
+      {/* <section className={`${style.section} ${style.two}`}></section> */}
+      <Footer />
     </>
   );
 };

@@ -83,13 +83,11 @@ export const FuncionSelectFilter = (filters) => {
       }
 
       //*----------------------------------------Fechas:
-
-      //http://localhost:3001/hotels?page=1&services=Pileta&checkIn=2023-05-27&checkOut=2023-05-28
-
-      if (checkOut.length) {
+      console.log(checkIn, checkOut);
+      if (checkIn.length) {
         URL = URL + `&checkIn=${checkIn}`;
       }
-      if (checkIn.length) {
+      if (checkOut.length) {
         URL = URL + `&checkOut=${checkOut}`;
       }
 
@@ -121,11 +119,12 @@ export const PostFilters = (filters) => {
 };
 
 //* ----------------- TYPE ROOMS ------------------------------------
-export const FuncionTypeRoomTypes = (idHotel,checkIn,checkOut) => {
- 
+export const FuncionTypeRoomTypes = (idHotel, checkIn, checkOut) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`);
+      const response = await axios.get(
+        `${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`
+      );
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
