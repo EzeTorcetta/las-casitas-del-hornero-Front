@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRequests,getUsers } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
@@ -6,19 +6,28 @@ import MUIDataTable from "mui-datatables";
 import axios from "axios";
 import swal from "sweetalert";
 import style from "./GetRequest.module.css"
+
+
 const GetRequests = () => {
     const {Requests} = useSelector(state=>state)
     const dispatch = useDispatch()
     const user = PedirLocalStorage();
     const {Users} = useSelector((state) => state);
     const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+    const  [loading,setLoading] = useState(false)
     
+
     useEffect(() => {
+      if(!loading){
+        setLoading(true)
         if(!Requests.length){
             dispatch(getRequests(user.id))
         }
+      }
     }, [Requests,Users]);
 
+    
+ 
     const handler = async (event,requestId,userId) => {
      
         try {

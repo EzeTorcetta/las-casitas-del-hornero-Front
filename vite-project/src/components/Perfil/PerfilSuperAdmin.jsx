@@ -15,7 +15,7 @@ import {
   EstadisticasLinealUsuarioQueMasReservo,
   EstadisticasLinealProvinciasMasReservada,
 } from "../../Estadisticas/EstadisticasSuperAdmin";
-import { NavBar, Footer, PedirLocalStorage, GetUsers,GetRequests } from "../Index";
+import { NavBar, Footer, PedirLocalStorage, GetUsers,GetRequests,GetHotels } from "../Index";
 import "./PerfilSuperAdmin.css";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./PerfilSuperAdmin.module.css";
@@ -58,6 +58,8 @@ const PerfilSuperAdmin = () => {
   return (
     <>
       <NavBar />
+      <div className={style.divContainerGigaChad}>
+
       <section>
         <div className="divDeBienvenido">
           <h1>{`Bienvenido ${User.username}`}</h1>
@@ -69,6 +71,7 @@ const PerfilSuperAdmin = () => {
           {/* <h1>Usuarios</h1> */}
           <GetUsers />
           <GetRequests/>
+          <GetHotels/>
         </div>
       </section>
       <section className="ContainerEst">
@@ -110,6 +113,7 @@ const PerfilSuperAdmin = () => {
          
         </div>
       </section>
+      </div>
       <section className="Footer">
         <Footer />
       </section>
