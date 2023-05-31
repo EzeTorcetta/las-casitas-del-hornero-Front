@@ -1,7 +1,23 @@
+.formHotelContainer {
+  display: flex;
+  padding-top: 2em;
+  margin-top: 10vh;
+  background-color: whitesmoke;
+  justify-content: center;
+  padding-bottom: 2em;
+}
 .form {
-    max-width: 500px;
-    max-width: 500px;
+  padding: 2em;
+  border: 2px solid black;
+  max-width: 850px;
+  box-shadow: 3px 3px 5px rgba(1, 1, 1, 0.616);
+  border-color: #e0e0e0;
+
   }
+.form h1 {
+  padding-bottom: .5em;
+  border-bottom: 1px solid rgb(194, 191, 191);
+}
   
   .error {
     visibility: visible;
@@ -34,13 +50,14 @@
     left: 0;
     height: 1.3em;
     width: 1.3em;
+    margin-right: 1em;
     background: white;
     border-radius: 5px;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 5);
   }
   
   .container input:checked ~ .checkmark {
-    background-image: linear-gradient(#ff9b21, #ffa02b);
+    background-color: #E56910;
   }
   
   .checkmark:after {
@@ -66,10 +83,14 @@
   .checkContainer {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
   }
   
   .checkbox {
-    margin: 0 100px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    margin-bottom: .5em;
   }
   
   .nameService {
@@ -82,10 +103,13 @@
     cursor: pointer;
     color: white;
     border-radius: 0.5rem;
-    background-color: orange;
+    background-color: #E56910;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
     padding: 7px;
     border: 2px solid white;
     margin: 5px;
+  }
+  .uploadContainer {
+    width: fit-content;
   }
