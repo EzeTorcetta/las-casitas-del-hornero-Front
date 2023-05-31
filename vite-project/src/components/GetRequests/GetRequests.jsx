@@ -55,8 +55,32 @@ const GetRequests = () => {
 
 
     const columnas = [
-        "id",
-        "UserId",
+      {
+        name: "id",
+        label: "id",
+        options: {
+          customBodyRender: (value, tableMeta, updateValue) => {
+            return(
+              <div className={style.divId}>
+                {value}
+              </div>
+            )
+          }
+        }
+      },
+        {
+          name: "UserId",
+          label: "UserId",
+          options: {
+            customBodyRender: (value, tableMeta, updateValue) => {
+              return(
+                <div className={style.divId}>
+                  {value}
+                </div>
+              )
+            }
+          }
+        },
         {
           name: "username",
           label: "Nombre de usuario",  
@@ -64,7 +88,7 @@ const GetRequests = () => {
             customBodyRender: (value, tableMeta, updateValue) => {
               
               return (
-                <div>
+                <div  className={style.divUserName}>
                   <p>{value}</p>     
                 </div>
               );
@@ -80,7 +104,7 @@ const GetRequests = () => {
               customBodyRender: (value, tableMeta, updateValue) => {
                 
                 return (
-                  <div>
+                  <div className={style.divFecha}>
                     <p>{value.slice(0,10)}</p>     
                   </div>
                 );
@@ -97,7 +121,7 @@ const GetRequests = () => {
                   return (
                     <div>
                       {value === false ? (
-                        <select name="" onChange={(event) => handler(event,requestId, userId)}>
+                        <select className={style.boton} name="" onChange={(event) => handler(event,requestId, userId)}>
                           <option hidden>Pendiente</option>
                           <option value="si">Aceptar</option>
                           <option value="no">Rechazar</option>

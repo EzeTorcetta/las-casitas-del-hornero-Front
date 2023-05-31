@@ -4,7 +4,7 @@ import { getHotelsAdmin } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
 import MUIDataTable from "mui-datatables";
 import axios from "axios";
-
+import style from "./GetHotels.module.css"
 const GetHotels = () => {
     const {HotelsAdmin} = useSelector(data=>data)
     const dispatch = useDispatch()
@@ -29,12 +29,60 @@ console.log(id_Hotel)
 }
 
 const columnas = [
-    "id",
+  {
+    name: "id",
+    label: "id",
+    options: {
+      customBodyRender: (value, tableMeta, updateValue) => {
+        return(
+          <div className={style.divColumns}>
+            {value}
+          </div>
+        )
+      }
+    }
+  },
     "name",
     "email",
-    "phoneNumber",
-    "rating",
-    "valoration",
+    {
+      name: "phoneNumber",
+      label: "phoneNumber",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return(
+            <div className={style.divColumns}>
+              {value}
+            </div>
+          )
+        }
+      }
+    },
+    {
+      name: "rating",
+      label: "rating",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return(
+            <div className={style.divColumns}>
+              {value}
+            </div>
+          )
+        }
+      }
+    },
+    {
+      name: "valoration",
+      label: "valoration",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return(
+            <div className={style.divValoration}>
+              {value}
+            </div>
+          )
+        }
+      }
+    },
     {
         name: "status",
         label: "Status",  
@@ -44,7 +92,7 @@ const columnas = [
             return (
               <div>
                 <h1>{value}</h1>
-                <button
+                <button className={style.boton}
                   onClick={() => FuncioBloquear(id_Hotel)}
                 >
                   {value ? "Bloquear" : "Desbloquear"}
@@ -54,7 +102,20 @@ const columnas = [
           },
         },
       },
-    "UserId",
+      {
+        name: "UserId",
+        label: "UserId",
+        options: {
+          customBodyRender: (value, tableMeta, updateValue) => {
+            return(
+              <div className={style.divUserId}>
+                {value}
+              </div>
+            )
+          }
+        }
+      },
+   
     "province"
 ]
 
