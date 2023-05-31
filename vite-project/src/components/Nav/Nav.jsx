@@ -39,6 +39,7 @@ const NavBar = ({ countCarrito }) => {
   const theme = useSelector((state) => state.theme);
   const idioma = useSelector((state) => state.idioma);
   const [isOpen, setIsOpen] = useState(false);
+ 
 
   const translations = {
     en: {
@@ -48,7 +49,7 @@ const NavBar = ({ countCarrito }) => {
       ProveerHotel: "Provide Hotel",
       AdministrarUsuarios: "Manage Users",
       QuieroSerProveedor: "I want to be a supplier",
-      Salir: "Go out",
+      Salir: "Log out",
     },
     es: {
       VerPerfil: " Ver Perfil",
@@ -60,6 +61,8 @@ const NavBar = ({ countCarrito }) => {
       Salir: "Salir",
     },
   };
+
+
 
   const toggleLang = (event) => {
     dispatch(updateLanguage(event.target.value));
@@ -107,7 +110,6 @@ const NavBar = ({ countCarrito }) => {
   };
 
   if (windowWidth > 1080) {
-
     return (
       <div>
         <div className={theme === "light" ? "navlight" : "navdark"}>
@@ -124,51 +126,60 @@ const NavBar = ({ countCarrito }) => {
           <SwitchButton />
           <SymbolsCurrency />
 
-          {rol === 1 ?
-            (
-              <Link to={"/Carrito"}>
-                <div className="divCarritoCount">
-                  <div className="countCarritoDiv">{countCarrito}</div>
-                  <img
-                    className="iconoCarrito"
-                    src={theme === "light" ? imageCarrito : carritoblanco}
-                  />
+          {rol === 1 ? (
+            <Link to={"/Carrito"} style={{ "text-decoration": "none" }}>
+              <div className="divCarritoCount">
+                <div className="countCarritoDiv">
+                  <span>{countCarrito}</span>
                 </div>
-              </Link>
-            ) : (
-              <></>
-            )
-          }
-
+                <img
+                  className="iconoCarrito"
+                  src={theme === "light" ? imageCarrito : carritoblanco}
+                />
+              </div>
+            </Link>
+          ) : (
+            <></>
+          )}
 
           <div>
-            {username ? (theme === 'dark' ? (
-              <div className="contenedor-elementos-dark">
-                <div className="nombre-usuario-dark">{`${username}`}</div>
-                <div className="contenedor-opciones-dark">
-                  <button onClick={handleVerPerfil} className="botoncito-dark">{translations[idioma].VerPerfil}</button>
-                  {rol === 2 ? <div className="opciones-dark">{translations[idioma].ProveerHotel}</div> :
-                    rol === 3 ? <div className="opciones-dark">{translations[idioma].AdministrarUsuarios}</div> :
-                      <button onClick={handleChangeTipoCuenta} className="botoncito-dark">{translations[idioma].QuieroSerProveedor}</button>}
-                  <button onClick={handleLogout} className="botoncito-dark">{translations[idioma].Salir}</button>
+            {username ? (
+              theme === "dark" ? (
+                <div className="contenedor-elementos-dark">
+                  <div className="nombre-usuario-dark">{`${username}`}</div>
+                  <div className="contenedor-opciones-dark">
+                    <button
+                      onClick={handleVerPerfil}
+                      className="botoncito-dark"
+                    >
+                      {translations[idioma].VerPerfil}
+                    </button>
+              
+                    <button onClick={handleLogout} className="botoncito-dark">
+                      {translations[idioma].Salir}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="contenedor-elementos">
+                  <div className="nombre-usuario">{`${username}`}</div>
+                  <div className="contenedor-opciones">
+                    <button onClick={handleVerPerfil} className="botoncito">
+                      {translations[idioma].VerPerfil}
+                    </button>
+                    
+                    <button onClick={handleLogout} className="botoncito">
+                      {translations[idioma].Salir}
+                    </button>
+                  </div>
+                </div>
+              )
             ) : (
-              <div className="contenedor-elementos">
-                <div className="nombre-usuario">{`${username}`}</div>
-                <div className="contenedor-opciones">
-                  <button onClick={handleVerPerfil} className="botoncito">{translations[idioma].VerPerfil}</button>
-                  {rol === 2 ? <div className="opciones">{translations[idioma].ProveerHotel}</div> :
-                    rol === 3 ? <div className="opciones">{translations[idioma].AdministrarUsuarios}</div> :
-                      <div className="opciones">{translations[idioma].QuieroSerProveedor}</div>}
-                  <button onClick={handleLogout} className="botoncito">{translations[idioma].Salir}</button>
-                </div>
-              </div>
-            )) : (
-              <button onClick={handleGoHome} className="boton-inicia-sesion"> {translations[idioma].IniciarSesion} </button>
-            )
-            }
-
+              <button onClick={handleGoHome} className="boton-inicia-sesion">
+                {" "}
+                {translations[idioma].IniciarSesion}{" "}
+              </button>
+            )}
           </div>
           <div className="idioma">
             🌐
@@ -180,11 +191,10 @@ const NavBar = ({ countCarrito }) => {
         </div>
       </div>
     );
-  }
-  else {
+  } else {
     return (
       
-      <div className="navflex">
+      <div className={theme === 'light' ? 'navflex' : 'navflex-dark'}>
         <div>
           <NavLink to={"/Home"}>
               <div>
@@ -196,12 +206,52 @@ const NavBar = ({ countCarrito }) => {
               </div>
             </NavLink>
         </div>
-        <div className={`navitems ${isOpen && "open"}`}>
+      
+        <div className={`${theme} ${isOpen && "open"}`}>
+        <div>
+            {username ? (
+              theme === "dark" ? (
+                <div className="contenedor-elementos-dark">
+                  <div className="nombre-usuario-dark-flex">{`${username}`}</div>
+                  <div className="contenedor-opciones-dark">
+                    <button
+                      onClick={handleVerPerfil}
+                      className="botoncito-dark"
+                    >
+                      {translations[idioma].VerPerfil}
+                    </button>
+                    
+                    <button onClick={handleLogout} className="botoncito-dark">
+                      {translations[idioma].Salir}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="contenedor-elementos">
+                  <div className="nombre-usuario">{`${username}`}</div>
+                  <div className="contenedor-opciones">
+                    <button onClick={handleVerPerfil} className="botoncito">
+                      {translations[idioma].VerPerfil}
+                    </button>
+                    
+                    <button onClick={handleLogout} className="botoncito">
+                      {translations[idioma].Salir}
+                    </button>
+                  </div>
+                </div>
+              )
+            ) : (
+              <button onClick={handleGoHome} className="boton-inicia-sesion">
+                {" "}
+                {translations[idioma].IniciarSesion}{" "}
+              </button>
+            )}
+          </div>
           <div>
             <SwitchButton/>
           </div>
           <div>
-            <SymbolsCurrency />
+            <SymbolsCurrencyFlex />
           </div>
           <div>
             {rol === 1 ?
@@ -220,7 +270,13 @@ const NavBar = ({ countCarrito }) => {
               )
             }
           </div>
-          <a>portafolio</a>
+          <div className="idioma">
+            🌐
+            <select value={idioma} onChange={toggleLang}>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
         </div>
         <div className={`navtoggle ${isOpen && "open"}`} onClick={() => setIsOpen(!isOpen)}>
           <span></span>
@@ -228,8 +284,7 @@ const NavBar = ({ countCarrito }) => {
           <span></span>
         </div>
       </div>
-         
-    )
+    );
   }
 };
 

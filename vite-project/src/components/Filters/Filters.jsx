@@ -18,6 +18,7 @@ import {
   getServices,
 } from "../../redux/Actions/Actions";
 //css
+import style from "./FiltersDark.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
@@ -187,7 +188,7 @@ const Filter = () => {
     GuardarCheckInCheckOut({
       CheckIn: stateFecha.checkIn,
       CheckOut: stateFecha.checkOut,
-    })
+    });
   };
 
   // CLEAN FILTROS
@@ -251,23 +252,15 @@ const Filter = () => {
 
   return (
     <div>
-      <form
-        name="filterForm"
-        className={style.form}
-      >
+      <form name="filterForm" className={style.form}>
         <input
           type="text"
           name="text"
-          className={
-            style.inputSearch
-          }
+          className={style.inputSearch}
           placeholder="Buscar un Hotel . . ."
           onChange={onChangeName}
         />
-        <select
-          onChange={onChangeProvinces}
-          className={style.select}
-        >
+        <select onChange={onChangeProvinces} className={style.select}>
           <option hidden>{translations[idioma].FiltroPorProvincia}</option>
           {Provinces.map((pro) => (
             <option id={pro.id} value={pro.nombre} key={pro.id}>
@@ -306,10 +299,7 @@ const Filter = () => {
         ) : (
           <></>
         )}
-        <select
-          onChange={onChangeRating}
-          className={style.select}
-        >
+        <select onChange={onChangeRating} className={style.select}>
           <option hidden>{translations[idioma].Estrellas}</option>
           {raiting.map((rant, index) => (
             <option value={rant} key={index}>
@@ -348,7 +338,10 @@ const Filter = () => {
             maxDate={addMonths(new Date(), 12)} // La función addMonths es una función proporcionada por la biblioteca date-fns, que se utiliza para agregar un número específico de meses a una fecha determinada. Toma dos argumentos: la fecha inicial y la cantidad de meses que deseas agregar. se utiliza para realizar cálculos de fechas, como agregar o restar meses, de una manera sencilla y eficiente utilizando la biblioteca date-fns.
             showDisabledMonthNavigation
             customInput={
-              <div className="datepicker-custom-input" style={{"background-color": "#E56910"}}>
+              <div
+                className="datepicker-custom-input"
+                style={{ "background-color": "#E56910" }}
+              >
                 <FontAwesomeIcon icon={faCalendarAlt} />
                 {!stateFecha.checkIn && !stateFecha.checkOut ? (
                   <span className="span">

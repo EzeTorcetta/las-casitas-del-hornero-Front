@@ -15,7 +15,7 @@ import {
   EstadisticasLinealUsuarioQueMasReservo,
   EstadisticasLinealProvinciasMasReservada,
 } from "../../Estadisticas/EstadisticasSuperAdmin";
-import { NavBar, Footer, PedirLocalStorage, GetUsers,GetRequests } from "../Index";
+import { NavBar, Footer, PedirLocalStorage, GetUsers,GetRequests,GetHotels } from "../Index";
 import "./PerfilSuperAdmin.css";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./PerfilSuperAdmin.module.css";
@@ -55,13 +55,30 @@ const PerfilSuperAdmin = () => {
   }, []);
 
 
+  let date = new Date()
+  const horas = date.getHours()
+
+
+
   return (
     <>
       <NavBar />
+      <div className={style.divContainerGigaChad}>
+      <div className={style.divEmail}>
+
+          <p>{`Email: ${User.email}`}</p>
+      </div>
       <section>
         <div className="divDeBienvenido">
-          <h1>{`Bienvenido ${User.username}`}</h1>
-          <h3>{`Tu email es : ${User.email}`}</h3>
+        {horas <= 12 && horas > 5 && (
+      <h1>Buenos días {User.username}</h1>
+    )}
+    {horas > 12 && horas < 19 && (
+      <h1>Buenas tardes {User.username}</h1>
+    )}
+    {(horas >= 19 || horas <= 5) && (
+      <h1>Buenas noches {User.username}</h1>
+    )}
         </div>
       </section>
       <section>
@@ -69,6 +86,7 @@ const PerfilSuperAdmin = () => {
           {/* <h1>Usuarios</h1> */}
           <GetUsers />
           <GetRequests/>
+          <GetHotels/>
         </div>
       </section>
       <section className="ContainerEst">
@@ -110,6 +128,7 @@ const PerfilSuperAdmin = () => {
          
         </div>
       </section>
+      </div>
       <section className="Footer">
         <Footer />
       </section>

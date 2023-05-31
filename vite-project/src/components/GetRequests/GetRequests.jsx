@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRequests,getUsers } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
@@ -6,19 +6,28 @@ import MUIDataTable from "mui-datatables";
 import axios from "axios";
 import swal from "sweetalert";
 import style from "./GetRequest.module.css"
+
+
 const GetRequests = () => {
     const {Requests} = useSelector(state=>state)
     const dispatch = useDispatch()
     const user = PedirLocalStorage();
     const {Users} = useSelector((state) => state);
     const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+    const  [loading,setLoading] = useState(false)
     
+
     useEffect(() => {
+      if(!loading){
+        setLoading(true)
         if(!Requests.length){
             dispatch(getRequests(user.id))
         }
+      }
     }, [Requests,Users]);
 
+    
+ 
     const handler = async (event,requestId,userId) => {
      
         try {
@@ -46,8 +55,32 @@ const GetRequests = () => {
 
 
     const columnas = [
-        "id",
-        "UserId",
+      {
+        name: "id",
+        label: "id",
+        options: {
+          customBodyRender: (value, tableMeta, updateValue) => {
+            return(
+              <div className={style.divId}>
+                {value}
+              </div>
+            )
+          }
+        }
+      },
+        {
+          name: "UserId",
+          label: "UserId",
+          options: {
+            customBodyRender: (value, tableMeta, updateValue) => {
+              return(
+                <div className={style.divId}>
+                  {value}
+                </div>
+              )
+            }
+          }
+        },
         {
           name: "username",
           label: "Nombre de usuario",  
@@ -55,7 +88,7 @@ const GetRequests = () => {
             customBodyRender: (value, tableMeta, updateValue) => {
               
               return (
-                <div>
+                <div  className={style.divUserName}>
                   <p>{value}</p>     
                 </div>
               );
@@ -71,7 +104,7 @@ const GetRequests = () => {
               customBodyRender: (value, tableMeta, updateValue) => {
                 
                 return (
-                  <div>
+                  <div className={style.divFecha}>
                     <p>{value.slice(0,10)}</p>     
                   </div>
                 );
@@ -88,7 +121,7 @@ const GetRequests = () => {
                   return (
                     <div>
                       {value === false ? (
-                        <select name="" onChange={(event) => handler(event,requestId, userId)}>
+                        <select className={style.boton} name="" onChange={(event) => handler(event,requestId, userId)}>
                           <option hidden>Pendiente</option>
                           <option value="si">Aceptar</option>
                           <option value="no">Rechazar</option>

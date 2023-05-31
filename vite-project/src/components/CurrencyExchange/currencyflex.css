@@ -1,29 +1,23 @@
-.select-barr{
-    display: none;
-    border-radius: 1rem;
+.select-bar{
+    border-radius: 2rem;
     border: none;
     height: 3rem;
-    width: 15rem;
+    width: 13rem;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: orange;
+    background-color: whitesmoke;
     font-size: .9rem;
-    color: white;
-
-    margin-left: 18rem;
-}
-
-.currency-containerr:hover .select-barr{
-    display: block;
+    color: #929292;
 }
 
 .logocurrency{
     height: 3rem;
 }
 
-.currency-containerr{
+.currency-container{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 6rem;
+    width: 17rem;
+    
 }

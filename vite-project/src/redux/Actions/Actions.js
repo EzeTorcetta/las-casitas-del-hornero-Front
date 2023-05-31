@@ -38,7 +38,7 @@ import {
   MODIFICAR_HOTEL_PARTNER,
   UPDATE_LANGUAGE,
   GET_REQUESTS,
-
+  GET_HOTELS_ADMIN
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -658,3 +658,21 @@ export const getRequests = (id_user) => {
   }
 }
 
+export const getHotelsAdmin = (id_user) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/hotels/allHotels/${id_user}`)
+
+      dispatch({
+        type: GET_HOTELS_ADMIN,
+        payload: response.data
+      })
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  }
+}
