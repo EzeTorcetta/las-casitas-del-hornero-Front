@@ -19,10 +19,10 @@ import {
 } from "../../redux/Actions/Actions";
 //css
 // import style from "./FiltersDark.module.css";
-import "react-datepicker/dist/react-datepicker.css";
-import "./FiltrosCalendario.css";
+// import "react-datepicker/dist/react-datepicker.css";
+// import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
-import styleDark from "./FiltersDark.module.css";
+// import styleDark from "./FiltersDark.module.css";
 import { GuardarCheckInCheckOut } from "../Index";
 import traductor from "../Traductor/Traductor";
 
@@ -349,7 +349,7 @@ const Filter = () => {
             maxDate={addMonths(new Date(), 12)} // La función addMonths es una función proporcionada por la biblioteca date-fns, que se utiliza para agregar un número específico de meses a una fecha determinada. Toma dos argumentos: la fecha inicial y la cantidad de meses que deseas agregar. se utiliza para realizar cálculos de fechas, como agregar o restar meses, de una manera sencilla y eficiente utilizando la biblioteca date-fns.
             showDisabledMonthNavigation
             customInput={
-              <div className="datepicker-custom-input">
+              <div className="datepicker-custom-input" style={{"background-color": "#E56910"}}>
                 <FontAwesomeIcon icon={faCalendarAlt} />
                 {!stateFecha.checkIn && !stateFecha.checkOut ? (
                   <span className="span">
