@@ -1,4 +1,4 @@
-import { Line, Bar, Doughnut } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import "./Estadisticas.css";
 import {
   // en line chart debo importar LineElement
@@ -62,19 +62,27 @@ const EstadisticasLinealPartner = ({ MesDondeMasSeReservoPartner }) => {
     responsive: true,
     scales: {
       y: {
-        beginAtZero: true, // Start the y-axis at zero
+        beginAtZero: true,
+        ticks: {
+          callback: function (value, index, values) {
+            return value + " Reservas"; // Agregar 'Reservas' al valor en el eje Y
+          },
+        },
+        title: {
+          display: true,
+          text: "Cantidad de Reservas", // Agregar título al eje Y
+        },
       },
     },
     plugins: {
       tooltip: {
-        enabled: true, // Show tooltips when hovering over points
+        enabled: true,
       },
       legend: {
-        display: true, // Display the chart legend
+        display: true,
       },
     },
   };
-
   return (
     <div className="ContainerGraficoLinea">
       <Line data={data} options={options} />
@@ -88,8 +96,6 @@ const EstadisticasLinealPartner = ({ MesDondeMasSeReservoPartner }) => {
 //Bar
 
 const EstadisticasBarraPartner = ({ HotelesMasReservadosPartner }) => {
-
-
   const NameHotel = [];
   const Reserva = [];
 

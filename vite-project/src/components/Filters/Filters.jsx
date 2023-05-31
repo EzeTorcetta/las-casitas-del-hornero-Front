@@ -6,7 +6,6 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import es from "date-fns/locale/es";
 import DatePicker, { registerLocale } from "react-datepicker";
 registerLocale("es", es);
-import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,6 +17,7 @@ import {
   getServices,
 } from "../../redux/Actions/Actions";
 //css
+import style from "./FiltersDark.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
@@ -34,7 +34,7 @@ const Filter = () => {
     (state) => state
   );
   //*-----------------------------------------------------Fechas:
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const [dateRange, setDateRange] = useState([null, null]);
   const [stateFecha, setStateFecha] = useState({
     checkIn: "",
     checkOut: "",
@@ -94,32 +94,35 @@ const Filter = () => {
     },
   };
 
+  //*---------------------------Funcion Fehcas:
+
   const onChange = (update) => {
     setDateRange(update);
 
     const formatDate = (date) => {
       const year = date.getFullYear().toString();
-      const month = (date.getMonth() + 1).toString().padStart(2, "0"); //? Se asegura de obtener el mes correcto sumando 1 al mes devuelto por  (ya que los meses en JavaScript van de 0 a 11).
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
       const day = date.getDate().toString().padStart(2, "0");
 
       return `${year}-${month}-${day}`;
     };
 
-    const checkInDate = update[0];
-    const checkOutDate = update[1];
-
-    const checkIn = formatDate(checkInDate); //?invocamos la funcion de arriba pasandole el date para transformarlo.
-    const checkOut = formatDate(checkOutDate); //?invocamos la funcion de arriba pasandole el date para transformarlo.
-
-    setStateFecha({ checkIn, checkOut });
+    const [checkInDate, checkOutDate] = update; // destructuro de upDate el valor de fecha inicio y final.
+    const checkIn = checkInDate ? formatDate(checkInDate) : ""; // lo guardo en constatne y pregunto si existe , si existe se lo envio como parametro a la funcion y sino un string vacio.
+    const checkOut = checkOutDate ? formatDate(checkOutDate) : ""; // lo guardo en constatne y pregunto si existe , si existe se lo envio como parametro a la funcion y sino un string vacio.
 
     setFilter({
       ...stateFilter,
-      checkIn: stateFecha.checkIn,
-      checkOut: stateFecha.checkOut,
+      checkIn: checkIn,
+      checkOut: checkOut,
+    });
+    setStateFecha({
+      checkIn: checkIn,
+      checkOut: checkOut,
     });
   };
 
+  console.log(stateFilter);
   //*----------------------------------------------------------*//
 
   const onChangeProvinces = async (event) => {
@@ -187,7 +190,7 @@ const Filter = () => {
     GuardarCheckInCheckOut({
       CheckIn: stateFecha.checkIn,
       CheckOut: stateFecha.checkOut,
-    })
+    });
   };
 
   // CLEAN FILTROS
@@ -251,23 +254,15 @@ const Filter = () => {
 
   return (
     <div>
-      <form
-        name="filterForm"
-        className={style.form}
-      >
+      <form name="filterForm" className={style.form}>
         <input
           type="text"
           name="text"
-          className={
-            style.inputSearch
-          }
+          className={style.inputSearch}
           placeholder="Buscar un Hotel . . ."
           onChange={onChangeName}
         />
-        <select
-          onChange={onChangeProvinces}
-          className={style.select}
-        >
+        <select onChange={onChangeProvinces} className={style.select}>
           <option hidden>{translations[idioma].FiltroPorProvincia}</option>
           {Provinces.map((pro) => (
             <option id={pro.id} value={pro.nombre} key={pro.id}>
@@ -306,10 +301,7 @@ const Filter = () => {
         ) : (
           <></>
         )}
-        <select
-          onChange={onChangeRating}
-          className={style.select}
-        >
+        <select onChange={onChangeRating} className={style.select}>
           <option hidden>{translations[idioma].Estrellas}</option>
           {raiting.map((rant, index) => (
             <option value={rant} key={index}>
@@ -348,7 +340,10 @@ const Filter = () => {
             maxDate={addMonths(new Date(), 12)} // La función addMonths es una función proporcionada por la biblioteca date-fns, que se utiliza para agregar un número específico de meses a una fecha determinada. Toma dos argumentos: la fecha inicial y la cantidad de meses que deseas agregar. se utiliza para realizar cálculos de fechas, como agregar o restar meses, de una manera sencilla y eficiente utilizando la biblioteca date-fns.
             showDisabledMonthNavigation
             customInput={
-              <div className="datepicker-custom-input" style={{"background-color": "#E56910"}}>
+              <div
+                className="datepicker-custom-input"
+                style={{ "background-color": "#E56910" }}
+              >
                 <FontAwesomeIcon icon={faCalendarAlt} />
                 {!stateFecha.checkIn && !stateFecha.checkOut ? (
                   <span className="span">

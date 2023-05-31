@@ -12,6 +12,7 @@ import {
   TypeRoom,
   Footer,
   Error404,
+  Loading,
 } from "../Index";
 //actions
 import {
@@ -26,8 +27,9 @@ import imagenCorreo from "../../image/correo-electronico-vacio.png";
 import imagenTelefono from "../../image/llamada-telefonica.png";
 import { PedirLocalStorage } from "../Index";
 //css
-import style from "./Detail.module.css";
 import Reviews from "../Reviews/Reviews";
+import styleLight from "./Detail.module.css";
+import styleDark from "./DetailDark.module.css";
 
 //?----------------- COMPONENTE DETAIL ------------------------------------
 const Detail = ({ setCountCarrito, countCarrito }) => {
@@ -36,6 +38,8 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   const dispatch = useDispatch();
   const DetailHotel = useSelector((state) => state.DetailHotel);
   const Trolleys = useSelector((state) => state.Trolley);
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
 
   useEffect(() => {
     dispatch(FuncionDetailHotel(id));
@@ -76,102 +80,117 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-        <div className={style.detailContainer}>
-          {/* ---CONTENEDOR INFO HOTEL E IMAGE -------*/}
-          <div className={style.div}>
-            <div className={style.divDescription}>
-              <h1>{DetailHotel.name}</h1>
-              <div className={style.infoContainerEstrellas}>
-                {array.map((ranting, index) => (
-                  <img className={style.img} src={imagen} key={index} />
-                ))}
+      {DetailHotel.name ? (
+        <>
+          <div className={style.detailContainer}>
+            {/* ---CONTENEDOR INFO HOTEL E IMAGE -------*/}
+            <div className={style.div}>
+              <div className={style.divDescription}>
+                <h1>{DetailHotel.name}</h1>
+                <div className={style.infoContainerEstrellas}>
+                  {array.map((ranting, index) => (
+                    <img className={style.img} src={imagen} key={index} />
+                  ))}
+                </div>
+                <div className={style.infoContainer}>
+                  <img className={style.img} src={imagenTelefono} />
+                  <span>{DetailHotel.phoneNumber}</span>
+                </div>
+                <div className={style.infoContainer}>
+                  <img className={style.img} src={imagenCorreo} />
+                  <span>{DetailHotel.email}</span>
+                </div>
+                <div className={style.namesPlaces}>
+                  <span>{DetailHotel.locality}, </span>
+                  <span>{DetailHotel.department}, </span>
+                  <span>{DetailHotel.province}</span>
+                </div>
               </div>
-              <div className={style.infoContainer}>
-                <img className={style.img} src={imagenTelefono} />
-                <span>{DetailHotel.phoneNumber}</span>
-              </div>
-              <div className={style.infoContainer}>
-                <img className={style.img} src={imagenCorreo} />
-                <span>{DetailHotel.email}</span>
-              </div>
-              <div className={style.namesPlaces}>
-                <span>{DetailHotel.locality}, </span>
-                <span>{DetailHotel.department}, </span>
-                <span>{DetailHotel.province}</span>
+              <div className={style.divCarrusel}>
+                <CarruselDetail image={DetailHotel.image} />
               </div>
             </div>
-            <div className={style.divCarrusel}>
-              <CarruselDetail image={DetailHotel.image} />
+            {/* ----CONTENEDOR DE TIPOS DE HABITACIONES---- */}
+            <section className={style.sectionTypeRoom}>
+              <h2>HABITACIONES</h2>
+              <div className={style.roomContainer}>
+                {" "}
+                <TypeRoom
+                  Trolleys={Trolleys}
+                  name={DetailHotel.name}
+                  setCountCarrito={setCountCarrito}
+                  countCarrito={countCarrito}
+                  id={id}
+                />
+              </div>
+
+              {User?.rol === 2 ? (
+                <NavLink to="/FormRoomType">
+                  <p onClick={setHotel}>
+                    {translations[idioma].AgregarRoomType}
+                  </p>
+                </NavLink>
+              ) : (
+                ""
+              )}
+            </section>
+            {/* ----CONTENEDOR -VALORACION, DESCRIPCION,SERVICIOS UBICACION------ */}
+            <section className={style.sectionDescription}>
+              <h2>INFORMACIÓN </h2>
+              <section>
+                <div className={style.sectionDescription_left}>
+                  <div className={style.reviewContainer}>
+                    <h3>Puntuación de la review</h3>
+                    <p className={style.valoration}>{DetailHotel.valoration}</p>
+                  </div>
+                  <div className={style.descriptionHotelCont}>
+                    <h3>{translations[idioma].Descripción}</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Architecto alias eligendi sequi non ipsum corporis,
+                      aliquam aperiam sunt a excepturi sint sapiente ducimus
+                      unde aliquid quos dolorum iusto, impedit in! Lorem ipsum
+                      dolor sit amet consectetur adipisicing elit. Architecto
+                      alias eligendi sequi non ipsum corporis, aliquam aperiam
+                      sunt a excepturi sint sapiente ducimus unde aliquid quos
+                      dolorum iusto, impedit in! Lorem ipsum dolor sit amet
+                      consectetur adipisicing elit. Architecto alias eligendi
+                      sequi non ipsum corporis, aliquam aperiam sunt a excepturi
+                      sint sapiente ducimus unde aliquid quos dolorum iusto,
+                      impedit in!
+                    </p>
+                  </div>
+                </div>
+                <div className={style.sectionDescription_right}>
+                  <div className={style.servicesContainer}>
+                    <FuncionServices Services={DetailHotel.Services} />
+                  </div>
+                  <div className={style.mapContainer}>
+                    <h3>Ubicación</h3>
+                    {DetailHotel.location && DetailHotel.name && (
+                      <Maps
+                        location={DetailHotel.location}
+                        name={DetailHotel.name}
+                      />
+                    )}
+                  </div>
+                </div>
+              </section>
+            </section>
+            <div className={style.sectionReviews}>
+              <Reviews />
             </div>
           </div>
-          {/* ----CONTENEDOR DE TIPOS DE HABITACIONES---- */}
-          <section className={style.sectionTypeRoom}>
-            <h2>HABITACIONES</h2>
-            <div className={style.roomContainer}>
-              {" "}
-              <TypeRoom
-                Trolleys={Trolleys}
-                name={DetailHotel.name}
-                setCountCarrito={setCountCarrito}
-                countCarrito={countCarrito}
-                id={id}
-              />
+        </>
+      ) : (
+        <div className={style.DivContainerLoading}>
+          <div className={style.DivContainerLoadingHijo}>
+            <div className={style.LoadingDiv}>
+              <Loading />
             </div>
-
-            {User?.rol === 2 ? (
-              <NavLink to="/FormRoomType">
-                <p onClick={setHotel}>{translations[idioma].AgregarRoomType}</p>
-              </NavLink>
-            ) : (
-              ""
-            )}
-          </section>
-          {/* ----CONTENEDOR -VALORACION, DESCRIPCION,SERVICIOS UBICACION------ */}
-          <section className={style.sectionDescription}>
-            <h2>INFORMACIÓN </h2>
-            <section>
-              <div className={style.sectionDescription_left}>
-                <div className={style.reviewContainer}>
-                  <h3>Puntuación de la review</h3>
-                  <p className={style.valoration}>{DetailHotel.valoration}</p>
-                </div>
-                <div className={style.descriptionHotelCont}>
-                  <h3>{translations[idioma].Descripción}</h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Architecto alias eligendi sequi non ipsum corporis, aliquam
-                    aperiam sunt a excepturi sint sapiente ducimus unde aliquid
-                    quos dolorum iusto, impedit in! Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Architecto alias eligendi
-                    sequi non ipsum corporis, aliquam aperiam sunt a excepturi
-                    sint sapiente ducimus unde aliquid quos dolorum iusto,
-                    impedit in! Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Architecto alias eligendi sequi non ipsum
-                    corporis, aliquam aperiam sunt a excepturi sint sapiente
-                    ducimus unde aliquid quos dolorum iusto, impedit in!
-                  </p>
-                </div>
-              </div>
-              <div className={style.sectionDescription_right}>
-                <div className={style.servicesContainer}>
-                  <FuncionServices Services={DetailHotel.Services}/>
-                </div>
-                <div className={style.mapContainer}>
-                  <h3>Ubicación</h3>
-                  {DetailHotel.location && DetailHotel.name && (
-                    <Maps
-                      location={DetailHotel.location}
-                      name={DetailHotel.name}
-                    />
-                  )}
-                </div>
-              </div>
-            </section>
-          </section>
-          <div className={style.sectionReviews}>
-            <Reviews />
           </div>
         </div>
+      )}
       <Footer />
     </>
   );

@@ -85,13 +85,11 @@ export const FuncionSelectFilter = (filters) => {
       }
 
       //*----------------------------------------Fechas:
-
-      //http://localhost:3001/hotels?page=1&services=Pileta&checkIn=2023-05-27&checkOut=2023-05-28
-
-      if (checkOut.length) {
+      console.log(checkIn, checkOut);
+      if (checkIn.length) {
         URL = URL + `&checkIn=${checkIn}`;
       }
-      if (checkIn.length) {
+      if (checkOut.length) {
         URL = URL + `&checkOut=${checkOut}`;
       }
 
@@ -106,6 +104,7 @@ export const FuncionSelectFilter = (filters) => {
 
       dispatch({ type: GET_ALL_HOTELS, payload: response.data });
     } catch (error) {
+      console.log(error)
       swal({
         text: error.response.data.error,
         icon: "warning",
@@ -124,10 +123,11 @@ export const PostFilters = (filters) => {
 
 //* ----------------- TYPE ROOMS ------------------------------------
 export const FuncionTypeRoomTypes = (idHotel, checkIn, checkOut) => {
-
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`);
+      const response = await axios.get(
+        `${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`
+      );
       dispatch({ type: TYPE_ROOM, payload: response.data });
     } catch (error) {
       swal({
@@ -642,12 +642,12 @@ export const FuncionModificarHotel = (idHotel) => {
 export const getRequests = (id_user) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL_BASE}/request/${id_user}`)
+      const response = await axios.get(`${URL_BASE}/request/${id_user}`);
 
       dispatch({
         type: GET_REQUESTS,
-        payload: response.data
-      })
+        payload: response.data,
+      });
     } catch (error) {
       swal({
         text: error.response.data.error,

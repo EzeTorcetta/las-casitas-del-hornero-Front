@@ -1,7 +1,7 @@
 .navlight {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   z-index: 3;
   /*encima de to */
@@ -10,6 +10,7 @@
   padding-left: 2rem;
   position: fixed;
   top: 0;
+  height: 10%;
 }
 
 .navdark {
@@ -23,6 +24,7 @@
   padding-left: 2rem;
   position: fixed;
   top: 0;
+  height: 10%;
 }
 
 @media (max-width: 1080px) {
@@ -49,9 +51,7 @@
   }
 }
 
- {
-  /*-----BARRA DE OPCIONES DARK----*/
-}
+/*-----BARRA DE OPCIONES DARK----*/
 
 .contenedor-elementos-dark {
   background-color: aqua;
@@ -102,9 +102,7 @@
   box-shadow: #000 10px 10px 10px;
 }
 
- {
-  /*-----BARRA DE OPCIONES LIGHT----*/
-}
+/*-----BARRA DE OPCIONES LIGHT----*/
 
 .contenedor-elementos {
   background-color: aqua;
@@ -207,9 +205,7 @@
   padding-right: 4rem;
 }
 
- {
-  /*-----CSS DE MENU DISPLAY ---*/
-}
+/*-----CSS DE MENU DISPLAY ---*/
 
 .menu-horizontal {
   padding-top: 1rem;
@@ -259,9 +255,7 @@
   padding-top: 1rem;
 }
 
- {
-  /*-----------------------*/
-}
+/*-----------------------*/
 
 .links {
   display: flex;

@@ -20,7 +20,6 @@ import "./PerfilSuperAdmin.css";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./PerfilSuperAdmin.module.css";
 
-
 const PerfilSuperAdmin = () => {
   const dispatch = useDispatch();
   const {
@@ -92,40 +91,41 @@ const PerfilSuperAdmin = () => {
       <section className="ContainerEst">
         <div className="DivEstadisticas">
           <section>
-          <h3>Estadistica 1</h3>
-          <EstadisticasLinealValoracionHoteles
-            ValoracionHoteles={ValoracionHoteles}
-          />
+            <h3>Estadistica 1</h3>
+            <EstadisticasLinealValoracionHoteles
+              ValoracionHoteles={ValoracionHoteles}
+            />
           </section>
           <section>
             <h3>Estadistica 2</h3>
-          <EstadisticasLinealTodosLosBookings
-            TodosLosBookings={TodosLosBookings}
-          />
+            <EstadisticasLinealTodosLosBookings
+              TodosLosBookings={TodosLosBookings}
+            />
           </section>
           <section>
             <h3>Estadistica 3</h3>
-          <EstadisticasBarraMesMasReservado MesMasReservado={MesMasReservado} />
+            <EstadisticasBarraMesMasReservado
+              MesMasReservado={MesMasReservado}
+            />
           </section>
           <section>
             <h3>Estadistica 4</h3>
-          <EstadisticasBarraHotelMasReservado
-            HotelMasReservado={HotelMasReservado}
-          />
+            <EstadisticasBarraHotelMasReservado
+              HotelMasReservado={HotelMasReservado}
+            />
           </section>
           <section>
             <h3>Estadistica 5</h3>
-          <EstadisticasLinealUsuarioQueMasReservo
-            UsuarioQueMasReservo={UsuarioQueMasReservo}
-          />
+            <EstadisticasLinealUsuarioQueMasReservo
+              UsuarioQueMasReservo={UsuarioQueMasReservo}
+            />
           </section>
           <section>
             <h3>Estadistica 6</h3>
-          <EstadisticasLinealProvinciasMasReservada
-            ProvinciasMasReservada={ProvinciasMasReservada}
-          />
+            <EstadisticasLinealProvinciasMasReservada
+              ProvinciasMasReservada={ProvinciasMasReservada}
+            />
           </section>
-         
         </div>
       </section>
       </div>

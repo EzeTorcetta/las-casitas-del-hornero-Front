@@ -1,6 +1,11 @@
+.DivContainerLoading {
+  width: 100%;
+  height: 100%;
+}
+
 .wifi {
   --background: #ff8707;
-  --front-color: #E56910;
+  --front-color: #e56910;
   --back-color: #e09846;
   --text-color: #f18306;
   width: 64px;
