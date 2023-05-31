@@ -55,15 +55,30 @@ const PerfilSuperAdmin = () => {
   }, []);
 
 
+  let date = new Date()
+  const horas = date.getHours()
+
+
+
   return (
     <>
       <NavBar />
       <div className={style.divContainerGigaChad}>
+      <div className={style.divEmail}>
 
+          <p>{`Email: ${User.email}`}</p>
+      </div>
       <section>
         <div className="divDeBienvenido">
-          <h1>{`Bienvenido ${User.username}`}</h1>
-          <h3>{`Tu email es : ${User.email}`}</h3>
+        {horas <= 12 && horas > 5 && (
+      <h1>Buenos días {User.username}</h1>
+    )}
+    {horas > 12 && horas < 19 && (
+      <h1>Buenas tardes {User.username}</h1>
+    )}
+    {(horas >= 19 || horas <= 5) && (
+      <h1>Buenas noches {User.username}</h1>
+    )}
         </div>
       </section>
       <section>
