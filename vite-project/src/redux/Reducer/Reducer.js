@@ -37,6 +37,9 @@ import {
   HOTELES_MAS_RESERVADOS_PARTNER,
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
+  UPDATE_LANGUAGE,
+  GET_REQUESTS,
+
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -57,6 +60,8 @@ const InicialState = {
   PartnerHotels: [],
   Booking: [],
   Users: [],
+  idioma: "en",
+  Requests: [],
   Filters: {
     provinces: "",
     department: "",

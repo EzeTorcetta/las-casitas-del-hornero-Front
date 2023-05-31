@@ -72,10 +72,10 @@ const PerfilColaborador = () => {
 
       <section className={style.section}>
         <div className={style.divConteiner}>
-          <h1>Tus Hoteles</h1>
+          <h1>{translations[idioma].TusHoteles}</h1>
           <div className={style.LinkFormHotel}>
              <NavLink  to="/FormHotel">
-            <h4>{translations[idioma].TusHoteles}</h4>
+            <h4>Agregar Hotel</h4>
             </NavLink>
           </div>
           <div className={style.divHotels}>
