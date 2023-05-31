@@ -18,6 +18,21 @@
   border-radius: 10px;
 }
 .saludo {
-  align-items: center;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+
+.x{
+  margin-top: 10vh;
+}
+
+.LinkFormHotel{
+
+  width: fit-content;
+ margin-right: auto;
+ margin-left: auto;
+ 
+}
+

@@ -26,6 +26,7 @@ const GetUsers = () => {
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
+
   const handleRoleChange = async () => {
     const data = {
       id_user: selectedUserId,
@@ -35,6 +36,7 @@ const GetUsers = () => {
     setShowOptions(false);
     await dispatch(getUsers(user.id));
   };
+
   const handleSelectUser = (userId) => {
 
     setSelectedUserId(userId);
@@ -54,21 +56,45 @@ const GetUsers = () => {
   };
 
   const columnas = [
-    "id",
-    "username",
+    {
+      name: "id",
+      label: "id",
+      options: {
+        customBodyRender: (value) => {
+          return(
+            <div className={style.divId}>
+              {value}
+            </div>
+          )
+        }
+      }
+    },
+    {
+      name: "username",
+      label: "username",
+      options: {
+        customBodyRender: (value) => {
+          return(
+            <div className={style.divUserName}>
+              {value}
+            </div>
+          )
+        }
+      }
+    },
     "email",
     {
       name: "status",
       label: "Status",  
       options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
+        customBodyRender: (value, tableMeta) => {
           const userId = tableMeta.rowData[0];
           const userEmail = tableMeta.rowData[2]
           return (
             <div>
               <h1>{value}</h1>
               <button
-                className={style.BotonBloqueo}
+                className={style.botonRol}
                 onClick={() => FuncioBloquear(userId,userEmail)}
               >
                 {value ? "Bloquear" : "Desbloquear"}
@@ -83,11 +109,11 @@ const GetUsers = () => {
       name: "rol",
       label: "Rol",
       options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
+        customBodyRender: (value, tableMeta) => {
           //* customBodyRender sirve para modificar o actualizar un valor de la tabla
           const userId = tableMeta.rowData[0]; // Obtén el ID del usuario desde los datos de la fila
           return (
-            <div>
+            <div >
               {showOptions && selectedUserId === userId ? (
                 <select
                   className={style.select}
@@ -102,31 +128,51 @@ const GetUsers = () => {
               ) : (
                 roles[value]
               )}
-              <button
-                className={style.botonRol}
-                onClick={() => handleSelectUser(userId)}
-              >
-                Cambiar
-              </button>
-              {showOptions && selectedUserId === userId && (
-                <button
-                  className={style.botonGuardar}
-                  onClick={handleRoleChange}
-                >
-                  Guardar
-                </button>
-              )}
+              
+            
             </div>
           );
         },
       },
     },
+    {
+      name: "change",
+      label: "Change",
+      options: {
+        customBodyRender: (value, tableMeta) =>{
+          const userId = tableMeta.rowData[0]
+          return(
+
+            <div>
+
+              <button
+              className={style.botonRol}
+              onClick={() => handleSelectUser(userId)}
+            >
+              Cambiar
+            </button>
+            {showOptions && selectedUserId === userId && (
+              <button
+                className={style.botonGuardar}
+                onClick={handleRoleChange}
+              >
+                Guardar
+              </button>
+            )}
+            </div>
+          )
+          
+          
+        }
+      }
+    }
   ];
   const options = {
     selectableRows: false, // Desactivar checkboxes en cada fila
   };
   return (
     <MUIDataTable
+      className={style.gigachadaowo}
       title="Lista de Usuarios"
       data={users}
       columns={columnas}
