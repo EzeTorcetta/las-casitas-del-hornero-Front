@@ -68,3 +68,12 @@
   margin-left: 5px;
   margin-right: 5px;
 }
+
+.divId{
+  display: flex;
+  padding-left: 2em;
+}
+
+.divUserName{
+  padding-left: 1em;
+}
