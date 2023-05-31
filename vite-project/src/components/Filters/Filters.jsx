@@ -18,11 +18,10 @@ import {
   getServices,
 } from "../../redux/Actions/Actions";
 //css
-// import style from "./FiltersDark.module.css";
-// import "react-datepicker/dist/react-datepicker.css";
-// import "./FiltrosCalendario.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
-// import styleDark from "./FiltersDark.module.css";
+import styleDark from "./FiltersDark.module.css";
 import { GuardarCheckInCheckOut } from "../Index";
 import traductor from "../Traductor/Traductor";
 
