@@ -28,9 +28,11 @@ import {
   PedirLocalStorage,
   PedirCheckInCheckOut,
   GuardarCheckInCheckOut,
+  PedirMonedaLocalStorage,
 } from "../Index";
 import { useNavigate } from "react-router-dom";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import cargarDivisas from "./cargarDivisas";
 
 //?----------------- COMPONENTE HOME ------------------------------------
 const Home = ({ countCarrito, setCountCarrito }) => {
@@ -60,6 +62,8 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     })
   }
 
+  if(!PedirMonedaLocalStorage())cargarDivisas()
+  
   setCountCarrito((countCarrito = Trolleys.length));
 
   const handleUserLoggedIn = (user) => {

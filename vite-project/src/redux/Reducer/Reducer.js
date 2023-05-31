@@ -1,4 +1,5 @@
 //?---------------------------- IMPORTS --------------------------------
+import GuardarMonedaLocalStorage from "../../components/LocalStorage/moneda/GuardarMonedaLocalStorage";
 import {
   GET_ALL_HOTELS,
   POST_FILTERS,
@@ -227,6 +228,11 @@ export const rootReducer = (state = InicialState, actions) => {
         },
       };
     case SET_CURRENCY_SYMBOL:
+      GuardarMonedaLocalStorage({
+          ...state.currencyExchange,
+          symbol: actions.payload,
+        }
+      );
       return {
         ...state,
         currencyExchange: {
