@@ -85,6 +85,7 @@ const TypeRoom = ({ id, Trolleys }) => {
             {translations[idioma].Personas}: {room.people}
           </Card.Text>
           <img className={style.img} src={room.image} />
+          {console.log(room)}
           {room.stock === 0 ? (
             <Card.Text>No disponible</Card.Text>
           ) : (

@@ -345,6 +345,7 @@ const FormularioHotel = () => {
         replace: true,
       });
     } catch (error) {
+      console.log(error);
       swal({
         text: translations[idioma].ErrorCarga,
         icon: "warning",
