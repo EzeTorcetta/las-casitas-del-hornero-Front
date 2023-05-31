@@ -1,4 +1,4 @@
-import { Error404 } from "../Index";
+import { Error404 } from "../../Index";
 
 const PedirMonedaLocalStorage = () => {
   const checkJSON = localStorage.getItem("Moneda");
