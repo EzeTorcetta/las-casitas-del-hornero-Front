@@ -130,8 +130,7 @@
   appearance: none;
   color: white;
   border-radius: 0.5rem;
-
- opacity: 0.8;
+  opacity: 0.8;
   width: 100%;
   border: none;
   margin: 5px;
@@ -143,12 +142,10 @@
     -o-border-radius: 0.5rem;
     -webkit-border-radius: 0.5rem;
 }
-
 .inputSearch::placeholder {
   color: black;
   opacity: 1;
 }
-
 /* Estilos para el contenedor del DatePicker */
 .custom-datepicker {
   position: relative;
@@ -259,7 +256,17 @@
   margin-bottom: 1.5em 0;
   color: white;
 }
-
 .che{
   background-color: red;
+}
+@media (max-width:1200px) {
+  .form {
+    width: 80%;
+  }
+    .table {
+      
+      width: 50%;
+      margin: 5px 0;
+    }
+
 }

@@ -50,7 +50,7 @@ const Home = ({ countCarrito, setCountCarrito }) => {
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
 
-  if(!PedirCheckInCheckOut()){
+  if (!PedirCheckInCheckOut()) {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -59,11 +59,11 @@ const Home = ({ countCarrito, setCountCarrito }) => {
     GuardarCheckInCheckOut({
       CheckIn: checkIn,
       CheckOut: checkOut,
-    })
+    });
   }
 
-  if(!PedirMonedaLocalStorage())cargarDivisas()
-  
+  if (!PedirMonedaLocalStorage()) cargarDivisas();
+
   setCountCarrito((countCarrito = Trolleys.length));
 
   const handleUserLoggedIn = (user) => {
@@ -134,7 +134,9 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                   )
                 )}
               </div>
-              <Clima />
+              <div className={style.climaContainer}>
+                <Clima />
+              </div>
             </section>
           </>
         ) : (

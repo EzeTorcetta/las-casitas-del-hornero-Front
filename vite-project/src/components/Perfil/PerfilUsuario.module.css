@@ -3,9 +3,11 @@
   flex-direction: column;
   margin-top: 10vh;
   padding: 0 2em;
+  background-color: lightgreen;
 }
-.saludo {
-  text-align: center;
+.card_profile {
+display: flex;
+
   margin-bottom: 20px;
 }
 

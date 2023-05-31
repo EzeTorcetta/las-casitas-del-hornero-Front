@@ -22,31 +22,40 @@ body {
 }
 
 .filtroContainer {
-  flex-basis: 20%;
+  flex-basis: 14%;
   justify-content: center;
   padding: 1em;
 }
 
 .divCard {
-  flex-basis: 60%;
+  flex-basis: 66%;
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: start;
 
 }
 
-@media (max-width:1080px) {
+@media (max-width:1200px) {
   .section {
-    width: 100%; 
-    margin-right: 2rem;
-  }
-  .filtroContainer {
-    width:100%;
-    margin-bottom: 4rem;
-  }
-  .home_container{
-    margin-left: 5rem;
-  }
+      flex-direction: column;
+      width: 100%;
+      margin-right: 2rem;
+      padding-top: .5rem;
+    }
+  
+    .divCard {
+      flex-direction: column;
+      order: 1;
+    }
+  
+    .filtroContainer {
+      width: 100%;
+      margin-bottom: 4rem;
+    }
+  
+    .climaContainer {
+      order: 3;
+    }
 }

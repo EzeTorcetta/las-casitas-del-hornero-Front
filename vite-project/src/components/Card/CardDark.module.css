@@ -125,18 +125,19 @@ box-shadow:  2px 2px rgba(0, 0, 0, 0.616)
   opacity: 1;
 }
 
-@media (max-width:1080px){
-  .container{
+@media (max-width:1200px) {
+  .container {
     flex-direction: column;
     padding: 0;
     border-top: 2px solid white;
     overflow: hidden;
-    width: 15rem;
+    width: 100%;
+    height: fit-content;
   }
 
   .imgContainer {
     object-fit: cover;
-    background-color: #454545;
+    background-color: rgb(33, 33, 87);
     flex-basis: 50%;
   }
 
@@ -151,6 +152,7 @@ box-shadow:  2px 2px rgba(0, 0, 0, 0.616)
   .title {
     flex-basis: 50%;
   }
+
 }
 
 

@@ -10,7 +10,7 @@
   margin-bottom: 1em;
   border-radius: 0.5rem;
   width: 48%;
-  height: 25%;
+  height: 30%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
   -webkit-border-radius: 0.5rem;
   -moz-border-radius: 0.5rem;
@@ -125,13 +125,14 @@ object-fit: cover;
   opacity: 1;
 }
 
-@media (max-width:1080px) {
+@media (max-width:1200px) {
   .container {
     flex-direction: column;
     padding: 0;
     border-top: 2px solid white;
     overflow: hidden;
-    width: 15rem;
+    width: 100%;
+    height: fit-content;
   }
 
   .imgContainer {
