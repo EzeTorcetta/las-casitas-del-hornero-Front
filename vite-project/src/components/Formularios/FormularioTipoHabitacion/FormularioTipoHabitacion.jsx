@@ -9,15 +9,55 @@ import NavBar from "../../Nav/Nav";
 import { PedirLocalStorage } from "../../Index";
 
 const FormularioTipoHab = (props) => {
-  const URL_BASE =
-    "https://las-casitas-del-hornero-back-deploy.up.railway.app";
+  const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
   const User = PedirLocalStorage();
   const { state } = useLocation();
   const idHotelForm = useSelector((state) => state.idHotelForm);
   const id = state?.id_hotel || idHotelForm;
+  const idioma = useSelector((state) => state.idioma);
 
-  console.log(id)
+  const translations = {
+    en: {
+      CompletaLosCampos: "Please complete all the fields.",
+      Aceptar: "Accept",
+      ErroresEnlosCampos: "You have errors in the fields",
+      HabitacionesExito: "Your rooms were registered successfully!",
+      YaRegistraste: "You already registered this type of room.",
+      ErrorCargar: "Please try again, there was a problem loading the rooms.",
+      RegistraLasHabitaciones: "Register the rooms",
+      TipoDeHabitación: "Room type",
+      CantidadDePersonas: "Amount of people",
+      CantidadDePersonasPorHabitación: "Amount of people per room",
+      PrecioPorNoche: "Price per night",
+      CantidadDeHabitaciones: "Number of rooms",
+      CargaLaFotoDeTuHotel: "Load the photo of your hotel",
+      ArrastraLaImg: "drag the image here",
+      Registrar: "Register",
+      VolverAlInicio: "Back to home",
+    },
+    es: {
+      CompletaLosCampos: "Por favor completa todos los campos.",
+      Aceptar: "Aceptar",
+      ErroresEnlosCampos: "Tienes errores en los campos",
+      HabitacionesExito: "Tus habitaciones se registraron con éxito! ",
+      YaRegistraste: "Ya registraste este tipo de habitación.",
+      ErrorCargar:
+        "Por favor vuelve a intentarlo, ocurrio un problema al cargar las habitaciones.",
+      RegistraLasHabitaciones: "Registra las habitaciones",
+      TipoDeHabitación: "Tipo de habitación",
+      CantidadDePersonas: "Cantidad de personas",
+      CantidadDePersonasPorHabitación: "Cantidad de personas por habitación",
+      PrecioPorNoche: "Precio por noche",
+      CantidadDeHabitaciones: "Cantidad de habitaciones",
+      CargaLaFotoDeTuHotel: "Carga la foto de tu hotel",
+      ArrastraLaImg: "arrastra la imagen aquí",
+      Registrar: "Registrar",
+      VolverAlInicio: "Volver al inicio",
+    },
+  };
+
+  console.log(id);
 
   const resetTipoHab = {
     people: "",
@@ -59,16 +99,16 @@ const FormularioTipoHab = (props) => {
       !tipoHab.stock.length
     )
       return swal({
-        text: "Por favor completa todos los campos.",
+        text: translations[idioma].CompletaLosCampos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
 
     if (Object.entries(error).length)
       return swal({
-        text: "Tienes errores en los campos",
+        text: translations[idioma].ErroresEnlosCampos,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
 
     const { people, price, name, image, stock, id_user } = tipoHab;
@@ -81,32 +121,31 @@ const FormularioTipoHab = (props) => {
         stock,
         id_user,
       });
-      
+
       swal({
-        text: "Tus habitaciones se registraron con éxito! ",
+        text: translations[idioma].HabitacionesExito,
         icon: "success",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
       navigate("/FormRoomType", {
         state: { id_hotel: state.id_hotel },
         replace: true,
       });
       setTipoHab(resetTipoHab);
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.response.data.error === "Room type already exists.") {
         setTipoHab(resetTipoHab);
         return swal({
-          text: "Ya registraste este tipo de habitación.",
+          text: translations[idioma].YaRegistraste,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       }
       swal({
-        text: "Por favor vuelve a intentarlo, ocurrio un problema al cargar las habitaciones.",
+        text: translations[idioma].ErrorCargar,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     }
   };
@@ -116,15 +155,15 @@ const FormularioTipoHab = (props) => {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "La_Casita_Del_Hornero");
-    setLoading(true)
+    setLoading(true);
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dhe1t8gs0/image/upload",
       {
         method: "POST",
         body: data,
       }
-    )
-    const file = await res.json()
+    );
+    const file = await res.json();
     tipoHab.image = file.secure_url;
     setLoading(false);
     setError(validacion({ ...tipoHab, image: tipoHab.image }));
@@ -132,7 +171,7 @@ const FormularioTipoHab = (props) => {
 
   const deleteImage = async (url) => {
     setLoading(true);
-    tipoHab.image = ""
+    tipoHab.image = "";
     setLoading(false);
     setError(validacion({ ...tipoHab, image: tipoHab.image }));
   };
@@ -146,7 +185,7 @@ const FormularioTipoHab = (props) => {
       <div className="container">
         <form onSubmit={handleSubmit} className={style.form}>
           <h1 className="h3 mb-3 fw-normal">
-            Registra las habitaciones:
+            {translations[idioma].RegistraLasHabitaciones}:
           </h1>
 
           {/* CANTIDAD DE PERSONAS */}
@@ -155,7 +194,7 @@ const FormularioTipoHab = (props) => {
             <span className={style.error}>{error.people}</span>
           ) : (
             <span className={style.tipoHab}>
-              Tipo de habitación:{" "}
+              {translations[idioma].TipoDeHabitación}:{" "}
               {tipo[tipoHab.people]?.toUpperCase() || "MULTIPLE"}
             </span>
           )}
@@ -164,12 +203,14 @@ const FormularioTipoHab = (props) => {
               type="text"
               className="form-control"
               id="people"
-              placeholder="Cantidad de personas."
+              placeholder={translations[idioma].CantidadDePersonas}
               onChange={handleChange}
               value={tipoHab.people}
               name="people"
             />
-            <label>Cantidad de personas por habitación.</label>
+            <label>
+              {translations[idioma].CantidadDePersonasPorHabitación}.
+            </label>
           </div>
 
           {/* PRECIO DE LA HABITACION */}
@@ -184,12 +225,12 @@ const FormularioTipoHab = (props) => {
               type="text"
               className="form-control"
               id="price"
-              placeholder="Precio por noche."
+              placeholder={translations[idioma].PrecioPorNoche}
               onChange={handleChange}
               value={tipoHab.price}
               name="price"
             />
-            <label>Precio por noche.</label>
+            <label>{translations[idioma].PrecioPorNoche}.</label>
           </div>
 
           {/* CANTIDAD DE HABITACIONES POR TIPO */}
@@ -204,12 +245,12 @@ const FormularioTipoHab = (props) => {
               type="text"
               className="form-control"
               id="stock"
-              placeholder="Cantidad de habitaciones."
+              placeholder={translations[idioma].CantidadDeHabitaciones}
               onChange={handleChange}
               value={tipoHab.stock}
               name="stock"
             />
-            <label>Cantidad de habitaciones.</label>
+            <label>{translations[idioma].CantidadDeHabitaciones}.</label>
           </div>
 
           {/* FOTOS DE LA HABITACION */}
@@ -218,31 +259,31 @@ const FormularioTipoHab = (props) => {
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div>Carga la foto de tu hotel:</div>
+          <div>{translations[idioma].CargaLaFotoDeTuHotel}:</div>
           <div>
             <input
               type="file"
               name="image"
-              placeholder="arrastra la imagen aquí"
+              placeholder={translations[idioma].ArrastraLaImg}
               onChange={uploadImage}
             />
             {tipoHab.image.length ? (
-                  <>
-                    <img src={tipoHab.image} style={{ width: "300px" }} />
-                    <button onClick={() => deleteImage(tipoHab.image)}>X</button>
-                  </>):
-                  (<></>)}
+              <>
+                <img src={tipoHab.image} style={{ width: "300px" }} />
+                <button onClick={() => deleteImage(tipoHab.image)}>X</button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
 
           <button className="w-100 btn btn-lg btn-warning" type="submit">
-            Registrar
+            {translations[idioma].Registrar}
           </button>
 
           <NavLink to={"/Home"}>
-            <button
-              className="w-100 btn btn-lg btn-warning"
-              type="button">
-              Volver al inicio
+            <button className="w-100 btn btn-lg btn-warning" type="button">
+              {translations[idioma].VolverAlInicio}
             </button>
           </NavLink>
         </form>

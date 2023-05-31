@@ -1,16 +1,15 @@
 /* Estilos para el componente Clima */
-.contenedor {
-
+.container {
   height: fit-content;
   padding: 1em;
   border-radius: 12px;
+  background-color: #e56910;
 }
 
-@media(max-width: 1080px){
-  .contenedor{
+@media (max-width: 1080px) {
+  .contenedor {
     margin-top: 2rem;
     margin-bottom: 3rem;
-
   }
 }
 .container:hover {
