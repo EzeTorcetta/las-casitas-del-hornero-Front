@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PedirLocalStorage } from "../Index";
-import { useEffect, useState } from "react";
 import { changeRol, getUsers } from "../../redux/Actions/Actions";
 import style from "./GetUser.module.css";
 import MUIDataTable from "mui-datatables";

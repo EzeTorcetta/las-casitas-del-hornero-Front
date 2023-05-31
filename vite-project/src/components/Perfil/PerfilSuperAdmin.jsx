@@ -18,6 +18,7 @@ import {
 import { NavBar, Footer, PedirLocalStorage, GetUsers } from "../Index";
 import "./PerfilSuperAdmin.css";
 import { useDispatch, useSelector } from "react-redux";
+import style from "./PerfilSuperAdmin.module.css";
 
 const PerfilSuperAdmin = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,18 @@ const PerfilSuperAdmin = () => {
     ProvinciasMasReservada,
   } = useSelector((state) => state.Estadisticas);
   let User = PedirLocalStorage();
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      Bienvenido: "Welcome",
+      Email: "Your email is",
+    },
+    es: {
+      Bienvenido: "Bienvenido",
+      Email: "Tu email es",
+    },
+  };
 
   useEffect(() => {
     dispatch(FuncionHotelesMasReservadosEstadistica(User.id));

@@ -36,6 +36,7 @@ import {
   HOTELES_MAS_RESERVADOS_PARTNER,
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
+  UPDATE_LANGUAGE,
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -126,7 +127,6 @@ export const FuncionTypeRoomTypes = (idHotel,checkIn,checkOut) => {
     try {
       const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`);
       dispatch({ type: TYPE_ROOM, payload: response.data });
-      console.log(response.data)
     } catch (error) {
       swal({
         text: error.response.data.error,
@@ -406,6 +406,12 @@ export const idHotelForm = (id) => {
   };
 };
 
+export const updateLanguage = (language) => ({
+  type: "UPDATE_LANGUAGE",
+  payload: {
+    language,
+  },
+});
 //* ----------------- GET CURRENCY RATE API----------------------------------
 export const getCurrencyRateAPI = () => {
   try {
@@ -573,7 +579,6 @@ export const FuncionHotelesMasReservadosPartnerEstadistica = (idUser) => {
       const response = await axios.get(
         `${URL_BASE}/booking/mostBooking/${idUser}`
       );
-      console.log(response.data, idUser);
       dispatch({
         type: HOTELES_MAS_RESERVADOS_PARTNER,
         payload: response.data,

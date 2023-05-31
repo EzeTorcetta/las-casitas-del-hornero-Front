@@ -19,9 +19,23 @@ const TypeRoom = ({ id, Trolleys }) => {
   const check = PedirCheckInCheckOut();
   const dispatch = useDispatch();
   const [State, setState] = useState([]);
-  const { TypeRoom } = useSelector((state) => state);
+  const idioma = useSelector((state) => state.idioma);
 
-  
+  const translations = {
+    en: {
+      AgregadoCorrectamente: "Added successfully!!",
+      Aceptar: "Accept",
+      Personas: "People",
+      AgregarAlCarrito: "Add to cart",
+    },
+    es: {
+      AgregadoCorrectamente: "Agregado con exito!!",
+      Aceptar: "Aceptar",
+      Personas: "Personas",
+      AgregarAlCarrito: "Agregar al Carrito",
+    },
+  };
+  const { TypeRoom } = useSelector((state) => state);
 
   const FuncionPostCarrito = async (idUser, idTypeRoom, stock) => {
     if (stock !== 0) {
@@ -29,15 +43,15 @@ const TypeRoom = ({ id, Trolleys }) => {
         try {
           await axios.post(`${URL_BASE}/cart/${idUser}/${idTypeRoom}`);
           swal({
-            text: "Agregado con exito!!",
+            text: translations[idioma].AgregadoCorrectamente,
             icon: "success",
-            buttons: "Aceptar",
+            buttons: translations[idioma].Aceptar,
           });
         } catch (error) {
           swal({
             text: error.response.data.error,
             icon: "warning",
-            buttons: "Aceptar",
+            buttons: translations[idioma].Aceptar,
           });
         }
         dispatch(GetTrolley(User.id));
@@ -67,7 +81,9 @@ const TypeRoom = ({ id, Trolleys }) => {
           <Card.Subtitle className="mb-2 text-muted">
             <GetCurrencyExchange value={room.price} />
           </Card.Subtitle>
-          <Card.Text>Capacidad: {room.people}</Card.Text>
+          <Card.Text>
+            {translations[idioma].Personas}: {room.people}
+          </Card.Text>
           <img className={style.img} src={room.image} />
           {room.stock === 0 ? (
             <Card.Text>No disponible</Card.Text>
@@ -80,16 +96,10 @@ const TypeRoom = ({ id, Trolleys }) => {
               disabled={room.stock === 0}
               className={style.BotonCarrito}
               onClick={() =>
-                FuncionPostCarrito(
-                  User.id,
-                  room.id,
-                  room.name,
-                  Trolleys,
-                  room.stock
-                )
+                FuncionPostCarrito(User.id, room.id, room.name, Trolleys)
               }
             >
-              + Agregar al Carrito
+              + {translations[idioma].AgregarAlCarrito}
             </button>
           ) : (
             <></>

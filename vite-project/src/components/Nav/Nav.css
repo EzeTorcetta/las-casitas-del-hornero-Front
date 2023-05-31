@@ -1,9 +1,7 @@
-
-
 .navlight {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   z-index: 3;
   /*encima de to */
@@ -14,7 +12,7 @@
   top:0;
 }
 
-.navdark{
+.navdark {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -228,18 +226,18 @@ font-size: 1.5rem;
   text-decoration: none;
 }
 
-.menu-horizontal:hover{
-background-color: rgb(253, 198, 95);
+.menu-horizontal:hover {
+  background-color: rgb(253, 198, 95);
 }
 
-.menu-vertical{
+.menu-vertical {
   position: absolute;
   display: none;
   list-style: none;
-  right:0px
+  right: 0px;
 }
 
-.menu-horizontal:hover .menu-vertical{
+.menu-horizontal:hover .menu-vertical {
   margin-top: 1.8rem;
   background-color: white;
   opacity: 60%;
@@ -247,27 +245,24 @@ background-color: rgb(253, 198, 95);
   z-index: 2;
 }
 
-.menu-vertical a:hover{
-  background-color: #CCC;
+.menu-vertical a:hover {
+  background-color: #ccc;
   opacity: 50%;
-  
 }
 
-.menu-vertical li a{
+.menu-vertical li a {
   display: block;
   color: black;
   text-decoration: none;
   height: 4rem;
   width: 20rem;
   padding-top: 1rem;
-
 }
 
 {/*-----------------------*/}
 
 
 .links {
-
   display: flex;
   flex-direction: row;
   list-style-type: none;
@@ -281,10 +276,10 @@ background-color: rgb(253, 198, 95);
   text-decoration: none;
 }
 
-.username{
+.username {
   padding-top: 1rem;
-color: white;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .show {
@@ -405,8 +400,8 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
- margin-top: 10rem;
- margin-left: 5rem;
+  margin-top: 10rem;
+  margin-left: 5rem;
 }
 
 .menuOption {
@@ -434,4 +429,3 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 .menuOption:last-child {
   margin-bottom: 0;
 }
-

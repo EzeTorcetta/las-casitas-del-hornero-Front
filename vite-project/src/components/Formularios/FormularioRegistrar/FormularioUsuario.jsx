@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validacion2 from "./Validation";
 import style from "./FormularioUsuario.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const FormularioIngresa = () => {
+const FormularioUsuario = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const idioma = useSelector((state) => state.idioma);
 
   const [usuario, setUsuario] = useState({
     username: "",
@@ -51,14 +52,22 @@ const FormularioIngresa = () => {
       !usuario.password.length ||
       !usuario.repetir.length
     ) {
-      alert("Debes completar los campos");
+      alert(
+        idioma === "es"
+          ? "Debes completar los campos"
+          : "Please fill in all fields"
+      );
     } else if (
       Error.username.length > 0 ||
       Error.email.length > 0 ||
       Error.password.length > 0 ||
       Error.repetir.length > 0
     ) {
-      alert("Tienes errores en los campos");
+      alert(
+        idioma === "es"
+          ? "Tienes errores en los campos"
+          : "You have errors in the fields"
+      );
     } else {
       try {
         const { username, password, email, admin } = usuario;
@@ -67,16 +76,19 @@ const FormularioIngresa = () => {
           { username, password, email, admin }
         );
         swal({
-          text: "Usuarios registrado con exito!!",
+          text:
+            idioma === "es"
+              ? "Usuario registrado con éxito"
+              : "User registered successfully",
           icon: "success",
-          buttons: "Aceptar",
+          buttons: idioma === "es" ? "Aceptar" : "Accept",
         });
         navigate("/");
       } catch (error) {
         swal({
           text: error.response.data.error,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: idioma === "es" ? "Aceptar" : "Accept",
         });
       }
     }
@@ -88,9 +100,12 @@ const FormularioIngresa = () => {
       usuario.repetir === ""
     )
       swal({
-        text: "Necesitas completar las áreas",
+        text:
+          idioma === "es"
+            ? "Necesitas completar las áreas"
+            : "You need to fill in the fields",
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: idioma === "es" ? "Aceptar" : "Accept",
       });
 
     if (
@@ -100,25 +115,31 @@ const FormularioIngresa = () => {
       )
     ) {
       swal({
-        text: "El email o usuario ya existe",
+        text:
+          idioma === "es"
+            ? "El correo electrónico o el nombre de usuario ya existe"
+            : "The email or username already exists",
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: idioma === "es" ? "Aceptar" : "Accept",
       });
     }
     if (usuario.password !== usuario.repetir) {
       swal({
-        text: "La password no coincide",
+        text:
+          idioma === "es"
+            ? "La contraseña no coincide"
+            : "The password does not match",
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: idioma === "es" ? "Aceptar" : "Accept",
       });
     } else {
       {
         window.location.href = "Home";
       }
       swal({
-        text: "usuario creado",
+        text: idioma === "es" ? "Usuario creado" : "User created",
         icon: "success",
-        buttons: "Aceptar",
+        buttons: idioma === "es" ? "Aceptar" : "Accept",
       });
     }
 
@@ -130,10 +151,35 @@ const FormularioIngresa = () => {
     });
   };
 
+  const getLabelText = (labelKey) => {
+    const translations = {
+      es: {
+        username: "Nombre de usuario",
+        email: "Correo electrónico",
+        password: "Contraseña",
+        repetir: "Repetir contraseña",
+        hotelRegistration: "¡Quiero registrar mi hotel!",
+        registerButton: "Registrar",
+      },
+      en: {
+        username: "Username",
+        email: "Email",
+        password: "Password",
+        repetir: "Repeat password",
+        hotelRegistration: "Register my hotel!",
+        registerButton: "Register",
+      },
+    };
+
+    return translations[idioma][labelKey];
+  };
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <h1 className="h3 mb-3 fw-normal">Ingresa</h1>
+        <h1 className="h3 mb-3 fw-normal">
+          {idioma === "es" ? "Ingresa" : "Login"}
+        </h1>
 
         <div className="form-floating">
           <input
@@ -146,7 +192,7 @@ const FormularioIngresa = () => {
             name="username"
           />
           <span className={style.span}>{Error.username}</span>
-          <label>Username</label>
+          <label>{getLabelText("username")}</label>
         </div>
 
         <div className="form-floating">
@@ -160,7 +206,7 @@ const FormularioIngresa = () => {
             name="email"
           />
           <span className={style.span}>{Error.email}</span>
-          <label>Email</label>
+          <label>{getLabelText("email")}</label>
         </div>
 
         <div className="form-floating">
@@ -174,7 +220,7 @@ const FormularioIngresa = () => {
             name="password"
           />
           <span className={style.span}>{Error.password}</span>
-          <label>password</label>
+          <label>{getLabelText("password")}</label>
         </div>
 
         <div className="form-floating">
@@ -188,7 +234,7 @@ const FormularioIngresa = () => {
             name="repetir"
           />
           <span className={style.span}>{Error.repetir}</span>
-          <label>Repetir password</label>
+          <label>{getLabelText("repetir")}</label>
         </div>
 
         <div className="checkbox">
@@ -199,16 +245,16 @@ const FormularioIngresa = () => {
             indeterminate
             onClick={onChange}
           />
-          <label>Quiero registrar mi hotel !</label>
+          <label>{getLabelText("hotelRegistration")}</label>
         </div>
 
         <button className="w-100 btn btn-lg btn-warning" type="submit">
-          Registrar
+          {getLabelText("registerButton")}
         </button>
       </form>
-      {/* <a href="$"> Olvidé mi password </a> */}
+      {/* <a href="$"> Olvidé mi contraseña </a> */}
     </div>
   );
 };
 
-export default FormularioIngresa;
+export default FormularioUsuario;

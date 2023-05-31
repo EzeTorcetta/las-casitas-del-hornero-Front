@@ -36,6 +36,7 @@ import {
   HOTELES_MAS_RESERVADOS_PARTNER,
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
+  UPDATE_LANGUAGE,
 } from "../Actions";
 
 //?----------------- REDUCER ------------------------------------
@@ -56,6 +57,7 @@ const InicialState = {
   PartnerHotels: [],
   Booking: [],
   Users: [],
+  idioma: "en",
   Filters: {
     provinces: "",
     department: "",
@@ -70,9 +72,8 @@ const InicialState = {
   },
   Reviews: 0,
   idHotelForm: "",
-  currencyExchange: {},
+  currencyExchange: {symbol:"ARS"},
   theme: "light",
-
   Estadisticas: {
     HotelMasReservado: [],
     MesMasReservado: [],
@@ -208,10 +209,14 @@ export const rootReducer = (state = InicialState, actions) => {
         Trolley: actions.payload,
       };
     case ID_HOTEL_FORM:
-      console.log("hola");
       return {
         ...state,
         idHotelForm: actions.payload,
+      };
+    case UPDATE_LANGUAGE:
+      return {
+        ...state,
+        idioma: actions.payload.language,
       };
     case GET_CURRENCY_RATE:
       return {

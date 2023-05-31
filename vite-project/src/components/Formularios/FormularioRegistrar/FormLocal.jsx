@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validacion2 from "./Validation";
 import style from "./FormularioUsuario.module.css";
 import "./FormularioLocal.css";
@@ -10,8 +10,39 @@ import swal from "sweetalert";
 const FormLocal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  //---------------ESTADOS-----------------
+  const idioma = useSelector((state) => state.idioma);
+  const translations = {
+    en: {
+      Welcome: "Welcome",
+      Username: "Username",
+      Email: "Email",
+      Password: "Password",
+      RepeatPassword: "Repeat Password",
+      CompleteFields: "You must complete all fields",
+      FieldErrors: "You have errors in the fields",
+      UserRegisteredSuccess: "User registered successfully!",
+      UserExists: "The email or username already exists",
+      PasswordMismatch: "The password does not match",
+      CreateUser: "Create User",
+      Back: "Back",
+      Aceptar: "Accept",
+    },
+    es: {
+      Welcome: "Bienvenido",
+      Username: "Nombre de usuario",
+      Email: "Email",
+      Password: "Contraseña",
+      RepeatPassword: "Repetir contraseña",
+      CompleteFields: "Debes completar todos los campos",
+      FieldErrors: "Tienes errores en los campos",
+      UserRegisteredSuccess: "¡Usuario registrado exitosamente!",
+      UserExists: "El email o nombre de usuario ya existe",
+      PasswordMismatch: "Las contraseñas no coinciden",
+      CreateUser: "Crear Usuario",
+      Back: "Volver",
+      Aceptar: "Aceptar",
+    },
+  };
 
   const [usuario, setUsuario] = useState({
     username: "",
@@ -30,8 +61,6 @@ const FormLocal = () => {
   const [state, setState] = useState(0);
 
   const [currentUser, setCurrentUser] = useState({});
-
-  //-------------HANDLERS----------------
 
   const handleChange = (event) => {
     const property = event.target.name;
@@ -59,7 +88,7 @@ const FormLocal = () => {
       !usuario.repetir.length
     ) {
       swal({
-        text: "Debes completar los campos",
+        text: translations[idioma].CompleteFields,
         icon: "warning",
         buttons: "Aceptar",
       });
@@ -70,9 +99,9 @@ const FormLocal = () => {
       Error.repetir.length > 0
     ) {
       swal({
-        text: "Tienes Errores en los campos",
+        text: translations[idioma].FieldErrors,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
     } else {
       try {
@@ -86,16 +115,16 @@ const FormLocal = () => {
         );
 
         swal({
-          text: "Usuarios registrado con exito!!",
+          text: translations[idioma].UserRegisteredSuccess,
           icon: "success",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
         navigate("/");
       } catch (error) {
         swal({
           text: error.response.data.error,
           icon: "warning",
-          buttons: "Aceptar",
+          buttons: translations[idioma].Aceptar,
         });
       }
     }
@@ -107,10 +136,46 @@ const FormLocal = () => {
       usuario.repetir === ""
     )
       swal({
-        text: "Necesitas completar las áreas",
+        text: translations[idioma].CompleteFields,
         icon: "warning",
-        buttons: "Aceptar",
+        buttons: translations[idioma].Aceptar,
       });
+
+    if (
+      db.find(
+        (user) =>
+          user.email === usuario.email || user.username === usuario.username
+      )
+    ) {
+      swal({
+        text: translations[idioma].UserExists,
+        icon: "warning",
+        buttons: translations[idioma].Aceptar,
+      });
+    }
+    if (usuario.password !== usuario.repetir) {
+      swal({
+        text: translations[idioma].PasswordMismatch,
+        icon: "warning",
+        buttons: translations[idioma].Aceptar,
+      });
+    } else {
+      {
+        window.location.href = "Home";
+      }
+      swal({
+        text: "usuario creado",
+        icon: "success",
+        buttons: translations[idioma].Aceptar,
+      });
+    }
+
+    setUsuario({
+      username: "",
+      email: "",
+      password: "",
+      repetir: "",
+    });
   };
   //   if (
   //     db.find(
@@ -154,13 +219,12 @@ const FormLocal = () => {
       <div className="form-container">
         <div className="DivDeBienvenido">
           <h1 className="h3 mb-3 fw-normal">
-            Bienvenido {currentUser.displayName}
+            {translations[idioma].Welcome} {currentUser.displayName}
           </h1>
         </div>
         <form className="form" onSubmit={handleSubmit}>
-          {/*--------------------------------UserName----------------------------------*/}
           <div className="input-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">{translations[idioma].Username}</label>
             <input
               type="text"
               name="username"
@@ -172,10 +236,9 @@ const FormLocal = () => {
           </div>
           <span className={style.span}>{Error.username}</span>
 
-          {/*--------------------------------Emial----------------------------------*/}
-
           <div className="input-group">
-            <label htmlFor="email">email</label>
+            <label htmlFor="email">{translations[idioma].Email}</label>
+
             <input
               type="email"
               name="email"
@@ -187,10 +250,9 @@ const FormLocal = () => {
           </div>
           <span className={style.span}>{Error.email}</span>
 
-          {/*--------------------------------Password----------------------------------*/}
-
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{translations[idioma].Password}</label>
+
             <input
               type="password"
               name="password"
@@ -202,10 +264,10 @@ const FormLocal = () => {
           </div>
           <span className={style.span}>{Error.password}</span>
 
-          {/*--------------------------------Password----------------------------------*/}
-
           <div className="input-group">
-            <label htmlFor="Repetirpassword">Repetir Password</label>
+            <label htmlFor="repetir">
+              {translations[idioma].RepeatPassword}
+            </label>
             <input
               type="password"
               name="repetir"
@@ -217,11 +279,11 @@ const FormLocal = () => {
           </div>
           <span className={style.span}>{Error.repetir}</span>
           <button className="sign" type="submit">
-            Registrar
+            {translations[idioma].CreateUser}
           </button>
           <Link to="/">
             <button type="button" className="w-100 btn btn-lg btn-warning">
-              Volver
+              {translations[idioma].Back}
             </button>
           </Link>
         </form>

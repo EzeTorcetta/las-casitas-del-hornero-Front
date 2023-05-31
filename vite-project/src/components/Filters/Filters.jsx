@@ -24,6 +24,7 @@ import "./FiltrosCalendario.css";
 import styleLight from "./Filters.module.css";
 import styleDark from "./FiltersDark.module.css";
 import { GuardarCheckInCheckOut } from "../Index";
+import traductor from "../Traductor/Traductor";
 
 // import style from theme === 'light'? "./Filters.module.css":"./FiltersDark.module.css";
 
@@ -56,7 +57,43 @@ const Filter = () => {
     if (departmentId.length) dispatch(getLocality(departmentId));
   }, [dispatch, provinceId, departmentId]);
 
-  //*---------------------------------------Calendario Funcion :
+  const raiting = [1, 2, 3, 4, 5];
+  const idioma = useSelector((state) => state.idioma);
+
+  const translations = {
+    en: {
+      FiltroPorProvincia: "Filter By Province",
+      FiltroPorDepartamento: "Filter By Department",
+      FiltroPorLocalidad: "Filter By Location",
+      FiltroPorRating: "Filter By Rating",
+      OrdenarPor: "Sort by",
+      MayorValoracion: "Highest Valuation",
+      MenorValoracion: "Lower Valuation",
+      NombreAZ: "Name A-Z",
+      NombreZA: "Name Z-A",
+      MasEstrellas: "More Stars",
+      MenosEstrellas: "Less stars",
+      Estrellas: "Number of stars",
+      Filtrar: "Filter",
+      LimpiarFiltros: "Clean Filters",
+    },
+    es: {
+      FiltroPorProvincia: "Filtro Por Provincia",
+      FiltroPorDepartamento: "Filtro Por Departamento",
+      FiltroPorLocalidad: "Filtro Por Localidad",
+      FiltroPorRating: "Filtro Por Rating",
+      OrdenarPor: "Ordenar por",
+      MayorValoracion: "Mayor Valoración",
+      MenorValoracion: "Menor Valoración",
+      NombreAZ: "Nombre A-Z",
+      NombreZA: "Nombre Z-A",
+      MasEstrellas: "Mas Estrellas",
+      MenosEstrellas: "Menos estrellas",
+      Estrellas: "N° de estrellas",
+      Filtrar: "Filtrar",
+      LimpiarFiltros: "Limpiar Filtros",
+    },
+  };
 
   const onChange = (update) => {
     setDateRange(update);
@@ -86,7 +123,6 @@ const Filter = () => {
 
   //*----------------------------------------------------------*//
 
-  const raiting = [1, 2, 3, 4, 5];
   const onChangeProvinces = async (event) => {
     setFilter({
       ...stateFilter,
@@ -233,7 +269,7 @@ const Filter = () => {
           onChange={onChangeProvinces}
           className={style.select}
         >
-          <option hidden>Seleccione una provincia</option>
+          <option hidden>{translations[idioma].FiltroPorProvincia}</option>
           {Provinces.map((pro) => (
             <option id={pro.id} value={pro.nombre} key={pro.id}>
               {pro.nombre}
@@ -244,7 +280,9 @@ const Filter = () => {
         {provinceId.length ? (
           <>
             <select onChange={onChangeDeparment} className={style.select}>
-              <option hidden>Seleccione un departamento</option>
+              <option hidden>
+                {translations[idioma].FiltroPorDepartamento}
+              </option>
               {Department.map((dep) => (
                 <option id={dep.id} value={dep.nombre}>
                   {dep.nombre}
@@ -258,7 +296,7 @@ const Filter = () => {
         {departmentId.length ? (
           <>
             <select onChange={onChangeLocality} className={style.select}>
-              <option hidden>Seleccione una localidad</option>
+              <option hidden>{translations[idioma].FiltroPorLocalidad}</option>
               {Locality.map((loc) => (
                 <option id={loc.id} value={loc.nombre}>
                   {loc.nombre}
@@ -273,7 +311,7 @@ const Filter = () => {
           onChange={onChangeRating}
           className={style.select}
         >
-          <option hidden>N° de estrellas</option>
+          <option hidden>{translations[idioma].Estrellas}</option>
           {raiting.map((rant, index) => (
             <option value={rant} key={index}>
               {rant}
@@ -281,13 +319,21 @@ const Filter = () => {
           ))}
         </select>
         <select onChange={onChangeOrder} className={style.select}>
-          <option hidden>Ordenar por</option>
-          <option value="VALORATIONDESC">Mayor Valoracion</option>
-          <option value="VALORATIONASC">Menor Valoracion</option>
-          <option value="NAMEASC">Nombre A-Z</option>
-          <option value="NAMEDESC">Nombre Z-A</option>
-          <option value="RATINGDESC">Mas Estrellas</option>
-          <option value="RATINGASC">Menos Estrellas</option>
+          <option hidden>{translations[idioma].OrdenarPor}</option>
+          <option value="VALORATIONDESC">
+            {translations[idioma].MayorValoracion}
+          </option>
+          <option value="VALORATIONASC">
+            {translations[idioma].MenorValoracion}
+          </option>
+          <option value="NAMEASC">{translations[idioma].NombreAZ}</option>
+          <option value="NAMEDESC">{translations[idioma].NombreZA}</option>
+          <option value="RATINGDESC">
+            {translations[idioma].MasEstrellas}
+          </option>
+          <option value="RATINGASC">
+            {translations[idioma].MenosEstrellas}
+          </option>
         </select>
         <div className={style.Checks}>
           <DatePicker
@@ -325,7 +371,9 @@ const Filter = () => {
           {Services.map((Ser) => (
             <tbody key={Ser.id}>
               <tr className={style.tr}>
-                <td className={style.td}>{Ser.name}</td>
+                <td className={style.td}>
+                  {idioma === "en" ? traductor(Ser.name) : Ser.name}
+                </td>
                 <td className={style.td}>
                   <label className={style.checkbox_btn}>
                     <label htmlFor="checkbox"></label>
@@ -345,10 +393,10 @@ const Filter = () => {
         </table>
         <div>
           <button onClick={FuncionFilter} className={style.button}>
-            Filtrar
+            {translations[idioma].Filtrar}
           </button>
           <button onClick={FuncionCleanFilter} className={style.button}>
-            Limpiar filtros
+            {translations[idioma].LimpiarFiltros}
           </button>
         </div>
       </form>
