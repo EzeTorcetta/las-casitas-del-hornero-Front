@@ -85,7 +85,7 @@ export const FuncionSelectFilter = (filters) => {
       }
 
       //*----------------------------------------Fechas:
-      console.log(checkIn, checkOut);
+      console.log("check:",checkIn, checkOut);
       if (checkIn.length) {
         URL = URL + `&checkIn=${checkIn}`;
       }
@@ -101,7 +101,7 @@ export const FuncionSelectFilter = (filters) => {
         );
       }
       const response = await axios.get(URL);
-
+      console.log("respuesta url:",response.data);
       dispatch({ type: GET_ALL_HOTELS, payload: response.data });
     } catch (error) {
       console.log(error)

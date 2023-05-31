@@ -106,7 +106,6 @@ const NavBar = ({ countCarrito }) => {
   };
 
   if (windowWidth > 1080) {
-
     return (
       <div>
         <div className={theme === "light" ? "navlight" : "navdark"}>
@@ -123,51 +122,87 @@ const NavBar = ({ countCarrito }) => {
           <SwitchButton />
           <SymbolsCurrency />
 
-          {rol === 1 ?
-            (
-              <Link to={"/Carrito"}>
-                <div className="divCarritoCount">
-                  <div className="countCarritoDiv">{countCarrito}</div>
-                  <img
-                    className="iconoCarrito"
-                    src={theme === "light" ? imageCarrito : carritoblanco}
-                  />
+          {rol === 1 ? (
+            <Link to={"/Carrito"} style={{ "text-decoration": "none" }}>
+              <div className="divCarritoCount">
+                <div className="countCarritoDiv">
+                  <span>{countCarrito}</span>
                 </div>
-              </Link>
-            ) : (
-              <></>
-            )
-          }
-
+                <img
+                  className="iconoCarrito"
+                  src={theme === "light" ? imageCarrito : carritoblanco}
+                />
+              </div>
+            </Link>
+          ) : (
+            <></>
+          )}
 
           <div>
-            {username ? (theme === 'dark' ? (
-              <div className="contenedor-elementos-dark">
-                <div className="nombre-usuario-dark">{`${username}`}</div>
-                <div className="contenedor-opciones-dark">
-                  <button onClick={handleVerPerfil} className="botoncito-dark">{translations[idioma].VerPerfil}</button>
-                  {rol === 2 ? <div className="opciones-dark">{translations[idioma].ProveerHotel}</div> :
-                    rol === 3 ? <div className="opciones-dark">{translations[idioma].AdministrarUsuarios}</div> :
-                      <button onClick={handleChangeTipoCuenta} className="botoncito-dark">{translations[idioma].QuieroSerProveedor}</button>}
-                  <button onClick={handleLogout} className="botoncito-dark">{translations[idioma].Salir}</button>
+            {username ? (
+              theme === "dark" ? (
+                <div className="contenedor-elementos-dark">
+                  <div className="nombre-usuario-dark">{`${username}`}</div>
+                  <div className="contenedor-opciones-dark">
+                    <button
+                      onClick={handleVerPerfil}
+                      className="botoncito-dark"
+                    >
+                      {translations[idioma].VerPerfil}
+                    </button>
+                    {rol === 2 ? (
+                      <div className="opciones-dark">
+                        {translations[idioma].ProveerHotel}
+                      </div>
+                    ) : rol === 3 ? (
+                      <div className="opciones-dark">
+                        {translations[idioma].AdministrarUsuarios}
+                      </div>
+                    ) : (
+                      <button
+                        onClick={handleChangeTipoCuenta}
+                        className="botoncito-dark"
+                      >
+                        {translations[idioma].QuieroSerProveedor}
+                      </button>
+                    )}
+                    <button onClick={handleLogout} className="botoncito-dark">
+                      {translations[idioma].Salir}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="contenedor-elementos">
+                  <div className="nombre-usuario">{`${username}`}</div>
+                  <div className="contenedor-opciones">
+                    <button onClick={handleVerPerfil} className="botoncito">
+                      {translations[idioma].VerPerfil}
+                    </button>
+                    {rol === 2 ? (
+                      <div className="opciones">
+                        {translations[idioma].ProveerHotel}
+                      </div>
+                    ) : rol === 3 ? (
+                      <div className="opciones">
+                        {translations[idioma].AdministrarUsuarios}
+                      </div>
+                    ) : (
+                      <div className="opciones">
+                        {translations[idioma].QuieroSerProveedor}
+                      </div>
+                    )}
+                    <button onClick={handleLogout} className="botoncito">
+                      {translations[idioma].Salir}
+                    </button>
+                  </div>
+                </div>
+              )
             ) : (
-              <div className="contenedor-elementos">
-                <div className="nombre-usuario">{`${username}`}</div>
-                <div className="contenedor-opciones">
-                  <button onClick={handleVerPerfil} className="botoncito">{translations[idioma].VerPerfil}</button>
-                  {rol === 2 ? <div className="opciones">{translations[idioma].ProveerHotel}</div> :
-                    rol === 3 ? <div className="opciones">{translations[idioma].AdministrarUsuarios}</div> :
-                      <div className="opciones">{translations[idioma].QuieroSerProveedor}</div>}
-                  <button onClick={handleLogout} className="botoncito">{translations[idioma].Salir}</button>
-                </div>
-              </div>
-            )) : (
-              <button onClick={handleGoHome} className="boton-inicia-sesion"> {translations[idioma].IniciarSesion} </button>
-            )
-            }
-
+              <button onClick={handleGoHome} className="boton-inicia-sesion">
+                {" "}
+                {translations[idioma].IniciarSesion}{" "}
+              </button>
+            )}
           </div>
           <div className="idioma">
             🌐
@@ -179,8 +214,7 @@ const NavBar = ({ countCarrito }) => {
         </div>
       </div>
     );
-  }
-  else {
+  } else {
     return (
       <div>
         <div className={theme === "light" ? "navlight" : "navdark"}>
@@ -196,21 +230,19 @@ const NavBar = ({ countCarrito }) => {
           <SwitchButtonFlex />
           <SymbolsCurrencyFlex />
 
-          {rol === 1 ?
-            (
-              <Link to={"/Carrito"}>
-                <div className="divCarritoCount">
-                  <div className="countCarritoDiv">{countCarrito}</div>
-                  <img
-                    className="iconoCarrito"
-                    src={theme === "light" ? imageCarrito : carritoblanco}
-                  />
-                </div>
-              </Link>
-            ) : (
-              <></>
-            )
-          }
+          {rol === 1 ? (
+            <Link to={"/Carrito"}>
+              <div className="divCarritoCount">
+                <div className="countCarritoDiv">{countCarrito}</div>
+                <img
+                  className="iconoCarrito"
+                  src={theme === "light" ? imageCarrito : carritoblanco}
+                />
+              </div>
+            </Link>
+          ) : (
+            <></>
+          )}
 
           <div>
             {username ? (
@@ -230,15 +262,21 @@ const NavBar = ({ countCarrito }) => {
                           </li>
                         ) : rol === 3 ? (
                           <li>
-                            <a href="">{translations[idioma].AdministrarUsuarios}</a>
+                            <a href="">
+                              {translations[idioma].AdministrarUsuarios}
+                            </a>
                           </li>
                         ) : (
                           <li>
-                            <a href="">{translations[idioma].QuieroSerProveedor}</a>
+                            <a href="">
+                              {translations[idioma].QuieroSerProveedor}
+                            </a>
                           </li>
                         )}
                         <li>
-                          <button onClick={handleLogout}>{translations[idioma].Salir}</button>
+                          <button onClick={handleLogout}>
+                            {translations[idioma].Salir}
+                          </button>
                         </li>
                       </ul>
                     </li>
@@ -251,7 +289,7 @@ const NavBar = ({ countCarrito }) => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 };
 

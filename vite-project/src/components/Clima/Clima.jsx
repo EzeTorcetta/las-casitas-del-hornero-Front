@@ -83,7 +83,7 @@ export default function Clima() {
       </form>
 
       {weather.city && (
-        <div>
+        <div style={{ "text-align": "center" }}>
           <h4>
             {weather.city}, {weather.country}
           </h4>

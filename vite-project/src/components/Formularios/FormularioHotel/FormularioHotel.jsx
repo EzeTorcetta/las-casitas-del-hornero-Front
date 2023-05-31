@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import Maps from "../../MapForm/Map";
-import { PedirLocalStorage } from "../../Index";
+import { Footer, PedirLocalStorage } from "../../Index";
 import { idHotelForm } from "../../../redux/Actions/Actions";
 import NavBar from "../../Nav/Nav";
 
@@ -60,52 +60,48 @@ const FormularioHotel = () => {
       ErrorCampos: "You have errors in the fields",
       HotelExito: "Your hotel was registered successfully!",
       ErrorCarga: "Please try again, there was a problem loading your hotel",
-      RegistraTuHotel: "Register your hotel!",
+      RegistraTuHotel: "HOTEL REGISTER",
       NombreDelHotel: "Name of the hotel",
       NotiMail: "Email notification",
       NumeroTelefonico: "Phone Number",
-      DescripcionOpcional: "An optional Description",
+      DescripcionOpcional: "[Optional]Add a description...",
       Valoracion: "Hotel Valoration",
       Clasificacion: "Hotel Rating",
-      SeleccionProvincia: "Select the Province where your hotel is located:",
-      SeleccionDepartamento:
-        "Select the Department where your hotel is located:",
-      SeleccionLocalidad: "Select the City where your hotel is located:",
+      SeleccionProvincia: "Province where your hotel is located:",
+      SeleccionDepartamento: "Department where your hotel is located:",
+      SeleccionLocalidad: "Locality where your hotel is located:",
       SeleccionServicios: "Select the services that your hotel has:",
-      CargaFoto: "Upload your hotel photo:",
+      CargaFoto: "Upload your hotel photo/os:",
       URLFoto: "Photo url",
-      UbicacionHotel: "Change the location where your hotel is located:",
-      Registrar: "To register",
+      UbicacionHotel: "Set the location of the hotel on the map:",
+      Registrar: "REGISTER HOTEL",
     },
     es: {
       CompletarTodos: "Por favor completa todos los campos",
       Aceptar: "Aceptar",
-      ProblemaProvincias: "Ocurrio un problema al cargar las Provincias",
-      ErrorDepartamentos: "Ocurrio un problema al cargar los Departamentos",
-      ErrorLocalidad: "Ocurrio un problema al cargar las Localidades",
-      ErrorServicios: "Ocurrio un problema al cargar los servicios",
+      ProblemaProvincias: "Ocurrió un problema al cargar las Provincias",
+      ErrorDepartamentos: "Ocurrió un problema al cargar los Departamentos",
+      ErrorLocalidad: "Ocurrió un problema al cargar las Localidades",
+      ErrorServicios: "Ocurrió un problema al cargar los servicios",
       ErrorCampos: "Tienes errores en los campos",
-      HotelExito: "Tu hotel se registro con éxito!",
+      HotelExito: "Tu hotel se registró con éxito!",
       ErrorCarga:
         "Por favor vuelve a intentarlo, ocurrio un problema al cargar tu hotel",
-      RegistraTuHotel: "Registra tu hotel!",
+      RegistraTuHotel: "REGISTRO DE HOTEL",
       NombreDelHotel: "Nombre del hotel",
       NotiMail: "Email de notificación",
-      NumeroTelefonico: "Numero Telefonico",
-      DescripcionOpcional: "Una descriptión opcional.",
+      NumeroTelefonico: "Número de teléfono",
+      DescripcionOpcional: "[Opcional] Añade una descripción...",
       Valoracion: "Valoración del hotel",
       Clasificacion: "Clasificación del hotel",
-      SeleccionProvincia:
-        "Selecciona la Provincia donde se encuentra tu hotel:",
-      SeleccionDepartamento:
-        "Selecciona el Departamento donde se encuentra tu hotel:",
-      SeleccionLocalidad:
-        "Selecciona la Localidad donde se encuentra tu hotel:",
+      SeleccionProvincia: "Provincia donde se encuentra tu hotel:",
+      SeleccionDepartamento: "Departamento donde se encuentra tu hotel:",
+      SeleccionLocalidad: "Localidad donde se encuentra tu hotel:",
       SeleccionServicios: "Selecciona los servicios que tiene tu hotel:",
-      CargaFoto: "Carga la foto de tu hotel:",
+      CargaFoto: "Carga la/s foto/s de tu hotel:",
       URLFoto: "URL de la foto",
-      UbicacionHotel: "Cambia la ubicación donde se encuentra tu hotel:",
-      Registrar: "Registrar",
+      UbicacionHotel: "Establece la ubicación del hotel en el mapa:",
+      Registrar: "REGISTRAR HOTEL",
     },
   };
 
@@ -358,7 +354,7 @@ const FormularioHotel = () => {
     <>
       <NavBar />
 
-      <div className="container">
+      <div className={style.formHotelContainer}>
         <form onSubmit={handleSubmit} className={style.form}>
           <h1 className="h3 mb-3 fw-normal">
             {translations[idioma].RegistraTuHotel}!
@@ -421,7 +417,7 @@ const FormularioHotel = () => {
               value={hotel.phoneNumber}
               name="phoneNumber"
             />
-            <label>{translations[idioma].NumeroTelefonico}.</label>
+            <label>{translations[idioma].NumeroTelefonico}</label>
           </div>
 
           {/* UNA DESCRIPCION OPCIONAL */}
@@ -492,9 +488,10 @@ const FormularioHotel = () => {
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div>Carga la foto de tu hotel:</div>
+          <div>{translations[idioma].CargaFoto}</div>
           <div>
             <input
+              className={style.uploadContainer}
               type="file"
               name="image"
               placeholder="arrastra la imagen aquí"
@@ -516,9 +513,9 @@ const FormularioHotel = () => {
 
           {/* LOCATION DONDE SE UBICA EL HOTEL*/}
 
-          <div>Selecciona la Provincia donde se encuentra tu hotel:</div>
-          <option hidden>Selecciona el Provincia</option>
+          <div>{translations[idioma].SeleccionProvincia}</div>
           <select onChange={onChangeProvinces} className={style.select}>
+            <option hidden>Selecciona la provincia</option>
             {location.provinces?.map(({ nombre, id }) => (
               <option value={nombre} key={id} id={id}>
                 {nombre}
@@ -527,9 +524,9 @@ const FormularioHotel = () => {
           </select>
           {location.departments.length ? (
             <div>
-              <div>Selecciona el Departamento donde se encuentra tu hotel:</div>
+              <div>{translations[idioma].SeleccionDepartamento}:</div>
               <select onChange={onChangeDepartments} className={style.select}>
-                <option hidden>Selecciona el Departamento</option>
+                <option hidden>Selecciona el departamento</option>
                 {location.departments?.map(({ nombre, id }) => (
                   <option value={nombre} key={id} id={id}>
                     {nombre}
@@ -542,9 +539,9 @@ const FormularioHotel = () => {
           )}
           {location.localities.length ? (
             <div>
-              <div>Selecciona la Localidad donde se encuentra tu hotel:</div>
+              <div>{translations[idioma].SeleccionLocalidad}</div>
               <select onChange={onChangeLocalities} className={style.select}>
-                <option hidden>Selecciona el Localidad</option>
+                <option hidden>Selecciona la localidad</option>
                 {location.localities?.map(({ nombre, id }) => (
                   <option value={nombre} key={id} id={id}>
                     {nombre}
@@ -558,14 +555,19 @@ const FormularioHotel = () => {
 
           {/* GEOLOCALIZACION DEL HOTEL */}
 
-          <div>Cambia la ubicación donde se encuentra tu hotel:</div>
+          <div>{translations[idioma].UbicacionHotel}</div>
           <Maps location={geoposition} setLocation={setGeoposition} />
 
-          <button className="w-100 btn btn-lg btn-warning" type="submit">
+          <button
+            className="w-100 btn btn-lg"
+            type="submit"
+            style={{ "background-color": "#E56910", color: "white" }}
+          >
             {translations[idioma].Registrar}
           </button>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

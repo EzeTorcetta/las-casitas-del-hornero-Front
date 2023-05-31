@@ -65,6 +65,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
       ServiciosDelAlojamiento: "Accommodation Services",
       Descripción: "Description",
       AgregarRoomType: "Add Room Type",
+      notDescription: "No description available",
     },
     es: {
       Rating: "Valoracion Del Hotel :",
@@ -72,6 +73,7 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
       ServiciosDelAlojamiento: "Servicios del alojamiento",
       Descripción: "Descripción",
       AgregarRoomType: "Agregar tipo de habitacion",
+      notDescription: "No hay descripción disponible",
     },
   };
 
@@ -145,20 +147,11 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
                   </div>
                   <div className={style.descriptionHotelCont}>
                     <h3>{translations[idioma].Descripción}</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Architecto alias eligendi sequi non ipsum corporis,
-                      aliquam aperiam sunt a excepturi sint sapiente ducimus
-                      unde aliquid quos dolorum iusto, impedit in! Lorem ipsum
-                      dolor sit amet consectetur adipisicing elit. Architecto
-                      alias eligendi sequi non ipsum corporis, aliquam aperiam
-                      sunt a excepturi sint sapiente ducimus unde aliquid quos
-                      dolorum iusto, impedit in! Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Architecto alias eligendi
-                      sequi non ipsum corporis, aliquam aperiam sunt a excepturi
-                      sint sapiente ducimus unde aliquid quos dolorum iusto,
-                      impedit in!
-                    </p>
+                    {DetailHotel.description ? (
+                      <p>{DetailHotel.description}</p>
+                    ) : (
+                      <p>{translations[idioma].notDescription}</p>
+                    )}
                   </div>
                 </div>
                 <div className={style.sectionDescription_right}>

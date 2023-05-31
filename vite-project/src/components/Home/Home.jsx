@@ -134,7 +134,9 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                   )
                 )}
               </div>
-              <Clima />
+              <div className={style.climaContainer}>
+                <Clima />
+              </div>
             </section>
           </div>
           <Paginado paginas={Hotels.numPages} />

@@ -110,3 +110,7 @@
   border: none;
   font-size: 20px;
 }
+
+.footer{
+  bottom: 0px;
+}

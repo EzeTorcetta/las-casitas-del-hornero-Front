@@ -86,7 +86,9 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
             <Booking />
           </div>
         </section>
-        <Footer />
+      </div>
+      <div className={style.footer}>
+      <Footer />
       </div>
     </>
   );
