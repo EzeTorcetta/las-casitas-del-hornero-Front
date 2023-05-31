@@ -26,6 +26,7 @@ const GetUsers = () => {
   useEffect(() => {
     dispatch(getUsers(user.id));
   }, [dispatch, user.id]);
+
   const handleRoleChange = async () => {
     const data = {
       id_user: selectedUserId,
@@ -35,6 +36,7 @@ const GetUsers = () => {
     setShowOptions(false);
     await dispatch(getUsers(user.id));
   };
+
   const handleSelectUser = (userId) => {
 
     setSelectedUserId(userId);

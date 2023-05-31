@@ -36,6 +36,8 @@ import {
   HOTELES_MAS_RESERVADOS_PARTNER,
   MES_MAS_RESERVA_PARTNER,
   MODIFICAR_HOTEL_PARTNER,
+  GET_REQUESTS,
+
 } from "../Actions";
 import axios from "axios";
 import swal from "sweetalert";
@@ -120,8 +122,8 @@ export const PostFilters = (filters) => {
 };
 
 //* ----------------- TYPE ROOMS ------------------------------------
-export const FuncionTypeRoomTypes = (idHotel,checkIn,checkOut) => {
- 
+export const FuncionTypeRoomTypes = (idHotel, checkIn, checkOut) => {
+
   return async (dispatch) => {
     try {
       const response = await axios.get(`${URL_BASE}/roomTypes/${idHotel}?checkIn=${checkIn}&checkOut=${checkOut}`);
@@ -561,9 +563,9 @@ export const FuncionTodosLosBookingsEstadistica = (idUser, rol) => {
 //*----------------------------------------------------------------------------*//
 /*
 Partner:
-	- Hoteles mas reservados:  .../booking/mostBooking/:id_admin
-	- Traer mes donde mas se reservo:  .../booking/monthPartner/:id_admin
-	- Modificar el Hotel:  hotel/update/:id_hotel
+  - Hoteles mas reservados:  .../booking/mostBooking/:id_admin
+  - Traer mes donde mas se reservo:  .../booking/monthPartner/:id_admin
+  - Modificar el Hotel:  hotel/update/:id_hotel
 */
 
 //*-------------------------------Estadisticas Partner---------------------------------*//
@@ -616,7 +618,7 @@ export const FuncionMesDondeMasSeReservaPartnerEstadistica = (idUser) => {
 export const FuncionModificarHotel = (idHotel) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`${URL_BASE}hotel/update/${idHotel}`); // body mandar lo que se pinte
+      const response = await axios.put(`${URL_BASE}/hotels/update/${idHotel}`); // body mandar lo que se pinte
 
       dispatch({
         type: MODIFICAR_HOTEL_PARTNER,
@@ -631,3 +633,23 @@ export const FuncionModificarHotel = (idHotel) => {
     }
   };
 };
+
+export const getRequests = (id_user) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL_BASE}/request/${id_user}`)
+
+      dispatch({
+        type: GET_REQUESTS,
+        payload: response.data
+      })
+    } catch (error) {
+      swal({
+        text: error.response.data.error,
+        icon: "warning",
+        buttons: "Aceptar",
+      });
+    }
+  }
+}
+
