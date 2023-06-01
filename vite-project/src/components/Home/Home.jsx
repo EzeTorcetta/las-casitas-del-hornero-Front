@@ -119,18 +119,21 @@ const Home = ({ countCarrito, setCountCarrito }) => {
                     rating,
                     description,
                     valoration,
+                    status,
                   }) => (
-                    <Cards
-                      key={id}
-                      id={id}
-                      name={name}
-                      image={image}
-                      province={province}
-                      department={department}
-                      rating={rating}
-                      description={description}
-                      valoration={valoration}
-                    />
+                    status ? (
+                      <Cards
+                        key={id}
+                        id={id}
+                        name={name}
+                        image={image}
+                        province={province}
+                        department={department}
+                        rating={rating}
+                        description={description}
+                        valoration={valoration}
+                      />
+                    ) : (<></>)
                   )
                 )}
               </div>

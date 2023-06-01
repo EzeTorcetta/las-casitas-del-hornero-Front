@@ -60,7 +60,7 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   };
 
   return (
-    <div className={style.perfil_container}>
+    <>
       <NavBar countCarrito={countCarrito} />
       <div className={style.perfil_container}>
         <div className={style.card_profile}>
@@ -95,7 +95,7 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

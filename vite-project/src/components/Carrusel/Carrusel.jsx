@@ -15,8 +15,9 @@ const style = theme === "light"?styleLight:styleDark;
     <div>
       <Carousel className={style.carousel}>
         {HotelsCarrusel ? (
-          HotelsCarrusel?.map(({ id, name, image, decription }) => {
+          HotelsCarrusel?.map(({ id, name, image, decription, status }) => {
             return (
+              status?(
               <Carousel.Item className={style.item} key={id}>
                 <Link to={`/detail/${id}`}>
                   <img className={style.img} src={image[0]} alt="loading" />
@@ -26,6 +27,7 @@ const style = theme === "light"?styleLight:styleDark;
                   </Carousel.Caption>
                 </Link>
               </Carousel.Item>
+              ):("")
             );
           })
         ) : (
