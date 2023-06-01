@@ -63,31 +63,38 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
     <>
       <NavBar countCarrito={countCarrito} />
       <div className={style.perfil_container}>
-        <section>
-          <div className={style.saludo}>
-            <h2>{`${User.username}`}</h2>
+        <div className={style.card_profile}>
+          <div className={style.card_profile_left}>
+            <div className={style.card_photo}></div>
+            <div className={style.card_info}>
+              <h2>USUARIO</h2>
+              <h2>{`${User.username}`}</h2>
+              <h2>{`${User.email}`}</h2>
+            </div>
           </div>
-          <button
-            className={style.QuieroProveedor}
-            onClick={() => FuncionQuieroSerProveedor(User.id)}
-          >
-            {translations[idioma].QuieroSerProveedor}!
-          </button>
-        </section>
-        <section className={style.section}>
-          <div className={style.divFavorites}>
-            <h2>{translations[idioma].Favoritos}</h2>
+          <div className={style.card_profile_right}>
+            <button
+              className={style.QuieroProveedor}
+              onClick={() => FuncionQuieroSerProveedor(User.id)}
+            >
+              {translations[idioma].QuieroSerProveedor}!
+            </button>
+          </div>
+        </div>
+
+        <div className={style.divFavorites}>
+          <h2>{translations[idioma].Favoritos}</h2>
+          <div>
             <Favoritos />
           </div>
-        </section>
-        <section className={style.section}>
-          <div className={style.divRewies}>
-            <h2>{translations[idioma].Booking}</h2>
-            <Booking />
-          </div>
-        </section>
-        <Footer />
+        </div>
+
+        <div className={style.divRewies}>
+          <h2>{translations[idioma].Booking}</h2>
+          <Booking />
+        </div>
       </div>
+      <Footer />
     </>
   );
 };
