@@ -10,7 +10,7 @@ const Maps = ({ location, name }) => {
   const position = location;
 
   return (
-    <section className={style.divMap}>
+    
       <MapContainer
         className={style.leaflet}
         center={{ lat: location[0], lng: location[1] }}
@@ -25,7 +25,6 @@ const Maps = ({ location, name }) => {
           <Popup>{name}</Popup>
         </Marker>
       </MapContainer>
-    </section>
   );
 };
 

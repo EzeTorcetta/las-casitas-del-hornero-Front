@@ -1,6 +1,5 @@
 import NavBar from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-import style from "./Trolley.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,6 +13,9 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Calendario from "../Calendar/FullCalendar";
+import styleLight from "./Trolley.module.css"
+import styleDark from "./TrolleyDark.module.css"
+import swal from "sweetalert";
 
 const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
@@ -25,6 +27,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [TotalPrecio, setTotalPrecio] = useState([]);
   const navigate = useNavigate();
+
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
 
   function calcularDiferenciaEnDias(fecha1, fecha2) {
     const date1 = new Date(fecha1);
@@ -49,28 +54,40 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
     en: {
       ReservaExitosa: "Room(s) reserved successfully!!!",
       Aceptar: "Accept",
-      BorrarCarrito: "Delete all carts",
+      BorrarCarrito: "Clear cart",
       Reservar: "Reserve",
       Precio: "Price",
       Personas: "People",
       PrecioTotal: "Total price",
+      CantidadDisponible: "Rooms availables",
+      Eliminar: "Delete",
+      Por: "For",
+      Noches: "nights",
+      Hasta: "To",
+      Desde: "From",
+      Precio:"Price"
     },
     es: {
       ReservaExitosa: "Habitacion/es reservadas con exito!!!",
       Aceptar: "Aceptar",
-      BorrarCarrito: "Borrar Carrito",
+      BorrarCarrito: "Vaciar Carrito",
       Reservar: "Reservar",
       Precio: "Precio",
       Personas: "Personas",
       PrecioTotal: "Precio Total",
+      CantidadDisponible: "Habitaciones disponibles",
+      Eliminar: "Eliminar",
+      Por: "Por",
+      Noches: "noches",
+      Hasta: "Hasta",
+      Desde: "Desde",
+      Precio:"Precio"
     },
   };
 
   if (!User) {
     return null;
   }
-
-
 
   const ArrayMP = Trolley.map((tro) => {
     const unit_price = tro.price * Tiempo;
@@ -162,58 +179,57 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
     dispatch(DeleteTrolley(idUser, idTypeRoom));
   };
 
-  const FuncionDeleteAllCarritos = (idUser) => {
-    setCountCarrito((countCarrito = 0));
-    dispatch(DeleteAllTrolley(idUser));
+  const FuncionDeleteAllCarritos =  (idUser) => {
+    swal({
+      title: '¿Estás seguro que deseas vaciar el carrito?',
+      icon: "warning",
+      buttons: {
+        cancel: 'Cancelar',
+        confirm: translations[idioma].Aceptar,
+      }
+    }).then( async (result)  => {
+      console.log(result);
+      if (result) {
+        // El usuario ha hecho clic en el botón de confirmación
+        setCountCarrito((countCarrito = 0));
+        await dispatch(DeleteAllTrolley(idUser));
+
+      }
+    });
   };
 
   return (
     <>
       <NavBar countCarrito={countCarrito} />
-      <div className={style.divBotonEliminarTodo}>
-        <button
-          className={style.botonEliminar}
-          onClick={() => FuncionDeleteAllCarritos(User.id)}
-        >
-          {translations[idioma].BorrarCarrito}
-        </button>
-        <button
-          onClick={() => FuncionReservar(User.id, User.email)}
-          className={style.button}
-        >
-          <span>{translations[idioma].Reservar}</span>
-        </button>
-      </div>
-      <section className={style.section}>
-        {Trolley?.map(({ id, name, image, price, stock, people, amount }) => (
-          <div className={style.CardCarrito} key={id}>
-            <Card style={{ width: "18rem", margin: "10px" }}>
-              <Card.Body>
-                <button
-                  className={style.BotonElinimarCarrito}
-                  onClick={() => FuncionDeleteCarrito(User.id, id)}
-                >
-                  X
-                </button>
-                <Card.Title>{name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {translations[idioma].Precio}:{`$  ${price}`}
-                </Card.Subtitle>
-                <Card.Text>{translations[idioma].Personas}: {people}</Card.Text>
+      <div className={style.trolleyContainer}>
+        <section className={style.section}>
+          {Trolley?.map(({ id, name, image, price, stock, people, amount, hotelName }) => (
+            <div className={style.CardCarrito} key={id}>
+              {/*--- divImg ---*/}
+              <div>
                 <img className={style.img} src={image} />
-                <Card.Text>stock :{stock}</Card.Text>
-                <div className={style.divCount}>
+                <div>
                   <button
-                    value="up"
-                    className={style.botonCount}
-                    onClick={() => FuncionCount("up", User.id, id, stock)}
-                    disabled={amount === stock || amount > stock}
+                    className={style.BotonElinimarCarrito}
+                    onClick={() => FuncionDeleteCarrito(User.id, id)}
                   >
-                    +
+                    {translations[idioma].Eliminar}
                   </button>
-                  <div className={style.spanCount}>
-                    {ObjetoTrolley.id === id ? ObjetoTrolley.amount : amount}
-                  </div>
+                </div>
+              </div>
+              {/*--- divInfo ---*/}
+              <div>
+                <h2>{hotelName}</h2>
+                <h3>{name}</h3>
+                <p>{translations[idioma].Personas}: {people}</p>
+                <p>{translations[idioma].Precio}:{`$  ${price}`}</p>
+              </div>
+              {/* divStock */}
+              <div className={style.divStock}>
+                <div>
+                  <p>{translations[idioma].CantidadDisponible}: <span>{stock}</span></p>
+                </div>
+                <section>
                   <button
                     value="down"
                     className={style.botonCount}
@@ -222,17 +238,52 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
                   >
                     -
                   </button>
-                </div>
-              </Card.Body>
-            </Card>
+                  <div className={style.spanCount}>
+                    {ObjetoTrolley.id === id ? ObjetoTrolley.amount : amount}
+                  </div>
+                  <button
+                    value="up"
+                    className={style.botonCount}
+                    onClick={() => FuncionCount("up", User.id, id, stock)}
+                    disabled={amount === stock || amount > stock}
+                  >
+                    +
+                  </button>
+                </section>
+              </div>
+              <div className={style.divTiempo}>
+                <p>{translations[idioma].Por} {Tiempo} {translations[idioma].Noches}</p>
+                <p>{translations[idioma].Desde} {check.CheckIn}</p>
+                <p>{translations[idioma].Hasta} {check.CheckOut}</p>
+              </div>
+              <div>
+                <p className={style.priceRooms}>{translations[idioma].Precio}: ${Math.floor((price * Tiempo) * amount)}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+        <div>
+          <div className={style.abajo}>
+            <div className={style.divTotalPrecio}>
+              <h2 className={style.totalPrice}>{translations[idioma].PrecioTotal}: ${totalPrecio * Tiempo}</h2>
+            </div>
+            <div className={style.divBotonEliminarTodo}>
+              <button
+                className={style.botonEliminar}
+                onClick={() => FuncionDeleteAllCarritos(User.id)}
+              >
+                {translations[idioma].BorrarCarrito}
+              </button>
+              <button
+                onClick={() => FuncionReservar(User.id, User.email)}
+                className={style.button}
+              >
+                <span>{translations[idioma].Reservar}</span>
+              </button>
+            </div>
           </div>
-        ))}
-      </section>
-
-      <div className={style.divTotalPrecio}>
-        <h1 className={style.h1}>{translations[idioma].PrecioTotal}: ${totalPrecio * Tiempo}</h1>
+        </div>
       </div>
-
       <Footer />
     </>
   );

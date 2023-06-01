@@ -114,6 +114,7 @@ background-color: #d75e08;
 @media (max-width:1200px) {
   .perfil_container {
     padding: 0;
+    /* margin-top: 0; */
   }
   .divFavorites, .divRewies, .card_profile {
     width: 100%;

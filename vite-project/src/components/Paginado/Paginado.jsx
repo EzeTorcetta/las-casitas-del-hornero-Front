@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 //css
-import style from "./Paginado.module.css";
+// import style from "./Paginado.module.css";
+import styleLight from "./Paginado.module.css";
+import styleDark from"./PaginadoDark.module.css";
+
 //actions
 import { FuncionSelectFilter, PostFilters } from "../../redux/Actions/Actions";
 
@@ -14,6 +17,8 @@ const Paginado = ({ paginas }) => {
   const paginado = useSelector((state) => state.Hotels.numPages);
   const { Filters } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light"?styleLight:styleDark;
 
   const cards = Array.from({ length: paginado }, (_, i) => i + 1);
 

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import style from "./Reviews.module.css";
 import axios from "axios";
 import { NewReview } from "../../redux/Actions/Actions";
 import { PedirLocalStorage } from "../Index";
 import { FuncionDetailHotel } from "../../redux/Actions/Actions";
 import swal from "sweetalert";
+
+import styleLight from "./Reviews.module.css"
+import styleDark from"./ReviewsDark.module.css"
+
+
+
 
 export default function Reviews() {
   const [comments, setComments] = useState([]);
@@ -16,6 +21,8 @@ export default function Reviews() {
 
   let User = PedirLocalStorage();
   const Hotel = useSelector((state) => state.DetailHotel);
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light"?styleLight:styleDark;
 
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
 
@@ -86,43 +93,45 @@ export default function Reviews() {
   return (
     <div className={style.container}>
       <h2>REVIEWS</h2>
-      <div className={style.comment}>
-        {Hotel.Reviews?.map((review, index) => (
-          <div className={style.caja} key={index}>
-            <img
-              src="https://www.softzone.es/app/uploads-softzone.es/2018/04/guest.png"
-              alt=""
-            />
-            <div className={style.commentText}>
-              <h3>{review.username}:</h3>
-              <p>{review.review}</p>
-              <span>{review.punctuation}⭐</span>
+      <section>
+        <div className={style.comment}>
+          {Hotel.Reviews?.map((review, index) => (
+            <div className={style.caja} key={index}>
+              <img
+                src="https://www.softzone.es/app/uploads-softzone.es/2018/04/guest.png"
+                alt=""
+              />
+              <div className={style.commentText}>
+                <h3>{review.username}:</h3>
+                <p>{review.review}</p>
+                <span>{review.punctuation}⭐</span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className={style.reviewForm}>
-        <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newComment}
-          onChange={handleCommentChange}
-          placeholder={translations[idioma].Placeholder}
-        />
-        <div>
-        <label>{translations[idioma].Puntuacion}:</label>
-        <input
-          type="number"
-          min="1"
-          max="10"
-          value={rating}
-          onChange={handleRatingChange}
-          placeholder={translations[idioma].Puntuacion}
-        />
+          ))}
         </div>
-        <button type="submit">{translations[idioma].Enviar}</button>
-      </form>
-      </div>
+        <div className={style.reviewForm}>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={newComment}
+              onChange={handleCommentChange}
+              placeholder={translations[idioma].Placeholder}
+            />
+            <div>
+              <label>{translations[idioma].Puntuacion}:</label>
+              <input
+                type="number"
+                min="1"
+                max="10"
+                value={rating}
+                onChange={handleRatingChange}
+                placeholder={translations[idioma].Puntuacion}
+              />
+            </div>
+            <button type="submit">{translations[idioma].Enviar}</button>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }

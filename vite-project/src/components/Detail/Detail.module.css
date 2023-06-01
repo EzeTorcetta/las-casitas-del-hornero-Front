@@ -1,7 +1,7 @@
 .detailContainer {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 11vh;
+  margin-top: 10vh;
   padding-top: 2em;
   padding-left: 8rem;
   padding-right: 8rem;
@@ -96,6 +96,7 @@
   display: flex;
   flex-basis: 90%;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .h1 {
@@ -120,6 +121,7 @@
   -moz-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
   box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
   text-align: left;
+  overflow-x: hidden;
   /* background-color: lightpink; */
 }
 
@@ -256,6 +258,7 @@
     margin-top: 0;
     padding: 0.1em;
   }
+
 }
 
 @media (max-width: 400px) {
@@ -263,6 +266,14 @@
     margin-top: 0;
     padding: 0.1em;
   }
+  .roomContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mapContainer section{
+    position: relative;
+    left:-40px;
+  };
 }
 
 .DivContainerLoading {

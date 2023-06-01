@@ -7,7 +7,10 @@ import Card from "react-bootstrap/Card";
 import { PedirCheckInCheckOut, PedirLocalStorage } from "../Index";
 import GetCurrencyExchange from "../CurrencyExchange/GetCurrencyExchange";
 import swal from "sweetalert";
-import style from "./TypeRoom.module.css";
+// import style from "./TypeRoom.module.css";
+
+import styleLight from "./TypeRoom.module.css"
+import styleDark from"./TypeRoomDark.module.css"
 //action
 import { FuncionTypeRoomTypes, GetTrolley } from "../../redux/Actions/Actions";
 import { v4 as uuidv4 } from "uuid";
@@ -20,6 +23,8 @@ const TypeRoom = ({ id, Trolleys }) => {
   const dispatch = useDispatch();
   const [State, setState] = useState([]);
   const idioma = useSelector((state) => state.idioma);
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light"?styleLight:styleDark;
 
   const translations = {
     en: {
@@ -65,18 +70,18 @@ const TypeRoom = ({ id, Trolleys }) => {
     }
   };
 
-  useEffect( ()  => {
+  useEffect(() => {
     const checkIn = check.CheckIn;
     const checkOut = check.CheckOut;
-    dispatch(FuncionTypeRoomTypes(id,checkIn,checkOut));
+    dispatch(FuncionTypeRoomTypes(id, checkIn, checkOut));
   }, []);
 
   //{ id, name, image, price, stock, people }
 
   return TypeRoom?.map((room, index) => (
     <div key={index}>
-      <Card className={style.cardContainer}>
-        <Card.Body>
+      <Card className={style.cardContainer} >
+        <Card.Body >
           <Card.Title>{room.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             <GetCurrencyExchange value={room.price} />

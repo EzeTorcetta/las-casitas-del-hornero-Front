@@ -160,12 +160,14 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
                   </div>
                   <div className={style.mapContainer}>
                     <h3>Ubicación</h3>
-                    {DetailHotel.location && DetailHotel.name && (
-                      <Maps
-                        location={DetailHotel.location}
-                        name={DetailHotel.name}
-                      />
-                    )}
+                    <section>
+                      {DetailHotel.location && DetailHotel.name && (
+                        <Maps
+                          location={DetailHotel.location}
+                          name={DetailHotel.name}
+                        />
+                      )}
+                    </section>
                   </div>
                 </div>
               </section>

@@ -1,10 +1,10 @@
 .trolleyContainer {
-  background-color: whitesmoke;
+  background-color: #454545;
   display: flex;
   flex-direction: column;
   margin-top: 10vh;
   align-items: center;
-
+  color: white;
 }
 
 .section {
@@ -19,12 +19,13 @@ margin-bottom: 0;;
 }
 
 .CardCarrito {
-  -webkit-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
-  -moz-box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
-  box-shadow: 10px 10px 17px -12px rgba(36, 30, 24, 1);
+  -webkit-box-shadow: 10px 10px 17px -12px rgb(184, 180, 176);
+  -moz-box-shadow: 10px 10px 17px -12px rgb(165, 162, 159);
+  box-shadow: 10px 10px 17px -12px rgb(126, 124, 123);
   flex-basis: 100%;
   height: fit-content;
   display: flex;
+  background-color: #2d2d2d;
 }
 
 .CardCarrito div:nth-child(1) {}
@@ -66,8 +67,7 @@ margin-bottom: 0;;
   margin-left: 5px;
 }
 .totalPrice {
-  background-color: #b7ec97;
-
+  background-color: rgb(30, 140, 140);
   width: fit-content;
   height: fit-content;
   border-radius: 10px;
@@ -75,7 +75,7 @@ margin-bottom: 0;;
   font-size: 30px;
 }
 .priceRooms {
-  background-color: #b7ec97;
+  background-color: rgb(30, 140, 140);
   width: fit-content;
   height: fit-content;
   border-radius: 10px;
@@ -116,7 +116,7 @@ margin-bottom: 0;;
   color: white;
 }
 
-.button:hover  {
+.button:hover {
   background-color: rgb(5, 73, 5);
 }
 
@@ -173,7 +173,7 @@ margin-bottom: 0;;
 .spanCount {
   text-align: center;
   padding: 10px;
-  color: black;
+  color: whitesmoke;
   /* background-color: rgb(210, 201, 201); */
   width: 40px;
 }
