@@ -12,8 +12,14 @@
   background-color: #e56910;
   color: white;
   padding: 1em;
-
+  border-radius: 5px;
 }
+
+.divButonAddRoom {
+  display: flex;
+  justify-content: center;
+}
+
 .div {
   border-color: rgb(70, 69, 69);
   background-color: #454545;
@@ -285,7 +291,6 @@
     align-items: center;
   }
 }
-
 
 .DivContainerLoading {
   width: 100%;

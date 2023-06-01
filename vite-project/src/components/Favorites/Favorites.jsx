@@ -38,35 +38,26 @@ const Favorites = () => {
 
   return (
     <>
-          {favorites.length ? (
-            favorites.map(
-              ({
-                id,
-                name,
-                image,
-                province,
-                department,
-                rating,
-                valoration,
-              }) => (
-                <Cards
-                  key={id}
-                  id={id}
-                  name={name}
-                  image={image}
-                  rating={rating}
-                  province={province}
-                  department={department}
-                  valoration={valoration}
-                />
-              )
-            )
-          ) : (
-            <h3>{translations[idioma].No}</h3>
-          )}
-          </>
-  )
-  
+      {favorites.length ? (
+        favorites.map(
+          ({ id, name, image, province, department, rating, valoration }) => (
+            <Cards
+              key={id}
+              id={id}
+              name={name}
+              image={image}
+              province={province}
+              department={department}
+              rating={rating}
+              valoration={valoration}
+            />
+          )
+        )
+      ) : (
+        <h3>{translations[idioma].No}</h3>
+      )}
+    </>
+  );
 };
 
 export default Favorites;

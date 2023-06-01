@@ -4,6 +4,14 @@
   padding-right: 5em;
 }
 
+.divHotels {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 30px;
+  padding: 25px 30px;
+}
+
 .divConteiner {
   text-align: center;
   height: 60vh;
@@ -17,6 +25,7 @@
   border-radius: 0.5rem;
   text-transform: uppercase;
   background-color: #454545;
+  height: fit-content;
 }
 
 .divConteinerHotels h1 {
@@ -93,8 +102,7 @@
   background-color: #c45c12;
 }
 
-@media (max-width:576px) {
-
+@media (max-width: 576px) {
   .perfilColaboradorContainer {
     max-width: 100%;
     margin-top: 9;

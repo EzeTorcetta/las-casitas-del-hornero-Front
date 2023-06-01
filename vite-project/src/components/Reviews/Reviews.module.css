@@ -1,9 +1,8 @@
 .container h2 {
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   margin-bottom: 1em;
-  border-bottom: 1px solid rgb(224, 224, 224)
+  border-bottom: 1px solid rgb(224, 224, 224);
 }
-
 
 .container form {
   display: flex;
@@ -32,6 +31,8 @@
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  width: fit-content;
+  height: fit-content;
 }
 
 .comment {
@@ -59,7 +60,7 @@
 }
 
 @media (max-width: 576px) {
-  .reviewForm form{
+  .reviewForm form {
     display: flex;
     flex-direction: column;
   }

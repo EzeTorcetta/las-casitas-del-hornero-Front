@@ -4,7 +4,6 @@
   flex-direction: column;
   margin-top: 10vh;
   align-items: center;
-
 }
 
 .section {
@@ -15,7 +14,7 @@
   flex-wrap: wrap;
   padding: 50px;
   margin: 1.5em;
-margin-bottom: 0;;
+  margin-bottom: 0;
 }
 
 .CardCarrito {
@@ -27,7 +26,8 @@ margin-bottom: 0;;
   display: flex;
 }
 
-.CardCarrito div:nth-child(1) {}
+.CardCarrito div:nth-child(1) {
+}
 
 .CardCarrito div:nth-child(2) {
   display: flex;
@@ -116,7 +116,7 @@ margin-bottom: 0;;
   color: white;
 }
 
-.button:hover  {
+.button:hover {
   background-color: rgb(5, 73, 5);
 }
 
@@ -149,14 +149,6 @@ margin-bottom: 0;;
   background-color: red;
 }
 
-.BotonEliminarCarrito {
-  background-color: rgb(231, 87, 87);
-  color: white;
-  border-radius: 5px;
-  padding: 5px;
-  width: 30px;
-}
-
 .BotonEliminarCarrito:hover {
   background-color: rgb(255, 0, 0);
   color: rgb(255, 255, 255);
@@ -185,7 +177,6 @@ margin-bottom: 0;;
   margin: 10px;
 }
 
-
 .divStock {
   display: flex;
   flex-direction: column;
@@ -198,16 +189,24 @@ margin-bottom: 0;;
   align-items: center;
   justify-content: center;
 }
-@media (max-width:576px) {
+@media (max-width: 576px) {
   .trolleyContainer {
     margin-top: 0;
   }
   .CardCarrito {
-  flex-direction: column;
-  margin-top: 1em;
+    flex-direction: column;
+    margin-top: 1em;
   }
-.divBotonEliminarTodo {
-  flex-direction: column-reverse;
-  align-items: center;
+  .divBotonEliminarTodo {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }
+
+.BotonEliminarCarrito {
+  background-color: rgb(231, 87, 87);
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 30px;
 }

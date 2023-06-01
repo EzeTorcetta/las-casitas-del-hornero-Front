@@ -83,6 +83,7 @@ const EstadisticasLinealPartner = ({ MesDondeMasSeReservoPartner }) => {
       },
     },
   };
+
   return (
     <div className="ContainerGraficoLinea">
       <Line data={data} options={options} />

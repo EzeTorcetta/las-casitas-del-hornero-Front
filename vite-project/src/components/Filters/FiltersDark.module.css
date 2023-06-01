@@ -9,15 +9,15 @@
   background-color: #2d2d2d;
 }
 
-.table{
-  color:white;
+.table {
+  color: white;
   border-color: white;
   width: 100%;
   margin: 5px 0;
 }
 
 .select {
-  background-color: #E56910;
+  background-color: #e56910;
   appearance: none;
   color: white;
   border-radius: 0.5rem;
@@ -50,7 +50,7 @@
   border-radius: 0.5rem;
   border: none;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #E56910;
+  background-color: #e56910;
   color: #fff;
   cursor: pointer;
   margin: 10px;
@@ -92,12 +92,12 @@
   top: 40%;
   width: 10px;
   height: 14px;
-  border: 2px solid #E56910;
-  filter: drop-shadow(0px 0px 10px #E56910);
+  border: 2px solid #e56910;
+  filter: drop-shadow(0px 0px 10px #e56910);
   border-width: 0 2.5px 2.5px 0;
   transition: 0.2s linear;
   transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
-  -webkit-filter: drop-shadow(0px 0px 10px #E56910);
+  -webkit-filter: drop-shadow(0px 0px 10px #e56910);
 }
 
 .checkbox_btn .inputServices:checked ~ .checkmark:after {
@@ -123,23 +123,23 @@
   }
 }
 
-.inputSearch{
+.inputSearch {
   width: 100%;
   appearance: none;
   color: rgb(0, 0, 0);
   border-radius: 0.5rem;
 
- opacity: 0.8;
+  opacity: 0.8;
   width: 100%;
   border: none;
   margin: 5px;
   padding: 0.5rem;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
-    -webkit-border-radius: 0.5rem;
-    -moz-border-radius: 0.5rem;
-    -ms-border-radius: 0.5rem;
-    -o-border-radius: 0.5rem;
-    -webkit-border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
 }
 
 .inputSearch::placeholder {
@@ -188,14 +188,12 @@
   padding: 10px;
   font-size: 14px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  
 }
 
 .custom-datepicker .react-datepicker__header {
   background-color: #f2f2f2;
   padding: 5px;
   border-bottom: 1px solid #ccc;
-  
 }
 
 .custom-datepicker .react-datepicker__month-container {
@@ -225,7 +223,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 .custom-datepicker .react-datepicker__day--selected {
   background-color: #007bff;
@@ -265,5 +262,5 @@
   background-color: rgb(69, 71, 145);
   color: #fff;
   cursor: pointer;
-  margin: .6em 0;
+  margin: 0.6em 0;
 }

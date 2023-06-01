@@ -33,23 +33,23 @@ body {
   align-content: start;
 }
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
   .section {
     flex-direction: column;
-    width: 100%; 
+    width: 100%;
     margin-right: 2rem;
-    padding-top: .5rem;
+    padding-top: 0.5rem;
   }
   .divCard {
     flex-direction: column;
-    order :1;
+    order: 1;
   }
   .filtroContainer {
     width: 100%;
     margin-bottom: 4rem;
   }
   .climaContainer {
-    order :3;
+    order: 3;
   }
 }
 

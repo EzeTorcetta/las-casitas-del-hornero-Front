@@ -127,10 +127,15 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               </div>
 
               {User?.rol === 2 ? (
-                <NavLink to="/FormRoomType" style={{"text-decoration" : "none"}}>
-                  <p  onClick={setHotel} className={style.butonAddRoom}>
-                    {translations[idioma].AgregarRoomType}
-                  </p>
+                <NavLink
+                  to="/FormRoomType"
+                  style={{ "text-decoration": "none" }}
+                >
+                  <div className={style.divButonAddRoom}>
+                    <p onClick={setHotel} className={style.butonAddRoom}>
+                      {translations[idioma].AgregarRoomType}
+                    </p>
+                  </div>
                 </NavLink>
               ) : (
                 ""

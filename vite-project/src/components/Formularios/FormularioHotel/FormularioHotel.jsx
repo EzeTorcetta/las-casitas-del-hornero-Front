@@ -9,8 +9,8 @@ import { Footer, PedirLocalStorage } from "../../Index";
 import { idHotelForm } from "../../../redux/Actions/Actions";
 import NavBar from "../../Nav/Nav";
 
-import styleLight from "./FormularioHotel.module.css"
-import styleDark from"./FormularioHotelDark.module.css"
+import styleLight from "./FormularioHotel.module.css";
+import styleDark from "./FormularioHotelDark.module.css";
 
 const initialLocation = {
   provinces: [],
@@ -363,7 +363,6 @@ const FormularioHotel = () => {
   return (
     <>
       <NavBar />
-
       <div className={style.formHotelContainer}>
         <form onSubmit={handleSubmit} className={style.form}>
           <h1 className="h3 mb-3 fw-normal">
@@ -453,7 +452,9 @@ const FormularioHotel = () => {
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div className={style.selectService}>{translations[idioma].SeleccionServicios}</div>
+          <div className={style.selectService}>
+            {translations[idioma].SeleccionServicios}
+          </div>
           <span onChange={onChangeServices} className={style.checkContainer}>
             {services?.map((service) => (
               <div key={service.id} className={style.checkbox}>
@@ -508,14 +509,21 @@ const FormularioHotel = () => {
               onChange={uploadImage}
             />
             {hotel.image.length ? (
-              hotel.image.map((imagen) => {
-                return (
-                  <>
-                    <img src={imagen} style={{ width: "300px" }} />
-                    <button onClick={() => deleteImage(imagen)}>X</button>
-                  </>
-                );
-              })
+              <div className={style.DivPadre}>
+                {hotel.image.map((imagen) => {
+                  return (
+                    <div className={style.ContainerImagen}>
+                      <button
+                        className={style.BotonDelete}
+                        onClick={() => deleteImage(imagen)}
+                      >
+                        X
+                      </button>
+                      <img src={imagen} style={{ width: "300px" }} />
+                    </div>
+                  );
+                })}
+              </div>
             ) : (
               <></>
             )}
@@ -523,7 +531,9 @@ const FormularioHotel = () => {
 
           {/* LOCATION DONDE SE UBICA EL HOTEL*/}
 
-          <div className={style.label}>{translations[idioma].SeleccionProvincia}</div>
+          <div className={style.label}>
+            {translations[idioma].SeleccionProvincia}
+          </div>
           <select onChange={onChangeProvinces} className={style.select}>
             <option hidden>{translations[idioma].SelectProvince}</option>
             {location.provinces?.map(({ nombre, id }) => (
@@ -565,7 +575,9 @@ const FormularioHotel = () => {
 
           {/* GEOLOCALIZACION DEL HOTEL */}
 
-          <div className={style.label}>{translations[idioma].UbicacionHotel}</div>
+          <div className={style.label}>
+            {translations[idioma].UbicacionHotel}
+          </div>
           <Maps location={geoposition} setLocation={setGeoposition} />
 
           <button

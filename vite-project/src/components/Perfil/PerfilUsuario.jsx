@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert";
 import axios from "axios";
 
-import styleLight from "./PerfilUsuario.module.css"
-import styleDark from"./PerfilUsuarioDark.module.css"
+import styleLight from "./PerfilUsuario.module.css";
+import styleDark from "./PerfilUsuarioDark.module.css";
 
 const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   const Trolleys = useSelector((state) => state.Trolley);
@@ -41,7 +41,8 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
       Aceptar: "Aceptar",
       Cancelar: "Cancelar",
       TituloProveedor: "¿Estás seguro que deseas ser proveedor?",
-      TextoProveedor: "Nuestros proveedores son aquellos usuarios que publican sus hoteles",
+      TextoProveedor:
+        "Nuestros proveedores son aquellos usuarios que publican sus hoteles",
       Usuario: "USUARIO",
     },
   };
@@ -53,37 +54,39 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   }, []);
 
   const FuncionQuieroSerProveedor = (id_user) => {
-
     swal({
       title: translations[idioma].TituloProveedor,
       text: translations[idioma].TextoProveedor,
-      content: 'input',
+      content: "input",
       buttons: {
         cancel: translations[idioma].Cancelar,
         confirm: translations[idioma].Aceptar,
+      },
+    }).then((result) => {
+      if (result.length) {
+        // El usuario ha hecho clic en el botón de confirmación y ha ingresado un mensaje
+        const mensaje = result;
+        axios
+          .post(
+            `https://las-casitas-del-hornero-back-deploy.up.railway.app/request`,
+            { message: mensaje, id_user }
+          )
+          .then((response) => {
+            swal({
+              text: response.data,
+              icon: "success",
+              buttons: translations[idioma].Aceptar,
+            });
+          })
+          .catch((error) => {
+            swal({
+              text: error.response.data.error,
+              icon: "warning",
+              buttons: translations[idioma].Aceptar,
+            });
+          });
       }
-    })
-      .then((result) => {
-        if (result.length) {
-          // El usuario ha hecho clic en el botón de confirmación y ha ingresado un mensaje
-          const mensaje = result;
-          axios.post(`https://las-casitas-del-hornero-back-deploy.up.railway.app/request`, { message: mensaje, id_user })
-            .then((response) => {
-              swal({
-                text: response.data,
-                icon: "success",
-                buttons: translations[idioma].Aceptar,
-              });
-            })
-            .catch((error) => {
-              swal({
-                text: error.response.data.error,
-                icon: "warning",
-                buttons: translations[idioma].Aceptar,
-              })
-            })
-        }
-      });
+    });
   };
 
   return (
@@ -92,7 +95,6 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
       <div className={style.perfil_container}>
         <div className={style.card_profile}>
           <div className={style.card_profile_left}>
-
             <div className={style.card_info}>
               <h2> {translations[idioma].Usuario}</h2>
               <h2>{`${User.username}`}</h2>
@@ -111,9 +113,7 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
 
         <div className={style.divFavorites}>
           <h2>{translations[idioma].Favoritos}</h2>
-          <div>
-            <Favoritos />
-          </div>
+          <Favoritos />
         </div>
 
         <div className={style.divRewies}>
