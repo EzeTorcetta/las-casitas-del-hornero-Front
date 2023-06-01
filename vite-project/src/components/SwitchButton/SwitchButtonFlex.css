@@ -54,16 +54,10 @@ input:checked + .slider:before{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 17rem;
+    width: 4rem;
     padding: 1rem;
 }
 
 .imagen{
     height: 2rem;
-}
-
-.conteiner{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }

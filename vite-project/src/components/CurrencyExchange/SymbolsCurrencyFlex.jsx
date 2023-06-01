@@ -11,7 +11,7 @@ const SymbolsCurrency = () => {
   };
 
   return (
-    <div className="currency-containerr">
+    <div className="currency-container">
     <img src={logocurrency} alt='logocurrency' className="logocurrency"/>
     <select name="select" onChange={onChangeCurrency} className="select-bar" defaultValue="ARS">
         <option value="ARS">Peso argentino</option>

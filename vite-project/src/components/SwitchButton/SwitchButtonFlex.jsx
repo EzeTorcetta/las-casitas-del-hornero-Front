@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './SwitchButton.css';
+import './SwitchButtonFlex.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTheme } from '../../redux/Actions/Actions';
 import day from "../../image/day-color.png";

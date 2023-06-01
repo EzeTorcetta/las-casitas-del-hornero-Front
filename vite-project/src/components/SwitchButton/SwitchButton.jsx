@@ -7,30 +7,35 @@ import night from "../../image/night-color.png";
 
 
 const SwitchButton = () => {
-    
+
     const dispatch = useDispatch();
     const theme = useSelector((state) => state.theme)
-    
+
 
     const handleTheme = () => {
-        if(theme === 'light'){
-            dispatch(changeTheme('dark'))}
-        else{
-            dispatch(changeTheme('light'))};
+        if (theme === 'light') {
+            dispatch(changeTheme('dark'))
+        }
+        else {
+            dispatch(changeTheme('light'))
+        };
         ;
     }
 
-return(
-    <div className='caja'>
-        <img className='imagen' src={day} alt='imagen'/>
-        <label className='switch'>
-            <input type='checkbox' className='checkbox' onClick={handleTheme}/>
-            <span className='slider'/>
-        </label>
-        <img className='imagen' src={night} alt='imagen'/>
-    </div>
-    
-)
+    return (
+        <div className='conteiner'>
+            <img className='imagen' src={day} alt='imagen' />
+            <div className='caja'>
+                <label className='switch'>
+                    <input type='checkbox' className='checkbox' onClick={handleTheme} />
+                    <span className='slider' />
+                </label>
+            </div>
+            <img className='imagen' src={night} alt='imagen' />
+        </div>
+
+
+    )
 }
 
 export default SwitchButton;

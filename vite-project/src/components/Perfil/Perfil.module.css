@@ -1,6 +1,9 @@
 .section {
-  padding-top: 10vh;
-  min-height: 0vh;
+
+}
+
+.sectiondark{
+background-color: #2d2d2d;
 }
 
 .divFavorites {

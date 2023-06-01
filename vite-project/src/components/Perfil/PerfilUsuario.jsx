@@ -60,13 +60,10 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
   };
 
   return (
-    <>
+    <div className={style.perfil_container}>
       <NavBar countCarrito={countCarrito} />
-      <div className={style.perfil_container}>
+      <div>
         <section>
-          <div className={style.saludo}>
-            <h2>{`${User.username}`}</h2>
-          </div>
           <button
             className={style.QuieroProveedor}
             onClick={() => FuncionQuieroSerProveedor(User.id)}
@@ -88,9 +85,9 @@ const PerfilUsuario = ({ countCarrito, setCountCarrito }) => {
         </section>
       </div>
       <div className={style.footer}>
-      <Footer />
+        <Footer />
       </div>
-    </>
+    </div>
   );
 };
 

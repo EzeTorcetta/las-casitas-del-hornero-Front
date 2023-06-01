@@ -1,114 +1,20 @@
+
 .perfil_container {
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
-  padding: 0 2em;
-}
-.saludo {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.saludo h2 {
-  font-size: 24px;
-}
-
-.saludo p {
-  font-size: 16px;
-}
-
-.section {
-  padding: 20px;
-  background-color: white;
-  margin-bottom: 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.divFavorites h1,
-.divRewies h1 {
-  color: #ff6f00;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.divFavorites,
-.divRewies {
-  margin-bottom: 20px;
-}
-
-.divFavorites,
-.divRewies,
-.divFavorites > *,
-.divRewies > * {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.section:last-child {
-  margin-bottom: 0;
-}
-
-.navbar {
-  background-color: #000;
-  color: white;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.saludo h2 {
-  background-color: orange;
-  color: white;
-  padding: 0.5em;
-  width: fit-content;
-}
-.divFavorites,
-.divRewies {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  padding: 2em;
-  margin-top: 4em;
-  border-radius: 0.5rem;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-}
-.divFavorites h2,
-.divRewies h2 {
-  text-align: center;
-  text-transform: uppercase;
-  width: 500px;
-  background-color: orange;
-  color: white;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  padding: 0.2em 2em;
-
-  margin-bottom: 0.3em;
-}
-
-.divRewies {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 20px;
+  margin-top: 4rem;
 }
 
 .QuieroProveedor {
-  padding: 10px 20px;
-  background-color: blanchedalmond;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: #ddb900;
   border: none;
   font-size: 20px;
+  color: white;
 }
 
 .footer{

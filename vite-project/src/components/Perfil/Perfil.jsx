@@ -1,10 +1,13 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PedirLocalStorage, PerfilColaborador, PerfilSuperAdmin, PerfilUsuario } from "../Index";
+import style from "./Perfil.module.css";
 
 const Perfil = ({countCarrito,setCountCarrito}) => {
     let User = PedirLocalStorage();
     const navigate = useNavigate();
+    const theme = useSelector((state) => state.theme);
 
     useEffect(() => {
     if (!User) {
@@ -19,7 +22,7 @@ const Perfil = ({countCarrito,setCountCarrito}) => {
     let { rol } = User;
 
     return (
-        <>
+        <div className={theme === 'light' ? style.section : style.sectiondark}>
         {
             rol===1?(
                 <PerfilUsuario
@@ -34,7 +37,7 @@ const Perfil = ({countCarrito,setCountCarrito}) => {
                 <></>
             )
         }
-        </>
+        </div>
     );
 };
 
