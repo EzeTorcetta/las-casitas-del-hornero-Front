@@ -65,7 +65,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
       Noches: "nights",
       Hasta: "To",
       Desde: "From",
-      Precio:"Price"
+      Precio:"Price",
+      Cancelar:"Cancel",
+      VaciarCarrito:"Are you sure you want to empty the cart?"
     },
     es: {
       ReservaExitosa: "Habitacion/es reservadas con exito!!!",
@@ -81,7 +83,9 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
       Noches: "noches",
       Hasta: "Hasta",
       Desde: "Desde",
-      Precio:"Precio"
+      Precio:"Precio",
+      Cancelar:"Cancelar",
+      VaciarCarrito: "¿Estás seguro que deseas vaciar el carrito?"
     },
   };
 
@@ -181,14 +185,14 @@ const Trolleys = ({ setCountCarrito, countCarrito }) => {
 
   const FuncionDeleteAllCarritos =  (idUser) => {
     swal({
-      title: '¿Estás seguro que deseas vaciar el carrito?',
+      title: translations[idioma].VaciarCarrito,
       icon: "warning",
       buttons: {
-        cancel: 'Cancelar',
+        cancel: translations[idioma].Cancelar,
         confirm: translations[idioma].Aceptar,
       }
     }).then( async (result)  => {
-      console.log(result);
+      
       if (result) {
         // El usuario ha hecho clic en el botón de confirmación
         setCountCarrito((countCarrito = 0));

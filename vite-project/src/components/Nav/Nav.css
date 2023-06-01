@@ -99,7 +99,8 @@
 }
 
 .contenedor-elementos-dark:hover .contenedor-opciones-dark {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   z-index: 3;
   /* box-shadow: #000 10px 10px 10px; */
@@ -155,15 +156,12 @@
 }
 
 .contenedor-elementos:hover .contenedor-opciones {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   z-index: 3;
   /* box-shadow: #000 10px 10px 10px; */
 }
-
-
-
-
 
   {
   /*---------OPCIONES FLEX----------*/
@@ -183,7 +181,7 @@
 
 .light {
   position: fixed;
-  top: 60px;
+  top:8VH;
   left: 0;
   background: orange;
   display: flex;
@@ -251,7 +249,7 @@
 
 .dark {
   position: fixed;
-  top: 60px;
+  top: 8vh;
   left: 0;
   background: #454545;
   display: flex;

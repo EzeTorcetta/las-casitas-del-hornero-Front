@@ -30,7 +30,7 @@ const FormularioIngresa = () => {
       CompletarCampos: "Debes completar todos los campos",
       Aceptar: "Aceptar",
       ErroresCampos: "Tienes errores en los campos",
-      SessionExito: " Inicio de sesion con exito!!",
+      SessionExito: " Inicio de sesión con éxito!!",
       Ingresa: "Ingresa",
       Ingresar: " Ingresar",
     },

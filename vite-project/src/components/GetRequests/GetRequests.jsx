@@ -146,7 +146,7 @@ const GetRequests = () => {
 
     return (
         <MUIDataTable
-        
+        className={style.gigachadaowo}
           title="Peticiones"
           data={Requests}
           columns={columnas}

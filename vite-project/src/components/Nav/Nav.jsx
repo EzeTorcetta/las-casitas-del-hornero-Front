@@ -39,7 +39,7 @@ const NavBar = ({ countCarrito }) => {
   const theme = useSelector((state) => state.theme);
   const idioma = useSelector((state) => state.idioma);
   const [isOpen, setIsOpen] = useState(false);
- 
+
 
   const translations = {
     en: {
@@ -125,7 +125,13 @@ const NavBar = ({ countCarrito }) => {
           </NavLink>
           <SwitchButton />
           <SymbolsCurrency />
-
+          <div className="idioma">
+            🌐
+            <select value={idioma} onChange={toggleLang}>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
           {rol === 1 ? (
             <Link to={"/Carrito"} style={{ "text-decoration": "none" }}>
               <div className="divCarritoCount">
@@ -141,7 +147,6 @@ const NavBar = ({ countCarrito }) => {
           ) : (
             <></>
           )}
-
           <div>
             {username ? (
               theme === "dark" ? (
@@ -154,7 +159,7 @@ const NavBar = ({ countCarrito }) => {
                     >
                       {translations[idioma].VerPerfil}
                     </button>
-              
+
                     <button onClick={handleLogout} className="botoncito-dark">
                       {translations[idioma].Salir}
                     </button>
@@ -167,7 +172,7 @@ const NavBar = ({ countCarrito }) => {
                     <button onClick={handleVerPerfil} className="botoncito">
                       {translations[idioma].VerPerfil}
                     </button>
-                    
+
                     <button onClick={handleLogout} className="botoncito">
                       {translations[idioma].Salir}
                     </button>
@@ -181,34 +186,34 @@ const NavBar = ({ countCarrito }) => {
               </button>
             )}
           </div>
-          <div className="idioma">
-            🌐
-            <select value={idioma} onChange={toggleLang}>
-              <option value="en">English</option>
-              <option value="es">Español</option>
-            </select>
-          </div>
+
         </div>
       </div>
     );
   } else {
     return (
-      
+
       <div className={theme === 'light' ? 'navflex' : 'navflex-dark'}>
         <div>
           <NavLink to={"/Home"}>
-              <div>
-                <img
-                  className="img"
-                  src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
-                  alt="LaCasitaDelHornero"
-                />
-              </div>
-            </NavLink>
+            <div>
+              <img
+                className="img"
+                src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/utbvsuv2bhb7gbubbaqk"
+                alt="LaCasitaDelHornero"
+              />
+            </div>
+          </NavLink>
         </div>
-      
+        <div className="idioma">
+          🌐
+          <select value={idioma} onChange={toggleLang}>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
         <div className={`${theme} ${isOpen && "open"}`}>
-        <div>
+          <div>
             {username ? (
               theme === "dark" ? (
                 <div className="contenedor-elementos-dark">
@@ -220,7 +225,7 @@ const NavBar = ({ countCarrito }) => {
                     >
                       {translations[idioma].VerPerfil}
                     </button>
-                    
+
                     <button onClick={handleLogout} className="botoncito-dark">
                       {translations[idioma].Salir}
                     </button>
@@ -233,7 +238,7 @@ const NavBar = ({ countCarrito }) => {
                     <button onClick={handleVerPerfil} className="botoncito">
                       {translations[idioma].VerPerfil}
                     </button>
-                    
+
                     <button onClick={handleLogout} className="botoncito">
                       {translations[idioma].Salir}
                     </button>
@@ -248,7 +253,7 @@ const NavBar = ({ countCarrito }) => {
             )}
           </div>
           <div>
-            <SwitchButton/>
+            <SwitchButton />
           </div>
           <div>
             <SymbolsCurrencyFlex />
@@ -270,13 +275,7 @@ const NavBar = ({ countCarrito }) => {
               )
             }
           </div>
-          <div className="idioma">
-            🌐
-            <select value={idioma} onChange={toggleLang}>
-              <option value="en">English</option>
-              <option value="es">Español</option>
-            </select>
-          </div>
+
         </div>
         <div className={`navtoggle ${isOpen && "open"}`} onClick={() => setIsOpen(!isOpen)}>
           <span></span>

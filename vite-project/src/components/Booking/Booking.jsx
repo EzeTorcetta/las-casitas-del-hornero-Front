@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { PedirLocalStorage } from "../Index";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooking } from "../../redux/Actions/Actions";
-import style from "./Booking.module.css";
+// import style from "./Booking.module.css";
+import styleLight from "./Booking.module.css"
+import styleDark from"./BookingDark.module.css"
 
 const Booking = () => {
   let User = PedirLocalStorage();
@@ -13,7 +15,8 @@ const Booking = () => {
     dispatch(getBooking(User.id, User.rol));
   }, [dispatch]);
   const idioma = useSelector((state) => state.idioma);
-
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
   const translations = {
     en: {
       Precioindividual: "Individual Price",
@@ -36,7 +39,7 @@ const Booking = () => {
               {`${translations[idioma].Precioindividual}: ${book.individualPrice}`}
             </div>
             <div className={style.totalPrice}>
-              {`${translations[idioma].Precioindividual}: ${book.totalPrice}`}
+              {`${translations[idioma].Preciototal}: ${book.totalPrice}`}
             </div>
           </div>
         );

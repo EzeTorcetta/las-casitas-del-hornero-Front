@@ -1,7 +1,6 @@
 import { useEffect, useState, useReducer } from "react";
 import { useSelector } from "react-redux";
 import validacion from "./Validations";
-import style from "./FormularioHotel.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
@@ -9,6 +8,9 @@ import Maps from "../../MapForm/Map";
 import { Footer, PedirLocalStorage } from "../../Index";
 import { idHotelForm } from "../../../redux/Actions/Actions";
 import NavBar from "../../Nav/Nav";
+
+import styleLight from "./FormularioHotel.module.css"
+import styleDark from"./FormularioHotelDark.module.css"
 
 const initialLocation = {
   provinces: [],
@@ -46,6 +48,8 @@ const FormularioHotel = () => {
   const [location, dispatch] = useReducer(reducer, initialLocation);
   const [services, setServices] = useState([]);
   const [fotos, setFotos] = useState({});
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light" ? styleLight : styleDark;
 
   const idioma = useSelector((state) => state.idioma);
 
@@ -75,6 +79,9 @@ const FormularioHotel = () => {
       URLFoto: "Photo url",
       UbicacionHotel: "Set the location of the hotel on the map:",
       Registrar: "REGISTER HOTEL",
+      SelectProvince: "Select a province",
+      SelectDepartment: "Select a department",
+      SelectLocality: "Select a locality",
     },
     es: {
       CompletarTodos: "Por favor completa todos los campos",
@@ -102,6 +109,9 @@ const FormularioHotel = () => {
       URLFoto: "URL de la foto",
       UbicacionHotel: "Establece la ubicación del hotel en el mapa:",
       Registrar: "REGISTRAR HOTEL",
+      SelectProvince: "Selecciona una provincia",
+      SelectDepartment: "Selecciona un departamento",
+      SelectLocality: "Selecciona una localidad",
     },
   };
 
@@ -443,7 +453,7 @@ const FormularioHotel = () => {
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div>{translations[idioma].SeleccionServicios}</div>
+          <div className={style.selectService}>{translations[idioma].SeleccionServicios}</div>
           <span onChange={onChangeServices} className={style.checkContainer}>
             {services?.map((service) => (
               <div key={service.id} className={style.checkbox}>
@@ -488,7 +498,7 @@ const FormularioHotel = () => {
           ) : (
             <span className={style.hidden}>hidden</span>
           )}
-          <div>{translations[idioma].CargaFoto}</div>
+          <div className={style.label}>{translations[idioma].CargaFoto}</div>
           <div>
             <input
               className={style.uploadContainer}
@@ -513,9 +523,9 @@ const FormularioHotel = () => {
 
           {/* LOCATION DONDE SE UBICA EL HOTEL*/}
 
-          <div>{translations[idioma].SeleccionProvincia}</div>
+          <div className={style.label}>{translations[idioma].SeleccionProvincia}</div>
           <select onChange={onChangeProvinces} className={style.select}>
-            <option hidden>Selecciona la provincia</option>
+            <option hidden>{translations[idioma].SelectProvince}</option>
             {location.provinces?.map(({ nombre, id }) => (
               <option value={nombre} key={id} id={id}>
                 {nombre}
@@ -526,7 +536,7 @@ const FormularioHotel = () => {
             <div>
               <div>{translations[idioma].SeleccionDepartamento}:</div>
               <select onChange={onChangeDepartments} className={style.select}>
-                <option hidden>Selecciona el departamento</option>
+                <option hidden>{translations[idioma].SelectDepartment}</option>
                 {location.departments?.map(({ nombre, id }) => (
                   <option value={nombre} key={id} id={id}>
                     {nombre}
@@ -541,7 +551,7 @@ const FormularioHotel = () => {
             <div>
               <div>{translations[idioma].SeleccionLocalidad}</div>
               <select onChange={onChangeLocalities} className={style.select}>
-                <option hidden>Selecciona la localidad</option>
+                <option hidden>{translations[idioma].SelectLocality}</option>
                 {location.localities?.map(({ nombre, id }) => (
                   <option value={nombre} key={id} id={id}>
                     {nombre}
@@ -555,7 +565,7 @@ const FormularioHotel = () => {
 
           {/* GEOLOCALIZACION DEL HOTEL */}
 
-          <div>{translations[idioma].UbicacionHotel}</div>
+          <div className={style.label}>{translations[idioma].UbicacionHotel}</div>
           <Maps location={geoposition} setLocation={setGeoposition} />
 
           <button

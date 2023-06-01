@@ -48,12 +48,12 @@ function Cards({
         : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
       dispatch(FuncionAllFavoritesHotel(User.id));
     }
-    else{
+    else {
       swal({
         text: "Debes iniciar sesion ",
         icon: "warning",
         buttons: "Aceptar",
-    });
+      });
     }
   };
   const idioma = useSelector((state) => state.idioma);

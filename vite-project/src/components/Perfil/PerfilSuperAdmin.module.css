@@ -1,68 +1,69 @@
-.container {
-  background-color: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  border-style: none;
-}
-
-.container h1 {
-  color: #ff6f00;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.container h3 {
-  color: black;
-  font-size: 16px;
-}
-
-.section:last-child {
-  margin-bottom: 0;
-}
-
-.footer {
-  background-color: black;
-  color: white;
-  padding: 20px;
+.divDeBienvenido {
   text-align: center;
+  margin: 30px;
 }
-
-.footer a {
-  color: white;
-  text-decoration: none;
-}
-
-.navbar {
-  background-color: black;
-  color: white;
-  padding: 20px;
+.DivEstadisticas {
+  background-color: white;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  scroll-snap-align: center;
+  text-align: center;
+  box-shadow: 3px 3px 5px rgba(1, 1, 1, 0.616);
+  border-color:#e0e0e0;
+}
+.DivTables {
+  max-width: 100vw;
+  width: 70%;
+  margin-bottom: 1.5em;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  flex-wrap: wrap;
+  scroll-snap-align: center;
+  gap: 2em;
 }
 
-.navbar a {
-  color: white;
-  text-decoration: none;
+.ContainerEst{
+  margin-bottom: 2em;
+  display: flex;
 }
 
-.navbar__logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-.futer {
-  margin-top: 150px;
+.DivEstadisticas div{
+  border: 2px solid rgb(163, 161, 161);
+  border-style:ridge; 
+  background-color: rgba(255, 166, 0, 0.221);
+   flex-basis: 50%;
+  padding: 0.5em;
 }
 
 .divContainerGigaChad{
- 
   margin-top: 10vh;
 }
 
-.divEmail{
+.divContainer{
+  width: 10vh;
+}
 
-  display: flex;
-  justify-content: end;
-  margin-right: 2em;
+@media (max-width: 768px) {
+  .divContainerGigaChad{
+    margin-top: 0;
+  }
+  .divContainer{
+    width: 0;
+  }
+  .DivTables{
+    width: 100%;
+    padding-left: auto;
+    padding-right: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    text-align: center;
+  }
 }

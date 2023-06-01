@@ -3,10 +3,12 @@ import validacion from "./Validations";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import style from "./FormularioTipoHabitacion.module.css";
+// import style from "./FormularioTipoHabitacion.module.css";
 import { useSelector } from "react-redux";
 import NavBar from "../../Nav/Nav";
 import { PedirLocalStorage } from "../../Index";
+import styleLight from "./FormularioTipoHabitacion.module.css"
+import styleDark from"./FormularioTipoHabitacionDark.module.css"
 
 const FormularioTipoHab = (props) => {
   const URL_BASE =
@@ -17,6 +19,8 @@ const FormularioTipoHab = (props) => {
   const idHotelForm = useSelector((state) => state.idHotelForm);
   const id = state?.id_hotel || idHotelForm;
 
+  const theme = useSelector((state) => state.theme);
+  const style = theme === "light"?styleLight:styleDark;
   console.log(id)
 
   const resetTipoHab = {
@@ -81,7 +85,7 @@ const FormularioTipoHab = (props) => {
         stock,
         id_user,
       });
-      
+
       swal({
         text: "Tus habitaciones se registraron con éxito! ",
         icon: "success",
@@ -143,7 +147,7 @@ const FormularioTipoHab = (props) => {
     <>
       <NavBar />
 
-      <div className="container">
+      <div className={style.container}>
         <form onSubmit={handleSubmit} className={style.form}>
           <h1 className="h3 mb-3 fw-normal">
             Registra las habitaciones:
@@ -227,17 +231,18 @@ const FormularioTipoHab = (props) => {
               onChange={uploadImage}
             />
             {tipoHab.image.length ? (
-                  <>
-                    <img src={tipoHab.image} style={{ width: "300px" }} />
-                    <button onClick={() => deleteImage(tipoHab.image)}>X</button>
-                  </>):
-                  (<></>)}
+              <>
+                <img src={tipoHab.image} style={{ width: "300px" }} />
+                <button onClick={() => deleteImage(tipoHab.image)}>X</button>
+              </>) :
+              (<></>)}
           </div>
 
           <button className="w-100 btn btn-lg btn-warning" type="submit">
             Registrar
           </button>
-
+          <br></br>
+          <br></br>
           <NavLink to={"/Home"}>
             <button
               className="w-100 btn btn-lg btn-warning"

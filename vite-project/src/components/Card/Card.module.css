@@ -41,9 +41,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+
 .imgRating {
-  height: 20px;
-  width: auto;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .province {
@@ -51,9 +52,6 @@
   font-size: 1.1rem;
 }
 
-.rating {
-  margin-top: 0;
-}
 
 .punctuation {
   margin-top: .5em;
@@ -123,6 +121,8 @@ object-fit: cover;
   opacity: 1;
 }
 
+
+
 @media (max-width:1200px) {
   .container {
     flex-direction: column;
@@ -137,6 +137,17 @@ object-fit: cover;
     object-fit: cover;
     background-color: rgb(33, 33, 87);
     flex-basis: 50%;
+  }
+
+  .imgRating {
+    height: 1rem;
+    width: 1rem;
+  }
+  
+  .rating {
+    display: flex;
+    /* background-color: red; */
+    flex-direction: row;
   }
 
   .imgHotel {

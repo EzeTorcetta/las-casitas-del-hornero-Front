@@ -126,7 +126,7 @@ const options = {
 
 return (
     <MUIDataTable
-    
+    className={style.gigachadaowo}
         title="Hoteles"
         data={HotelsAdmin}
         columns={columnas}

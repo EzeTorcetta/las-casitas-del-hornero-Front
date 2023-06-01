@@ -37,8 +37,7 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div className={style.full}>
-        <Row xs={1} sm={2} lg={3} className="g-2">
+    <>
           {favorites.length ? (
             favorites.map(
               ({
@@ -65,9 +64,9 @@ const Favorites = () => {
           ) : (
             <h3>{translations[idioma].No}</h3>
           )}
-        </Row>
-    </div>
-  );
+          </>
+  )
+  
 };
 
 export default Favorites;

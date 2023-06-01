@@ -127,8 +127,8 @@ const Detail = ({ setCountCarrito, countCarrito }) => {
               </div>
 
               {User?.rol === 2 ? (
-                <NavLink to="/FormRoomType">
-                  <p onClick={setHotel}>
+                <NavLink to="/FormRoomType" style={{"text-decoration" : "none"}}>
+                  <p  onClick={setHotel} className={style.butonAddRoom}>
                     {translations[idioma].AgregarRoomType}
                   </p>
                 </NavLink>

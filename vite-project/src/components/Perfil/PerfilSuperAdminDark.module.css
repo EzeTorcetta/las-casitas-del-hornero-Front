@@ -1,10 +1,15 @@
+.divContainerGigaChad{
+  background-color: #454545;
+  color: whitesmoke;
+  margin-top: 10vh;
+}
+
 .divDeBienvenido {
   text-align: center;
   margin: 30px;
 }
-
 .DivEstadisticas {
-  background-color: white;
+  background-color: #1e1e1e;
   width: 70%;
   margin-left: auto;
   margin-right: auto;
@@ -16,9 +21,7 @@
   text-align: center;
   box-shadow: 3px 3px 5px rgba(1, 1, 1, 0.616);
   border-color:#e0e0e0;
-
 }
-
 .DivTables {
   max-width: 100vw;
   width: 70%;
@@ -45,6 +48,28 @@
   padding: 0.5em;
 }
 
+.divContainerGigaChad{
+  margin-top: 10vh;
+}
+
 .divContainer{
   width: 10vh;
+} 
+
+@media (max-width: 768px) {
+  .divContainerGigaChad{
+    margin-top: 0;
+  }
+  .divContainer{
+    width: -10vh;
+  }
+  .DivTables{
+    width: 100%;
+    padding-left: auto;
+    padding-right: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    text-align: center;
+  }
 }

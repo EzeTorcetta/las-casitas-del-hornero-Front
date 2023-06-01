@@ -44,14 +44,21 @@ const GetUsers = () => {
   };
 
   //*---------------------------------FuncionBloque:
-  const FuncioBloquear = async (idUser,userEmail) => {
-
-    
+  const FuncioBloquear = async (idUser, userEmail, value) => {
     await axios.put(
       `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/status/${idUser}`
     );
-    await axios.get(
-      `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Baneo/${userEmail}`)
+  
+    if (value) {
+      await axios.get(
+        `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Baneo/${userEmail}`
+      );
+    } else {
+      await axios.get(
+        `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Desbaneo/${userEmail}`
+      );
+    }
+  
     await dispatch(getUsers(user.id));
   };
 
@@ -93,9 +100,10 @@ const GetUsers = () => {
           return (
             <div>
               <h1>{value}</h1>
+             
               <button
                 className={style.botonRol}
-                onClick={() => FuncioBloquear(userId,userEmail)}
+                onClick={() => FuncioBloquear(userId, userEmail, value)}
               >
                 {value ? "Bloquear" : "Desbloquear"}
               </button>

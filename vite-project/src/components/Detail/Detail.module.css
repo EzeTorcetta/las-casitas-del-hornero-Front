@@ -7,7 +7,12 @@
   padding-right: 8rem;
   background-color: #f2f2f2;
 }
-
+.butonAddRoom {
+  width: fit-content;
+  background-color: #e56910;
+  color: white;
+  padding: 1em;
+}
 .div {
   border-color: #e0e0e0;
   background-color: #fff;
