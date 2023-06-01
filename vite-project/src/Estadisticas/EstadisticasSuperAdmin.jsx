@@ -45,12 +45,12 @@ const EstadisticasLinealTodosLosBookings = ({ TodosLosBookings }) => {
     labels: Usuario,
     datasets: [
       {
-        label: "Todos los Usuarios que Reservaron y El total de Pago",
+        label: "Usuarios que reservaron y valor del pago",
         data: Precio,
         backgroundColor: "orange",
         borderWidth: 5, // es el borde de las barras
         borderColor: "gray",
-        borderRadius: 5, // el borde de la barra
+        borderWidth: 5, // el borde de la barra
         inflateAmount: 0, // tamaño de las barras tanto alto como ancho
       },
     ],
@@ -102,11 +102,14 @@ const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
         label: "Valoraciones de los Hoteles",
         data: valoracion,
         fill: true, // seria el arrea de la linea (todo lo que hay por debajo)
-        borderColor: "orange", // los estilos en commilllas
-        // backgroundColor: "blue",
+        borderColor: "gray", // los estilos en commilllas
+        borderWidth: 5,
+        borderRadius: 5,
+        backgroundColor: "orange",
         pointRadius: 6,
         pointBorderColor: "black",
         pointBackgroundColor: "white",
+        inflateAmount: 0
       },
     ],
   };
@@ -145,7 +148,7 @@ const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
 
   return (
     <div className="ContainerGraficoLinea">
-      <Line data={data} options={options} />
+      <Bar data={data} options={options} />
     </div>
   );
 };
@@ -170,7 +173,7 @@ const EstadisticasBarraHotelMasReservado = ({ HotelMasReservado }) => {
     labels: NameHotel,
     datasets: [
       {
-        label: "Hoteles Mas Reservados",
+        label: "Hoteles mas reservados",
         data: reservas,
         backgroundColor: "orange",
         borderWidth: 5, // es el borde de las barras
@@ -223,7 +226,7 @@ const EstadisticasBarraMesMasReservado = ({ MesMasReservado }) => {
     labels: Meses,
     datasets: [
       {
-        label: "Meses mas Reservados",
+        label: "Meses mas reservados",
         data: Cantidad,
         backgroundColor: "orange",
         borderWidth: 5, // es el borde de las barras
@@ -279,12 +282,14 @@ const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
     labels: Usuario, // Labels seria el eje X de la grafica y lo que se va a  mostrar.
     datasets: [
       {
-        label: "Usuarios que mas reservaron",
+        label: "Cantidad de reservas por usuario",
         data: Reserva,
         fill: true, // seria el arrea de la linea (todo lo que hay por debajo)
-        borderColor: "orange", // los estilos en commilllas
-        // backgroundColor: "blue",
+        borderColor: "gray", // los estilos en commilllas
+        backgroundColor: "orange",
+        borderWidth: 5,
         pointRadius: 6,
+        borderRadius: 5,
         pointBorderColor: "black",
         pointBackgroundColor: "white",
       },
@@ -310,7 +315,7 @@ const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
 
   return (
     <div className="ContainerGraficoLinea">
-      <Line data={data} options={options} />
+      <Bar data={data} options={options} />
     </div>
   );
 };
@@ -332,7 +337,7 @@ const EstadisticasLinealProvinciasMasReservada = ({
     labels: Provincias, // Labels seria el eje X de la grafica y lo que se va a  mostrar.
     datasets: [
       {
-        label: "Provincias Donde Mas Se Reservo",
+        label: "Provincias donde mas se reservo",
         data: Reservas,
         fill: true, // seria el arrea de la linea (todo lo que hay por debajo)
         borderColor: "orange", // los estilos en commilllas

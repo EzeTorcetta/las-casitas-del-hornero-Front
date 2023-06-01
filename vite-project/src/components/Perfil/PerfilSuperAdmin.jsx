@@ -93,35 +93,35 @@ const PerfilSuperAdmin = () => {
       <section className="ContainerEst">
         <div className="DivEstadisticas">
           <section>
-          <h3>Estadistica 1</h3>
+          <h3>Valoracion de Hoteles</h3>
           <EstadisticasLinealValoracionHoteles
             ValoracionHoteles={ValoracionHoteles}
           />
           </section>
           <section>
-            <h3>Estadistica 2</h3>
+            <h3>Todas las reservas y pago</h3>
           <EstadisticasLinealTodosLosBookings
             TodosLosBookings={TodosLosBookings}
           />
           </section>
           <section>
-            <h3>Estadistica 3</h3>
+            <h3>Meses mas reservados</h3>
           <EstadisticasBarraMesMasReservado MesMasReservado={MesMasReservado} />
           </section>
           <section>
-            <h3>Estadistica 4</h3>
+            <h3>Hoteles mas reservados</h3>
           <EstadisticasBarraHotelMasReservado
             HotelMasReservado={HotelMasReservado}
           />
           </section>
           <section>
-            <h3>Estadistica 5</h3>
+            <h3>Cantidad de reservas por usuario</h3>
           <EstadisticasLinealUsuarioQueMasReservo
             UsuarioQueMasReservo={UsuarioQueMasReservo}
           />
           </section>
           <section>
-            <h3>Estadistica 6</h3>
+            <h3>Provincias mas reservadas</h3>
           <EstadisticasLinealProvinciasMasReservada
             ProvinciasMasReservada={ProvinciasMasReservada}
           />
