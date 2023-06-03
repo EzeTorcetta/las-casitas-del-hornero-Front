@@ -6,6 +6,7 @@
   padding-bottom: 2em;
 }
 .form {
+  margin-top: 7vh;
   padding: 2em;
   border: 2px solid black;
   max-width: 850px;
@@ -164,7 +165,7 @@
   padding: 10px;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 500px) {
   .form {
     margin-top: 7vh;
     padding: 2em;

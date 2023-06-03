@@ -1,5 +1,4 @@
-
-.gigachadaowo{
+.gigachadaowo {
   background-color: #454545;
   color: white;
 }
@@ -72,7 +71,7 @@
   color: white;
 }
 
-.color{
+.color {
   color: white;
 }
 
@@ -84,25 +83,25 @@
   margin-right: 5px;
 }
 
-.divId{
+.divId {
   display: flex;
   padding-left: 2em;
   color: white;
 }
 
-.divUserName{
+.divUserName {
   padding-left: 1em;
   color: white;
 }
 
 @media (max-width: 768px) {
   .gigachadaowo {
-      width: 37rem;
+    width: 37rem;
   }
 }
 
 @media (max-width: 400px) {
   .gigachadaowo {
-      width: 25rem;
+    width: 25rem;
   }
 }

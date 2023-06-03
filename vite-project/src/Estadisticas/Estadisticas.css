@@ -13,17 +13,13 @@
 @media (max-width: 550px) {
   .ContainerGraficoLinea {
     width: 240px;
-    height: 200px;
+    height: 350px;
   }
 }
 
 @media (max-width: 550px) {
-  .ContainerGraficoDona {
-    width: 250px;
-    height: fit-content;
-  }
   .ContainerGraficoBar {
     width: 240px;
-    height: 200px;
+    height: 330px;
   }
 }
