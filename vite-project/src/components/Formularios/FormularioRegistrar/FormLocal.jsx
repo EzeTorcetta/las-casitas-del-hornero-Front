@@ -225,8 +225,10 @@ const FormLocal = () => {
               onChange={handleChange}
               value={usuario.password}
             />
+            <div className={style.DivSpanError}>
+              <span className={style.span}>{Error.password}</span>
+            </div>
           </div>
-          <span className={style.span}>{Error.password}</span>
 
           <div className="input-group">
             <label htmlFor="repetir">
