@@ -73,5 +73,25 @@
   display: flex;
   justify-content: center;
   background-color: rgb(12, 13, 13);
-  height: 190vh;
+  height: 130vh;
+  width: 100%;
+}
+
+@media (max-width: 780px) {
+  .form {
+    padding-top: 2em;
+    min-width: 350px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 3px 3px 5px rgba(1, 1, 1, 0);
+  }
+
+  .ContainerPadre {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(12, 13, 13);
+    height: 130vh;
+    width: 102%;
+  }
 }

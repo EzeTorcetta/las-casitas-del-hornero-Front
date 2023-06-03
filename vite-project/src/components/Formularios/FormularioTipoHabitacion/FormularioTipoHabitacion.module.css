@@ -80,5 +80,32 @@
 .ContainerPadre {
   display: flex;
   justify-content: center;
-  height: 190vh;
+  height: 130vh;
+  width: 100%;
+}
+
+@media (max-width: 780px) {
+  .form {
+    padding-top: 2em;
+    min-width: 350px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 3px 3px 5px rgba(1, 1, 1, 0);
+  }
+
+  .ContainerPadre {
+    display: flex;
+    justify-content: center;
+    height: 130vh;
+    width: 102%;
+  }
+  .container {
+    margin-top: 20vh;
+    padding: 20px 20px;
+    border: 2px solid black;
+    box-shadow: 3px 3px 5px rgba(1, 1, 1, 0.616);
+    height: fit-content;
+    width: fit-content;
+  }
 }
