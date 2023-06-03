@@ -108,7 +108,7 @@ const FormLocal = () => {
         const { username, password, email } = usuario;
         await axios.get(
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Registro/${email}`
-        ); //! cambiar en el deploy
+        );
         await axios.post(
           `https://las-casitas-del-hornero-back-deploy.up.railway.app/user`,
           { username, password, email }
@@ -177,42 +177,6 @@ const FormLocal = () => {
       repetir: "",
     });
   };
-  //   if (
-  //     db.find(
-  //       (user) =>
-  //         user.email === usuario.email || user.username === usuario.username
-  //     )
-  //   ) {
-  //     swal({
-  //       text: "El email o usuario ya existe",
-  //       icon: "warning",
-  //       buttons: "Aceptar",
-  //     });
-  //   }
-  //   if (usuario.password !== usuario.repetir) {
-  //     swal({
-  //       text: "La password no coincide",
-  //       icon: "warning",
-  //       buttons: "Aceptar",
-  //     });
-  //   } else {
-  //     {
-  //       window.location.href = "Home";
-  //     }
-  //     swal({
-  //       text: "usuario creado",
-  //       icon: "success",
-  //       buttons: "Aceptar",
-  //     });
-  //   }
-
-  //   setUsuario({
-  //     username: "",
-  //     email: "",
-  //     password: "",
-  //     repetir: "",
-  //   });
-  // };
 
   return (
     <div className="DivContenedorPadre">
@@ -287,7 +251,6 @@ const FormLocal = () => {
             </button>
           </Link>
         </form>
-        <div></div>
       </div>
     </div>
   );

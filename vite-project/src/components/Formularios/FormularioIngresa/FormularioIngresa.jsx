@@ -38,7 +38,7 @@ const FormularioIngresa = () => {
 
   const handleHome = () => {
     navigate("/Home");
-  }
+  };
 
   const [usuario, setUsuario] = useState({
     email: "",
@@ -148,7 +148,9 @@ const FormularioIngresa = () => {
           <div className={style.butonGoogleDiv}>
             <BotonAuthGoogle />
           </div>
-          <button onClick={handleHome} className="btn btn-secondary">Ingresar sin registrar</button>
+          <button onClick={handleHome} className="btn btn-secondary">
+            Ingresar sin registrar
+          </button>
         </div>
       </div>
     </>

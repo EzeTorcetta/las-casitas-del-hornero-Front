@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncionAllFavoritesHotel } from "../../redux/Actions/Actions.js";
 import { PedirLocalStorage } from "../Index.js";
-import Row from "react-bootstrap/Row";
-//css
-import style from "./Favorites.module.css";
 //components
 import { Cards } from "../Index.js";
 

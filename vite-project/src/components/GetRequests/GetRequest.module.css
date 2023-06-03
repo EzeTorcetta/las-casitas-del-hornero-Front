@@ -1,15 +1,14 @@
-.divId{
+.divId {
   padding-left: 2em;
 }
 
-.divUserName{
+.divUserName {
   padding-left: 3em;
 }
 
-.divFecha{
+.divFecha {
   padding-left: 0.7em;
 }
-
 
 .boton {
   background-color: antiquewhite;
@@ -19,13 +18,18 @@
   margin-right: 5px;
 }
 @media (max-width: 768px) {
+  .ContenerdoTabla {
+    overflow-x: auto;
+  }
+
   .gigachadaowo {
-      width: 37rem;
+    width: 50vh;
+    font-size: 10px;
   }
 }
 
 @media (max-width: 400px) {
   .gigachadaowo {
-      width: 25rem;
+    width: 25rem;
   }
 }

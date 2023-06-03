@@ -98,16 +98,16 @@
   transform: scale(0.6);
 }
 
-#chk:checked~.register {
+#chk:checked ~ .register {
   transform: translateY(-60%);
 }
 
-#chk:checked~.register label {
+#chk:checked ~ .register label {
   transform: scale(1);
   margin: 10% 0 5%;
 }
 
-#chk:checked~.login label {
+#chk:checked ~ .login label {
   transform: scale(0.6);
   margin: 5% 0 5%;
 }
@@ -118,7 +118,7 @@
   height: 40px;
   margin: 12px auto 10%;
   color: #fff;
-  background-color: #E56910;
+  background-color: #e56910;
   font-size: 1rem;
   font-weight: bold;
   border: none;
@@ -133,7 +133,7 @@
 
 .form button:hover {
   color: white;
-  background-color: #E56910;
+  background-color: #e56910;
   opacity: 1;
   -webkit-transform: scale(1.02);
   -moz-transform: scale(1.02);

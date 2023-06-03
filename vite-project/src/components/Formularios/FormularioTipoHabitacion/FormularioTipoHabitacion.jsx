@@ -10,7 +10,7 @@ import { PedirLocalStorage } from "../../Index";
 import styleLight from "./FormularioTipoHabitacion.module.css";
 import styleDark from "./FormularioTipoHabitacionDark.module.css";
 
-const FormularioTipoHab = (props) => {
+const FormularioTipoHab = () => {
   const URL_BASE = "https://las-casitas-del-hornero-back-deploy.up.railway.app";
   const navigate = useNavigate();
   const User = PedirLocalStorage();
@@ -20,7 +20,6 @@ const FormularioTipoHab = (props) => {
 
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
-  console.log(id);
 
   const resetTipoHab = {
     people: "",
@@ -28,7 +27,7 @@ const FormularioTipoHab = (props) => {
     name: "",
     image: "",
     stock: "",
-    id_user: User.id,
+    id_user: User?.id,
     id_hotel: id,
   };
   const [tipoHab, setTipoHab] = useState(resetTipoHab);

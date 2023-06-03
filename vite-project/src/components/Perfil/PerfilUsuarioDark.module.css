@@ -1,10 +1,8 @@
 .perfil_container {
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
   padding: 0 2em;
   background-color: #454545;
-  margin-top: 10vh;
   color: white;
 }
 
@@ -118,11 +116,6 @@
   -webkit-border-radius: 0.5rem;
 }
 
-.divFavorites div {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .QuieroProveedor {
   padding: 1em 1.3em;
   background-color: #e56910;
@@ -182,9 +175,5 @@
     height: 30%;
     font-size: medium;
     margin-bottom: 1rem;
-  }
-
-  .divFavorites div {
-    flex-direction: column;
   }
 }

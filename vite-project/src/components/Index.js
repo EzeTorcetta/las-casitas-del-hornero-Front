@@ -7,7 +7,6 @@ import Favoritos from "./Favorites/Favorites";
 import Home from "./Home/Home";
 import Loading from "./Loading/Loading";
 import Footer from "./Footer/Footer";
-import Search from "./Search/Search";
 import FormularioIngresa from "./Formularios/FormularioIngresa/FormularioIngresa";
 import Landing from "./Landing/Landing";
 import Maps from "./Map/Map";
@@ -21,19 +20,18 @@ import { LogOut } from "./GoogleAuth/LogOut";
 import Trolley from "./Trolley/Trolley";
 import TrolleyCard from "./TrolleyCard/TrolleyCard";
 import GetRequests from "./GetRequests/GetRequests";
-import GetHotels from "./GetHotels/GetHotels"
-import GetBookings from "./GetBookings/GetBookings"
+import GetHotels from "./GetHotels/GetHotels";
+import GetBookings from "./GetBookings/GetBookings";
 //*------------------LoclaStorage-----------------------------------*//
 import GuardarLocalStorage from "./LocalStorage/GuardarLocalStorage";
 import PedirLocalStorage from "./LocalStorage/PedirLocalStorage";
 import GuardarDatosParaCambiarPassword from "./LocalStorage/PutPasswordLocalStorage/GuardarDatosParaCambiarPassword";
 import PedirEmailLocalStorage from "./LocalStorage/PutPasswordLocalStorage/PedirEmailLocalStorage";
-import GuardarCheckInCheckOut from './LocalStorage/Check/GuardarCheckInCheckOut';
-import PedirCheckInCheckOut from './LocalStorage/Check/PedirCheckInCheckOut';
-import CleanCheckinCheckout from './LocalStorage/Check/CleanCheckinCheckout';
-import GuardarMonedaLocalStorage from './LocalStorage/moneda/GuardarMonedaLocalStorage'
-import PedirMonedaLocalStorage from './LocalStorage/moneda/PedirMonedaLocalStorage'
-
+import GuardarCheckInCheckOut from "./LocalStorage/Check/GuardarCheckInCheckOut";
+import PedirCheckInCheckOut from "./LocalStorage/Check/PedirCheckInCheckOut";
+import CleanCheckinCheckout from "./LocalStorage/Check/CleanCheckinCheckout";
+import GuardarMonedaLocalStorage from "./LocalStorage/moneda/GuardarMonedaLocalStorage";
+import PedirMonedaLocalStorage from "./LocalStorage/moneda/PedirMonedaLocalStorage";
 
 //*----------------------------------------------------------------*//
 import FormLocal from "./Formularios/FormularioRegistrar/FormLocal";
@@ -89,7 +87,6 @@ export {
   Detail,
   Footer,
   Loading,
-  Search,
   Favoritos,
   FormularioIngresa,
   Landing,
@@ -102,5 +99,5 @@ export {
   PedirEmailLocalStorage,
   GetRequests,
   GetHotels,
-  GetBookings
+  GetBookings,
 };

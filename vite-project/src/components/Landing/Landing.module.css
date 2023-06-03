@@ -1,18 +1,18 @@
 .landing_container {
-  background-color: #F1F2EE;;
+  background-color: #f1f2ee;
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100vh;
+  height: 140vh;
 }
 .btnrg button {
   color: white;
-  background-color: #E56910;
+  background-color: #e56910;
   opacity: 0.9;
 }
 .btnrg button:hover {
   color: white;
-  background-color: #E56910;
+  background-color: #e56910;
   transform: scale(1.02);
   -webkit-transform: scale(1.02);
   -moz-transform: scale(1.02);
@@ -61,7 +61,6 @@
     flex-basis: 35%;
     background-position: center 30%;
     /* background-position: left 25%; */
-
   }
 
   .container {
@@ -105,6 +104,8 @@
     z-index: 54;
     margin-right: auto;
     margin-left: auto;
-
+    position: absolute;
+    margin-top: 2px;
+    top: 0;
   }
 }

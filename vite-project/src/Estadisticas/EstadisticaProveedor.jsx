@@ -15,9 +15,7 @@ import {
   Filler,
   Colors,
 } from "chart.js";
-import { useEffect } from "react";
-import axios from "axios";
-import { PedirLocalStorage } from "../components/Index";
+
 //*---------grafico de lineas:
 
 ChartJS.register(
@@ -59,6 +57,7 @@ const EstadisticasLinealPartner = ({ MesDondeMasSeReservoPartner }) => {
   };
 
   let options = {
+    maintainAspectRatio: false, // Desactiva el mantenimiento del aspecto
     responsive: true,
     scales: {
       y: {
@@ -121,6 +120,7 @@ const EstadisticasBarraPartner = ({ HotelesMasReservadosPartner }) => {
   };
 
   let options = {
+    maintainAspectRatio: false, // Desactiva el mantenimiento del aspecto
     responsive: true, // es responsivo
     scales: {
       y: {

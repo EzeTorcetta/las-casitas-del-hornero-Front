@@ -40,7 +40,6 @@ const NavBar = ({ countCarrito }) => {
   const idioma = useSelector((state) => state.idioma);
   const [isOpen, setIsOpen] = useState(false);
 
-
   const translations = {
     en: {
       VerPerfil: "View profile",
@@ -61,8 +60,6 @@ const NavBar = ({ countCarrito }) => {
       Salir: "Salir",
     },
   };
-
-
 
   const toggleLang = (event) => {
     dispatch(updateLanguage(event.target.value));
@@ -186,14 +183,12 @@ const NavBar = ({ countCarrito }) => {
               </button>
             )}
           </div>
-
         </div>
       </div>
     );
   } else {
     return (
-
-      <div className={theme === 'light' ? 'navflex' : 'navflex-dark'}>
+      <div className={theme === "light" ? "navflex" : "navflex-dark"}>
         <div>
           <NavLink to={"/Home"}>
             <div>
@@ -259,25 +254,25 @@ const NavBar = ({ countCarrito }) => {
             <SymbolsCurrencyFlex />
           </div>
           <div>
-            {rol === 1 ?
-              (
-                <Link to={"/Carrito"}>
-                  <div className="divCarritoCount">
-                    <div className="countCarritoDiv">{countCarrito}</div>
-                    <img
-                      className="iconoCarrito"
-                      src={theme === "light" ? imageCarrito : carritoblanco}
-                    />
-                  </div>
-                </Link>
-              ) : (
-                <></>
-              )
-            }
+            {rol === 1 ? (
+              <Link to={"/Carrito"}>
+                <div className="divCarritoCount">
+                  <div className="countCarritoDiv">{countCarrito}</div>
+                  <img
+                    className="iconoCarrito"
+                    src={theme === "light" ? imageCarrito : carritoblanco}
+                  />
+                </div>
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
-
         </div>
-        <div className={`navtoggle ${isOpen && "open"}`} onClick={() => setIsOpen(!isOpen)}>
+        <div
+          className={`navtoggle ${isOpen && "open"}`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <span></span>
           <span></span>
           <span></span>

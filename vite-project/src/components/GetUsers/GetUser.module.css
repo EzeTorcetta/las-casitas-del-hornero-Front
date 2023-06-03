@@ -69,23 +69,28 @@
   margin-right: 5px;
 }
 
-.divId{
+.divId {
   display: flex;
   padding-left: 2em;
 }
 
-.divUserName{
+.divUserName {
   padding-left: 1em;
 }
 
 @media (max-width: 768px) {
+  .ContenerdoTabla {
+    overflow-x: auto;
+  }
+
   .gigachadaowo {
-      width: 37rem;
+    width: 50vh;
+    font-size: 10px;
   }
 }
 
 @media (max-width: 400px) {
   .gigachadaowo {
-      width: 25rem;
+    font-size: 12px;
   }
 }

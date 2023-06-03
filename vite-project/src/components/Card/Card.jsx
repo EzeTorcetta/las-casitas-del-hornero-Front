@@ -105,7 +105,9 @@ function Cards({ id, name, image, province, department, rating, valoration }) {
             </p>
           </div>
           <p className={style.province}>
-            {department},{province}
+            {department}
+            <br />
+            {province}
           </p>
         </div>
       </Link>

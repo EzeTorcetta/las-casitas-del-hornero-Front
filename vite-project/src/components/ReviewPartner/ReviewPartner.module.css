@@ -1,20 +1,16 @@
-
-
-.contenedor{
-    /* background-color: red; */
-    display: flex;
+.contenedor {
+  display: flex;
 }
 
-.hotel{
-    display: flex;
-    flex-direction: column;
-    width:max-content;
-    border: none;
-    padding: 1rem;
-    border: 0.1rem solid black;
-    border-radius: 0.5rem;
-    background-color: whitesmoke;
-    margin-bottom: 1rem;
-    justify-content: space-around;
+.hotel {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  border: none;
+  padding: 1rem;
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
+  background-color: whitesmoke;
+  margin-bottom: 1rem;
+  justify-content: space-around;
 }
-
