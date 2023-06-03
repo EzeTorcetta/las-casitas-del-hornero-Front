@@ -519,7 +519,7 @@ const FormularioHotel = () => {
                       >
                         X
                       </button>
-                      <img src={imagen} style={{ width: "300px" }} />
+                      <img src={imagen} style={{ width: "230px" }} />
                     </div>
                   );
                 })}

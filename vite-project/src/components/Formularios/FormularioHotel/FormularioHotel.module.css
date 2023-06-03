@@ -149,3 +149,15 @@
   flex-wrap: wrap;
   padding: 10px;
 }
+
+@media (max-width: 780px) {
+  .form {
+    margin-top: 7vh;
+    padding: 2em;
+    border: 2px solid black;
+    max-width: 350px;
+    border: 2px solid black;
+    box-shadow: 3px 3px 5px rgba(1, 1, 1, 0.616);
+    border-color: #e0e0e0;
+  }
+}

@@ -163,3 +163,26 @@
   flex-wrap: wrap;
   padding: 10px;
 }
+
+@media (max-width: 780px) {
+  .form {
+    margin-top: 7vh;
+    padding: 2em;
+    border: 2px solid black;
+    max-width: 350px;
+    border: 2px solid black;
+    box-shadow: 3px 3px 5px rgba(1, 1, 1, 0.616);
+    border-color: #e0e0e0;
+  }
+  .ContainerImagen {
+    background-color: rgb(55, 54, 54);
+    border: none;
+    border-radius: 10px;
+    width: 250px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+  }
+}
