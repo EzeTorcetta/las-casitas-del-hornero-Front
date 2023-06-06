@@ -14,5 +14,3 @@ RUN npm install
 # Expose the port that the application will run on
 EXPOSE 3000
 
-# Start the application
-CMD npm run dev
