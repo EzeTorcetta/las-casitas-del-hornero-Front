@@ -15,9 +15,6 @@ import {
   Filler,
   Colors,
 } from "chart.js";
-import { useEffect } from "react";
-import axios from "axios";
-import { PedirLocalStorage } from "../components/Index";
 //*---------grafico de lineas:
 
 ChartJS.register(
@@ -57,6 +54,8 @@ const EstadisticasLinealTodosLosBookings = ({ TodosLosBookings }) => {
   };
 
   let options = {
+    maintainAspectRatio: false, // Permite que el gráfico se ajuste al tamaño del contenedor
+    // Resto de las opciones...
     responsive: true, // es responsivo
     scales: {
       y: {
@@ -109,7 +108,7 @@ const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
         pointRadius: 6,
         pointBorderColor: "black",
         pointBackgroundColor: "white",
-        inflateAmount: 0
+        inflateAmount: 0,
       },
     ],
   };
@@ -130,6 +129,8 @@ const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
   //* Es donde voy a determinar de como quiero que funcione mi grafica.
 
   let options = {
+    maintainAspectRatio: false, // Permite que el gráfico se ajuste al tamaño del contenedor
+    // Resto de las opciones...
     responsive: true,
     scales: {
       y: {
@@ -159,8 +160,6 @@ const EstadisticasLinealValoracionHoteles = ({ ValoracionHoteles }) => {
 //Bar
 
 const EstadisticasBarraHotelMasReservado = ({ HotelMasReservado }) => {
-
-
   const reservas = [];
   const NameHotel = [];
 
@@ -185,6 +184,8 @@ const EstadisticasBarraHotelMasReservado = ({ HotelMasReservado }) => {
   };
 
   let options = {
+    maintainAspectRatio: false, // Permite que el gráfico se ajuste al tamaño del contenedor
+    // Resto de las opciones...
     responsive: true, // es responsivo
     scales: {
       y: {
@@ -212,8 +213,6 @@ const EstadisticasBarraHotelMasReservado = ({ HotelMasReservado }) => {
 };
 //--------------------------------------------------------------------------------//
 const EstadisticasBarraMesMasReservado = ({ MesMasReservado }) => {
-
-
   const Cantidad = [];
   const Meses = [];
 
@@ -238,6 +237,8 @@ const EstadisticasBarraMesMasReservado = ({ MesMasReservado }) => {
   };
 
   let options = {
+    maintainAspectRatio: false, // Permite que el gráfico se ajuste al tamaño del contenedor
+    // Resto de las opciones...
     responsive: true, // es responsivo
     scales: {
       y: {
@@ -269,7 +270,6 @@ const EstadisticasBarraMesMasReservado = ({ MesMasReservado }) => {
 //Doughnut
 
 const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
-
   const Reserva = [];
   const Usuario = [];
 
@@ -297,6 +297,8 @@ const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
   };
 
   let options = {
+    maintainAspectRatio: false, // Permite que el gráfico se ajuste al tamaño del contenedor
+    // Resto de las opciones...
     responsive: true,
     scales: {
       y: {
@@ -324,7 +326,6 @@ const EstadisticasLinealUsuarioQueMasReservo = ({ UsuarioQueMasReservo }) => {
 const EstadisticasLinealProvinciasMasReservada = ({
   ProvinciasMasReservada,
 }) => {
-
   const Provincias = [];
   const Reservas = [];
 
@@ -350,6 +351,8 @@ const EstadisticasLinealProvinciasMasReservada = ({
   };
 
   let options = {
+    maintainAspectRatio: false, // Permite que el gráfico se ajuste al tamaño del contenedor
+    // Resto de las opciones...
     responsive: true,
     scales: {
       y: {

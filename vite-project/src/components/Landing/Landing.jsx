@@ -46,12 +46,9 @@ const Landing = () => {
               {translations[idioma].Registrate}
             </button>
           </Link>
-          
         </div>
         <FormularioIngresa />
-        
       </div>
-      
     </div>
   );
 };

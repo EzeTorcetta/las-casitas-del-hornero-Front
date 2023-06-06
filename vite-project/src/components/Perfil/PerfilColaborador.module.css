@@ -4,6 +4,19 @@
   padding-right: 5em;
 }
 
+.divConteinerStatsView {
+  width: 65%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.divHotels {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
 .divConteiner {
   text-align: center;
   height: 60vh;
@@ -11,14 +24,16 @@
 
 .divConteinerHotels {
   text-align: center;
-  height: 60vh;
   padding: 1.5em;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
   border-radius: 0.5rem;
   text-transform: uppercase;
+  height: fit-content;
 }
-.divConteinerHotels h1{
+
+.divConteinerHotels h1 {
   color: #e56910;
+  padding: 15px;
 }
 
 .divConteinerReviews {
@@ -27,6 +42,7 @@
   margin-top: 5vh;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.616);
   border-radius: 0.5rem;
+  padding: 20px 20px;
 }
 
 .divConteinerReviews h1 {
@@ -58,8 +74,10 @@
 }
 
 .LinkFormHotel {
-  width: fit-content;
+  height: fit-content;
+  width: 100%;
   margin-left: auto;
+  margin-bottom: 30px;
 }
 
 .card_info h2 {
@@ -83,13 +101,22 @@
   border-radius: 0.3rem;
   transition: background-color 0.3s;
   margin-bottom: 1rem;
+  margin-top: 28px;
+  margin-right: 30px;
 }
 
 .Link:hover {
   background-color: #c45c12;
 }
 
-@media (max-width:576px) {
+@media (max-width: 576px) {
+  .Link {
+    margin-left: 25px;
+  }
+
+  .LinkFormHotel {
+    width: 100%;
+  }
 
   .perfilColaboradorContainer {
     max-width: 100%;
@@ -101,7 +128,7 @@
   }
 
   .divConteinerStatsView {
-    width: 60%;
+    width: fit-content;
     align-items: center;
     flex-direction: column;
   }
@@ -117,18 +144,19 @@
   .divConteinerReviews {
     flex-direction: column;
     align-items: center;
+    padding: 20px 20px;
   }
 }
 
-.divConteinerHotels{
+.divConteinerHotels {
   margin: 0;
   padding: 0;
   width: 100%;
 }
-  .divConteiner {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-  }
+.divConteiner {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}

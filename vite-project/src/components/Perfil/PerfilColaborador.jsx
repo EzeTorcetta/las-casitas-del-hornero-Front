@@ -13,8 +13,8 @@ import {
 } from "../../Estadisticas/EstadisticaProveedor";
 import { NavLink } from "react-router-dom";
 
-import styleLight from "./PerfilColaborador.module.css"
-import styleDark from"./PerfilColaboradorDark.module.css"
+import styleLight from "./PerfilColaborador.module.css";
+import styleDark from "./PerfilColaboradorDark.module.css";
 
 const PerfilColaborador = () => {
   let User = PedirLocalStorage();
@@ -27,7 +27,6 @@ const PerfilColaborador = () => {
 
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
-
 
   const translations = {
     en: {
@@ -51,55 +50,37 @@ const PerfilColaborador = () => {
     }
   }, []);
 
-  let date = new Date()
-  const horas = date.getHours()
-
-
+  let date = new Date();
+  const horas = date.getHours();
 
   return (
     <>
       <NavBar />
       <div className={style.perfilColaboradorContainer}>
         <div className={style.saludo}>
-
-          {horas <= 12 && horas > 5 && (
-            <h1>Buenos días {User.username}</h1>
-          )}
-          {horas > 12 && horas < 19 && (
-            <h1>Buenas tardes {User.username}</h1>
-          )}
+          {horas <= 12 && horas > 5 && <h1>Buenos días {User.username}</h1>}
+          {horas > 12 && horas < 19 && <h1>Buenas tardes {User.username}</h1>}
           {(horas >= 19 || horas <= 5) && (
             <h1>Buenas noches {User.username}</h1>
           )}
         </div>
 
-
-
-
         <div className={style.divConteinerHotels}>
-          <div>
-            <h1>{translations[idioma].TusHoteles}</h1>
-            <div className={style.LinkFormHotel}>
-              <NavLink to="/FormHotel" className={style.Link}>
-                <h4>Agregar Hotel</h4>
-              </NavLink>
-            </div>
+          <h1>{translations[idioma].TusHoteles}</h1>
+          <div className={style.LinkFormHotel}>
+            <NavLink to="/FormHotel" className={style.Link}>
+              <h4>Agregar Hotel</h4>
+            </NavLink>
           </div>
           <div className={style.divHotels}>
-            <br />
             <PartnerHotels hotels={hotels} />
           </div>
         </div>
-
-
-
 
         <div className={style.divConteinerReviews}>
           <h1>{translations[idioma].Reviews}</h1>
           <ReviewPartner hotels={hotels} />
         </div>
-
-
 
         <div className={style.divConteinerStats}>
           <h1>Stats</h1>

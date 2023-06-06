@@ -1,18 +1,16 @@
 .perfil_container {
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
   padding: 0 2em;
   background-color: #454545;
-  margin-top: 10vh;
-  color:white;
+  color: white;
 }
 
-.divFavorites{
+.divFavorites {
   background-color: #1e1e1e;
 }
 
-.divRewies{
+.divRewies {
   background-color: #1e1e1e;
 }
 
@@ -79,10 +77,10 @@
 
 .divFavorites h2,
 .divRewies h2 {
-  padding: .5em;
+  padding: 0.5em;
   font-size: 2rem;
   margin-bottom: 1.2em;
-  border-bottom: 1px solid rgb(224, 224, 224)
+  border-bottom: 1px solid rgb(224, 224, 224);
 }
 
 .section:last-child {
@@ -118,20 +116,14 @@
   -webkit-border-radius: 0.5rem;
 }
 
-.divFavorites div {
-  display: flex;
-  justify-content: space-around;
-
-}
-
 .QuieroProveedor {
   padding: 1em 1.3em;
-  background-color: #E56910;
+  background-color: #e56910;
   color: white;
   border-radius: 10px;
   border: none;
   font-size: 2rem;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .QuieroProveedor:hover {
@@ -142,7 +134,7 @@
   background-color: #d75e08;
 }
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
   .perfil_container {
     padding: 0;
     /* margin-top: 0; */
@@ -159,7 +151,7 @@
   }
 
   .card_profile_left {
-    flex-basis: 66%
+    flex-basis: 66%;
   }
 
   .card_profile_right {
@@ -167,7 +159,7 @@
   }
 }
 
-@media (max-width:576px) {
+@media (max-width: 576px) {
   .perfil_container {
     margin-top: 0;
   }
@@ -184,9 +176,4 @@
     font-size: medium;
     margin-bottom: 1rem;
   }
-
-  .divFavorites div {
-    flex-direction: column;
-  }
-
 }

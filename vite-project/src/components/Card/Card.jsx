@@ -13,18 +13,8 @@ import styleDark from "./CardDark.module.css";
 import swal from "sweetalert";
 
 //?----------------- COMPONENTE CARD ------------------------------------
-function Cards({
-  id,
-  name,
-  image,
-  province,
-  department,
-  rating,
-  description,
-  valoration,
-}) {
+function Cards({ id, name, image, province, department, rating, valoration }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const FavHotels = useSelector((state) => state.FavHotels);
   const theme = useSelector((state) => state.theme);
   const style = theme === "light" ? styleLight : styleDark;
@@ -47,8 +37,7 @@ function Cards({
         ? await axios.delete(`${URL_BASE}/favorites/${idUser}/${id}`)
         : await axios.post(`${URL_BASE}/favorites/${idUser}/${id}`);
       dispatch(FuncionAllFavoritesHotel(User.id));
-    }
-    else {
+    } else {
       swal({
         text: "Debes iniciar sesion ",
         icon: "warning",
@@ -69,9 +58,6 @@ function Cards({
     },
   };
 
-  const onClickDetail = () => {
-    navigate(`/detail/${id}`);
-  };
   return (
     <div className={style.container}>
       <div className={style.imgContainer}>
@@ -119,7 +105,9 @@ function Cards({
             </p>
           </div>
           <p className={style.province}>
-            {department},{province}
+            {department}
+            <br />
+            {province}
           </p>
         </div>
       </Link>

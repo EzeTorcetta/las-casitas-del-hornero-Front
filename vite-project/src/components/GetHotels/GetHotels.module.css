@@ -1,32 +1,36 @@
-.divColumns{
-    padding-left: 2em;
-  }
-
-.divValoration{
-    padding-left: 3.5em;
+.divColumns {
+  padding-left: 2em;
 }
 
-.divUserId{
-    padding-left: 2.5em;
+.divValoration {
+  padding-left: 3.5em;
+}
+
+.divUserId {
+  padding-left: 2.5em;
 }
 
 .boton {
-    background-color: antiquewhite;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
+  background-color: antiquewhite;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .ContenerdoTabla {
+    overflow-x: auto;
   }
 
-
-  @media (max-width: 768px) {
-    .gigachadaowo {
-        width: 37rem;
-    }
+  .gigachadaowo {
+    width: 50vh;
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 400px) {
-    .gigachadaowo {
-        width: 25rem;
-    }
+  .gigachadaowo {
+    width: 25rem;
+  }
 }

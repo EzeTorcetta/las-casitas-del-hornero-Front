@@ -19,9 +19,8 @@ const GetUsers = () => {
   const roles = {
     1: "Usuario",
     2: "Proveedor",
-    3: "Administrador"
+    3: "Administrador",
   };
-
 
   useEffect(() => {
     dispatch(getUsers(user.id));
@@ -38,7 +37,6 @@ const GetUsers = () => {
   };
 
   const handleSelectUser = (userId) => {
-
     setSelectedUserId(userId);
     setShowOptions(true);
   };
@@ -48,7 +46,7 @@ const GetUsers = () => {
     await axios.put(
       `https://las-casitas-del-hornero-back-deploy.up.railway.app/user/status/${idUser}`
     );
-  
+
     if (value) {
       await axios.get(
         `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Baneo/${userEmail}`
@@ -58,7 +56,7 @@ const GetUsers = () => {
         `https://las-casitas-del-hornero-back-deploy.up.railway.app/email/Desbaneo/${userEmail}`
       );
     }
-  
+
     await dispatch(getUsers(user.id));
   };
 
@@ -68,39 +66,31 @@ const GetUsers = () => {
       label: "id",
       options: {
         customBodyRender: (value) => {
-          return(
-            <div className={style.divId}>
-              {value}
-            </div>
-          )
-        }
-      }
+          return <div className={style.divId}>{value}</div>;
+        },
+      },
     },
     {
       name: "username",
       label: "username",
       options: {
         customBodyRender: (value) => {
-          return(
-            <div className={style.divUserName}>
-              {value}
-            </div>
-          )
-        }
-      }
+          return <div className={style.divUserName}>{value}</div>;
+        },
+      },
     },
     "email",
     {
       name: "status",
-      label: "Status",  
+      label: "Status",
       options: {
         customBodyRender: (value, tableMeta) => {
           const userId = tableMeta.rowData[0];
-          const userEmail = tableMeta.rowData[2]
+          const userEmail = tableMeta.rowData[2];
           return (
             <div>
               <h1>{value}</h1>
-             
+
               <button
                 className={style.botonRol}
                 onClick={() => FuncioBloquear(userId, userEmail, value)}
@@ -121,7 +111,7 @@ const GetUsers = () => {
           //* customBodyRender sirve para modificar o actualizar un valor de la tabla
           const userId = tableMeta.rowData[0]; // Obtén el ID del usuario desde los datos de la fila
           return (
-            <div >
+            <div>
               {showOptions && selectedUserId === userId ? (
                 <select
                   className={style.select}
@@ -136,8 +126,6 @@ const GetUsers = () => {
               ) : (
                 roles[value]
               )}
-              
-            
             </div>
           );
         },
@@ -147,45 +135,44 @@ const GetUsers = () => {
       name: "change",
       label: "Change",
       options: {
-        customBodyRender: (value, tableMeta) =>{
-          const userId = tableMeta.rowData[0]
-          return(
-
+        customBodyRender: (value, tableMeta) => {
+          const userId = tableMeta.rowData[0];
+          return (
             <div>
-
               <button
-              className={style.botonRol}
-              onClick={() => handleSelectUser(userId)}
-            >
-              Cambiar
-            </button>
-            {showOptions && selectedUserId === userId && (
-              <button
-                className={style.botonGuardar}
-                onClick={handleRoleChange}
+                className={style.botonRol}
+                onClick={() => handleSelectUser(userId)}
               >
-                Guardar
+                Cambiar
               </button>
-            )}
+              {showOptions && selectedUserId === userId && (
+                <button
+                  className={style.botonGuardar}
+                  onClick={handleRoleChange}
+                >
+                  Guardar
+                </button>
+              )}
             </div>
-          )
-          
-          
-        }
-      }
-    }
+          );
+        },
+      },
+    },
   ];
   const options = {
     selectableRows: false, // Desactivar checkboxes en cada fila
+    responsive: "vertical", // Permitir que la tabla se ajuste verticalmente en dispositivos móviles
   };
   return (
-    <MUIDataTable
-      className={style.gigachadaowo}
-      title="Lista de Usuarios"
-      data={users}
-      columns={columnas}
-      options={options}
-    />
+    <div className={StyleSheet.ContenerdoTabla}>
+      <MUIDataTable
+        className={style.gigachadaowo}
+        title="Lista de Usuarios"
+        data={users}
+        columns={columnas}
+        options={options}
+      />
+    </div>
   );
 };
 
