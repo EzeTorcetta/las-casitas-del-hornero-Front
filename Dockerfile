@@ -10,4 +10,4 @@ WORKDIR "/vite-project"
 RUN npm install
 
 # Start the application
-CMD npm start 
+CMD npm run dev
