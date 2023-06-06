@@ -1,5 +1,5 @@
 # Use a Node.js base image
-FROM node:14
+FROM node:19.9.0
 
 # Copy the rest of the application code to the working directory
 COPY ./vite-project ./vite-project
