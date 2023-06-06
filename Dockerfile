@@ -15,4 +15,4 @@ RUN npm install
 EXPOSE 3000
 
 # Start the application
-RUN npm run dev
+CMD npm run dev
