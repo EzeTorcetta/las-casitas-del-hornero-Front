@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/styled": "^11.11.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@popperjs/core": "^2.11.7",
+   // "@emotion/styled": "^11.11.0",
+   // "@fortawesome/free-solid-svg-icons": "^6.4.0",
+   // "@fortawesome/react-fontawesome": "^0.2.0",
+   // "@popperjs/core": "^2.11.7",
     "01": "^0.0.1",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
@@ -21,7 +21,7 @@
     "date-fns": "^2.30.0",
     "firebase": "^9.22.0",
     "leaflet": "^1.9.4",
-    "mui-datatables": "^4.3.0",
+    // "mui-datatables": "^4.3.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-chartjs-2": "^5.2.0",
